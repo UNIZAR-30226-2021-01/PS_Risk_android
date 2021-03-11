@@ -1,0 +1,39 @@
+###
+# Unity folders and files
+###
+Risk/[Aa]ssets/AssetStoreTools*
+Risk/[Bb]uild/
+Risk/[Ll]ibrary/
+Risk/[Ll]ocal[Cc]ache/
+Risk/[Oo]bj/
+Risk/[Tt]emp/
+Risk/[Uu]nityGenerated/
+# file on crash reports
+Risk/sysinfo.txt
+# Unity3D generated meta files
+*.pidb.meta
+
+###
+# VS/MD solution and project files
+###
+Risk/[Ee]xportedObj/
+*.booproj
+*.csproj
+*.sln
+*.suo
+*.svd
+*.unityproj
+*.user
+*.userprefs
+*.pidb
+Risk/.DS_Store
+
+###
+# OS generated
+###
+Risk/.DS_Store
+Risk/.DS_Store?
+Risk/._*
+Risk/.Spotlight-V100
+Risk/.Trashes
+Risk/Icon?
