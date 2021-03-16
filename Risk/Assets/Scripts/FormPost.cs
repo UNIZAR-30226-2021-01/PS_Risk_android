@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
-
 public class FormPost : MonoBehaviour {
 	public TextMeshProUGUI uiText;
 	private string textToSend;
@@ -18,6 +17,7 @@ public class FormPost : MonoBehaviour {
 			ID = n;
 			Cadena = s;
 		}
+		
 	}
 	
 	public void updateSendText(string newValue) {
