@@ -5,81 +5,54 @@ using UnityEngine.UI;
 
 public class ControladorUI : MonoBehaviour
 {
-    private static int escaladoInterfaz = 1; //Indica el escalado de la interafz, numero natural, dependiente del tamaño de la pantalla
+	public static ControladorUI instance; // Referencia estática a si mismo para usar como singleton
+	public Dictionary<string, GameObject> pantallas;
+	private Usuario usuarioRegistrado;
+	
+	private void Awake() {
+		instance = this;
+		pantallas = new Dictionary<string, GameObject>();
+		// Empieza en 1 para ignorar el primer hijo
+		for(int i = 1; i < transform.childCount; i++) {
+			GameObject hijo = transform.GetChild(i).gameObject;
+			pantallas.Add(hijo.name, hijo);
+		}
+	}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Actualizamos el escalado de la interfaz
-        actualizarEscalado();
+	// Cambia la pantalla actual por la pantalla especificada, si existe
+	public void AbrirPantalla(string pantalla) {
+		GameObject objetoPantalla;
+		if(pantallas.TryGetValue(pantalla, out objetoPantalla)) {
+			DesactivarPantallas();
+			objetoPantalla.SetActive(true);
+		} else {
+			Debug.LogError("No existe la pantalla especificada en el diccionario de pantallas");
+		}
+	}
 
-        Debug.Log("Escalado de Interfaz: " + escaladoInterfaz + " (Para resolución " + Screen.height + "px vertical)");
-    }
+	// Salir de la aplicación
+	public void Salir(){
+		#if UNITY_EDITOR
+			print("Se ha salido de la aplicación");
+		#endif
+		Application.Quit();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void PantallaError(string error){
+		Debug.LogError("ERROR: " + error);
+	}
+	
+	public void ActualizarUsuario(Usuario nuevo){
+		usuarioRegistrado = nuevo;
+		print("Registrado nuevo usuario con nombre " + nuevo.nombre + " y correo " + nuevo.correo + " con ID" + nuevo.id);
+	}
 
-    //Verifica que el usuario haya sido verificado correctamente
-    //y le redirecciona a la pantalla principal de la aplicación
-    public void login() {
-        //TODO: Verificación de datos
+	// Desactiva todas las pantallas
+	private void DesactivarPantallas() {
+		foreach (GameObject p in pantallas.Values)
+		{
+			p.SetActive(false);
+		}
+	}
 
-        abrirPantalla("Principal");
-    }
-
-    //Abre una pantalla con un nombre determinado
-    public void abrirPantalla(string pantalla) {
-        Debug.Log("Abriendo pantalla \"" + pantalla + "\"...");
-        
-        GameObject abrirEsteCanvas = gameObject.transform.Find(pantalla).gameObject; //Buscar pantalla/objeto a abrir
-
-        if(abrirEsteCanvas == null) { //Si el objeto pedido no existe, mensaje de error
-            Debug.LogError("No se ha podido abrir la pantalla de reglas\nNo se ha podido encontrar el child \"" + pantalla + "\" (Tipo Canvas)");
-            return;
-        }
-        if ( !esCavnas(abrirEsteCanvas) ) { //Si el objeto a activar no es un canvas, mensaje de error
-            Debug.LogError("Se ha seleccionado un objeto \"" + pantalla + "\" como pantalla que no es un canvas");
-            return;
-        }
-
-        //No sabemos de donde se ha accedido a la nueva pantalla
-        //(En caso de querer que se puedan acceder desde otro sitio)
-        //Por lo que hay que desactivar todas las pantallas
-        desactivar_pantalas();
-
-        abrirEsteCanvas.SetActive(true);
-    }
-
-    //Desactiva todas las pantallas (canvases)
-    private void desactivar_pantalas() {
-        for(int i = 0; i < gameObject.transform.childCount; i++) {
-            GameObject canvas = gameObject.transform.GetChild(i).gameObject; //Obtener hijo nº i
-
-            if(canvas != null && esCavnas(canvas)) { //Desactivar aquellos gameobjects que sean canvases
-                canvas.SetActive(false); //Desactivar
-            }
-        }
-    }
-
-    //Cambiar escalado de la interfaz
-    //Usar en startup y si se desea cambiar la resolucion (raro en movil)
-    public void actualizarEscalado() {
-        //Inicializar el escalado de la interfaz segun la resolución vertical
-        //Para dispositivos 1080p, este valor sera 3
-        escaladoInterfaz = Screen.height / 360;
-        if(escaladoInterfaz < 1)
-            escaladoInterfaz = 1;
-
-        //Escalar canvas
-        CanvasScaler scaler = GetComponent<CanvasScaler>();
-        scaler.scaleFactor = escaladoInterfaz;
-    }
-
-    //Determina si un GameObject es un canvas
-    private bool esCavnas(GameObject obj) {
-        return (obj.GetComponent<Canvas>() != null);
-    }
 }

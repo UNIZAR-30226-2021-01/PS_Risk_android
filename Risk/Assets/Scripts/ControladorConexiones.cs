@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 public class ControladorConexiones : MonoBehaviour
 {
 	private const float MAX_TIME = 10; // Tiempo máximo en segundos que puede tardar una conexión
-	private const string DIRECCION_PETICIONES = "https://fathomless-ridge-74437.herokuapp.com/";
+	private const string DIRECCION_PETICIONES = "https://risk-servidor.herokuapp.com/";
 	public static ControladorConexiones instance; // Referencia estática a si mismo para usar como singleton
 	
 	private void Awake() {
