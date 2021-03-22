@@ -1,11 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using Newtonsoft.Json;
 
 public class ControladorSesion : MonoBehaviour
@@ -36,7 +31,7 @@ public class ControladorSesion : MonoBehaviour
 	{
 		WWWForm form = new WWWForm();
 		form.AddField("usuario", usuario);
-		form.AddField("clave", clave);
+		form.AddField("clave", ControladorConexiones.Cifrar(clave));
 		string result = await ControladorConexiones.instance.RequestHTTP("iniciarSesion",form);
 		LoggearUsuario(result);
 	}
@@ -46,20 +41,10 @@ public class ControladorSesion : MonoBehaviour
 		WWWForm form = new WWWForm();
 		form.AddField("nombre", usuario);
 		form.AddField("correo", correo);
-		form.AddField("clave", Cifrar(clave));
+		form.AddField("clave", ControladorConexiones.Cifrar(clave));
 		form.AddField("recibeCorreos", recibeCorreos ? 1 : 0);
 		string result = await ControladorConexiones.instance.RequestHTTP("registrar", form);
 		LoggearUsuario(result);
-	}
-	
-	private string Cifrar(string entrada){
-		SHA256 hash = SHA256Managed.Create();
-		byte[] datos = hash.ComputeHash(Encoding.ASCII.GetBytes(entrada));
-		StringBuilder sBuilder = new StringBuilder();
-		foreach(byte b in datos){
-			sBuilder.Append(b.ToString("x2"));
-		}
-		return sBuilder.ToString();
 	}
 	
 	private void LoggearUsuario(string recibido){

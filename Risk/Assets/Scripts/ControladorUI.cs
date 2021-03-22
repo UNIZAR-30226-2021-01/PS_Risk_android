@@ -7,7 +7,7 @@ public class ControladorUI : MonoBehaviour
 {
 	public static ControladorUI instance; // Referencia estática a si mismo para usar como singleton
 	public Dictionary<string, GameObject> pantallas;
-	private Usuario usuarioRegistrado;
+	public Usuario usuarioRegistrado;
 	
 	private void Awake() {
 		instance = this;
@@ -44,7 +44,6 @@ public class ControladorUI : MonoBehaviour
 	
 	public void ActualizarUsuario(Usuario nuevo){
 		usuarioRegistrado = nuevo;
-		print("Registrado nuevo usuario con nombre " + nuevo.nombre + " y correo " + nuevo.correo + " con ID" + nuevo.id);
 	}
 
 	// Desactiva todas las pantallas

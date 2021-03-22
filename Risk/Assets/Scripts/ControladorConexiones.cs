@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Threading.Tasks;
+using System.Text;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -37,6 +39,17 @@ public class ControladorConexiones : MonoBehaviour
 		return temp;
 	}
 	
+	// Cifra el el string de entrada con el algoritmo SHA256
+	public static string Cifrar(string entrada){
+		SHA256 hash = SHA256Managed.Create();
+		byte[] datos = hash.ComputeHash(Encoding.ASCII.GetBytes(entrada));
+		StringBuilder sBuilder = new StringBuilder();
+		foreach(byte b in datos){
+			sBuilder.Append(b.ToString("x2"));
+		}
+		return sBuilder.ToString();
+	}
+	
 	// Envia una petición HTTP con el formulario y devuelve el resultado en texto a la función de callback
 	public IEnumerator SendRequest<T>(string direccion, WWWForm form, Action<T> callback) {
 		UnityWebRequest www = UnityWebRequest.Post(DIRECCION_PETICIONES + direccion, form);
@@ -53,4 +66,6 @@ public class ControladorConexiones : MonoBehaviour
 
 		}
 	}
+	
+	
 }
