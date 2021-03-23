@@ -20,4 +20,11 @@ public static class ClasesJSON {
 		public Usuario usuario;
 		public List<Cosmetico> aspectos, iconos, tiendaAspectos, tiendaIconos;
 	}
+	
+	[System.Serializable]
+	public class Amigo {
+		public int id, icono, aspecto;
+		public string nombre;
+	}
+	
 }

@@ -8,6 +8,7 @@ public class ControladorUI : MonoBehaviour
 	public static ControladorUI instance; // Referencia estática a si mismo para usar como singleton
 	public Dictionary<string, GameObject> pantallas;
 	public Usuario usuarioRegistrado;
+	public Sprite[] iconos, aspectos;
 	
 	private void Awake() {
 		instance = this;

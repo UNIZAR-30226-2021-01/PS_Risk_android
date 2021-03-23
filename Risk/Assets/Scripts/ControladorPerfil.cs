@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 public class ControladorPerfil : MonoBehaviour {
 	public TextMeshProUGUI nombreUsuario, riskos;
 	public Image icono, aspecto;
-	public Sprite[] iconos, aspectos;
 	private string nuevoNombre, nuevaClave, nuevoCorreo;
 	private int nuevoIcono, nuevoAspecto;
 	private bool nuevoRecibeCorreos;
@@ -113,8 +112,8 @@ public class ControladorPerfil : MonoBehaviour {
 		nuevoRecibeCorreos = usuario.recibeCorreos;
 		nombreUsuario.text = usuario.nombre;
 		riskos.text = "Riskos: " + usuario.riskos.ToString();
-		icono.sprite = iconos[usuario.icono - 1];
-		aspecto.sprite = iconos[usuario.icono - 1];
+		icono.sprite = ControladorUI.instance.iconos[usuario.icono - 1];
+		aspecto.sprite = ControladorUI.instance.iconos[usuario.icono - 1];
 	}
 
 }
