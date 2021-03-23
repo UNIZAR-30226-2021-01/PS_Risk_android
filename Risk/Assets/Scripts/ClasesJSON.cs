@@ -26,5 +26,20 @@ public static class ClasesJSON {
 		public int id, icono, aspecto;
 		public string nombre;
 	}
+
+	[System.Serializable]
+	public class Notificacion {
+		//ID de notificación
+		public int idNotificacion;
+
+		//Información extra sobre la notificación
+		public string infoExtra;
+
+		//Tipo de notificación
+		public string tipo;
+
+		//Emisor de la notificación
+		public int idEnvio;
+	}
 	
 }
