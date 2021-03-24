@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Colección de clases utilizadas para almacenar el contenido recibido del servidor en
+// formato JSON. Las clases y atributos corresponden con aquellos de la API del servidor.
 public static class ClasesJSON {
+
 	[System.Serializable]
 	public class RiskError {
 		public int code;
@@ -29,13 +32,10 @@ public static class ClasesJSON {
 
 	[System.Serializable]
 	public class Notificacion {
-		//Información extra sobre la notificación
 		public string infoExtra;
 
-		//Tipo de notificación
 		public string tipo;
 
-		//Emisor de la notificación
 		public int idEnvio;
 	}
 	

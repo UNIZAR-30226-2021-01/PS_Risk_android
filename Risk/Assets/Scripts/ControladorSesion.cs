@@ -29,6 +29,7 @@ public class ControladorSesion : MonoBehaviour
 	
 	public async void IniciarSesion()
 	{
+		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
 		form.AddField("usuario", usuario);
 		form.AddField("clave", ControladorConexiones.Cifrar(clave));
@@ -38,6 +39,7 @@ public class ControladorSesion : MonoBehaviour
 	
 	public async void Registrarse()
 	{
+		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
 		form.AddField("nombre", usuario);
 		form.AddField("correo", correo);
@@ -47,6 +49,7 @@ public class ControladorSesion : MonoBehaviour
 		LoggearUsuario(result);
 	}
 	
+	// Intenta acceder a la cuenta del usuario y en caso exitoso entra al menú principal
 	private void LoggearUsuario(string recibido){
 		try {
 			ClasesJSON.UsuarioCompleto usuarioCompleto = JsonConvert.DeserializeObject<ClasesJSON.UsuarioCompleto>(recibido);
@@ -54,8 +57,12 @@ public class ControladorSesion : MonoBehaviour
 			ControladorUI.instance.ActualizarUsuario(usuarioCompleto.usuario);
 			ControladorUI.instance.AbrirPantalla("Principal");
 		} catch {
-			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
-			ControladorUI.instance.PantallaError(error.err);
+			try {
+				ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
+				ControladorUI.instance.PantallaError(error.err);
+			} catch {
+				ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+			}
 		}
 		print(recibido);
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ControladorUI : MonoBehaviour
 {
@@ -9,12 +10,14 @@ public class ControladorUI : MonoBehaviour
 	public Dictionary<string, GameObject> pantallas;
 	public Usuario usuarioRegistrado;
 	public Sprite[] iconos, aspectos;
+	public GameObject pantallaCarga, pantallaError;
+	public TextMeshProUGUI textoError;
 	
 	private void Awake() {
+		// Asignación de valor inicial de las variables de la clase
 		instance = this;
 		pantallas = new Dictionary<string, GameObject>();
-		// Empieza en 1 para ignorar el primer hijo
-		for(int i = 1; i < transform.childCount; i++) {
+		for(int i = 0; i < transform.childCount; i++) {
 			GameObject hijo = transform.GetChild(i).gameObject;
 			pantallas.Add(hijo.name, hijo);
 		}
@@ -31,7 +34,6 @@ public class ControladorUI : MonoBehaviour
 		}
 	}
 
-	// Salir de la aplicación
 	public void Salir(){
 		#if UNITY_EDITOR
 			print("Se ha salido de la aplicación");
@@ -39,19 +41,23 @@ public class ControladorUI : MonoBehaviour
 		Application.Quit();
 	}
 
-	public void PantallaError(string error){
-		Debug.LogError("ERROR: " + error);
+	public void PantallaError(string error) {
+		pantallaError.SetActive(true);
+		textoError.text = error;
+	}
+	
+	public void PantallaCarga(bool activado) {
+		pantallaCarga.SetActive(activado);
 	}
 	
 	public void ActualizarUsuario(Usuario nuevo){
 		usuarioRegistrado = nuevo;
 	}
 
-	// Desactiva todas las pantallas
 	private void DesactivarPantallas() {
-		foreach (GameObject p in pantallas.Values)
-		{
-			p.SetActive(false);
+		foreach (GameObject p in pantallas.Values) {
+			// Desactivar todas las pantallas que no tengan el tag de mostrarSiempre
+			if(!p.transform.CompareTag("mostrarSiempre")) p.SetActive(false);
 		}
 	}
 

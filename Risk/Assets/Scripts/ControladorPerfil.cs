@@ -43,8 +43,9 @@ public class ControladorPerfil : MonoBehaviour {
 		nuevoRecibeCorreos = recibeCorreos;
 	}
 
-	// Recibe el tipo de dato a ser actualizado
+	// Recibe el tipo de dato a ser actualizado y envia petición de personalización al servidor
 	public async void PersonalizarUsuario(string elemento) {
+		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
 		form.AddField("idUsuario", usuario.id);
 		form.AddField("clave", usuario.clave);
@@ -91,18 +92,11 @@ public class ControladorPerfil : MonoBehaviour {
 				ActualizarDatosRepresentados();
 			}
 		} catch {
-			// No hay error, actualizar datos locales
-			ControladorUI.instance.usuarioRegistrado.nombre = nuevoNombre;
-			ControladorUI.instance.usuarioRegistrado.correo = nuevoCorreo;
-			ControladorUI.instance.usuarioRegistrado.clave = nuevaClave;
-			ControladorUI.instance.usuarioRegistrado.recibeCorreos = nuevoRecibeCorreos;
-			ControladorUI.instance.usuarioRegistrado.aspecto = nuevoAspecto;
-			ControladorUI.instance.usuarioRegistrado.icono = nuevoIcono;
-			usuario = ControladorUI.instance.usuarioRegistrado;
-			ActualizarDatosRepresentados();
+			ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 		}
 	}
 	
+	// Actualiza los campos mostrados al usuario mediante la interfaz
 	private void ActualizarDatosRepresentados(){
 		nuevoNombre = usuario.nombre;
 		nuevaClave = usuario.clave;

@@ -35,7 +35,10 @@ public class ControladorConexiones : MonoBehaviour
 				temp = "ERROR";
 				break;
 			}
+			// Si ha tardado mas de medio segundo activar la pantalla de carga (no importa si lo hace más de 1 vez)
+			ControladorUI.instance.PantallaCarga(true);
 		}
+		ControladorUI.instance.PantallaCarga(false);
 		return temp;
 	}
 	
