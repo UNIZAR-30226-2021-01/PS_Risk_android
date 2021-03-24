@@ -29,9 +29,6 @@ public static class ClasesJSON {
 
 	[System.Serializable]
 	public class Notificacion {
-		//ID de notificación
-		public int idNotificacion;
-
 		//Información extra sobre la notificación
 		public string infoExtra;
 
