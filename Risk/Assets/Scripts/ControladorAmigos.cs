@@ -10,47 +10,52 @@ public class ControladorAmigos : MonoBehaviour {
 	private string amigoAgregar;
 	
 	private void OnEnable() {
-		RecargarAmigos();
+		//RecargarAmigos();
 	}
 	
 	public void ActualizarAmigoAgregar(string nombre){
 		amigoAgregar = nombre;
 	}
 
-	public async void RecargarAmigos(){
-		if(ControladorUI.instance == null || ControladorUI.instance.usuarioRegistrado == null){
-			// Por razones de orden de ejecución inicial de Unity, es posible que esto se llame antes
-			// del Awake de ControladorUI por lo que la variable instance puede no estar asignada,
-			// en ese caso terminar la ejecución de esta función (cuando esto ocurre no interesa el valor real)
-			return;
+	public async void RecargarAmigos() {
+		// Borrar todos los amigos de la lista y poner no amigo
+		for(int i = 0; i < padreAmigos.childCount; i++) {
+			Destroy(padreAmigos.GetChild(i).gameObject);
 		}
+		GameObject noAmigo = Instantiate(noAmigoPrefab, padreAmigos);
 		// Crear formulario a enviar
 		WWWForm form = new WWWForm();
 		form.AddField("idUsuario", ControladorUI.instance.usuarioRegistrado.id);
 		form.AddField("clave", ControladorUI.instance.usuarioRegistrado.clave);
-		// Borrar todos los amigos de la lista
-		for(int i = 0; i < padreAmigos.childCount; i++) {
-			Destroy(padreAmigos.GetChild(i).gameObject);
-		}
 		// Enviar petición al servidor
 		string recibido = await ControladorConexiones.instance.RequestHTTP("amigos", form);
+		// En algunas circunstancias el servidor envia null en vez de un array, en ese caso no hay amigos
+		if (!recibido.Contains("[")) {
+			return;
+		}
 		try {
-			// Error, mostrar mensaje de error
-			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
-			ControladorUI.instance.PantallaError(error.err);
-		} catch {
-			// No hay error
-			listaAmigos = JsonConvert.DeserializeObject<List<ClasesJSON.Amigo>>(recibido);
+			listaAmigos = JsonConvert.DeserializeObject<ClasesJSON.ListaAmigos>(recibido).amigos;
+			if (listaAmigos.Count == 0) {
+				return;
+			}
+			Destroy(noAmigo);
 			foreach (var amigo in listaAmigos) {
 				Amigo nuevoAmigo = Instantiate(amigoPrefab, padreAmigos).GetComponent<Amigo>();
 				nuevoAmigo.id = amigo.id;
-				nuevoAmigo.icono.sprite = ControladorUI.instance.iconos[amigo.icono-1];
+				nuevoAmigo.icono.sprite = ControladorUI.instance.iconos[amigo.icono];
 				nuevoAmigo.nombre.text = amigo.nombre;
 			}
-		}
-		// Lista de amigos vacía, mostrar mensaje que indica que no tiene amigos
-		if(listaAmigos.Count == 0){
-			Instantiate(noAmigoPrefab, padreAmigos);
+		} catch {
+			try {
+				print(recibido);
+				// Error, mostrar mensaje de error
+				ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
+				print(error.code + ", " + error.err);
+				ControladorUI.instance.PantallaError(error.err);
+			} catch {
+				// No hay error
+				ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+			}
 		}
 	}
 	

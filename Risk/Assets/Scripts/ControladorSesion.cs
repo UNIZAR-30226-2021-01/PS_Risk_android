@@ -53,8 +53,7 @@ public class ControladorSesion : MonoBehaviour
 	private void LoggearUsuario(string recibido){
 		try {
 			ClasesJSON.UsuarioCompleto usuarioCompleto = JsonConvert.DeserializeObject<ClasesJSON.UsuarioCompleto>(recibido);
-			int pruebaError = usuarioCompleto.usuario.id;
-			ControladorUI.instance.ActualizarUsuario(usuarioCompleto.usuario);
+			ControladorUI.instance.usuarioRegistrado = usuarioCompleto.usuario;
 			ControladorUI.instance.AbrirPantalla("Principal");
 		} catch {
 			try {
@@ -64,6 +63,5 @@ public class ControladorSesion : MonoBehaviour
 				ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 			}
 		}
-		print(recibido);
 	}
 }

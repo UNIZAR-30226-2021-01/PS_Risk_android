@@ -106,8 +106,8 @@ public class ControladorPerfil : MonoBehaviour {
 		nuevoRecibeCorreos = usuario.recibeCorreos;
 		nombreUsuario.text = usuario.nombre;
 		riskos.text = "Riskos: " + usuario.riskos.ToString();
-		icono.sprite = ControladorUI.instance.iconos[usuario.icono - 1];
-		aspecto.sprite = ControladorUI.instance.iconos[usuario.icono - 1];
+		icono.sprite = ControladorUI.instance.iconos[usuario.icono];
+		aspecto.sprite = ControladorUI.instance.iconos[usuario.icono];
 	}
 
 }

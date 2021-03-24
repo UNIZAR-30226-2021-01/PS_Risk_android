@@ -31,6 +31,11 @@ public static class ClasesJSON {
 	}
 
 	[System.Serializable]
+	public class ListaAmigos {
+		public List<Amigo> amigos;
+	}
+
+	[System.Serializable]
 	public class Notificacion {
 		public string infoExtra;
 
