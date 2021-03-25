@@ -20,6 +20,7 @@ public class ControladorConexiones : MonoBehaviour
 	
 	// Devuelve el string recibido tras hacer una petición HTTP con el formulario
 	public async Task<string> RequestHTTP(string direccion, WWWForm form){
+		ControladorUI.instance.PantallaCarga(true);
 		string temp = null;
 		// Realizamos la petición HTTP a traves de la corrutina
 		StartCoroutine(SendRequest<string>(direccion, form, (returned) => {

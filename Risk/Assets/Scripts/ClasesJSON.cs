@@ -11,7 +11,7 @@ public static class ClasesJSON {
 	public static JsonSerializerSettings settings = new JsonSerializerSettings {
 		/*Error = (SpriteRenderer, args) =>
 		{
-            Debug.LogError("Error en Deserializacion: " + args.ErrorContext.Error.Message);
+			Debug.LogError("Error en Deserializacion: " + args.ErrorContext.Error.Message);
 			args.ErrorContext.Handled = true;
 		},*/
 		MissingMemberHandling = MissingMemberHandling.Error
@@ -56,8 +56,8 @@ public static class ClasesJSON {
 	}
 	
 	[System.Serializable]
-    public class ListaNotificaciones {
-        public List<Notificacion> notificaciones;
-    }
+	public class ListaNotificaciones {
+		public List<Notificacion> notificaciones;
+	}
 	
 }
