@@ -77,7 +77,7 @@ public class ControladorPerfil : MonoBehaviour {
 		print(recibido);
 		try {
 			// Vemos si hay error
-			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
 			if(error.code != 0){
 				ControladorUI.instance.PantallaError(error.err);
 			} else {

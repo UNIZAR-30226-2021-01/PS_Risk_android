@@ -34,7 +34,7 @@ public class ControladorAmigos : MonoBehaviour {
 			return;
 		}
 		try {
-			listaAmigos = JsonConvert.DeserializeObject<ClasesJSON.ListaAmigos>(recibido).amigos;
+			listaAmigos = JsonConvert.DeserializeObject<ClasesJSON.ListaAmigos>(recibido, ClasesJSON.settings).amigos;
 			if (listaAmigos.Count == 0) {
 				return;
 			}
@@ -49,7 +49,7 @@ public class ControladorAmigos : MonoBehaviour {
 			try {
 				print(recibido);
 				// Error, mostrar mensaje de error
-				ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
+				ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
 				print(error.code + ", " + error.err);
 				ControladorUI.instance.PantallaError(error.err);
 			} catch {
@@ -67,7 +67,7 @@ public class ControladorAmigos : MonoBehaviour {
 		form.AddField("nombreAmigo", amigoAgregar);
 		string recibido = await ControladorConexiones.instance.RequestHTTP("enviarSolicitudAmistad", form);
 		try {
-			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
 			if(error.code != 0) {
 				// No hay error	
 				ControladorUI.instance.PantallaError(error.err);

@@ -52,7 +52,7 @@ public class ControladorSesion : MonoBehaviour
 	// Intenta acceder a la cuenta del usuario y en caso exitoso entra al menú principal
 	private void LoggearUsuario(string recibido){
 		try {
-			ClasesJSON.UsuarioCompleto usuarioCompleto = JsonConvert.DeserializeObject<ClasesJSON.UsuarioCompleto>(recibido);
+			ClasesJSON.UsuarioCompleto usuarioCompleto = JsonConvert.DeserializeObject<ClasesJSON.UsuarioCompleto>(recibido, ClasesJSON.settings);
 			ControladorUI.instance.usuarioRegistrado = usuarioCompleto.usuario;
 			ControladorUI.instance.AbrirPantalla("Principal");
 		} catch {
