@@ -22,23 +22,23 @@ public class ControladorAmigos : MonoBehaviour {
 		for(int i = 0; i < padreAmigos.childCount; i++) {
 			Destroy(padreAmigos.GetChild(i).gameObject);
 		}
-		GameObject noAmigo = Instantiate(noAmigoPrefab, padreAmigos);
 		// Crear formulario a enviar
 		WWWForm form = new WWWForm();
 		form.AddField("idUsuario", ControladorUI.instance.usuarioRegistrado.id);
 		form.AddField("clave", ControladorUI.instance.usuarioRegistrado.clave);
 		// Enviar petición al servidor
 		string recibido = await ControladorConexiones.instance.RequestHTTP("amigos", form);
-		// En algunas circunstancias el servidor envia null en vez de un array, en ese caso no hay amigos
+		// En algunas circunstancias el servidor no envía un array, en ese caso no hay amigos
 		if (!recibido.Contains("[")) {
+			Instantiate(noAmigoPrefab, padreAmigos);
 			return;
 		}
 		try {
 			listaAmigos = JsonConvert.DeserializeObject<ClasesJSON.ListaAmigos>(recibido, ClasesJSON.settings).amigos;
 			if (listaAmigos.Count == 0) {
+				Instantiate(noAmigoPrefab, padreAmigos);
 				return;
 			}
-			Destroy(noAmigo);
 			foreach (var amigo in listaAmigos) {
 				Amigo nuevoAmigo = Instantiate(amigoPrefab, padreAmigos).GetComponent<Amigo>();
 				nuevoAmigo.id = amigo.id;
