@@ -9,7 +9,7 @@ public class ControladorUI : MonoBehaviour
 	public static ControladorUI instance; // Referencia estática a si mismo para usar como singleton
 	public Dictionary<string, GameObject> pantallas;
 	public Usuario usuarioRegistrado;
-	public Sprite[] iconos, aspectos;
+	public Sprite[] iconos, aspectos, aspectos_color; //Sprites para los iconos, aspectos y mascaras de color de los aspectos
 	public GameObject pantallaCarga, pantallaError;
 	public TextMeshProUGUI textoError;
 	

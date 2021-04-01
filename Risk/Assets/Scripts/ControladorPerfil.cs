@@ -6,17 +6,47 @@ using TMPro;
 using Newtonsoft.Json;
 
 public class ControladorPerfil : MonoBehaviour {
+	public static ControladorPerfil instance;
+
 	public TextMeshProUGUI nombreUsuario, riskos;
 	public Image icono, aspecto;
 	private string nuevoNombre, nuevaClave, nuevoCorreo;
 	private int nuevoIcono, nuevoAspecto;
 	private bool nuevoRecibeCorreos;
 	private Usuario usuario;
+
+	[SerializeField]
+	private GameObject panelTienda = null; //Panel de la tienda
+	[SerializeField]
+	private Transform tr_listaIconos = null; //Transform de la lista de iconos en la tienda
+	[SerializeField]
+	private Transform tr_listaAspectos = null; //Transform de la lista de iconos en la tienda
+	[SerializeField]
+	private GameObject panelTienda_prefab = null; //Prefab que se usara para mostrar los objetos en venta en la tienda
+	[SerializeField]
+	private GameObject panelTienda_confirmacion = null; //Panel de confirmación que se muestra cuando se va a comprar algo
+
+	private Animator animatorTienda = null; //Animator de tienda
+	private int tiendaAbierta = 0; //1 si la tienda esta abierta
+
+	public static ObjetoCompra objetoAComprar; //Objeto que se va a comprar cuando sale la ventana de confirmacións
 	
 	// Actualiza los datos de usuario cuando se abre la pantalla de perfil
 	private void OnEnable() {
+		instance = this;
+
+		if(panelTienda != null) { //Obtener animador
+			animatorTienda = panelTienda.GetComponent<Animator>();
+			if(animatorTienda == null)
+				Debug.LogWarning("En Panel de la Tienda no es nulo, pero si animador si");
+		} else {
+			Debug.LogWarning("En Panel de la Tienda es nulo, no se puede obtener animacion");
+		}
+
+
 		usuario = ControladorUI.instance.usuarioRegistrado;
 		ActualizarDatosRepresentados();
+		ActualizarTienda();
 	}
 	
 	public void ActualizarNombre(string nombre){
@@ -33,10 +63,16 @@ public class ControladorPerfil : MonoBehaviour {
 
 	public void ActualizarIcono(int icono){
 		nuevoIcono = icono;
+		try {
+			this.icono.overrideSprite = ControladorUI.instance.iconos[icono];
+		} catch {}
 	}
 
 	public void ActualizarAspecto(int aspecto){
 		nuevoAspecto = aspecto;
+		try {
+			this.aspecto.overrideSprite = ControladorUI.instance.aspectos[aspecto];
+		} catch {}
 	}
 
 	public void ActualizarRecibeCorreo(bool recibeCorreos){
@@ -105,9 +141,105 @@ public class ControladorPerfil : MonoBehaviour {
 		nuevoAspecto = usuario.aspecto;
 		nuevoRecibeCorreos = usuario.recibeCorreos;
 		nombreUsuario.text = usuario.nombre;
-		riskos.text = "Riskos: " + usuario.riskos.ToString();
+		riskos.text = usuario.riskos.ToString();
 		icono.sprite = ControladorUI.instance.iconos[usuario.icono];
 		aspecto.sprite = ControladorUI.instance.iconos[usuario.icono];
 	}
 
+
+	/*
+		Lógica de la Tienda
+	*/
+	// Actualiza los gameobjects de la tienda
+	public void ActualizarTienda() {
+		Debug.Log("Actualizando Tienda...");
+		//Borrar los gameobjects de las listas de iconos y aspectos
+		for(int i = 0; i < tr_listaAspectos.childCount; i++) {
+			Destroy(tr_listaAspectos.GetChild(i).gameObject);
+		}
+		for(int i = 0; i < tr_listaIconos.childCount; i++) {
+			Destroy(tr_listaIconos.GetChild(i).gameObject);
+		}
+
+		//Abortar si no hay listas de aspectos o iconos en la tienda
+		if(ControladorSesion.iconos_tienda == null || ControladorSesion.aspectos_tienda == null) {
+			Debug.LogError("iconos_tienda y/o aspectos_tienda es nulo/s");
+			return;
+		}
+
+		//Añadir prefabs
+		//Iconos
+		foreach (ClasesJSON.Icono i in ControladorSesion.iconos_tienda.tiendaIconos) {
+				ObjetoCompra go_oc = Instantiate(panelTienda_prefab, tr_listaIconos).GetComponent<ObjetoCompra>();
+				go_oc.Actualizar(i);
+		}
+		//Aspectos
+		foreach (ClasesJSON.Aspecto i in ControladorSesion.aspectos_tienda.tiendaAspectos) {
+				ObjetoCompra go_oc = Instantiate(panelTienda_prefab, tr_listaAspectos).GetComponent<ObjetoCompra>();
+				go_oc.Actualizar(i);
+		}
+	}
+	
+	//Abre y cierra la tienda
+	public void ToggleTienda() {
+		if(animatorTienda != null)
+		{
+			animatorTienda.SetInteger("state", 1 - tiendaAbierta);
+			tiendaAbierta = 1 - tiendaAbierta;
+		}
+	}
+
+	//Abre la ventana de confirmación de compra
+	public void AbrirConfirmacionCompra(ObjetoCompra oc) {
+		objetoAComprar = oc;
+		panelTienda_confirmacion.SetActive(true);
+	}
+
+	//Confirma la compra desde el menu de confirmación
+	public void ConfirmarCompra() {
+		objetoAComprar.Comprar();
+		panelTienda_confirmacion.SetActive(false);
+	}
+
+	//Cambia el nuevo icono del usuario en la pantalla de perfil
+	public void CambiarIcono(int direccion) {
+		int orig = ControladorUI.instance.usuarioRegistrado.icono;
+		int c = orig;
+		int MAX_TRIES = 14;
+
+		for(int i = 0; i < MAX_TRIES; i++) {
+			c += direccion;
+			bool end = false;
+
+			foreach(var obj in ControladorSesion.iconos_comprados.iconos)
+				if(obj.id == c) {
+					ActualizarIcono(c);
+					end = true;
+					break;
+				}
+				
+			if(end) break;
+		}
+	}
+
+	//Cambia el nuevo aspecto del usuario en la pantalla de perfil
+	public void CambiarAspecto(int direccion) {
+		int orig = ControladorUI.instance.usuarioRegistrado.aspecto;
+		int c = orig;
+		int MAX_TRIES = 14;
+
+		for(int i = 0; i < MAX_TRIES; i++) {
+			c += direccion;
+			bool end = false;
+
+			foreach(var obj in ControladorSesion.aspectos_comprados.aspectos)
+				if(obj.id == c) {
+					ActualizarIcono(c);
+					end = true;
+					break;
+				}
+
+			if(end) break;
+		}
+	}
 }

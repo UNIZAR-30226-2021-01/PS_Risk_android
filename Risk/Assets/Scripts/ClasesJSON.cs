@@ -60,4 +60,44 @@ public static class ClasesJSON {
 		public List<Notificacion> notificaciones;
 	}
 	
+	/*
+		ICONOS Y ASPECTOS
+	*/
+	//Aspecto, usado para deserializar datos de usuario y tienda
+	[System.Serializable]
+	public class Aspecto {
+		public int id;		//ID del Aspecto
+		public int precio;	//Precio del Aspecto en la tienda
+	}
+
+	//Lista de los aspectos que tiene el usuario
+	[System.Serializable]
+	public class ListaAspectosUsuario {
+		public List<Aspecto> aspectos;
+	}
+
+	//Lista de los aspectos que estan disponibles en la tienda
+	[System.Serializable]
+	public class ListaAspectosTienda {
+		public List<Aspecto> tiendaAspectos;
+	}
+	
+	//Icono, usado para deserializar datos de usuario y tienda
+	[System.Serializable]
+	public class Icono {
+		public int id;		//ID del Icono
+		public int precio;	//Precio del Icono en la tienda
+	}
+
+	//Lista de los iconos de perfil que tiene el usuario
+	[System.Serializable]
+	public class ListaIconosUsuario {
+		public List<Icono> iconos;
+	}
+
+	//Lista de los iconos de perfil que estan disponibles en la tienda
+	[System.Serializable]
+	public class ListaIconosTienda {
+		public List<Icono> tiendaIconos;
+	}
 }
