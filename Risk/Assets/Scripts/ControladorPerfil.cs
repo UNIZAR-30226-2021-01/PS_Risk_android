@@ -141,9 +141,8 @@ public class ControladorPerfil : MonoBehaviour {
 		nuevoAspecto = usuario.aspecto;
 		nuevoRecibeCorreos = usuario.recibeCorreos;
 		nombreUsuario.text = usuario.nombre;
-		riskos.text = usuario.riskos.ToString();
 		icono.sprite = ControladorUI.instance.iconos[usuario.icono];
-		aspecto.sprite = ControladorUI.instance.iconos[usuario.icono];
+		aspecto.sprite = ControladorUI.instance.aspectos[usuario.icono];
 	}
 
 
@@ -153,6 +152,8 @@ public class ControladorPerfil : MonoBehaviour {
 	// Actualiza los gameobjects de la tienda
 	public void ActualizarTienda() {
 		Debug.Log("Actualizando Tienda...");
+		riskos.text = usuario.riskos.ToString(); //Actualizar cuantos riskos quedan (Riskos™)
+
 		//Borrar los gameobjects de las listas de iconos y aspectos
 		for(int i = 0; i < tr_listaAspectos.childCount; i++) {
 			Destroy(tr_listaAspectos.GetChild(i).gameObject);
@@ -203,12 +204,13 @@ public class ControladorPerfil : MonoBehaviour {
 
 	//Cambia el nuevo icono del usuario en la pantalla de perfil
 	public void CambiarIcono(int direccion) {
-		int orig = ControladorUI.instance.usuarioRegistrado.icono;
+		int orig = nuevoIcono;
 		int c = orig;
-		int MAX_TRIES = 14;
+		int MAX_TRIES = ControladorUI.instance.iconos.Length;
 
 		for(int i = 0; i < MAX_TRIES; i++) {
 			c += direccion;
+			c = (c + MAX_TRIES) % MAX_TRIES; //Asegurar que no nos pasemos de busqueda
 			bool end = false;
 
 			foreach(var obj in ControladorSesion.iconos_comprados.iconos)
@@ -224,17 +226,18 @@ public class ControladorPerfil : MonoBehaviour {
 
 	//Cambia el nuevo aspecto del usuario en la pantalla de perfil
 	public void CambiarAspecto(int direccion) {
-		int orig = ControladorUI.instance.usuarioRegistrado.aspecto;
+		int orig = nuevoAspecto;
 		int c = orig;
-		int MAX_TRIES = 14;
+		int MAX_TRIES = ControladorUI.instance.aspectos.Length;
 
 		for(int i = 0; i < MAX_TRIES; i++) {
 			c += direccion;
+			c = (c + MAX_TRIES) % MAX_TRIES; //Asegurar que no nos pasemos de busqueda
 			bool end = false;
 
 			foreach(var obj in ControladorSesion.aspectos_comprados.aspectos)
 				if(obj.id == c) {
-					ActualizarIcono(c);
+					ActualizarAspecto(c);
 					end = true;
 					break;
 				}

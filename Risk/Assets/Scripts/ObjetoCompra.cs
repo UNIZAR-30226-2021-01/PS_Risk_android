@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Newtonsoft.Json;
 using TMPro;
 
 /*
@@ -44,6 +45,12 @@ public class ObjetoCompra : MonoBehaviour
             }
         SetComprar(sePuedeComprar);
         ActualizarImagen();
+
+        //Si no se tiene dinero suficiente, dehabilitar boton, hacer texto de precio rojo
+        if(coste > ControladorUI.instance.usuarioRegistrado.riskos) {
+            boton_componente.interactable = false;
+            texto_precio.color = new Color(1,0.5f,0.5f,1f);
+        }
     }
 
     //Inicializar clase basandose en un aspecto
@@ -53,10 +60,6 @@ public class ObjetoCompra : MonoBehaviour
         coste = aspecto.precio;
         texto_nombre.text = "ASPECTO";
         texto_precio.text = "<i>" + coste + "</i>";
-
-        //Si no se tiene dinero suficiente, dehabilitar boton
-        if(coste > ControladorUI.instance.usuarioRegistrado.riskos)
-            boton_componente.enabled = false;
 
         //Comprobar si este objeto ya esta comprado
         //¿Eficiencia?
@@ -68,6 +71,15 @@ public class ObjetoCompra : MonoBehaviour
             }
         SetComprar(sePuedeComprar);
         ActualizarImagen();
+
+        //Si no se tiene dinero suficiente, dehabilitar boton, hacer texto de precio rojo
+        if(coste > ControladorUI.instance.usuarioRegistrado.riskos) {
+            boton_componente.interactable = false;
+            texto_precio.color = new Color(1,0.25f,0.25f,1f);
+        }
+        else if(coste <= 0) { //Si el coste es 0 o menor, decir que es gratis 
+            texto_precio.text = "<i>Gratis</i>";
+        }
     }
 
     //Actualiza la imagen mostrada
@@ -97,44 +109,65 @@ public class ObjetoCompra : MonoBehaviour
     //Comunicarse con Backend para comprar el objecto
     //Indicar al juego que este objeto se ha comprado
     public void Comprar() {
-        //Marcar como comprado
-        SetComprar(false);
+        Debug.Log("Comprando Cosmetico " + id + "...");
+        //Marcar como comprado, haya error o no
+        Comprar_API();
+    }
 
-        if(!esAspecto) {
-            Debug.Log("Comprando Icono " + id + "...");
-            //Hablar con la API
+    //Manda mensaje a backend de compra
+    private async void Comprar_API() {
+        WWWForm form = new WWWForm();
+		form.AddField("idUsuario", ControladorUI.instance.usuarioRegistrado.id);
+		form.AddField("clave", ControladorUI.instance.usuarioRegistrado.clave);
+        form.AddField("cosmetico", id);
+        if(esAspecto)
+            form.AddField("tipo", "Aspecto");
+        else
+            form.AddField("tipo","Icono");
 
-            //Actualizar riskos
+        //Obtener respuesta del servidor
+		string respuesta = await ControladorConexiones.instance.RequestHTTP("comprar", form);
 
-            //Añadir a la lista de comprados
-            ClasesJSON.Icono cjson = null;
-            foreach(var o in ControladorSesion.iconos_tienda.tiendaIconos) {
-                if(o.id == id) {
-                    cjson = o;
-                    break;
+        //Procesar respuesta
+        try {
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(respuesta);
+
+            if(error.code != 0) //Mostrar pantalla de error solo si la respuesta no es error 0
+                ControladorUI.instance.PantallaError(error.err);
+            else { //Si no, restar riskos, añadir cosmetico
+                ControladorUI.instance.usuarioRegistrado.riskos -= coste;
+            
+                if(!esAspecto) {
+                    ClasesJSON.Icono cjson = null;
+                    foreach(var o in ControladorSesion.iconos_tienda.tiendaIconos) {
+                        if(o.id == id) {
+                            cjson = o;
+                            break;
+                        }
+                    }
+                    ControladorSesion.iconos_comprados.iconos.Add(cjson);
+                    Debug.Log("Se ha comprado el icono " + id);
                 }
-            }
-            ControladorSesion.iconos_comprados.iconos.Add(cjson);
-        }
-        else {
-            Debug.Log("Comprando Aspecto " + id + "...");
-            //Hablar con la API
-
-            //Actualizar riskos
-
-            //Añadir a la lista de comprados
-            ClasesJSON.Aspecto cjson = null;
-            foreach(var o in ControladorSesion.aspectos_tienda.tiendaAspectos) {
-                if(o.id == id) {
-                    cjson = o;
-                    break;
+                else {
+                    ClasesJSON.Aspecto cjson = null;
+                    foreach(var o in ControladorSesion.aspectos_tienda.tiendaAspectos) {
+                        if(o.id == id) {
+                            cjson = o;
+                            break;
+                        }
+                    }
+                    ControladorSesion.aspectos_comprados.aspectos.Add(cjson);
+                    Debug.Log("Se ha comprado el aspecto " + id);
                 }
-            }
-            ControladorSesion.aspectos_comprados.aspectos.Add(cjson);
-        }
 
-        //Actualizar tienda
-        ControladorPerfil.instance.ActualizarTienda();
+                //Actualizar tienda
+                SetComprar(false);
+                ControladorPerfil.instance.ActualizarTienda();
+            }
+        } catch {
+            //Respuesta desconocida, ¿El servidor esta mandando una respuesta?
+            Debug.LogError("[Controlador Notificaciones] Respuesta del servidor desconocida\nRespuesta: " + respuesta);
+        }
     }
 
     //Permitir / Bloquear la posibilidad de darle al botón de comprar
