@@ -110,7 +110,7 @@ public class ControladorPerfil : MonoBehaviour {
 				return;
 		}
 		string recibido = await ControladorConexiones.instance.RequestHTTP("personalizarUsuario", form);
-		print(recibido);
+		//print(recibido);
 		try {
 			// Vemos si hay error
 			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
@@ -137,8 +137,8 @@ public class ControladorPerfil : MonoBehaviour {
 		nuevoNombre = usuario.nombre;
 		nuevaClave = usuario.clave;
 		nuevoCorreo = usuario.correo;
-		nuevoIcono = usuario.icono;
-		nuevoAspecto = usuario.aspecto;
+		ActualizarIcono(usuario.icono);
+		ActualizarAspecto(usuario.aspecto);
 		nuevoRecibeCorreos = usuario.recibeCorreos;
 		nombreUsuario.text = usuario.nombre;
 		icono.sprite = ControladorUI.instance.iconos[usuario.icono];
@@ -163,19 +163,19 @@ public class ControladorPerfil : MonoBehaviour {
 		}
 
 		//Abortar si no hay listas de aspectos o iconos en la tienda
-		if(ControladorSesion.iconos_tienda == null || ControladorSesion.aspectos_tienda == null) {
+		if(ControladorUI.iconos_tienda == null || ControladorUI.aspectos_tienda == null) {
 			Debug.LogError("iconos_tienda y/o aspectos_tienda es nulo/s");
 			return;
 		}
 
 		//Añadir prefabs
 		//Iconos
-		foreach (ClasesJSON.Icono i in ControladorSesion.iconos_tienda.tiendaIconos) {
+		foreach (ClasesJSON.Icono i in ControladorUI.iconos_tienda.tiendaIconos) {
 				ObjetoCompra go_oc = Instantiate(panelTienda_prefab, tr_listaIconos).GetComponent<ObjetoCompra>();
 				go_oc.Actualizar(i);
 		}
 		//Aspectos
-		foreach (ClasesJSON.Aspecto i in ControladorSesion.aspectos_tienda.tiendaAspectos) {
+		foreach (ClasesJSON.Aspecto i in ControladorUI.aspectos_tienda.tiendaAspectos) {
 				ObjetoCompra go_oc = Instantiate(panelTienda_prefab, tr_listaAspectos).GetComponent<ObjetoCompra>();
 				go_oc.Actualizar(i);
 		}
@@ -213,7 +213,7 @@ public class ControladorPerfil : MonoBehaviour {
 			c = (c + MAX_TRIES) % MAX_TRIES; //Asegurar que no nos pasemos de busqueda
 			bool end = false;
 
-			foreach(var obj in ControladorSesion.iconos_comprados.iconos)
+			foreach(var obj in ControladorUI.iconos_comprados.iconos)
 				if(obj.id == c) {
 					ActualizarIcono(c);
 					end = true;
@@ -222,6 +222,8 @@ public class ControladorPerfil : MonoBehaviour {
 				
 			if(end) break;
 		}
+
+		PersonalizarUsuario("Icono");
 	}
 
 	//Cambia el nuevo aspecto del usuario en la pantalla de perfil
@@ -235,7 +237,7 @@ public class ControladorPerfil : MonoBehaviour {
 			c = (c + MAX_TRIES) % MAX_TRIES; //Asegurar que no nos pasemos de busqueda
 			bool end = false;
 
-			foreach(var obj in ControladorSesion.aspectos_comprados.aspectos)
+			foreach(var obj in ControladorUI.aspectos_comprados.aspectos)
 				if(obj.id == c) {
 					ActualizarAspecto(c);
 					end = true;
@@ -244,5 +246,7 @@ public class ControladorPerfil : MonoBehaviour {
 
 			if(end) break;
 		}
+
+		PersonalizarUsuario("Aspecto");
 	}
 }

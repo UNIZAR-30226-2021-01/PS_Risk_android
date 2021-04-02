@@ -12,6 +12,12 @@ public class ControladorUI : MonoBehaviour
 	public Sprite[] iconos, aspectos, aspectos_color; //Sprites para los iconos, aspectos y mascaras de color de los aspectos
 	public GameObject pantallaCarga, pantallaError;
 	public TextMeshProUGUI textoError;
+
+	//Cosmeticos desbloqueados
+	public static ClasesJSON.ListaAspectosUsuario aspectos_comprados; //Lista de aspectos que el usuario tiene comprados
+	public static ClasesJSON.ListaIconosUsuario iconos_comprados; //Lista de iconos que el usuario tiene comprados
+	public static ClasesJSON.ListaAspectosTienda aspectos_tienda; //Lista de aspectos en la tienda
+	public static ClasesJSON.ListaIconosTienda iconos_tienda; //Lista de iconos en la tienda
 	
 	private void Awake() {
 		// Asignación de valor inicial de las variables de la clase

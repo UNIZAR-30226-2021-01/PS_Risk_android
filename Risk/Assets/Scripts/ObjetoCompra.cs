@@ -38,7 +38,7 @@ public class ObjetoCompra : MonoBehaviour
         //Comprobar si este objeto ya esta comprado
         //¿Eficiencia?
         bool sePuedeComprar = true;
-        foreach(var o in ControladorSesion.iconos_comprados.iconos)
+        foreach(var o in ControladorUI.iconos_comprados.iconos)
             if(o.id == id) {
                 sePuedeComprar = false;
                 break;
@@ -64,7 +64,7 @@ public class ObjetoCompra : MonoBehaviour
         //Comprobar si este objeto ya esta comprado
         //¿Eficiencia?
         bool sePuedeComprar = true;
-        foreach(var o in ControladorSesion.aspectos_comprados.aspectos)
+        foreach(var o in ControladorUI.aspectos_comprados.aspectos)
             if(o.id == id) {
                 sePuedeComprar = false;
                 break;
@@ -139,24 +139,24 @@ public class ObjetoCompra : MonoBehaviour
             
                 if(!esAspecto) {
                     ClasesJSON.Icono cjson = null;
-                    foreach(var o in ControladorSesion.iconos_tienda.tiendaIconos) {
+                    foreach(var o in ControladorUI.iconos_tienda.tiendaIconos) {
                         if(o.id == id) {
                             cjson = o;
                             break;
                         }
                     }
-                    ControladorSesion.iconos_comprados.iconos.Add(cjson);
+                    ControladorUI.iconos_comprados.iconos.Add(cjson);
                     Debug.Log("Se ha comprado el icono " + id);
                 }
                 else {
                     ClasesJSON.Aspecto cjson = null;
-                    foreach(var o in ControladorSesion.aspectos_tienda.tiendaAspectos) {
+                    foreach(var o in ControladorUI.aspectos_tienda.tiendaAspectos) {
                         if(o.id == id) {
                             cjson = o;
                             break;
                         }
                     }
-                    ControladorSesion.aspectos_comprados.aspectos.Add(cjson);
+                    ControladorUI.aspectos_comprados.aspectos.Add(cjson);
                     Debug.Log("Se ha comprado el aspecto " + id);
                 }
 

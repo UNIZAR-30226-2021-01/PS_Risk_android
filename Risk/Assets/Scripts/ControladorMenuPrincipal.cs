@@ -9,7 +9,7 @@ public class ControladorMenuPrincipal : MonoBehaviour
     private Image fotoPerfil; //Icono de perfil
 
     // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
         try {
             fotoPerfil.overrideSprite = ControladorUI.instance.iconos[ControladorUI.instance.usuarioRegistrado.icono];
