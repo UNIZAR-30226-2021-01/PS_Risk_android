@@ -32,6 +32,7 @@ public class Amigo : MonoBehaviour {
 		} catch {
 			ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 		}
+		ControladorAmigos.instance.RecargarAmigos();
 	}
 
 }

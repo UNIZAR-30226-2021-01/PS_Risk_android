@@ -14,6 +14,11 @@ public class ControladorNotificaciones : MonoBehaviour
 	public static List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
 
 	private const string ERROR_ACTUALIZARNOTIFICACIONES = "No se puede actualizar la lista de notificaciones";
+	public static ControladorNotificaciones instance;
+	
+	private void Awake() {
+		instance = this;
+	}
 
 	//Queremos actualizar las notificaciones en pantalla cada vez que se accede a la pantalla
 	private void OnEnable() {
@@ -21,8 +26,7 @@ public class ControladorNotificaciones : MonoBehaviour
 	}
 
 	//Actualiza las notificaciones a mostrar al usuario
-	//Idea: Estaría bien que la campana en el menu principara indicara el numero de notificaciones
-	private async void ActualizarNotificaciones() {
+	public async void ActualizarNotificaciones() {
 		Debug.Log("[Controlador Notificaciones] Actualizando Lista de Notificaciones");
 
 		//Borrar los gameobjects de las notificaciones anteriores

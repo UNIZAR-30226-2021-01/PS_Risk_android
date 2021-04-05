@@ -7,34 +7,37 @@ using Newtonsoft.Json;
 
 public class ControladorPerfil : MonoBehaviour {
 	public static ControladorPerfil instance;
-
 	public TextMeshProUGUI nombreUsuario, riskos;
 	public Image icono, aspecto;
 	private string nuevoNombre, nuevaClave, nuevoCorreo;
 	private int nuevoIcono, nuevoAspecto;
 	private bool nuevoRecibeCorreos;
 	private Usuario usuario;
-
 	[SerializeField]
-	private GameObject panelTienda = null; //Panel de la tienda
+	private GameObject panelTienda; //Panel de la tienda
 	[SerializeField]
-	private Transform tr_listaIconos = null; //Transform de la lista de iconos en la tienda
+	private Transform listaIconos; //Transform de la lista de iconos en la tienda
 	[SerializeField]
-	private Transform tr_listaAspectos = null; //Transform de la lista de iconos en la tienda
+	private Transform listaAspectos; //Transform de la lista de iconos en la tienda
 	[SerializeField]
-	private GameObject panelTienda_prefab = null; //Prefab que se usara para mostrar los objetos en venta en la tienda
+	private GameObject prefabPanelTienda; //Prefab que se usara para mostrar los objetos en venta en la tienda
 	[SerializeField]
-	private GameObject panelTienda_confirmacion = null; //Panel de confirmación que se muestra cuando se va a comprar algo
-
-	private Animator animatorTienda = null; //Animator de tienda
-	private int tiendaAbierta = 0; //1 si la tienda esta abierta
+	private GameObject confirmacionPanelTienda; //Panel de confirmación que se muestra cuando se va a comprar algo
+	[SerializeField]
+	private Animator animatorTienda; //Animator de tienda
+	[SerializeField]
+	private Toggle toggleCorreo;
+	private bool tiendaAbierta = false;
 
 	public static ObjetoCompra objetoAComprar; //Objeto que se va a comprar cuando sale la ventana de confirmacións
 	
 	// Actualiza los datos de usuario cuando se abre la pantalla de perfil
-	private void OnEnable() {
+	
+	private void Awake() {
 		instance = this;
+	}
 
+	private void OnEnable() {
 		if(panelTienda != null) { //Obtener animador
 			animatorTienda = panelTienda.GetComponent<Animator>();
 			if(animatorTienda == null)
@@ -43,10 +46,10 @@ public class ControladorPerfil : MonoBehaviour {
 			Debug.LogWarning("En Panel de la Tienda es nulo, no se puede obtener animacion");
 		}
 
-
 		usuario = ControladorUI.instance.usuarioRegistrado;
 		ActualizarDatosRepresentados();
 		ActualizarTienda();
+		toggleCorreo.SetIsOnWithoutNotify(usuario.recibeCorreos);
 	}
 	
 	public void ActualizarNombre(string nombre){
@@ -146,37 +149,34 @@ public class ControladorPerfil : MonoBehaviour {
 	}
 
 
-	/*
-		Lógica de la Tienda
-	*/
 	// Actualiza los gameobjects de la tienda
 	public void ActualizarTienda() {
 		Debug.Log("Actualizando Tienda...");
 		riskos.text = usuario.riskos.ToString(); //Actualizar cuantos riskos quedan (Riskos™)
 
 		//Borrar los gameobjects de las listas de iconos y aspectos
-		for(int i = 0; i < tr_listaAspectos.childCount; i++) {
-			Destroy(tr_listaAspectos.GetChild(i).gameObject);
+		for(int i = 0; i < listaAspectos.childCount; i++) {
+			Destroy(listaAspectos.GetChild(i).gameObject);
 		}
-		for(int i = 0; i < tr_listaIconos.childCount; i++) {
-			Destroy(tr_listaIconos.GetChild(i).gameObject);
+		for(int i = 0; i < listaIconos.childCount; i++) {
+			Destroy(listaIconos.GetChild(i).gameObject);
 		}
 
 		//Abortar si no hay listas de aspectos o iconos en la tienda
-		if(ControladorUI.iconos_tienda == null || ControladorUI.aspectos_tienda == null) {
+		if(ControladorUI.iconosTienda == null || ControladorUI.aspectosTienda == null) {
 			Debug.LogError("iconos_tienda y/o aspectos_tienda es nulo/s");
 			return;
 		}
 
 		//Añadir prefabs
 		//Iconos
-		foreach (ClasesJSON.Icono i in ControladorUI.iconos_tienda.tiendaIconos) {
-				ObjetoCompra go_oc = Instantiate(panelTienda_prefab, tr_listaIconos).GetComponent<ObjetoCompra>();
-				go_oc.Actualizar(i);
+		foreach (ClasesJSON.Icono i in ControladorUI.iconosTienda.tiendaIconos) {
+				ObjetoCompra objCom = Instantiate(prefabPanelTienda, listaIconos).GetComponent<ObjetoCompra>();
+				objCom.Actualizar(i);
 		}
 		//Aspectos
-		foreach (ClasesJSON.Aspecto i in ControladorUI.aspectos_tienda.tiendaAspectos) {
-				ObjetoCompra go_oc = Instantiate(panelTienda_prefab, tr_listaAspectos).GetComponent<ObjetoCompra>();
+		foreach (ClasesJSON.Aspecto i in ControladorUI.aspectosTienda.tiendaAspectos) {
+				ObjetoCompra go_oc = Instantiate(prefabPanelTienda, listaAspectos).GetComponent<ObjetoCompra>();
 				go_oc.Actualizar(i);
 		}
 	}
@@ -185,21 +185,21 @@ public class ControladorPerfil : MonoBehaviour {
 	public void ToggleTienda() {
 		if(animatorTienda != null)
 		{
-			animatorTienda.SetInteger("state", 1 - tiendaAbierta);
-			tiendaAbierta = 1 - tiendaAbierta;
+			animatorTienda.SetInteger("state", (tiendaAbierta ? 0 : 1));
+			tiendaAbierta = !tiendaAbierta;
 		}
 	}
 
 	//Abre la ventana de confirmación de compra
 	public void AbrirConfirmacionCompra(ObjetoCompra oc) {
 		objetoAComprar = oc;
-		panelTienda_confirmacion.SetActive(true);
+		confirmacionPanelTienda.SetActive(true);
 	}
 
 	//Confirma la compra desde el menu de confirmación
 	public void ConfirmarCompra() {
 		objetoAComprar.Comprar();
-		panelTienda_confirmacion.SetActive(false);
+		confirmacionPanelTienda.SetActive(false);
 	}
 
 	//Cambia el nuevo icono del usuario en la pantalla de perfil
@@ -213,7 +213,7 @@ public class ControladorPerfil : MonoBehaviour {
 			c = (c + MAX_TRIES) % MAX_TRIES; //Asegurar que no nos pasemos de busqueda
 			bool end = false;
 
-			foreach(var obj in ControladorUI.iconos_comprados.iconos)
+			foreach(var obj in ControladorUI.iconosComprados.iconos)
 				if(obj.id == c) {
 					ActualizarIcono(c);
 					end = true;
@@ -237,7 +237,7 @@ public class ControladorPerfil : MonoBehaviour {
 			c = (c + MAX_TRIES) % MAX_TRIES; //Asegurar que no nos pasemos de busqueda
 			bool end = false;
 
-			foreach(var obj in ControladorUI.aspectos_comprados.aspectos)
+			foreach(var obj in ControladorUI.aspectosComprados.aspectos)
 				if(obj.id == c) {
 					ActualizarAspecto(c);
 					end = true;

@@ -5,30 +5,30 @@ using Newtonsoft.Json;
 
 public class ControladorSesion : MonoBehaviour
 {
-	private string usuario, clave, correo;
+	private string usuario = "", clave = "", correo = "";
 	private bool recibeCorreos = true;
 	
-	public void ActualizarUsuario(string nuevoUsuario)
-	{
+	public void ActualizarUsuario(string nuevoUsuario) {
 		usuario = nuevoUsuario;
 	}
 	
-	public void ActualizarClave(string nuevaClave)
-	{
+	public void ActualizarClave(string nuevaClave) {
 		clave = nuevaClave;
 	}
 	
-	public void ActualizarCorreo(string nuevoCorreo)
-	{
+	public void ActualizarCorreo(string nuevoCorreo) {
 		correo = nuevoCorreo;
 	}
 	
-	public void ActualizarRecibeCorreo(bool nuevoRecibir){
+	public void ActualizarRecibeCorreo(bool nuevoRecibir) {
 		recibeCorreos = nuevoRecibir;
 	}
 	
-	public async void IniciarSesion()
-	{
+	public async void IniciarSesion() {
+		if(usuario == "" || clave == "") {
+			ControladorUI.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");
+			return;
+		}
 		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
 		form.AddField("usuario", usuario);
@@ -37,8 +37,15 @@ public class ControladorSesion : MonoBehaviour
 		LoggearUsuario(result);
 	}
 	
-	public async void Registrarse()
-	{
+	public async void Registrarse() {
+		if(usuario == "" || clave == "" || correo == "") {
+			ControladorUI.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");
+			return;
+		}
+		if(usuario.Contains("@")) {
+			ControladorUI.instance.PantallaError("Caracter @ no permitido en nombre de usuario");
+			return;
+		}
 		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
 		form.AddField("nombre", usuario);
@@ -50,7 +57,7 @@ public class ControladorSesion : MonoBehaviour
 	}
 	
 	// Intenta acceder a la cuenta del usuario y en caso exitoso entra al menú principal
-	private void LoggearUsuario(string recibido){
+	private void LoggearUsuario(string recibido) {
 		try {
 			ClasesJSON.UsuarioCompleto usuarioCompleto = JsonConvert.DeserializeObject<ClasesJSON.UsuarioCompleto>(recibido, ClasesJSON.settings);
 			ControladorUI.instance.usuarioRegistrado = usuarioCompleto.usuario;
@@ -71,22 +78,23 @@ public class ControladorSesion : MonoBehaviour
 	//Guarda que aspectos/iconos tiene el usuario y cuales estan disponibles en la tienda
 	private void ObtenerIconosAspectos(string recibido) {
 		//Borrar aspectos e iconos anteriores
-		ControladorUI.aspectos_comprados = new ClasesJSON.ListaAspectosUsuario();
-		ControladorUI.iconos_comprados = new ClasesJSON.ListaIconosUsuario();
-		ControladorUI.aspectos_tienda = new ClasesJSON.ListaAspectosTienda();
-		ControladorUI.iconos_tienda = new ClasesJSON.ListaIconosTienda();
+		ControladorUI.aspectosComprados = new ClasesJSON.ListaAspectosUsuario();
+		ControladorUI.iconosComprados = new ClasesJSON.ListaIconosUsuario();
+		ControladorUI.aspectosTienda = new ClasesJSON.ListaAspectosTienda();
+		ControladorUI.iconosTienda = new ClasesJSON.ListaIconosTienda();
 
 		//Cargar desde api
 		try {
 			//No usar las settings del parser de JSON aquí, no puede ser un error aquí si se llama desde LoggearUsuario()
-			ControladorUI.aspectos_comprados = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosUsuario>(recibido);
-			ControladorUI.iconos_comprados = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosUsuario>(recibido);
-			ControladorUI.aspectos_tienda = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosTienda>(recibido);
-			ControladorUI.iconos_tienda = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosTienda>(recibido);
+			ControladorUI.aspectosComprados = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosUsuario>(recibido);
+			ControladorUI.iconosComprados = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosUsuario>(recibido);
+			ControladorUI.aspectosTienda = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosTienda>(recibido);
+			ControladorUI.iconosTienda = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosTienda>(recibido);
 
 		} catch (System.Exception e) {
 			Debug.LogError("Error al parsear los aspectos e iconos: " + e);
 			throw new System.Exception("No se ha podido leer los aspectos e iconos");
 		}
 	}
+	
 }

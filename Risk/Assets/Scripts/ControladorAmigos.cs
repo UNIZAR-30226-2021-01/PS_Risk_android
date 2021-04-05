@@ -8,7 +8,12 @@ public class ControladorAmigos : MonoBehaviour {
 	public Transform padreAmigos;
 	private List<ClasesJSON.Amigo> listaAmigos;
 	private string amigoAgregar;
-	
+	public static ControladorAmigos instance;
+
+	private void Awake() {
+		instance = this;
+	}
+
 	private void OnEnable() {
 		//RecargarAmigos();
 	}
