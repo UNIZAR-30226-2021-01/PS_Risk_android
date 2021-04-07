@@ -27,6 +27,8 @@ public class ControladorPerfil : MonoBehaviour {
 	private Animator animatorTienda; //Animator de tienda
 	[SerializeField]
 	private Toggle toggleCorreo;
+	[SerializeField]
+	private RectTransform rectPanelTienda;
 	private bool tiendaAbierta = false;
 
 	public static ObjetoCompra objetoAComprar; //Objeto que se va a comprar cuando sale la ventana de confirmacións
@@ -35,6 +37,18 @@ public class ControladorPerfil : MonoBehaviour {
 	
 	private void Awake() {
 		instance = this;
+		#if UNITY_EDITOR
+			Camera mainCamera = Camera.main;
+			rectPanelTienda.sizeDelta = new Vector2(mainCamera.pixelWidth, mainCamera.pixelHeight);
+			rectPanelTienda.anchoredPosition = new Vector2(mainCamera.pixelWidth/2, 0);
+		#else
+			rectPanelTienda.sizeDelta = Screen.currentResolution;
+			rectPanelTienda.anchoredPosition = new Vector2(Screen.currentResolution.width/2, 0);
+		#endif
+		RectTransform rtMenu = ControladorUI.instance.GetComponent<RectTransform>();
+		rectPanelTienda.sizeDelta = rtMenu.sizeDelta;
+		rectPanelTienda.anchoredPosition = new Vector2(rtMenu.sizeDelta.x/2, 0);
+		rectPanelTienda.ForceUpdateRectTransforms();
 	}
 
 	private void OnEnable() {
