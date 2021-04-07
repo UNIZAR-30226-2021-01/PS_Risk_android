@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Newtonsoft.Json;
 
 public class ControladorUI : MonoBehaviour
 {
@@ -48,6 +49,16 @@ public class ControladorUI : MonoBehaviour
 		Application.Quit();
 	}
 
+	// Muestra la pantalla de error indicando el tipo de error
+	// El string error contiene la estructura JSON de el error
+	public void PantallaErrorWS(string riskErr) {
+		ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(riskErr);
+		pantallaError.SetActive(true);
+		textoError.text = error.err;
+	}
+
+	// Muestra la pantalla de error indicando el tipo de error
+	// El string error contiene el mensaje a ser mostrado
 	public void PantallaError(string error) {
 		pantallaError.SetActive(true);
 		textoError.text = error;

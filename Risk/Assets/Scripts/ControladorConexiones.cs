@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using NativeWebSocket;
+using Newtonsoft.Json;
 
 public class ControladorConexiones : MonoBehaviour
 {
@@ -15,11 +16,12 @@ public class ControladorConexiones : MonoBehaviour
 	private const float FRECUENCIA_MENSAJES = 1; // Frecuencia de recolección de mensajes de la cola de mensajes de websockets
 	private const string DIRECCION_PETICIONES_HTTP = "https://risk-servidor.herokuapp.com/";
 	private const string DIRECCION_PETICIONES_WS = "ws://risk-servidor.herokuapp.com/";
+	private const int POSICION_TIPO_MENSAJE = 17; // El elemento 17 de el mensaje es siempre un caracter que indica el tipo de mensaje
 	public static ControladorConexiones instance; // Referencia estática a si mismo para usar como singleton
 	private WebSocket ws;
 	private Mutex mtxM = new Mutex();
-	private int estadoActual = 0;
-	private enum Estados{menuPrincipal, salaEspera, partida};
+	private enum Estado{menuPrincipal, salaEspera, partida};
+	private Estado estadoActual;
 	
 	private void Awake() {
 		// Es necesario utilizar un singleton porque no se puede invocar a un corrutina desde una clase estática
@@ -117,11 +119,83 @@ public class ControladorConexiones : MonoBehaviour
 		
 		ws.OnMessage += (bytes) =>
 		{
-			var message = System.Text.Encoding.UTF8.GetString(bytes);
-			print("Mensaje WebSocket Recibido: " + message);
+			var mensaje = System.Text.Encoding.UTF8.GetString(bytes);
+			GestionarMensaje(mensaje);
+			//print("Mensaje WebSocket Recibido: " + message);
 		};
 		
 		await ws.Connect();
+	}
+	
+	// Recibe un mensaje de websocket en formato JSON y lo gestiona dependiendo del estado actual
+	private void GestionarMensaje(string mensaje){
+		ControladorUI cui = ControladorUI.instance;
+		string tipoMensaje = mensaje[POSICION_TIPO_MENSAJE].ToString();
+		switch(estadoActual){
+			case(Estado.menuPrincipal):
+				switch(tipoMensaje){
+					case("d"):
+						// Datos de sala: Unirse a sala de espera
+						// TODO: Guardar los datos de la sala en la informacion de la partida
+						cui.AbrirPantalla("SalaEspera");
+						break;
+					case("e"):
+						// Error
+						cui.PantallaErrorWS(mensaje);
+						break;
+					default:
+						// Ignorar resto de mensajes
+						return;
+				}
+				break;
+			case(Estado.salaEspera):
+				switch(tipoMensaje){
+					case("d"):
+						// Datos de sala: Actualizar datos
+						// TODO: Guardar nuevos datos y recargar datos mostrados
+						break;
+					case("e"):
+						// Error
+						cui.PantallaErrorWS(mensaje);
+						break;
+					case("p"):
+						// Datos de partida completa: Empezar partida
+						// TODO: Guardar nuevos datos
+						cui.AbrirPantalla("Partida");
+						break;
+					default:
+						// Ignorar resto de mensajes
+						return;
+				}
+				break;
+			case(Estado.partida):
+				switch(tipoMensaje){
+					case("p"):
+						// Todos datos de partida: Actualizar datos de partida
+						// TODO: Guardar nuevos datos
+						cui.AbrirPantalla("Partida");
+						break;
+					case("a"):
+						// Accion: Mostrar Cambios
+						// TODO
+						break;
+					case("e"):
+						// Error
+						cui.PantallaErrorWS(mensaje);
+						break;
+					case("f"):
+						// Fin de partida, terminar partida
+						// TODO
+						break;
+					default:
+						// Ignorar resto de mensajes
+						return;
+				}
+				break;
+			default:
+				ControladorUI.instance.PantallaError("Estado desconocido");
+				break;
+		}
 	}
 	
 	private void LeerMensajesWS(){

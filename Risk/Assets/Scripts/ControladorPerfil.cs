@@ -9,7 +9,7 @@ public class ControladorPerfil : MonoBehaviour {
 	public static ControladorPerfil instance;
 	public TextMeshProUGUI nombreUsuario, riskos;
 	public Image icono, aspecto;
-	private string nuevoNombre, nuevaClave, nuevoCorreo;
+	private string nuevoNombre = "", nuevaClave = "", nuevoCorreo = "";
 	private int nuevoIcono, nuevoAspecto;
 	private bool nuevoRecibeCorreos;
 	private Usuario usuario;
@@ -64,6 +64,7 @@ public class ControladorPerfil : MonoBehaviour {
 		ActualizarDatosRepresentados();
 		ActualizarTienda();
 		toggleCorreo.SetIsOnWithoutNotify(usuario.recibeCorreos);
+		nuevoRecibeCorreos = usuario.recibeCorreos;
 	}
 	
 	public void ActualizarNombre(string nombre){
@@ -105,12 +106,24 @@ public class ControladorPerfil : MonoBehaviour {
 		form.AddField("tipo", elemento);
 		switch (elemento) {
 			case "Nombre":
+				if(nuevoNombre == "" || nuevoNombre.Contains("@")){
+					ControladorUI.instance.PantallaError("Nuevo nombre inválido");
+					return;
+				}
 				form.AddField("nuevoDato", nuevoNombre);
 				break;
 			case "Clave":
+				if(nuevaClave == ""){
+					ControladorUI.instance.PantallaError("Nueva contraseña inválida");
+					return;
+				}
 				form.AddField("nuevoDato", nuevaClave);
 				break;
 			case "Correo":
+				if(nuevoCorreo == ""){
+					ControladorUI.instance.PantallaError("Nuevo Correo inválido");
+					return;
+				}
 				form.AddField("nuevoDato", nuevoCorreo);
 				break;
 			case "Icono":

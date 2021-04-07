@@ -113,4 +113,18 @@ public static class ClasesJSON {
 			nombreSala = nm;
 		}
 	}
+
+	// Mensaje enviado por websocket. Contiene un string con un caracter que indica el tipo de mensaje
+	public class MensajeWebsocket {
+		public string _tipoMensaje;
+		
+	}
+
+	// Error producido por websocket
+	[System.Serializable]
+	public class RiskErrorWS : MensajeWebsocket{
+		public int code;
+		public string err;	
+	}
+
 }
