@@ -10,6 +10,7 @@ public class ControladorUI : MonoBehaviour
 	public Dictionary<string, GameObject> pantallas;
 	public Usuario usuarioRegistrado;
 	public Sprite[] iconos, aspectos, colorAspectos; //Sprites para los iconos, aspectos y mascaras de color de los aspectos
+	public string[] nombreIcono, nombreAspectos;
 	public GameObject pantallaCarga, pantallaError;
 	public TextMeshProUGUI textoError;
 

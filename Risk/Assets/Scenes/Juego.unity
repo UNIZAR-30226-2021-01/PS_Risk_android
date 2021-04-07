@@ -15683,7 +15683,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -2.5283203, y: -15, z: 0, w: 0}
+  m_margin: {x: 0, y: -15, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -16150,6 +16150,34 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 622b6ff368f99cb4e9191140806829e2, type: 3}
   - {fileID: 21300000, guid: 06c95fd7389e79a49b2b08578b091238, type: 3}
   - {fileID: 21300000, guid: 35926a1faea973949b138427649bb5c1, type: 3}
+  nombreIcono:
+  - Soldado
+  - "Ping\xFCino"
+  - Barco
+  - "Sart\xE9n"
+  - Libro
+  - "Cart\xF3grafo"
+  - Empresario
+  - Dados
+  - "Ping\xFCino Pirata"
+  - Esqueleto
+  - Mago
+  - "Ping\xFCino Ingeniero"
+  - "Ping\xFCino Emperador"
+  nombreAspectos:
+  - Soldado
+  - Sovietico
+  - Moderno
+  - "Alem\xE1n"
+  - Qing
+  - Janisario
+  - Tercio
+  - Majapahit
+  - Mali
+  - Samurai
+  - Husar alado
+  - Mongol
+  - Robot
   pantallaCarga: {fileID: 749556569}
   pantallaError: {fileID: 161648796}
   textoError: {fileID: 1464791215}

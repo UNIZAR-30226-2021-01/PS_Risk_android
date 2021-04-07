@@ -44,7 +44,7 @@ public class ObjetoCompra : MonoBehaviour
 				break;
 			}
 		SetComprar(sePuedeComprar);
-		ActualizarImagen();
+		ActualizarDatos();
 
 		//Si no se tiene dinero suficiente, dehabilitar boton, hacer texto de precio rojo
 		if(coste > ControladorUI.instance.usuarioRegistrado.riskos) {
@@ -70,7 +70,7 @@ public class ObjetoCompra : MonoBehaviour
 				break;
 			}
 		SetComprar(sePuedeComprar);
-		ActualizarImagen();
+		ActualizarDatos();
 
 		//Si no se tiene dinero suficiente, dehabilitar boton, hacer texto de precio rojo
 		if(coste > ControladorUI.instance.usuarioRegistrado.riskos) {
@@ -83,15 +83,17 @@ public class ObjetoCompra : MonoBehaviour
 	}
 
 	//Actualiza la imagen mostrada
-	private void ActualizarImagen() {
+	private void ActualizarDatos() {
 		if(spriteIconoAspecto != null || spriteTropasColor != null) {
 			try {
 				if(!esAspecto) { //Iconos
 					Sprite s = ControladorUI.instance.iconos[id];
 					spriteIconoAspecto.overrideSprite = s;
+					nombre.text = ControladorUI.instance.nombreIcono[id];
 				} else { //Aspectos
 					spriteIconoAspecto.overrideSprite = ControladorUI.instance.aspectos[id];
 					spriteTropasColor.overrideSprite = ControladorUI.instance.colorAspectos[id];
+					nombre.text = ControladorUI.instance.nombreAspectos[id];
 
 					//Mostrar colores para los aspectos (tropas)
 					spriteTropasColor.gameObject.SetActive(true);
