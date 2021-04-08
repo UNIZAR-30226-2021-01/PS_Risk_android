@@ -10,6 +10,7 @@ public class ControladorPrincipal : MonoBehaviour
 	public static ControladorPrincipal instance; // Referencia estática a si mismo para usar como singleton
 	private Dictionary<string, GameObject> pantallas;
 	public Usuario usuarioRegistrado;
+	public Color[] coloresJugadores;
 	public Sprite[] iconos, aspectos, colorAspectos; //Sprites para los iconos, aspectos y mascaras de color de los aspectos
 	public string[] nombreIcono, nombreAspectos;
 	[SerializeField]
@@ -26,7 +27,7 @@ public class ControladorPrincipal : MonoBehaviour
 		// Asignación de valor inicial de las variables de la clase
 		instance = this;
 		pantallas = new Dictionary<string, GameObject>();
-		for(int i = 0; i < transform.childCount; i++) {
+		for (int i = 0; i < transform.childCount; i++) {
 			GameObject hijo = transform.GetChild(i).gameObject;
 			pantallas.Add(hijo.name, hijo);
 		}
@@ -35,7 +36,7 @@ public class ControladorPrincipal : MonoBehaviour
 	// Cambia la pantalla actual por la pantalla especificada, si existe
 	public void AbrirPantalla(string pantalla) {
 		GameObject objetoPantalla;
-		if(pantallas.TryGetValue(pantalla, out objetoPantalla)) {
+		if (pantallas.TryGetValue(pantalla, out objetoPantalla)) {
 			DesactivarPantallas();
 			objetoPantalla.SetActive(true);
 		} else {
@@ -43,7 +44,7 @@ public class ControladorPrincipal : MonoBehaviour
 		}
 	}
 
-	public void Salir(){
+	public void Salir() {
 		#if UNITY_EDITOR
 			print("Se ha salido de la aplicación");
 		#endif
@@ -54,6 +55,9 @@ public class ControladorPrincipal : MonoBehaviour
 	// El string error contiene la estructura JSON de el error
 	public void PantallaErrorWS(string riskErr) {
 		ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(riskErr);
+		if (error.code == 0) { 
+			return;
+		}
 		pantallaError.SetActive(true);
 		textoError.text = error.err;
 	}
@@ -69,7 +73,7 @@ public class ControladorPrincipal : MonoBehaviour
 		pantallaCarga.SetActive(activado);
 	}
 	
-	public void ActualizarUsuario(Usuario nuevo){
+	public void ActualizarUsuario(Usuario nuevo) {
 		usuarioRegistrado = nuevo;
 	}
 

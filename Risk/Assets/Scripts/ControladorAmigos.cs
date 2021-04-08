@@ -4,8 +4,10 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 public class ControladorAmigos : MonoBehaviour {
-	public GameObject amigoPrefab, noAmigoPrefab;
-	public Transform padreAmigos;
+	[SerializeField]
+	private GameObject amigoPrefab, noAmigoPrefab;
+	[SerializeField]
+	private Transform padreAmigos;
 	private List<ClasesJSON.Amigo> listaAmigos;
 	private string amigoAgregar;
 

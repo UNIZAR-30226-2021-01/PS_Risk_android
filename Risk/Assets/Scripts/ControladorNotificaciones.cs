@@ -7,9 +7,12 @@ using Newtonsoft.Json;
 
 public class ControladorNotificaciones : MonoBehaviour
 {
-	public GameObject prefabNotificacion; //Prefab de notificación
-	public GameObject prefabNada; //Prefab usado cuando no hay notificaciones ha mostrar
-	public Transform listaPadre; //Transform del objeto padre que tendra como hijos los elementos de la lista
+	[SerializeField]
+	private GameObject prefabNotificacion; //Prefab de notificación
+	[SerializeField]
+	private GameObject prefabNada; //Prefab usado cuando no hay notificaciones ha mostrar
+	[SerializeField]
+	private Transform listaPadre; //Transform del objeto padre que tendra como hijos los elementos de la lista
 
 	public static List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
 

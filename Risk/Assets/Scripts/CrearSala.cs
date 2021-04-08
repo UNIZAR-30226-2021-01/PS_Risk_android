@@ -16,10 +16,15 @@ public class CrearSala : MonoBehaviour {
 	}
 	
 	public async void CreaSala(){
+		ControladorPrincipal.instance.PantallaCarga(true);
 		Usuario usuario = ControladorPrincipal.instance.usuarioRegistrado;
 		ClasesJSON.CreacionSala datosSala = new ClasesJSON.CreacionSala(usuario.id, usuario.clave, tiempo, nombre);
 		string datos = JsonConvert.SerializeObject(datosSala);
-		print(datos);
-		await ConexionWS.instance.EnviarWS("crearSala", datos);
+		if(!(await ConexionWS.instance.ConexionWebSocket("crearSala"))){
+			ControladorPrincipal.instance.PantallaError("No se ha podido realizar la conexión con el servidor");
+		} else {
+			await ConexionWS.instance.EnviarWS(datos);
+		}
+		ControladorPrincipal.instance.PantallaCarga(false);
 	}
 }

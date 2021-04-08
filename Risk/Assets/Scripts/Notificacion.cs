@@ -16,7 +16,7 @@ public class Notificacion : MonoBehaviour {
 
 	private const string TIPO_AMISTAD = "Peticion de amistad";
 	private const string TIPO_TURNO = "turno";
-	private const string TIPO_INVICATION = "invitacion";
+	private const string TIPO_INVICATION = "Invitacion";
 	
 	//Llamado por el botón de rechazar
 	public void Rechazar() {
@@ -30,7 +30,7 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			case TIPO_INVICATION:
-				//TODO
+				Destroy(gameObject);
 				break;
 
 			default:
@@ -53,6 +53,7 @@ public class Notificacion : MonoBehaviour {
 
 			case TIPO_INVICATION:
 				//TODO
+				AceptarInvitacion();
 				break;
 
 			default:
@@ -74,7 +75,7 @@ public class Notificacion : MonoBehaviour {
 	private void ActualizarTexto() {
 		switch(datos.tipo) {
 			case TIPO_AMISTAD:
-				nombre.text = "¡<b>" + datos.infoExtra + "</b> quiere ser tu amigo!";
+				nombre.text = "¡<b><color=#FF0000>" + datos.infoExtra + "</color></b> quiere ser tu amigo!";
 				break;
 
 			case TIPO_TURNO:
@@ -82,7 +83,7 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			case TIPO_INVICATION:
-				nombre.text = "Notificación Invitación";
+				nombre.text = "<b><color=#FF0000>" + datos.infoExtra + "</color></b> te ha invitado a una sala";
 				break;
 
 			default:
@@ -120,5 +121,18 @@ public class Notificacion : MonoBehaviour {
 			//Respuesta desconocida, ¿El servidor esta mandando una respuesta?
 			//Debug.LogError("[Controlador Notificaciones] Respuesta del servidor desconocida\nRespuesta: " + respuesta);
 		}
+		
 	}
+	private async void AceptarInvitacion(){
+		Usuario usuario = ControladorPrincipal.instance.usuarioRegistrado;
+		ClasesJSON.AceptarSala datosSala = new ClasesJSON.AceptarSala(usuario.id, usuario.clave, datos.idEnvio);
+		string datosEnviar = JsonConvert.SerializeObject(datosSala);
+		if(!(await ConexionWS.instance.ConexionWebSocket("aceptarSala"))){
+			ControladorPrincipal.instance.PantallaError("No se ha podido realizar la conexión con el servidor");
+		} else {
+			await ConexionWS.instance.EnviarWS(datosEnviar);
+			Destroy(gameObject);
+		}
+	}
+
 } //VSCode, para, que no hay ningun error aquí ;_;

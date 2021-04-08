@@ -13,6 +13,7 @@ public class Amigo : MonoBehaviour {
 	
 	// Envia petición al servidor con el id de este amigo para ser borrado de la lista de amigos del usuario
 	public async void BorrarAmigo(){
+		ControladorPrincipal.instance.PantallaCarga(true);
 		// Crear formulario a enviar
 		WWWForm form = new WWWForm();
 		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
@@ -34,6 +35,16 @@ public class Amigo : MonoBehaviour {
 			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 		}
 		controladorAmigos.RecargarAmigos();
+		ControladorPrincipal.instance.PantallaCarga(false);
+	}
+	
+	public async void InvitarAmigo(){
+		ControladorPrincipal.instance.PantallaCarga(true);
+		ClasesJSON.InvitacionSala invitacion = new ClasesJSON.InvitacionSala(id);
+		string datos = JsonConvert.SerializeObject(invitacion);
+		print(datos);
+		await ConexionWS.instance.EnviarWS(datos);
+		ControladorPrincipal.instance.PantallaCarga(false);
 	}
 
 }

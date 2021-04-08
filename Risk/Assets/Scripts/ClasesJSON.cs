@@ -114,6 +114,30 @@ public static class ClasesJSON {
 		}
 	}
 
+	// Estructura a enviar para aceptar una sala
+	[System.Serializable]
+	public class AceptarSala {
+		public int idUsuario, idSala;
+		public string clave;
+		
+		public AceptarSala(int us, string cl, int sl){
+			idUsuario = us;
+			clave = cl;
+			idSala = sl;
+		}
+	}
+
+	// Invitacion de amigo a sala
+	[System.Serializable]
+	public class InvitacionSala{
+		public int idInvitado;
+		public string tipo = "Invitar";
+		
+		public InvitacionSala(int id){
+			idInvitado = id;
+		}
+	}
+
 	// Mensaje enviado por websocket. Contiene un string con un caracter que indica el tipo de mensaje
 	public class MensajeWebsocket {
 		public string _tipoMensaje;
@@ -127,4 +151,19 @@ public static class ClasesJSON {
 		public string err;	
 	}
 
+	// Datos de Sala de espera
+	[System.Serializable]
+	public class DatosSala : MensajeWebsocket{
+		public int tiempoTurno, idSala;
+		public string nombrePartida;
+		public List<Jugador> jugadores;
+	}
+	
+	// Jugador de una partida
+	[System.Serializable]
+	public class Jugador {
+		public int id, icono, aspecto;
+		public string nombre;
+		public bool sigueVivo;
+	}
 }

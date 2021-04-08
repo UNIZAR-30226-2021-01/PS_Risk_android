@@ -40,7 +40,7 @@ public class ControladorPerfil : MonoBehaviour {
 			rectPanelTienda.sizeDelta = new Vector2(mainCamera.pixelWidth, mainCamera.pixelHeight);
 			rectPanelTienda.anchoredPosition = new Vector2(mainCamera.pixelWidth/2, 0);
 		#else
-			rectPanelTienda.sizeDelta = Screen.currentResolution;
+			rectPanelTienda.sizeDelta = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
 			rectPanelTienda.anchoredPosition = new Vector2(Screen.currentResolution.width/2, 0);
 		#endif
 		RectTransform rtMenu = ControladorPrincipal.instance.GetComponent<RectTransform>();

@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 public class ConexionHTTP : MonoBehaviour
 {
 	private const float MAX_TIME = 10; // Tiempo máximo en segundos que puede tardar una conexión
-	private const float FRECUENCIA_MENSAJES = 1; // Frecuencia de recolección de mensajes de la cola de mensajes de websockets
 	private const string DIRECCION_PETICIONES = "https://risk-servidor.herokuapp.com/";
 	public static ConexionHTTP instance; // Referencia estática a si mismo para usar como singleton
 	
