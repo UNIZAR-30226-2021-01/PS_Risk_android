@@ -68,7 +68,7 @@ public class ControladorNotificaciones : MonoBehaviour
 		Debug.Log("[Controlador Notificaciones] Obteniendo Notificaciones del Servidor");
 
 		//Si el controlador ui no esta iniciado, borrar la lista de notificaciones
-		if(ControladorUI.instance == null) {
+		if(ControladorPrincipal.instance == null) {
 			notificaciones = null;
 			return;
 		}
@@ -76,16 +76,16 @@ public class ControladorNotificaciones : MonoBehaviour
 		//Crear formulario
 		WWWForm form = new WWWForm();
 		//Comprobar que hay un usuario y su clave
-		if(ControladorUI.instance == null || ControladorUI.instance.usuarioRegistrado == null) {
+		if(ControladorPrincipal.instance == null || ControladorPrincipal.instance.usuarioRegistrado == null) {
 			Debug.LogError("No se pueden obtener notificaciones: Usuario y clave desconocidos");
 			notificaciones = null;
 			return;
 		}
-		form.AddField("idUsuario", ControladorUI.instance.usuarioRegistrado.id);
-		form.AddField("clave", ControladorUI.instance.usuarioRegistrado.clave);
+		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
+		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
 
 		//Obtener respuesta del servidor
-		string respuesta = await ControladorConexiones.instance.RequestHTTP("notificaciones", form);
+		string respuesta = await ConexionHTTP.instance.RequestHTTP("notificaciones", form);
 
 		try { 
 			try {
@@ -99,7 +99,7 @@ public class ControladorNotificaciones : MonoBehaviour
 		} catch {
 			//Error, ir a la pantalla de error
 			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(respuesta);
-			ControladorUI.instance.PantallaError(error.err);
+			ControladorPrincipal.instance.PantallaError(error.err);
 			notificaciones = null;
 		}
 	}

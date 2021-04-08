@@ -5,21 +5,22 @@ using UnityEngine.UI;
 using TMPro;
 using Newtonsoft.Json;
 
-public class ControladorUI : MonoBehaviour
+public class ControladorPrincipal : MonoBehaviour
 {
-	public static ControladorUI instance; // Referencia estática a si mismo para usar como singleton
-	public Dictionary<string, GameObject> pantallas;
+	public static ControladorPrincipal instance; // Referencia estática a si mismo para usar como singleton
+	private Dictionary<string, GameObject> pantallas;
 	public Usuario usuarioRegistrado;
 	public Sprite[] iconos, aspectos, colorAspectos; //Sprites para los iconos, aspectos y mascaras de color de los aspectos
 	public string[] nombreIcono, nombreAspectos;
-	public GameObject pantallaCarga, pantallaError;
+	[SerializeField]
+	private GameObject pantallaCarga, pantallaError;
 	public TextMeshProUGUI textoError;
 
 	//Cosmeticos desbloqueados
-	public static ClasesJSON.ListaAspectosUsuario aspectosComprados; //Lista de aspectos que el usuario tiene comprados
-	public static ClasesJSON.ListaIconosUsuario iconosComprados; //Lista de iconos que el usuario tiene comprados
-	public static ClasesJSON.ListaAspectosTienda aspectosTienda; //Lista de aspectos en la tienda
-	public static ClasesJSON.ListaIconosTienda iconosTienda; //Lista de iconos en la tienda
+	public ClasesJSON.ListaAspectosUsuario aspectosComprados; //Lista de aspectos que el usuario tiene comprados
+	public ClasesJSON.ListaIconosUsuario iconosComprados; //Lista de iconos que el usuario tiene comprados
+	public ClasesJSON.ListaAspectosTienda aspectosTienda; //Lista de aspectos en la tienda
+	public ClasesJSON.ListaIconosTienda iconosTienda; //Lista de iconos en la tienda
 	
 	private void Awake() {
 		// Asignación de valor inicial de las variables de la clase

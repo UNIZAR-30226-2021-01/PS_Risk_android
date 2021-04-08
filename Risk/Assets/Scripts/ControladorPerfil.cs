@@ -6,7 +6,6 @@ using TMPro;
 using Newtonsoft.Json;
 
 public class ControladorPerfil : MonoBehaviour {
-	public static ControladorPerfil instance;
 	public TextMeshProUGUI nombreUsuario, riskos;
 	public Image icono, aspecto;
 	private string nuevoNombre = "", nuevaClave = "", nuevoCorreo = "";
@@ -20,7 +19,7 @@ public class ControladorPerfil : MonoBehaviour {
 	[SerializeField]
 	private Transform listaAspectos; //Transform de la lista de iconos en la tienda
 	[SerializeField]
-	private GameObject prefabPanelTienda; //Prefab que se usara para mostrar los objetos en venta en la tienda
+	private GameObject prefabObjetoCompra; //Prefab que se usara para mostrar los objetos en venta en la tienda
 	[SerializeField]
 	private GameObject confirmacionPanelTienda; //Panel de confirmación que se muestra cuando se va a comprar algo
 	[SerializeField]
@@ -36,7 +35,6 @@ public class ControladorPerfil : MonoBehaviour {
 	// Actualiza los datos de usuario cuando se abre la pantalla de perfil
 	
 	private void Awake() {
-		instance = this;
 		#if UNITY_EDITOR
 			Camera mainCamera = Camera.main;
 			rectPanelTienda.sizeDelta = new Vector2(mainCamera.pixelWidth, mainCamera.pixelHeight);
@@ -45,7 +43,7 @@ public class ControladorPerfil : MonoBehaviour {
 			rectPanelTienda.sizeDelta = Screen.currentResolution;
 			rectPanelTienda.anchoredPosition = new Vector2(Screen.currentResolution.width/2, 0);
 		#endif
-		RectTransform rtMenu = ControladorUI.instance.GetComponent<RectTransform>();
+		RectTransform rtMenu = ControladorPrincipal.instance.GetComponent<RectTransform>();
 		rectPanelTienda.sizeDelta = rtMenu.sizeDelta;
 		rectPanelTienda.anchoredPosition = new Vector2(rtMenu.sizeDelta.x/2, 0);
 		rectPanelTienda.ForceUpdateRectTransforms();
@@ -60,7 +58,7 @@ public class ControladorPerfil : MonoBehaviour {
 			Debug.LogWarning("En Panel de la Tienda es nulo, no se puede obtener animacion");
 		}
 
-		usuario = ControladorUI.instance.usuarioRegistrado;
+		usuario = ControladorPrincipal.instance.usuarioRegistrado;
 		ActualizarDatosRepresentados();
 		ActualizarTienda();
 		toggleCorreo.SetIsOnWithoutNotify(usuario.recibeCorreos);
@@ -76,20 +74,20 @@ public class ControladorPerfil : MonoBehaviour {
 	}
 
 	public void ActualizarClave(string clave){
-		nuevaClave = ControladorConexiones.Cifrar(clave);
+		nuevaClave = ConexionHTTP.Cifrar(clave);
 	}
 
 	public void ActualizarIcono(int icono){
 		nuevoIcono = icono;
 		try {
-			this.icono.overrideSprite = ControladorUI.instance.iconos[icono];
+			this.icono.overrideSprite = ControladorPrincipal.instance.iconos[icono];
 		} catch {}
 	}
 
 	public void ActualizarAspecto(int aspecto){
 		nuevoAspecto = aspecto;
 		try {
-			this.aspecto.overrideSprite = ControladorUI.instance.aspectos[aspecto];
+			this.aspecto.overrideSprite = ControladorPrincipal.instance.aspectos[aspecto];
 		} catch {}
 	}
 
@@ -107,21 +105,21 @@ public class ControladorPerfil : MonoBehaviour {
 		switch (elemento) {
 			case "Nombre":
 				if(nuevoNombre == "" || nuevoNombre.Contains("@")){
-					ControladorUI.instance.PantallaError("Nuevo nombre inválido");
+					ControladorPrincipal.instance.PantallaError("Nuevo nombre inválido");
 					return;
 				}
 				form.AddField("nuevoDato", nuevoNombre);
 				break;
 			case "Clave":
 				if(nuevaClave == ""){
-					ControladorUI.instance.PantallaError("Nueva contraseña inválida");
+					ControladorPrincipal.instance.PantallaError("Nueva contraseña inválida");
 					return;
 				}
 				form.AddField("nuevoDato", nuevaClave);
 				break;
 			case "Correo":
 				if(nuevoCorreo == ""){
-					ControladorUI.instance.PantallaError("Nuevo Correo inválido");
+					ControladorPrincipal.instance.PantallaError("Nuevo Correo inválido");
 					return;
 				}
 				form.AddField("nuevoDato", nuevoCorreo);
@@ -139,26 +137,26 @@ public class ControladorPerfil : MonoBehaviour {
 				Debug.Log("Elemento a personalizar \"" + elemento + "\" no conocido");
 				return;
 		}
-		string recibido = await ControladorConexiones.instance.RequestHTTP("personalizarUsuario", form);
+		string recibido = await ConexionHTTP.instance.RequestHTTP("personalizarUsuario", form);
 		//print(recibido);
 		try {
 			// Vemos si hay error
 			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
 			if(error.code != 0){
-				ControladorUI.instance.PantallaError(error.err);
+				ControladorPrincipal.instance.PantallaError(error.err);
 			} else {
 				// No hay error, actualizar datos locales
-				ControladorUI.instance.usuarioRegistrado.nombre = nuevoNombre;
-				ControladorUI.instance.usuarioRegistrado.correo = nuevoCorreo;
-				ControladorUI.instance.usuarioRegistrado.clave = nuevaClave;
-				ControladorUI.instance.usuarioRegistrado.recibeCorreos = nuevoRecibeCorreos;
-				ControladorUI.instance.usuarioRegistrado.aspecto = nuevoAspecto;
-				ControladorUI.instance.usuarioRegistrado.icono = nuevoIcono;
-				usuario = ControladorUI.instance.usuarioRegistrado;
+				ControladorPrincipal.instance.usuarioRegistrado.nombre = nuevoNombre;
+				ControladorPrincipal.instance.usuarioRegistrado.correo = nuevoCorreo;
+				ControladorPrincipal.instance.usuarioRegistrado.clave = nuevaClave;
+				ControladorPrincipal.instance.usuarioRegistrado.recibeCorreos = nuevoRecibeCorreos;
+				ControladorPrincipal.instance.usuarioRegistrado.aspecto = nuevoAspecto;
+				ControladorPrincipal.instance.usuarioRegistrado.icono = nuevoIcono;
+				usuario = ControladorPrincipal.instance.usuarioRegistrado;
 				ActualizarDatosRepresentados();
 			}
 		} catch {
-			ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 		}
 	}
 	
@@ -171,8 +169,8 @@ public class ControladorPerfil : MonoBehaviour {
 		ActualizarAspecto(usuario.aspecto);
 		nuevoRecibeCorreos = usuario.recibeCorreos;
 		nombreUsuario.text = usuario.nombre;
-		icono.sprite = ControladorUI.instance.iconos[usuario.icono];
-		aspecto.sprite = ControladorUI.instance.aspectos[usuario.icono];
+		icono.sprite = ControladorPrincipal.instance.iconos[usuario.icono];
+		aspecto.sprite = ControladorPrincipal.instance.aspectos[usuario.icono];
 	}
 
 
@@ -190,21 +188,23 @@ public class ControladorPerfil : MonoBehaviour {
 		}
 
 		//Abortar si no hay listas de aspectos o iconos en la tienda
-		if(ControladorUI.iconosTienda == null || ControladorUI.aspectosTienda == null) {
+		if(ControladorPrincipal.instance.iconosTienda == null || ControladorPrincipal.instance.aspectosTienda == null) {
 			Debug.LogError("iconos_tienda y/o aspectos_tienda es nulo/s");
 			return;
 		}
 
 		//Añadir prefabs
 		//Iconos
-		foreach (ClasesJSON.Icono i in ControladorUI.iconosTienda.tiendaIconos) {
-				ObjetoCompra objCom = Instantiate(prefabPanelTienda, listaIconos).GetComponent<ObjetoCompra>();
+		foreach (ClasesJSON.Icono i in ControladorPrincipal.instance.iconosTienda.tiendaIconos) {
+				ObjetoCompra objCom = Instantiate(prefabObjetoCompra, listaIconos).GetComponent<ObjetoCompra>();
+				objCom.controladorPerfil = this;
 				objCom.Actualizar(i);
 		}
 		//Aspectos
-		foreach (ClasesJSON.Aspecto i in ControladorUI.aspectosTienda.tiendaAspectos) {
-				ObjetoCompra go_oc = Instantiate(prefabPanelTienda, listaAspectos).GetComponent<ObjetoCompra>();
-				go_oc.Actualizar(i);
+		foreach (ClasesJSON.Aspecto i in ControladorPrincipal.instance.aspectosTienda.tiendaAspectos) {
+				ObjetoCompra objCom = Instantiate(prefabObjetoCompra, listaAspectos).GetComponent<ObjetoCompra>();
+				objCom.controladorPerfil = this;
+				objCom.Actualizar(i);
 		}
 	}
 	
@@ -233,14 +233,14 @@ public class ControladorPerfil : MonoBehaviour {
 	public void CambiarIcono(int direccion) {
 		int orig = nuevoIcono;
 		int c = orig;
-		int MAX_TRIES = ControladorUI.instance.iconos.Length;
+		int MAX_TRIES = ControladorPrincipal.instance.iconos.Length;
 
 		for(int i = 0; i < MAX_TRIES; i++) {
 			c += direccion;
 			c = (c + MAX_TRIES) % MAX_TRIES; //Asegurar que no nos pasemos de busqueda
 			bool end = false;
 
-			foreach(var obj in ControladorUI.iconosComprados.iconos)
+			foreach(var obj in ControladorPrincipal.instance.iconosComprados.iconos)
 				if(obj.id == c) {
 					ActualizarIcono(c);
 					end = true;
@@ -257,14 +257,14 @@ public class ControladorPerfil : MonoBehaviour {
 	public void CambiarAspecto(int direccion) {
 		int orig = nuevoAspecto;
 		int c = orig;
-		int MAX_TRIES = ControladorUI.instance.aspectos.Length;
+		int MAX_TRIES = ControladorPrincipal.instance.aspectos.Length;
 
 		for(int i = 0; i < MAX_TRIES; i++) {
 			c += direccion;
 			c = (c + MAX_TRIES) % MAX_TRIES; //Asegurar que no nos pasemos de busqueda
 			bool end = false;
 
-			foreach(var obj in ControladorUI.aspectosComprados.aspectos)
+			foreach(var obj in ControladorPrincipal.instance.aspectosComprados.aspectos)
 				if(obj.id == c) {
 					ActualizarAspecto(c);
 					end = true;

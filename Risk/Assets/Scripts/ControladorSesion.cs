@@ -26,33 +26,33 @@ public class ControladorSesion : MonoBehaviour
 	
 	public async void IniciarSesion() {
 		if(usuario == "" || clave == "") {
-			ControladorUI.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");
+			ControladorPrincipal.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");
 			return;
 		}
 		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
 		form.AddField("usuario", usuario);
-		form.AddField("clave", ControladorConexiones.Cifrar(clave));
-		string result = await ControladorConexiones.instance.RequestHTTP("iniciarSesion",form);
+		form.AddField("clave", ConexionHTTP.Cifrar(clave));
+		string result = await ConexionHTTP.instance.RequestHTTP("iniciarSesion",form);
 		LoggearUsuario(result);
 	}
 	
 	public async void Registrarse() {
 		if(usuario == "" || clave == "" || correo == "") {
-			ControladorUI.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");
+			ControladorPrincipal.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");
 			return;
 		}
 		if(usuario.Contains("@")) {
-			ControladorUI.instance.PantallaError("Caracter @ no permitido en nombre de usuario");
+			ControladorPrincipal.instance.PantallaError("Caracter @ no permitido en nombre de usuario");
 			return;
 		}
 		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
 		form.AddField("nombre", usuario);
 		form.AddField("correo", correo);
-		form.AddField("clave", ControladorConexiones.Cifrar(clave));
+		form.AddField("clave", ConexionHTTP.Cifrar(clave));
 		form.AddField("recibeCorreos", recibeCorreos ? 1 : 0);
-		string result = await ControladorConexiones.instance.RequestHTTP("registrar", form);
+		string result = await ConexionHTTP.instance.RequestHTTP("registrar", form);
 		LoggearUsuario(result);
 	}
 	
@@ -60,17 +60,17 @@ public class ControladorSesion : MonoBehaviour
 	private void LoggearUsuario(string recibido) {
 		try {
 			ClasesJSON.UsuarioCompleto usuarioCompleto = JsonConvert.DeserializeObject<ClasesJSON.UsuarioCompleto>(recibido, ClasesJSON.settings);
-			ControladorUI.instance.usuarioRegistrado = usuarioCompleto.usuario;
+			ControladorPrincipal.instance.usuarioRegistrado = usuarioCompleto.usuario;
 
 			ObtenerIconosAspectos(recibido);
 
-			ControladorUI.instance.AbrirPantalla("Principal");
+			ControladorPrincipal.instance.AbrirPantalla("Principal");
 		} catch {
 			try {
 				ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
-				ControladorUI.instance.PantallaError(error.err);
+				ControladorPrincipal.instance.PantallaError(error.err);
 			} catch {
-				ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+				ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 			}
 		}
 	}
@@ -78,18 +78,18 @@ public class ControladorSesion : MonoBehaviour
 	//Guarda que aspectos/iconos tiene el usuario y cuales estan disponibles en la tienda
 	private void ObtenerIconosAspectos(string recibido) {
 		//Borrar aspectos e iconos anteriores
-		ControladorUI.aspectosComprados = new ClasesJSON.ListaAspectosUsuario();
-		ControladorUI.iconosComprados = new ClasesJSON.ListaIconosUsuario();
-		ControladorUI.aspectosTienda = new ClasesJSON.ListaAspectosTienda();
-		ControladorUI.iconosTienda = new ClasesJSON.ListaIconosTienda();
+		ControladorPrincipal.instance.aspectosComprados = new ClasesJSON.ListaAspectosUsuario();
+		ControladorPrincipal.instance.iconosComprados = new ClasesJSON.ListaIconosUsuario();
+		ControladorPrincipal.instance.aspectosTienda = new ClasesJSON.ListaAspectosTienda();
+		ControladorPrincipal.instance.iconosTienda = new ClasesJSON.ListaIconosTienda();
 
 		//Cargar desde api
 		try {
 			//No usar las settings del parser de JSON aquí, no puede ser un error aquí si se llama desde LoggearUsuario()
-			ControladorUI.aspectosComprados = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosUsuario>(recibido);
-			ControladorUI.iconosComprados = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosUsuario>(recibido);
-			ControladorUI.aspectosTienda = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosTienda>(recibido);
-			ControladorUI.iconosTienda = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosTienda>(recibido);
+			ControladorPrincipal.instance.aspectosComprados = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosUsuario>(recibido);
+			ControladorPrincipal.instance.iconosComprados = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosUsuario>(recibido);
+			ControladorPrincipal.instance.aspectosTienda = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosTienda>(recibido);
+			ControladorPrincipal.instance.iconosTienda = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosTienda>(recibido);
 
 		} catch (System.Exception e) {
 			Debug.LogError("Error al parsear los aspectos e iconos: " + e);

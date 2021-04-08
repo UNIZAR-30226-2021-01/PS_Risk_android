@@ -97,13 +97,13 @@ public class Notificacion : MonoBehaviour {
 
 		//Crear formulario
 		WWWForm form = new WWWForm();
-		form.AddField("idUsuario", ControladorUI.instance.usuarioRegistrado.id);
-		form.AddField("clave", ControladorUI.instance.usuarioRegistrado.clave);
+		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
+		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
 		form.AddField("idAmigo", datos.idEnvio);
 		form.AddField("decision", modo);
 
 		//Obtener respuesta del servidor
-		string respuesta = await ControladorConexiones.instance.RequestHTTP("gestionAmistad", form);
+		string respuesta = await ConexionHTTP.instance.RequestHTTP("gestionAmistad", form);
 
 		//Procesar respuesta
 		try {
@@ -111,14 +111,14 @@ public class Notificacion : MonoBehaviour {
 			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(respuesta);
 
 			if(error.code != 0) //Mostrar pantalla de error solo si la respuesta no es error 0
-				ControladorUI.instance.PantallaError(error.err);
+				ControladorPrincipal.instance.PantallaError(error.err);
 			else { //Si no, se puede borrar la notificacion
 				Destroy(gameObject);
 				ControladorNotificaciones.notificaciones.Remove(datos);
 			}
 		} catch {
 			//Respuesta desconocida, ¿El servidor esta mandando una respuesta?
-			Debug.LogError("[Controlador Notificaciones] Respuesta del servidor desconocida\nRespuesta: " + respuesta);
+			//Debug.LogError("[Controlador Notificaciones] Respuesta del servidor desconocida\nRespuesta: " + respuesta);
 		}
 	}
 } //VSCode, para, que no hay ningun error aquí ;_;

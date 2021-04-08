@@ -2001,7 +2001,7 @@ PrefabInstance:
     - target: {fileID: 2322694320904624597, guid: 4c74f50be2129a146ba597c12ab43cfa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 831.7967
+      value: 831.5
       objectReference: {fileID: 0}
     - target: {fileID: 2322694320904624597, guid: 4c74f50be2129a146ba597c12ab43cfa,
         type: 3}
@@ -2279,7 +2279,7 @@ MonoBehaviour:
   panelTienda: {fileID: 1043762619}
   listaIconos: {fileID: 1269542009}
   listaAspectos: {fileID: 144286210}
-  prefabPanelTienda: {fileID: 8349847793183238321, guid: f5f9a7a46aac3e74cb0fab4c64271a24,
+  prefabObjetoCompra: {fileID: 8349847793183238321, guid: f5f9a7a46aac3e74cb0fab4c64271a24,
     type: 3}
   confirmacionPanelTienda: {fileID: 337667574}
   animatorTienda: {fileID: 1043762624}
@@ -8441,7 +8441,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 831.7967, y: -1215.1304}
+  m_AnchoredPosition: {x: 831.5, y: -1215.1304}
   m_SizeDelta: {x: 1663.5934, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &548881991
@@ -10609,7 +10609,7 @@ PrefabInstance:
     - target: {fileID: 2322694320904624597, guid: 4c74f50be2129a146ba597c12ab43cfa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 831.7967
+      value: 831.5
       objectReference: {fileID: 0}
     - target: {fileID: 2322694320904624597, guid: 4c74f50be2129a146ba597c12ab43cfa,
         type: 3}
@@ -16143,6 +16143,7 @@ GameObject:
   - component: {fileID: 1099130347}
   - component: {fileID: 1099130351}
   - component: {fileID: 1099130352}
+  - component: {fileID: 1099130353}
   m_Layer: 5
   m_Name: MenuPrincipal
   m_TagString: Untagged
@@ -16345,6 +16346,26 @@ MonoBehaviour:
   pantallaCarga: {fileID: 749556569}
   pantallaError: {fileID: 161648796}
   textoError: {fileID: 1464791215}
+  aspectosComprados:
+    aspectos: []
+  iconosComprados:
+    iconos: []
+  aspectosTienda:
+    tiendaAspectos: []
+  iconosTienda:
+    tiendaIconos: []
+--- !u!114 &1099130353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099130346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600af1a05ae2d5f47a57a53fd6d3280a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1114438111
 GameObject:
   m_ObjectHideFlags: 0
@@ -19012,7 +19033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 831.7967, y: -990.1304}
+  m_AnchoredPosition: {x: 831.5, y: -990.1304}
   m_SizeDelta: {x: 1663.5934, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1282802586
@@ -20026,7 +20047,6 @@ GameObject:
   - component: {fileID: 1327866870}
   - component: {fileID: 1327866872}
   - component: {fileID: 1327866871}
-  - component: {fileID: 1327866873}
   m_Layer: 5
   m_Name: Fondo
   m_TagString: mostrarSiempre
@@ -20090,18 +20110,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327866869}
   m_CullTransparentMesh: 0
---- !u!114 &1327866873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327866869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5db947186b606d6498005eaec44e5d43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1335248098
 GameObject:
   m_ObjectHideFlags: 0
@@ -26336,7 +26344,7 @@ PrefabInstance:
     - target: {fileID: 2322694320904624597, guid: 4c74f50be2129a146ba597c12ab43cfa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 831.7967
+      value: 831.5
       objectReference: {fileID: 0}
     - target: {fileID: 2322694320904624597, guid: 4c74f50be2129a146ba597c12ab43cfa,
         type: 3}
@@ -32041,7 +32049,7 @@ PrefabInstance:
     - target: {fileID: 2322694320904624597, guid: 4c74f50be2129a146ba597c12ab43cfa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 831.7967
+      value: 831.5
       objectReference: {fileID: 0}
     - target: {fileID: 2322694320904624597, guid: 4c74f50be2129a146ba597c12ab43cfa,
         type: 3}

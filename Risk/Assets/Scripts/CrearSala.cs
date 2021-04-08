@@ -16,9 +16,10 @@ public class CrearSala : MonoBehaviour {
 	}
 	
 	public async void CreaSala(){
-		Usuario usuario = ControladorUI.instance.usuarioRegistrado;
+		Usuario usuario = ControladorPrincipal.instance.usuarioRegistrado;
 		ClasesJSON.CreacionSala datosSala = new ClasesJSON.CreacionSala(usuario.id, usuario.clave, tiempo, nombre);
 		string datos = JsonConvert.SerializeObject(datosSala);
-		await ControladorConexiones.instance.EnviarWS("crearSala", datos);
+		print(datos);
+		await ConexionWS.instance.EnviarWS("crearSala", datos);
 	}
 }

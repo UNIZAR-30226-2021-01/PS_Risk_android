@@ -8,24 +8,25 @@ using TMPro;
 /*
 	Este MonoBehaivour se usa en la lista de aspectos y iconos a comprar
 */
-public class ObjetoCompra : MonoBehaviour
-{
+public class ObjetoCompra : MonoBehaviour {
 	private bool esAspecto = false; //Si true, esta clase describe un aspecto, no un icono
 	private int id = 0; //Indica la ID del aspecto u icono que esta clase describe
 	private int coste = 0; //Coste del objeto que la clase describe
 
 	[SerializeField]
-	public Button botonCompra; //Componente botón del botón de compra
+	private Button botonCompra; //Componente botón del botón de compra
 	[SerializeField]
-	public GameObject indicadorVendido; //Señal que indica que el usuario ya tiene este objeto
+	private GameObject indicadorVendido; //Señal que indica que el usuario ya tiene este objeto
 	[SerializeField]
-	public Image spriteIconoAspecto; //Panel que muestra el icono de perfil o aspecto
+	private Image spriteIconoAspecto; //Panel que muestra el icono de perfil o aspecto
 	[SerializeField]
 	private TextMeshProUGUI nombre; //Texto que indica el nombre del objeto
 	[SerializeField]
 	private TextMeshProUGUI precio; //Texto que indica el precio
 	[SerializeField]
-	public Image spriteTropasColor; //Sprite-Mascara de la colorización de las tropas
+	private Image spriteTropasColor; //Sprite-Mascara de la colorización de las tropas
+	
+	public ControladorPerfil controladorPerfil;
 
 	//Inicializar clase basandose en un icono
 	public void Actualizar(ClasesJSON.Icono icono) {
@@ -38,7 +39,7 @@ public class ObjetoCompra : MonoBehaviour
 		//Comprobar si este objeto ya esta comprado
 		//¿Eficiencia?
 		bool sePuedeComprar = true;
-		foreach(var o in ControladorUI.iconosComprados.iconos)
+		foreach(var o in ControladorPrincipal.instance.iconosComprados.iconos)
 			if(o.id == id) {
 				sePuedeComprar = false;
 				break;
@@ -47,7 +48,7 @@ public class ObjetoCompra : MonoBehaviour
 		ActualizarDatos();
 
 		//Si no se tiene dinero suficiente, dehabilitar boton, hacer texto de precio rojo
-		if(coste > ControladorUI.instance.usuarioRegistrado.riskos) {
+		if(coste > ControladorPrincipal.instance.usuarioRegistrado.riskos) {
 			botonCompra.interactable = false;
 			precio.color = new Color(1,0.5f,0.5f,1f);
 		}
@@ -64,7 +65,7 @@ public class ObjetoCompra : MonoBehaviour
 		//Comprobar si este objeto ya esta comprado
 		//¿Eficiencia?
 		bool sePuedeComprar = true;
-		foreach(var o in ControladorUI.aspectosComprados.aspectos)
+		foreach(var o in ControladorPrincipal.instance.aspectosComprados.aspectos)
 			if(o.id == id) {
 				sePuedeComprar = false;
 				break;
@@ -73,7 +74,7 @@ public class ObjetoCompra : MonoBehaviour
 		ActualizarDatos();
 
 		//Si no se tiene dinero suficiente, dehabilitar boton, hacer texto de precio rojo
-		if(coste > ControladorUI.instance.usuarioRegistrado.riskos) {
+		if(coste > ControladorPrincipal.instance.usuarioRegistrado.riskos) {
 			botonCompra.interactable = false;
 			precio.color = new Color(1,0.25f,0.25f,1f);
 		}
@@ -87,13 +88,13 @@ public class ObjetoCompra : MonoBehaviour
 		if(spriteIconoAspecto != null || spriteTropasColor != null) {
 			try {
 				if(!esAspecto) { //Iconos
-					Sprite s = ControladorUI.instance.iconos[id];
+					Sprite s = ControladorPrincipal.instance.iconos[id];
 					spriteIconoAspecto.overrideSprite = s;
-					nombre.text = ControladorUI.instance.nombreIcono[id];
+					nombre.text = ControladorPrincipal.instance.nombreIcono[id];
 				} else { //Aspectos
-					spriteIconoAspecto.overrideSprite = ControladorUI.instance.aspectos[id];
-					spriteTropasColor.overrideSprite = ControladorUI.instance.colorAspectos[id];
-					nombre.text = ControladorUI.instance.nombreAspectos[id];
+					spriteIconoAspecto.overrideSprite = ControladorPrincipal.instance.aspectos[id];
+					spriteTropasColor.overrideSprite = ControladorPrincipal.instance.colorAspectos[id];
+					nombre.text = ControladorPrincipal.instance.nombreAspectos[id];
 
 					//Mostrar colores para los aspectos (tropas)
 					spriteTropasColor.gameObject.SetActive(true);
@@ -105,7 +106,7 @@ public class ObjetoCompra : MonoBehaviour
 
 	//Boton de comprar
 	public void BotonComprar() {
-		ControladorPerfil.instance.AbrirConfirmacionCompra(this);
+		controladorPerfil.AbrirConfirmacionCompra(this);
 	}
 
 	//Comunicarse con Backend para comprar el objecto
@@ -119,8 +120,8 @@ public class ObjetoCompra : MonoBehaviour
 	//Manda mensaje a backend de compra
 	private async void Comprar_API() {
 		WWWForm form = new WWWForm();
-		form.AddField("idUsuario", ControladorUI.instance.usuarioRegistrado.id);
-		form.AddField("clave", ControladorUI.instance.usuarioRegistrado.clave);
+		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
+		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
 		form.AddField("cosmetico", id);
 		if(esAspecto)
 			form.AddField("tipo", "Aspecto");
@@ -128,43 +129,43 @@ public class ObjetoCompra : MonoBehaviour
 			form.AddField("tipo","Icono");
 
 		//Obtener respuesta del servidor
-		string respuesta = await ControladorConexiones.instance.RequestHTTP("comprar", form);
+		string respuesta = await ConexionHTTP.instance.RequestHTTP("comprar", form);
 
 		//Procesar respuesta
 		try {
 			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(respuesta);
 
 			if(error.code != 0) //Mostrar pantalla de error solo si la respuesta no es error 0
-				ControladorUI.instance.PantallaError(error.err);
+				ControladorPrincipal.instance.PantallaError(error.err);
 			else { //Si no, restar riskos, añadir cosmetico
-				ControladorUI.instance.usuarioRegistrado.riskos -= coste;
+				ControladorPrincipal.instance.usuarioRegistrado.riskos -= coste;
 			
 				if(!esAspecto) {
 					ClasesJSON.Icono cjson = null;
-					foreach(var o in ControladorUI.iconosTienda.tiendaIconos) {
+					foreach(var o in ControladorPrincipal.instance.iconosTienda.tiendaIconos) {
 						if(o.id == id) {
 							cjson = o;
 							break;
 						}
 					}
-					ControladorUI.iconosComprados.iconos.Add(cjson);
+					ControladorPrincipal.instance.iconosComprados.iconos.Add(cjson);
 					Debug.Log("Se ha comprado el icono " + id);
 				}
 				else {
 					ClasesJSON.Aspecto cjson = null;
-					foreach(var o in ControladorUI.aspectosTienda.tiendaAspectos) {
+					foreach(var o in ControladorPrincipal.instance.aspectosTienda.tiendaAspectos) {
 						if(o.id == id) {
 							cjson = o;
 							break;
 						}
 					}
-					ControladorUI.aspectosComprados.aspectos.Add(cjson);
+					ControladorPrincipal.instance.aspectosComprados.aspectos.Add(cjson);
 					Debug.Log("Se ha comprado el aspecto " + id);
 				}
 
 				//Actualizar tienda
 				SetComprar(false);
-				ControladorPerfil.instance.ActualizarTienda();
+				controladorPerfil.ActualizarTienda();
 			}
 		} catch {
 			//Respuesta desconocida, ¿El servidor esta mandando una respuesta?

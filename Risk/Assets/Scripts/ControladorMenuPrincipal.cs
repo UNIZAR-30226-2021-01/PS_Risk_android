@@ -12,7 +12,7 @@ public class ControladorMenuPrincipal : MonoBehaviour
 	void OnEnable()
 	{
 		try {
-			fotoPerfil.overrideSprite = ControladorUI.instance.iconos[ControladorUI.instance.usuarioRegistrado.icono];
+			fotoPerfil.overrideSprite = ControladorPrincipal.instance.iconos[ControladorPrincipal.instance.usuarioRegistrado.icono];
 		} catch {}
 	}
 }

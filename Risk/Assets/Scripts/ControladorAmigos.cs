@@ -8,16 +8,7 @@ public class ControladorAmigos : MonoBehaviour {
 	public Transform padreAmigos;
 	private List<ClasesJSON.Amigo> listaAmigos;
 	private string amigoAgregar;
-	public static ControladorAmigos instance;
 
-	private void Awake() {
-		instance = this;
-	}
-
-	private void OnEnable() {
-		//RecargarAmigos();
-	}
-	
 	public void ActualizarAmigoAgregar(string nombre){
 		amigoAgregar = nombre;
 	}
@@ -29,10 +20,10 @@ public class ControladorAmigos : MonoBehaviour {
 		}
 		// Crear formulario a enviar
 		WWWForm form = new WWWForm();
-		form.AddField("idUsuario", ControladorUI.instance.usuarioRegistrado.id);
-		form.AddField("clave", ControladorUI.instance.usuarioRegistrado.clave);
+		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
+		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
 		// Enviar petición al servidor
-		string recibido = await ControladorConexiones.instance.RequestHTTP("amigos", form);
+		string recibido = await ConexionHTTP.instance.RequestHTTP("amigos", form);
 		// En algunas circunstancias el servidor no envía un array, en ese caso no hay amigos
 		if (!recibido.Contains("[")) {
 			Instantiate(noAmigoPrefab, padreAmigos);
@@ -46,8 +37,9 @@ public class ControladorAmigos : MonoBehaviour {
 			}
 			foreach (var amigo in listaAmigos) {
 				Amigo nuevoAmigo = Instantiate(amigoPrefab, padreAmigos).GetComponent<Amigo>();
+				nuevoAmigo.controladorAmigos = this;
 				nuevoAmigo.id = amigo.id;
-				nuevoAmigo.icono.sprite = ControladorUI.instance.iconos[amigo.icono];
+				nuevoAmigo.icono.sprite = ControladorPrincipal.instance.iconos[amigo.icono];
 				nuevoAmigo.nombre.text = amigo.nombre;
 			}
 		} catch {
@@ -56,10 +48,10 @@ public class ControladorAmigos : MonoBehaviour {
 				// Error, mostrar mensaje de error
 				ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
 				print(error.code + ", " + error.err);
-				ControladorUI.instance.PantallaError(error.err);
+				ControladorPrincipal.instance.PantallaError(error.err);
 			} catch {
 				// No hay error
-				ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+				ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 			}
 		}
 	}
@@ -67,18 +59,18 @@ public class ControladorAmigos : MonoBehaviour {
 	public async void EnviarSolicitudAmistad(){
 		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
-		form.AddField("idUsuario", ControladorUI.instance.usuarioRegistrado.id);
-		form.AddField("clave", ControladorUI.instance.usuarioRegistrado.clave);
+		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
+		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
 		form.AddField("nombreAmigo", amigoAgregar);
-		string recibido = await ControladorConexiones.instance.RequestHTTP("enviarSolicitudAmistad", form);
+		string recibido = await ConexionHTTP.instance.RequestHTTP("enviarSolicitudAmistad", form);
 		try {
 			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
 			if(error.code != 0) {
 				// No hay error	
-				ControladorUI.instance.PantallaError(error.err);
+				ControladorPrincipal.instance.PantallaError(error.err);
 			}
 		} catch {
-			ControladorUI.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 		}
 		
 	}
