@@ -18329,11 +18329,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c45408eb6290985489e050424ebcc3e1, type: 3}
   - {fileID: 21300000, guid: fb43cf271fc4d7e489f40bcb7269f755, type: 3}
   - {fileID: 21300000, guid: 29e52afff2648184fa65e58b64ce1369, type: 3}
-  - {fileID: 21300000, guid: 2e18f0fcaf108594a9438da3f7fbf5b0, type: 3}
+  - {fileID: 21300000, guid: 3059bfa6217e5b4498dbab8ffa8736d3, type: 3}
   - {fileID: 21300000, guid: e14ddb3281a230a49bd3a95bca069587, type: 3}
   - {fileID: 21300000, guid: 80ac7c13c71955f488cb1409b09d392f, type: 3}
   - {fileID: 21300000, guid: a323bf5a8e84e574690c8d01ca76ff7e, type: 3}
-  - {fileID: 21300000, guid: 3059bfa6217e5b4498dbab8ffa8736d3, type: 3}
+  - {fileID: 21300000, guid: 2e18f0fcaf108594a9438da3f7fbf5b0, type: 3}
   - {fileID: 21300000, guid: 1e49fa5e4d089274fb779cf51847ed1b, type: 3}
   - {fileID: 21300000, guid: 1f3b5b12f098f054bad6388e4e0e700b, type: 3}
   - {fileID: 21300000, guid: 2b4d7949764f3964e9d5f5f4666367e9, type: 3}
@@ -18371,9 +18371,9 @@ MonoBehaviour:
   - Soldado
   - "Ping\xFCino"
   - Barco
-  - "Sart\xE9n"
   - Libro
-  - "Cart\xF3grafo"
+  - "Sart\xE9n"
+  - Sextante
   - Empresario
   - Dados
   - "Ping\xFCino Pirata"
@@ -21167,7 +21167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 19.59961}
+  m_AnchoredPosition: {x: 0, y: 19.5}
   m_SizeDelta: {x: -80.23718, y: -292.2729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269969487
@@ -28101,7 +28101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 98.875}
+  m_AnchoredPosition: {x: 0, y: 99}
   m_SizeDelta: {x: -80.23688, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1632466192
@@ -33379,7 +33379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -556.0513, y: 0}
+  m_AnchoredPosition: {x: -556, y: 0}
   m_SizeDelta: {x: 1212.1027, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1945787020
