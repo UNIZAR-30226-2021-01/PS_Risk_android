@@ -25,20 +25,10 @@ public class ControladorNotificaciones : MonoBehaviour
 
 	//Actualiza las notificaciones a mostrar al usuario
 	public async void ActualizarNotificaciones() {
-		Debug.Log("[Controlador Notificaciones] Actualizando Lista de Notificaciones");
 
 		//Borrar los gameobjects de las notificaciones anteriores
 		for(int i = 0; i < listaPadre.childCount; i++) {
 			Destroy(listaPadre.GetChild(i).gameObject);
-		}
-
-		//Errores de campos
-		if(prefabNotificacion == null) {
-			Debug.LogError(ERROR_ACTUALIZARNOTIFICACIONES + " ya que el prefab de notificación (prefabNotificacion) es nulo!");
-		} else if(prefabNada == null) {
-			Debug.LogError(ERROR_ACTUALIZARNOTIFICACIONES + " ya que el prefab de ninguna notificación (prefabNada) es nulo!");
-		} else if(listaPadre == null) {
-			Debug.LogError(ERROR_ACTUALIZARNOTIFICACIONES + " ya que el transform padre donde poner los prefabs (listaPadre) es nulo!");
 		}
 
 		//Retrivir las notificaciones del servidor
@@ -63,8 +53,7 @@ public class ControladorNotificaciones : MonoBehaviour
 
 	//Obtiene las notificaciones del servidor y las guarda en la variable 'notificaciones'
 	//Las notificaciones son guardadas en un campo estatico para uso posterior desde donde sea
-	public static async Task ObtenerNotificaciones() {
-		Debug.Log("[Controlador Notificaciones] Obteniendo Notificaciones del Servidor");
+	private async Task ObtenerNotificaciones() {
 
 		//Si el controlador ui no esta iniciado, borrar la lista de notificaciones
 		if(ControladorPrincipal.instance == null) {
@@ -76,7 +65,6 @@ public class ControladorNotificaciones : MonoBehaviour
 		WWWForm form = new WWWForm();
 		//Comprobar que hay un usuario y su clave
 		if(ControladorPrincipal.instance == null || ControladorPrincipal.instance.usuarioRegistrado == null) {
-			Debug.LogError("No se pueden obtener notificaciones: Usuario y clave desconocidos");
 			notificaciones = null;
 			return;
 		}
@@ -91,10 +79,7 @@ public class ControladorNotificaciones : MonoBehaviour
 				//Petición realiza con exito, guardar notificaciones en la variable 'notificaciones'
 				ClasesJSON.ListaNotificaciones p = JsonConvert.DeserializeObject<ClasesJSON.ListaNotificaciones>(respuesta, ClasesJSON.settings);
 				notificaciones = p.notificaciones;
-			} catch {
-				//Respuesta desconocida, ¿El servidor esta mandando una respuesta?
-				Debug.LogError("[Controlador Notificaciones] Respuesta del servidor desconocida\nRespuesta: " + respuesta);
-			}
+			} catch {}
 		} catch {
 			//Error, ir a la pantalla de error
 			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(respuesta);

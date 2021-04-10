@@ -112,7 +112,6 @@ public class ObjetoCompra : MonoBehaviour {
 	//Comunicarse con Backend para comprar el objecto
 	//Indicar al juego que este objeto se ha comprado
 	public void Comprar() {
-		Debug.Log("Comprando Cosmetico " + id + "...");
 		//Marcar como comprado, haya error o no
 		Comprar_API();
 	}
@@ -149,7 +148,6 @@ public class ObjetoCompra : MonoBehaviour {
 						}
 					}
 					ControladorPrincipal.instance.iconosComprados.iconos.Add(cjson);
-					Debug.Log("Se ha comprado el icono " + id);
 				}
 				else {
 					ClasesJSON.Aspecto cjson = null;
@@ -160,7 +158,6 @@ public class ObjetoCompra : MonoBehaviour {
 						}
 					}
 					ControladorPrincipal.instance.aspectosComprados.aspectos.Add(cjson);
-					Debug.Log("Se ha comprado el aspecto " + id);
 				}
 
 				//Actualizar tienda
@@ -169,7 +166,6 @@ public class ObjetoCompra : MonoBehaviour {
 			}
 		} catch {
 			//Respuesta desconocida, ¿El servidor esta mandando una respuesta?
-			Debug.LogError("[Controlador Notificaciones] Respuesta del servidor desconocida\nRespuesta: " + respuesta);
 		}
 	}
 

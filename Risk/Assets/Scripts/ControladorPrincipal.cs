@@ -14,8 +14,8 @@ public class ControladorPrincipal : MonoBehaviour
 	public Sprite[] iconos, aspectos, colorAspectos; //Sprites para los iconos, aspectos y mascaras de color de los aspectos
 	public string[] nombreIcono, nombreAspectos;
 	[SerializeField]
-	private GameObject pantallaCarga, pantallaError;
-	public TextMeshProUGUI textoError;
+	private GameObject pantallaCarga, pantallaError, pantallaInfo;
+	public TextMeshProUGUI textoError, textoInfo;
 
 	//Cosmeticos desbloqueados
 	public ClasesJSON.ListaAspectosUsuario aspectosComprados; //Lista de aspectos que el usuario tiene comprados
@@ -68,15 +68,17 @@ public class ControladorPrincipal : MonoBehaviour
 		pantallaError.SetActive(true);
 		textoError.text = error;
 	}
+
+	// Muestra la pantalla de información
+	public void PantallaInfo(string info) {
+		pantallaInfo.SetActive(true);
+		textoInfo.text = info;
+	}
 	
 	public void PantallaCarga(bool activado) {
 		pantallaCarga.SetActive(activado);
 	}
 	
-	public void ActualizarUsuario(Usuario nuevo) {
-		usuarioRegistrado = nuevo;
-	}
-
 	private void DesactivarPantallas() {
 		foreach (GameObject p in pantallas.Values) {
 			// Desactivar todas las pantallas que no tengan el tag de mostrarSiempre

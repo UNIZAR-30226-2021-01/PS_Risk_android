@@ -91,9 +91,7 @@ public class ControladorSesion : MonoBehaviour
 			ControladorPrincipal.instance.aspectosTienda = JsonConvert.DeserializeObject<ClasesJSON.ListaAspectosTienda>(recibido);
 			ControladorPrincipal.instance.iconosTienda = JsonConvert.DeserializeObject<ClasesJSON.ListaIconosTienda>(recibido);
 
-		} catch (System.Exception e) {
-			Debug.LogError("Error al parsear los aspectos e iconos: " + e);
-			throw new System.Exception("No se ha podido leer los aspectos e iconos");
+		} catch {
 		}
 	}
 	

@@ -49,11 +49,9 @@ public class ConexionWS : MonoBehaviour {
 		
 		// Código a ejecutar cuando se abre la conexión del websocket
 		ws.OnOpen += () => {
-			print("Websocket conectado");
 		};
 		// Código a ejecutar cuando se cierra la conexión del websocket
 		ws.OnClose += (e) => {
-			print("Websocket cerrado: " + e);
 		};
 		// Código a ejecutar cuando se produce un error de websocket
 		ws.OnError += (e) => {
@@ -90,7 +88,7 @@ public class ConexionWS : MonoBehaviour {
 	// Recibe un mensaje de websocket en formato JSON y lo gestiona dependiendo del estado actual
 	private void GestionarMensaje(string mensaje){
 		mtx.WaitOne();
-		ControladorPrincipal cui = ControladorPrincipal.instance;
+		ControladorPrincipal cp = ControladorPrincipal.instance;
 		string tipoMensaje = mensaje[POSICION_TIPO_MENSAJE].ToString();
 		switch (estadoActual) {
 			case (Estado.menuPrincipal):
@@ -102,15 +100,15 @@ public class ConexionWS : MonoBehaviour {
 						if(datosSala.jugadores.ToArray()[0].id == ControladorPrincipal.instance.usuarioRegistrado.id){
 							// Somos el anfitrión
 						controladorEsperaHost.ActualizarDatosSalaEspera(mensaje);
-							cui.AbrirPantalla("SalaEsperaHost");
+							cp.AbrirPantalla("SalaEsperaHost");
 						} else {
 						controladorEsperaInvitado.ActualizarDatosSalaEspera(mensaje);
-							cui.AbrirPantalla("SalaEsperaInvitado");
+							cp.AbrirPantalla("SalaEsperaInvitado");
 						}
 						break;
 					case ("e"):
 						// Error
-						cui.PantallaErrorWS(mensaje);
+						cp.PantallaErrorWS(mensaje);
 						break;
 					default:
 						// Ignorar resto de mensajes
@@ -126,13 +124,13 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("e"):
 						// Error
-						cui.PantallaErrorWS(mensaje);
+						cp.PantallaErrorWS(mensaje);
 						break;
 					case ("p"):
 						// Datos de partida completa: Empezar partida
 						// TODO: Guardar nuevos datos
 						estadoActual = Estado.partida;
-						cui.AbrirPantalla("Partida");
+						cp.AbrirPantalla("Partida");
 						break;
 					default:
 						// Ignorar resto de mensajes
@@ -144,7 +142,7 @@ public class ConexionWS : MonoBehaviour {
 					case ("p"):
 						// Todos datos de partida: Actualizar datos de partida
 						// TODO: Guardar nuevos datos
-						cui.AbrirPantalla("Partida");
+						cp.AbrirPantalla("Partida");
 						break;
 					case ("a"):
 						// Accion: Mostrar Cambios
@@ -152,7 +150,7 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("e"):
 						// Error
-						cui.PantallaErrorWS(mensaje);
+						cp.PantallaErrorWS(mensaje);
 						break;
 					case ("f"):
 						// Fin de partida, terminar partida

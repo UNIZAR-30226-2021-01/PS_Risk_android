@@ -21,7 +21,6 @@ public class ControladorSalaEspera : MonoBehaviour {
 		ClasesJSON.DatosSala datosSala = JsonConvert.DeserializeObject<ClasesJSON.DatosSala>(datosSalaJSON);
 		nombrePartida.text = datosSala.nombrePartida;
 		host = datosSala.jugadores.ToArray()[0].id;
-		//host = datosSala.idCreador;
 		jugadores = datosSala.jugadores;
 		for(int i = 0; i < padreJugadores.childCount; i++) {
 			Destroy(padreJugadores.GetChild(i).gameObject);

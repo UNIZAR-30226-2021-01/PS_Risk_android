@@ -50,14 +50,6 @@ public class ControladorPerfil : MonoBehaviour {
 	}
 
 	private void OnEnable() {
-		if(panelTienda != null) { //Obtener animador
-			animatorTienda = panelTienda.GetComponent<Animator>();
-			if(animatorTienda == null)
-				Debug.LogWarning("En Panel de la Tienda no es nulo, pero si animador si");
-		} else {
-			Debug.LogWarning("En Panel de la Tienda es nulo, no se puede obtener animacion");
-		}
-
 		usuario = ControladorPrincipal.instance.usuarioRegistrado;
 		ActualizarDatosRepresentados();
 		ActualizarTienda();
@@ -176,7 +168,6 @@ public class ControladorPerfil : MonoBehaviour {
 
 	// Actualiza los gameobjects de la tienda
 	public void ActualizarTienda() {
-		Debug.Log("Actualizando Tienda...");
 		riskos.text = usuario.riskos.ToString(); //Actualizar cuantos riskos quedan (Riskos™)
 
 		//Borrar los gameobjects de las listas de iconos y aspectos
@@ -189,7 +180,6 @@ public class ControladorPerfil : MonoBehaviour {
 
 		//Abortar si no hay listas de aspectos o iconos en la tienda
 		if(ControladorPrincipal.instance.iconosTienda == null || ControladorPrincipal.instance.aspectosTienda == null) {
-			Debug.LogError("iconos_tienda y/o aspectos_tienda es nulo/s");
 			return;
 		}
 

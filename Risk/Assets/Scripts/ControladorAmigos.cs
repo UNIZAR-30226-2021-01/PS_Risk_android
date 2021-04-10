@@ -46,10 +46,8 @@ public class ControladorAmigos : MonoBehaviour {
 			}
 		} catch {
 			try {
-				print(recibido);
 				// Error, mostrar mensaje de error
 				ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
-				print(error.code + ", " + error.err);
 				ControladorPrincipal.instance.PantallaError(error.err);
 			} catch {
 				// No hay error
@@ -74,6 +72,6 @@ public class ControladorAmigos : MonoBehaviour {
 		} catch {
 			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 		}
-		
+		ControladorPrincipal.instance.PantallaInfo("Solicitud de amistad enviada exitosamente");
 	}
 }

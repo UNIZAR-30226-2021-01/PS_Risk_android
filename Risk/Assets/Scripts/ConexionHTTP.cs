@@ -60,9 +60,7 @@ public class ConexionHTTP : MonoBehaviour
 	public IEnumerator SendRequest<T>(string direccion, WWWForm form, Action<T> callback) {
 		UnityWebRequest www = UnityWebRequest.Post(DIRECCION_PETICIONES + direccion, form);
 		yield return www.SendWebRequest();
-		if(www.isNetworkError || www.isHttpError) {
-			print("Error de conexión HTTP");
-		} else {
+		if(!(www.isNetworkError || www.isHttpError)) {
 			// Convertimos el texto recibido a tipo generico para poder devolverselo al callback
 			T t = (T)Convert.ChangeType(www.downloadHandler.text, typeof(T));
 			if(callback != null)

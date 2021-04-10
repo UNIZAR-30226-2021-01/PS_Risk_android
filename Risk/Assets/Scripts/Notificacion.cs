@@ -35,7 +35,6 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			default:
-				Debug.LogError("[Notificacion] No se puede rechazar, tipo de notificacion '" + datos.tipo + "' desconocido");
 				break;
 		}
 		controladorNotificaciones.ActualizarNotificaciones();
@@ -58,7 +57,6 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			default:
-				Debug.LogError("[Notificacion] No se puede rechazar, tipo de notificacion '" + datos.tipo + "' desconocido");
 				break;
 		}
 		controladorNotificaciones.ActualizarNotificaciones();
@@ -95,7 +93,6 @@ public class Notificacion : MonoBehaviour {
 
 	//Acepta o rechaza una petición de amistad
 	private async void GestionarAmistad(string modo) {
-		Debug.Log("[Notificacion] Gestionando petición de amistad (" + modo + ")");
 
 		//Crear formulario
 		WWWForm form = new WWWForm();
@@ -118,10 +115,7 @@ public class Notificacion : MonoBehaviour {
 				Destroy(gameObject);
 				ControladorNotificaciones.notificaciones.Remove(datos);
 			}
-		} catch {
-			//Respuesta desconocida, ¿El servidor esta mandando una respuesta?
-			//Debug.LogError("[Controlador Notificaciones] Respuesta del servidor desconocida\nRespuesta: " + respuesta);
-		}
+		} catch {}
 		
 	}
 	private async void AceptarInvitacion(){
