@@ -20,6 +20,7 @@ public class ControladorSalaEspera : MonoBehaviour {
 	public void ActualizarDatosSalaEspera(string datosSalaJSON){
 		ClasesJSON.DatosSala datosSala = JsonConvert.DeserializeObject<ClasesJSON.DatosSala>(datosSalaJSON);
 		nombrePartida.text = datosSala.nombrePartida;
+		host = datosSala.jugadores.ToArray()[0].id;
 		//host = datosSala.idCreador;
 		jugadores = datosSala.jugadores;
 		for(int i = 0; i < padreJugadores.childCount; i++) {
@@ -37,7 +38,11 @@ public class ControladorSalaEspera : MonoBehaviour {
 	}
 	
 	public async void EmpezarPartida(){
-		if(ControladorPrincipal.instance.usuarioRegistrado.id == host && jugadores.Count >= 3){
+		if(jugadores.Count < 3){
+			ControladorPrincipal.instance.PantallaError("Se necesitan como mínimo 3 jugadores para comenzar la partida");
+			return;
+		}
+		if(ControladorPrincipal.instance.usuarioRegistrado.id == host){
 			await ConexionWS.instance.EnviarWS(MENSAJE_COMIENZO);
 		}
 	}

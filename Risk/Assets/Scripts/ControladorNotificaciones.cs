@@ -17,12 +17,7 @@ public class ControladorNotificaciones : MonoBehaviour
 	public static List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
 
 	private const string ERROR_ACTUALIZARNOTIFICACIONES = "No se puede actualizar la lista de notificaciones";
-	public static ControladorNotificaciones instance;
 	
-	private void Awake() {
-		instance = this;
-	}
-
 	//Queremos actualizar las notificaciones en pantalla cada vez que se accede a la pantalla
 	private void OnEnable() {
 		ActualizarNotificaciones();
@@ -51,8 +46,9 @@ public class ControladorNotificaciones : MonoBehaviour
 		
 		if(notificaciones != null) {
 			foreach(ClasesJSON.Notificacion n in notificaciones) {
-				Notificacion go_n = Instantiate(prefabNotificacion, listaPadre).GetComponent<Notificacion>(); //Notificación anclada en el gameobject
-				go_n.Actualizar(n);
+				Notificacion notificacion = Instantiate(prefabNotificacion, listaPadre).GetComponent<Notificacion>(); //Notificación anclada en el gameobject
+				notificacion.Actualizar(n);
+				notificacion.controladorNotificaciones = this;
 			}
 
 			//Si no hay notificaciones, mostrar prefab 'prefabNada'

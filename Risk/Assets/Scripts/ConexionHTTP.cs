@@ -15,7 +15,8 @@ public class ConexionHTTP : MonoBehaviour
 	public static ConexionHTTP instance; // Referencia estática a si mismo para usar como singleton
 	
 	private void Awake() {
-		// Es necesario utilizar un singleton porque no se puede invocar a un corrutina desde una clase estática
+		// Es necesario utilizar un singleton en vez de crear la clase como estática
+		// porque no se puede invocar a un corrutina desde una clase estática
 		instance = this;
 	}
 	

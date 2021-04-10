@@ -17,6 +17,7 @@ public class Notificacion : MonoBehaviour {
 	private const string TIPO_AMISTAD = "Peticion de amistad";
 	private const string TIPO_TURNO = "turno";
 	private const string TIPO_INVICATION = "Invitacion";
+	public ControladorNotificaciones controladorNotificaciones;
 	
 	//Llamado por el botón de rechazar
 	public void Rechazar() {
@@ -37,7 +38,7 @@ public class Notificacion : MonoBehaviour {
 				Debug.LogError("[Notificacion] No se puede rechazar, tipo de notificacion '" + datos.tipo + "' desconocido");
 				break;
 		}
-		ControladorNotificaciones.instance.ActualizarNotificaciones();
+		controladorNotificaciones.ActualizarNotificaciones();
 	}
 
 	//Llamado por el botón de aceptar
@@ -60,7 +61,7 @@ public class Notificacion : MonoBehaviour {
 				Debug.LogError("[Notificacion] No se puede rechazar, tipo de notificacion '" + datos.tipo + "' desconocido");
 				break;
 		}
-		ControladorNotificaciones.instance.ActualizarNotificaciones();
+		controladorNotificaciones.ActualizarNotificaciones();
 	}
 
 	//Actualiza los datos de la clase

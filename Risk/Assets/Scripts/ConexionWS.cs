@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using NativeWebSocket;
+using Newtonsoft.Json;
 
 public class ConexionWS : MonoBehaviour {
 	private const string DIRECCION_PETICIONES = "wss://risk-servidor.herokuapp.com/";
@@ -15,7 +16,7 @@ public class ConexionWS : MonoBehaviour {
 	private enum Estado{menuPrincipal, salaEspera, partida};
 	private Estado estadoActual;
 	[SerializeField]
-	private ControladorSalaEspera controladorEspera;
+	private ControladorSalaEspera controladorEsperaHost, controladorEsperaInvitado;
 	public static ConexionWS instance;
 	
 	private void Awake() {
@@ -97,8 +98,15 @@ public class ConexionWS : MonoBehaviour {
 					case ("d"):
 						// Datos de sala: Unirse a sala de espera
 						estadoActual = Estado.salaEspera;
-						controladorEspera.ActualizarDatosSalaEspera(mensaje);
-						cui.AbrirPantalla("SalaEspera");
+						ClasesJSON.DatosSala datosSala = JsonConvert.DeserializeObject<ClasesJSON.DatosSala>(mensaje);
+						if(datosSala.jugadores.ToArray()[0].id == ControladorPrincipal.instance.usuarioRegistrado.id){
+							// Somos el anfitrión
+						controladorEsperaHost.ActualizarDatosSalaEspera(mensaje);
+							cui.AbrirPantalla("SalaEsperaHost");
+						} else {
+						controladorEsperaInvitado.ActualizarDatosSalaEspera(mensaje);
+							cui.AbrirPantalla("SalaEsperaInvitado");
+						}
 						break;
 					case ("e"):
 						// Error
@@ -113,7 +121,8 @@ public class ConexionWS : MonoBehaviour {
 				switch (tipoMensaje) {
 					case ("d"):
 						// Datos de sala: Actualizar datos
-						controladorEspera.ActualizarDatosSalaEspera(mensaje);
+						controladorEsperaHost.ActualizarDatosSalaEspera(mensaje);
+						controladorEsperaInvitado.ActualizarDatosSalaEspera(mensaje);
 						break;
 					case ("e"):
 						// Error
