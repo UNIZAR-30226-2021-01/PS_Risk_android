@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>Script que controla la interfaz del menu principal.</summary>
 public class ControladorMenuPrincipal : MonoBehaviour
 {
 	[SerializeField]

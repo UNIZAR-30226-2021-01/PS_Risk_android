@@ -8,6 +8,11 @@ Risk/[Ll]ocal[Cc]ache/
 Risk/[Oo]bj/
 Risk/[Tt]emp/
 Risk/[Uu]nityGenerated/
+Risk/Documentation/[Oo]bj/
+Risk/Documentation/[Aa]pi/
+Risk/_site/
+Risk/[Aa]ssets/[Ss]cripts/[Oo]bj
+Risk/[Aa]ssets/[Ss]cripts/[Oo]bj.meta
 # file on crash reports
 Risk/sysinfo.txt
 # Unity3D generated meta files

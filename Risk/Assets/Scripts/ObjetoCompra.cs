@@ -8,7 +8,17 @@ using TMPro;
 /*
 	Este MonoBehaivour se usa en la lista de aspectos y iconos a comprar
 */
+/// <summary>
+/// Script usado en el prefab de objeto a comprar (Cosmetico).
+/// Guarda la información de un cosmetico, sea icono o aspecto, para poder comprarlo si se desea.
+/// </summary>
 public class ObjetoCompra : MonoBehaviour {
+	/// <summary>
+	/// Instancia del Controlador del Perfil.
+	/// Iniciar en el prefab desde el editor de Unity.
+	/// </summary>
+	public ControladorPerfil controladorPerfil;
+
 	private bool esAspecto = false; //Si true, esta clase describe un aspecto, no un icono
 	private int id = 0; //Indica la ID del aspecto u icono que esta clase describe
 	private int coste = 0; //Coste del objeto que la clase describe
@@ -25,10 +35,12 @@ public class ObjetoCompra : MonoBehaviour {
 	private TextMeshProUGUI precio; //Texto que indica el precio
 	[SerializeField]
 	private Image spriteTropasColor; //Sprite-Mascara de la colorización de las tropas
-	
-	public ControladorPerfil controladorPerfil;
 
-	//Inicializar clase basandose en un icono
+	/// <summary>
+	/// Actualiza la clase y el prefab como venta de un Icono específico.
+	/// </summary>
+	/// <param name="icono">Icono a vender</param>
+	/// Ver <see cref="ObjetoCompra.Actualizar(ClasesJSON.Aspecto)"/> para realizar lo mismo con un aspecto 
 	public void Actualizar(ClasesJSON.Icono icono) {
 		esAspecto = false;
 		id = icono.id;
@@ -54,7 +66,11 @@ public class ObjetoCompra : MonoBehaviour {
 		}
 	}
 
-	//Inicializar clase basandose en un aspecto
+	/// <summary>
+	/// Actualiza la clase y el prefab como venta de un Aspecto específico.
+	/// </summary>
+	/// <param name="aspecto">Asepcto a vender</param>
+	/// Ver <see cref="ObjetoCompra.Actualizar(ClasesJSON.Icono)"/> para realizar lo mismo con un icono 
 	public void Actualizar(ClasesJSON.Aspecto aspecto) {
 		esAspecto = true;
 		id = aspecto.id;
@@ -104,13 +120,19 @@ public class ObjetoCompra : MonoBehaviour {
 	}
 
 
-	//Boton de comprar
+	/// <summary>
+	/// Función ejecutada desde el prefab cuando el usuario le da al botón de comprar.
+	/// Abre el menu de confirmación de compra y guarda en controladorPerfil.objetoAComprar el cosmetico que se va a comprar.
+	/// </summary>
 	public void BotonComprar() {
 		controladorPerfil.AbrirConfirmacionCompra(this);
 	}
 
-	//Comunicarse con Backend para comprar el objecto
-	//Indicar al juego que este objeto se ha comprado
+	/// <summary>
+	/// Comunicarse con Backend para comprar el objecto.
+	/// Indicar al juego que este objeto se ha comprado.
+	/// Ejecutado desde la ventada de confirmación de compra.
+	/// </summary>
 	public void Comprar() {
 		//Marcar como comprado, haya error o no
 		Comprar_API();
@@ -169,8 +191,10 @@ public class ObjetoCompra : MonoBehaviour {
 		}
 	}
 
-	//Permitir / Bloquear la posibilidad de darle al botón de comprar
-	//Si la entrada es 'true', se permite que se pueda comprar y viceversa
+	/// <summary>
+	/// Permitir / Bloquear la posibilidad de darle al botón de comprar.
+	/// </summary>
+	/// <param name="sePuedeComprar">Si 'true', el usuario puede comprar el objeto / darle al botón de compra</param>
 	public void SetComprar(bool sePuedeComprar) {
 		if(botonCompra != null)
 			botonCompra.interactable = sePuedeComprar;

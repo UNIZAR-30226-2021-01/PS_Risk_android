@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using Newtonsoft.Json;
 
+/// <summary>
+/// Script que controla la sala de espera
+/// </summary>
 public class ControladorSalaEspera : MonoBehaviour {
 	private const string MENSAJE_COMIENZO = "{\"tipo\":\"Iniciar\"}";
 	[SerializeField]
@@ -17,6 +20,10 @@ public class ControladorSalaEspera : MonoBehaviour {
 	List<ClasesJSON.Jugador> jugadores;
 	private int host;
 	
+	/// <summary>
+	/// Actualiza los datos de la sala de espera con nuevos datos
+	/// </summary>
+	/// <param name="datosSalaJSON">Nuevos datos de la sala en formato JSON</param>
 	public void ActualizarDatosSalaEspera(string datosSalaJSON){
 		ClasesJSON.DatosSala datosSala = JsonConvert.DeserializeObject<ClasesJSON.DatosSala>(datosSalaJSON);
 		nombrePartida.text = datosSala.nombrePartida;
@@ -36,6 +43,9 @@ public class ControladorSalaEspera : MonoBehaviour {
 		listaAmigos.RecargarAmigos();
 	}
 	
+	/// <summary>
+	/// Empieza una nueva partida
+	/// </summary>
 	public async void EmpezarPartida(){
 		if(jugadores.Count < 3){
 			ControladorPrincipal.instance.PantallaError("Se necesitan como mínimo 3 jugadores para comenzar la partida");

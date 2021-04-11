@@ -6,6 +6,7 @@ using UnityEngine;
 using NativeWebSocket;
 using Newtonsoft.Json;
 
+/// <summary>Script que gestiona la conexión por WebStockets con backend.</summary>
 public class ConexionWS : MonoBehaviour {
 	private const string DIRECCION_PETICIONES = "wss://risk-servidor.herokuapp.com/";
 	private const int POSICION_TIPO_MENSAJE = 17; // El elemento 17 de el mensaje es siempre un caracter que indica el tipo de mensaje
@@ -17,6 +18,8 @@ public class ConexionWS : MonoBehaviour {
 	private Estado estadoActual;
 	[SerializeField]
 	private ControladorSalaEspera controladorEsperaHost, controladorEsperaInvitado;
+
+	/// <summary>Referencia estática a si mismo para usar como singleton.</summary>
 	public static ConexionWS instance;
 	
 	private void Awake() {
@@ -29,7 +32,8 @@ public class ConexionWS : MonoBehaviour {
 		#endif
 	}
 	
-	// Realiza una petición WebSocket con el formulario en formato de string json
+	/// <summary>Realiza una petición WebSocket con el formulario en formato de string json.</summary>
+	/// <param name="form">Mensaje a enviar</param>
 	public async Task EnviarWS(string form) {
 		if (ws == null ||ws.State != WebSocketState.Open){
 			ControladorPrincipal.instance.PantallaError("No se ha podido realizar la conexión con el servidor");
@@ -38,6 +42,9 @@ public class ConexionWS : MonoBehaviour {
 		await ws.SendText(form);
 	}
 
+	/// <summary>Comienza una conexión por Web Stocket.</summary>
+	/// <param name="direccion">Dirección del servidor</param>
+	/// <returns>'true' si la conexión se ha realizado con exito, y viceversa</returns>
 	public async Task<bool> ConexionWebSocket(string direccion) {
 		
 		if (ws != null && ws.State == WebSocketState.Open) {
@@ -76,6 +83,7 @@ public class ConexionWS : MonoBehaviour {
 		return false;
 	}
 	
+	/// <summary>Cierra la conexión del Web Socket.</summary>
 	public async void CerrarConexionWebSocket(){
 		if(ws != null && (ws.State != WebSocketState.Closed || ws.State != WebSocketState.Closing)){
 			await ws.Close();
