@@ -126,7 +126,9 @@ public class Notificacion : MonoBehaviour {
 			ControladorPrincipal.instance.PantallaError("No se ha podido realizar la conexión con el servidor");
 		} else {
 			await ConexionWS.instance.EnviarWS(datosEnviar);
-			Destroy(gameObject);
+			try{
+				Destroy(gameObject);
+			} catch {}
 		}
 	}
 

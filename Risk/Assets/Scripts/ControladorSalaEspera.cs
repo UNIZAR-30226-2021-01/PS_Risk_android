@@ -33,7 +33,9 @@ public class ControladorSalaEspera : MonoBehaviour {
 			nuevoJugador.tropaOveraly.sprite = ControladorPrincipal.instance.colorAspectos[jugador.aspecto];
 			nuevoJugador.tropaOveraly.color = ControladorPrincipal.instance.coloresJugadores[jugadores.IndexOf(jugador)];
 		}
-		listaAmigos.RecargarAmigos();
+		if(listaAmigos != null){
+			listaAmigos.RecargarAmigos();
+		}
 	}
 	
 	public async void EmpezarPartida(){
