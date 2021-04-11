@@ -74,28 +74,28 @@ public class ControladorPerfil : MonoBehaviour {
 	}
 	
 	/// <summary>Guarda un nuevo nombre de usuario para actualizarlo en el futuro.</summary>
-    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario()"/> para actualizar el dato permanentemente
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
 	/// <param name="nombre">Nuevo nombre de usuario</param>
 	public void ActualizarNombre(string nombre){
 		nuevoNombre = nombre;
 	}
 	
 	/// <summary>Guarda un nuevo correo del usuario para actualizarlo en el futuro.</summary>
-    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario()"/> para actualizar el dato permanentemente
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
 	/// <param name="correo">Nuevo correo</param>
 	public void ActualizarCorreo(string correo){
 		nuevoCorreo = correo;
 	}
 
 	/// <summary>Guarda una nueva contraseña del usuario, cifrandola, para actualizarlo en el futuro.</summary>
-    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario()"/> para actualizar el dato permanentemente
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
 	/// <param name="clave">Nueva contraseña (Sin cifrar)</param>
 	public void ActualizarClave(string clave){
 		nuevaClave = ConexionHTTP.Cifrar(clave);
 	}
 
 	/// <summary>Guarda un nuevo icono de usuario para actualizarlo en el futuro.</summary>
-    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario()"/> para actualizar el dato permanentemente
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
 	/// <param name="icono">Nuevo icono</param>
 	public void ActualizarIcono(int icono){
 		nuevoIcono = icono;
@@ -105,7 +105,7 @@ public class ControladorPerfil : MonoBehaviour {
 	}
 
 	/// <summary>Guarda un nuevo aspecto de usuario para actualizarlo en el futuro.</summary>
-    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario()"/> para actualizar el dato permanentemente
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
 	/// <param name="aspecto">Nuevo aspecto</param>
 	public void ActualizarAspecto(int aspecto){
 		nuevoAspecto = aspecto;
@@ -115,7 +115,7 @@ public class ControladorPerfil : MonoBehaviour {
 	}
 
 	/// <summary>Guarda la opción de recibir correos para actualizarlo en el futuro.</summary>
-    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario()"/> para actualizar el dato permanentemente
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
 	/// <param name="recibeCorreos">'true' para recibir correos y viceversa</param>
 	public void ActualizarRecibeCorreo(bool recibeCorreos){
 		nuevoRecibeCorreos = recibeCorreos;

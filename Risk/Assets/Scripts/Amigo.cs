@@ -5,13 +5,24 @@ using UnityEngine.UI;
 using Newtonsoft.Json;
 using TMPro;
 
+/// <summary>
+/// Script usado para controlar el prefab de la lista de amigos
+/// </summary>
 public class Amigo : MonoBehaviour {
+
+	/// <summary>Imagen con el icono del usuario</summary>
 	public Image icono;
+
+	/// <summary>Compontente de Texto que muestra el nombre del usuario</summary>
 	public TextMeshProUGUI nombre;
+
+	/// <summary>ID del usuario</summary>
 	public int id;
+
+	/// <summary>Instancia del Controlador de Amigos usado en la escena del juego</summary>
 	public ControladorAmigos controladorAmigos;
 	
-	// Envia petición al servidor con el id de este amigo para ser borrado de la lista de amigos del usuario
+	/// <summary>Envia petición al servidor con el id de este amigo para ser borrado de la lista de amigos del usuario</summary>
 	public async void BorrarAmigo(){
 		ControladorPrincipal.instance.PantallaCarga(true);
 		// Crear formulario a enviar
@@ -38,6 +49,7 @@ public class Amigo : MonoBehaviour {
 		ControladorPrincipal.instance.PantallaCarga(false);
 	}
 	
+	/// <summary>Invitar al amigo a una sala</summary>
 	public async void InvitarAmigo(){
 		ControladorPrincipal.instance.PantallaCarga(true);
 		ClasesJSON.InvitacionSala invitacion = new ClasesJSON.InvitacionSala(id);
