@@ -5,16 +5,20 @@ using UnityEngine;
 
 using Newtonsoft.Json;
 
+/// <summary>
+/// Script usado para controlar el menu de notificaciones
+/// </summary>
 public class ControladorNotificaciones : MonoBehaviour
 {
+	/// <summary>Lista/Cache de las notificaciones</summary>
+	public static List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
+
 	[SerializeField]
 	private GameObject prefabNotificacion; //Prefab de notificación
 	[SerializeField]
 	private GameObject prefabNada; //Prefab usado cuando no hay notificaciones ha mostrar
 	[SerializeField]
 	private Transform listaPadre; //Transform del objeto padre que tendra como hijos los elementos de la lista
-
-	public static List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
 
 	private const string ERROR_ACTUALIZARNOTIFICACIONES = "No se puede actualizar la lista de notificaciones";
 	
@@ -23,7 +27,7 @@ public class ControladorNotificaciones : MonoBehaviour
 		ActualizarNotificaciones();
 	}
 
-	//Actualiza las notificaciones a mostrar al usuario
+	/// <summary>Actualiza las notificaciones a mostrar al usuario.</summary>
 	public async void ActualizarNotificaciones() {
 
 		//Borrar los gameobjects de las notificaciones anteriores

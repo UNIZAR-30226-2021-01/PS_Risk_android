@@ -5,23 +5,71 @@ using UnityEngine.UI;
 using TMPro;
 using Newtonsoft.Json;
 
+/// <summary>
+/// Script de control principal de la interfaz.
+/// </summary>
 public class ControladorPrincipal : MonoBehaviour
 {
+	/// <summary>
+	/// Instancia del controlador en la escena del juego.
+	/// </summary>
 	public static ControladorPrincipal instance; // Referencia estática a si mismo para usar como singleton
-	private Dictionary<string, GameObject> pantallas;
+	
+	/// <summary>
+	/// El usuario actualmente usando la aplicación.
+	/// </summary>
 	public Usuario usuarioRegistrado;
+	
+	/// <summary>
+	/// Lista de los colores de los jugadores.
+	/// </summary>
 	public Color[] coloresJugadores;
-	public Sprite[] iconos, aspectos, colorAspectos; //Sprites para los iconos, aspectos y mascaras de color de los aspectos
-	public string[] nombreIcono, nombreAspectos;
-	[SerializeField]
-	private GameObject pantallaCarga, pantallaError, pantallaInfo;
-	public TextMeshProUGUI textoError, textoInfo;
+
+	/// <summary>
+	/// Lista de Sprites de los Iconos.
+	/// </summary>
+	public Sprite[] iconos;
+	/// <summary>
+	/// Lista de Sprites de los Aspectos.
+	/// </summary>
+	public Sprite[] aspectos;
+	/// <summary>
+	/// Lista de Sprites de los Overlays de color de los Aspectos.
+	/// </summary>
+	public Sprite[] colorAspectos; //Sprites para los iconos, aspectos y mascaras de color de los aspectos
+
+	/// <summary>
+	/// Lista de los nombres de los iconos.
+	/// </summary>
+	public string[] nombreIcono;
+	/// <summary>
+	/// Lista de los nombres de los aspectos.
+	/// </summary>
+	public string[] nombreAspectos;
+
+	/// <summary>
+	/// Componente de Texto de la pantalla de error.
+	/// </summary>
+	public TextMeshProUGUI textoError;
+	/// <summary>
+	/// Componente de Texto de la información de un error en la pantalla correspondiente.
+	/// </summary>
+	public TextMeshProUGUI textoInfo;
 
 	//Cosmeticos desbloqueados
+	/// <summary>Lista de aspectos que el usuario tiene comprados</summary>
 	public ClasesJSON.ListaAspectosUsuario aspectosComprados; //Lista de aspectos que el usuario tiene comprados
+	/// <summary>Lista de iconos que el usuario tiene comprados</summary>
 	public ClasesJSON.ListaIconosUsuario iconosComprados; //Lista de iconos que el usuario tiene comprados
+	/// <summary>Lista de aspectos en la tienda</summary>
 	public ClasesJSON.ListaAspectosTienda aspectosTienda; //Lista de aspectos en la tienda
+	/// <summary>Lista de iconos en la tienda</summary>
 	public ClasesJSON.ListaIconosTienda iconosTienda; //Lista de iconos en la tienda
+
+
+	[SerializeField]
+	private GameObject pantallaCarga, pantallaError, pantallaInfo;
+	private Dictionary<string, GameObject> pantallas;
 	
 	private void Awake() {
 		// Asignación de valor inicial de las variables de la clase
@@ -33,7 +81,7 @@ public class ControladorPrincipal : MonoBehaviour
 		}
 	}
 
-	// Cambia la pantalla actual por la pantalla especificada, si existe
+	/// <summary>Cambia la pantalla actual por la pantalla especificada, si existe</summary>
 	public void AbrirPantalla(string pantalla) {
 		GameObject objetoPantalla;
 		if (pantallas.TryGetValue(pantalla, out objetoPantalla)) {
@@ -44,6 +92,7 @@ public class ControladorPrincipal : MonoBehaviour
 		}
 	}
 
+	/// <summary>Cerrar la aplicación</summary>
 	public void Salir() {
 		#if UNITY_EDITOR
 			print("Se ha salido de la aplicación");
@@ -51,8 +100,10 @@ public class ControladorPrincipal : MonoBehaviour
 		Application.Quit();
 	}
 
-	// Muestra la pantalla de error indicando el tipo de error
-	// El string error contiene la estructura JSON de el error
+	/// <summary>
+	/// Muestra la pantalla de error indicando el tipo de error.
+	/// </summary>
+	/// <param name="riskErr">Estructura JSON de el error</param>
 	public void PantallaErrorWS(string riskErr) {
 		ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(riskErr);
 		if (error.code == 0) { 
@@ -62,19 +113,24 @@ public class ControladorPrincipal : MonoBehaviour
 		textoError.text = error.err;
 	}
 
-	// Muestra la pantalla de error indicando el tipo de error
-	// El string error contiene el mensaje a ser mostrado
+	/// <summary>
+	/// Muestra la pantalla de error con un mensaje de error personalizado.
+	/// </summary>
+	/// <param name="riskErr">Mensaje a ser mostrado</param>
 	public void PantallaError(string error) {
 		pantallaError.SetActive(true);
 		textoError.text = error;
 	}
 
-	// Muestra la pantalla de información
+	/// <summary>Muestra la pantalla de información</summary>
+	/// <param name="info">Información a mostrar</param>
 	public void PantallaInfo(string info) {
 		pantallaInfo.SetActive(true);
 		textoInfo.text = info;
 	}
 	
+	/// <summary>Muestra/Esconde la pantalla de Carga</summary>
+	/// <param name="activado">Si 'true', se activa la pantalla de carga, y viceversa</param>
 	public void PantallaCarga(bool activado) {
 		pantallaCarga.SetActive(activado);
 	}

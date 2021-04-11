@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
+/// <summary>Script que controla la lista de amigos.</summary>
 public class ControladorAmigos : MonoBehaviour {
 	[SerializeField]
 	private GameObject amigoPrefab, noAmigoPrefab;
@@ -11,10 +12,13 @@ public class ControladorAmigos : MonoBehaviour {
 	private List<ClasesJSON.Amigo> listaAmigos;
 	private string amigoAgregar;
 
+	/// <summary>Actualiza que usuario se quiere añadir como amigo.</summary>
+	/// <param name="nombre">Nombre del usuario que se quiere añadir como amigo</param>
 	public void ActualizarAmigoAgregar(string nombre){
 		amigoAgregar = nombre;
 	}
 
+	/// <summary>Recarga la lista de amigos con datos obtenidos de backend.</summary>
 	public async void RecargarAmigos() {
 		// Borrar todos los amigos de la lista y poner no amigo
 		for(int i = 0; i < padreAmigos.childCount; i++) {
@@ -56,6 +60,7 @@ public class ControladorAmigos : MonoBehaviour {
 		}
 	}
 	
+	/// <summary>Envia una solicitud de amistad al usuario seleccionado con <see cref="ControladorAmigos.ActualizarAmigoAgregar(string)"/></summary>
 	public async void EnviarSolicitudAmistad(){
 		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();

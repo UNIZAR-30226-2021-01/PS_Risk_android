@@ -3,27 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
+/// <summary>
+/// Script usado para controlar los datos de la Sesión del Usuario
+/// </summary>
 public class ControladorSesion : MonoBehaviour
 {
 	private string usuario = "", clave = "", correo = "";
 	private bool recibeCorreos = true;
 	
+	/// <summary>
+	/// Actualiza el nombre del usuario.
+	/// </summary>
+	/// <param name="nuevoUsuario">Nuevo nombre de usuario</param>
 	public void ActualizarUsuario(string nuevoUsuario) {
 		usuario = nuevoUsuario;
 	}
 	
+	/// <summary>
+	/// Actualiza la clave del usuario.
+	/// </summary>
+	/// <param name="nuevaClave">Nueva clave de usuario</param>
 	public void ActualizarClave(string nuevaClave) {
 		clave = nuevaClave;
 	}
 	
+	/// <summary>
+	/// Actualiza el correo del usuario.
+	/// </summary>
+	/// <param name="nuevoCorreo">Nuevo Correo del usuario</param>
 	public void ActualizarCorreo(string nuevoCorreo) {
 		correo = nuevoCorreo;
 	}
 	
+	/// <summary>
+	/// Actualiza si el usuario recibe correos o no.
+	/// </summary>
+	/// <param name="nuevoRecibir">Indica si el usuario recibe correos (true) o no (false)</param>
 	public void ActualizarRecibeCorreo(bool nuevoRecibir) {
 		recibeCorreos = nuevoRecibir;
 	}
 	
+	/// <summary>
+	/// Envia una petición de inicio de sesión al backend y recibe los datos del usuario si el usuario y contraseña son correctos
+	/// </summary>
 	public async void IniciarSesion() {
 		if(usuario == "" || clave == "") {
 			ControladorPrincipal.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");
@@ -37,6 +59,9 @@ public class ControladorSesion : MonoBehaviour
 		LoggearUsuario(result);
 	}
 	
+	/// <summary>
+	/// Envia al backend una petición de registrar usuario si los datos dados son correctos. Recibe los datos básicos del usuario.
+	/// </summary>
 	public async void Registrarse() {
 		if(usuario == "" || clave == "" || correo == "") {
 			ControladorPrincipal.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");

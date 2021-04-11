@@ -5,9 +5,27 @@ using UnityEngine.UI;
 using TMPro;
 using Newtonsoft.Json;
 
+/// <summary>
+/// Script de control de la pantala de perfil
+/// </summary>
 public class ControladorPerfil : MonoBehaviour {
-	public TextMeshProUGUI nombreUsuario, riskos;
-	public Image icono, aspecto;
+
+	/// <summary>Compontente de Texto que muestra el nombre del usuario</summary>
+	public TextMeshProUGUI nombreUsuario;
+
+	/// <summary>Compontente de Texto que muestra el número de riskos (Moneda del juego) que tiene el usuario</summary>
+	public TextMeshProUGUI riskos;
+
+	/// <summary>Imagen que muestra el icono seleccionado.</summary>
+	public Image icono;
+
+	/// <summary>Imagen que muestra el aspecto seleccionado.</summary>
+	public Image aspecto;
+
+	/// <summary>Guarda el cosmetico que se desea comprar cuando el usuario esta en la ventana de confirmación de venta.</summary>
+	public static ObjetoCompra objetoAComprar; //Objeto que se va a comprar cuando sale la ventana de confirmacións
+
+
 	private string nuevoNombre = "", nuevaClave = "", nuevoCorreo = "";
 	private int nuevoIcono, nuevoAspecto;
 	private bool nuevoRecibeCorreos;
@@ -29,8 +47,6 @@ public class ControladorPerfil : MonoBehaviour {
 	[SerializeField]
 	private RectTransform rectPanelTienda;
 	private bool tiendaAbierta = false;
-
-	public static ObjetoCompra objetoAComprar; //Objeto que se va a comprar cuando sale la ventana de confirmacións
 	
 	// Actualiza los datos de usuario cuando se abre la pantalla de perfil
 	
@@ -57,18 +73,30 @@ public class ControladorPerfil : MonoBehaviour {
 		nuevoRecibeCorreos = usuario.recibeCorreos;
 	}
 	
+	/// <summary>Guarda un nuevo nombre de usuario para actualizarlo en el futuro.</summary>
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
+	/// <param name="nombre">Nuevo nombre de usuario</param>
 	public void ActualizarNombre(string nombre){
 		nuevoNombre = nombre;
 	}
 	
+	/// <summary>Guarda un nuevo correo del usuario para actualizarlo en el futuro.</summary>
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
+	/// <param name="correo">Nuevo correo</param>
 	public void ActualizarCorreo(string correo){
 		nuevoCorreo = correo;
 	}
 
+	/// <summary>Guarda una nueva contraseña del usuario, cifrandola, para actualizarlo en el futuro.</summary>
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
+	/// <param name="clave">Nueva contraseña (Sin cifrar)</param>
 	public void ActualizarClave(string clave){
 		nuevaClave = ConexionHTTP.Cifrar(clave);
 	}
 
+	/// <summary>Guarda un nuevo icono de usuario para actualizarlo en el futuro.</summary>
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
+	/// <param name="icono">Nuevo icono</param>
 	public void ActualizarIcono(int icono){
 		nuevoIcono = icono;
 		try {
@@ -76,6 +104,9 @@ public class ControladorPerfil : MonoBehaviour {
 		} catch {}
 	}
 
+	/// <summary>Guarda un nuevo aspecto de usuario para actualizarlo en el futuro.</summary>
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
+	/// <param name="aspecto">Nuevo aspecto</param>
 	public void ActualizarAspecto(int aspecto){
 		nuevoAspecto = aspecto;
 		try {
@@ -83,11 +114,21 @@ public class ControladorPerfil : MonoBehaviour {
 		} catch {}
 	}
 
+	/// <summary>Guarda la opción de recibir correos para actualizarlo en el futuro.</summary>
+    /// Ver <see cref="ControladorPerfil.PersonalizarUsuario"/> para actualizar el dato permanentemente
+	/// <param name="recibeCorreos">'true' para recibir correos y viceversa</param>
 	public void ActualizarRecibeCorreo(bool recibeCorreos){
 		nuevoRecibeCorreos = recibeCorreos;
 	}
 
-	// Recibe el tipo de dato a ser actualizado y envia petición de personalización al servidor
+	/// <summary>Recibe el tipo de dato a ser actualizado y envia petición de personalización al servidor.</summary>
+	/// <param name="elemento">Elemento a actualizar: "Nombre", "Clave", "Correo", "Icono", "Aspecto" o "RecibeCorreos"</param>
+	/// <seealso cref="ControladorPerfil.ActualizarNombre(string)"/>
+	/// <seealso cref="ControladorPerfil.ActualizarCorreo(string)"/>
+	/// <seealso cref="ControladorPerfil.ActualizarClave(string)"/>
+	/// <seealso cref="ControladorPerfil.ActualizarIcono(int)"/>
+	/// <seealso cref="ControladorPerfil.ActualizarAspecto(int)"/>
+	/// <seealso cref="ControladorPerfil.ActualizarRecibeCorreo(bool)"/>
 	public async void PersonalizarUsuario(string elemento) {
 		// Crear formulario a enviar petición al servidor
 		WWWForm form = new WWWForm();
@@ -152,7 +193,7 @@ public class ControladorPerfil : MonoBehaviour {
 		}
 	}
 	
-	// Actualiza los campos mostrados al usuario mediante la interfaz
+	/// <summary>Actualiza los campos mostrados al usuario mediante la interfaz.</summary>
 	private void ActualizarDatosRepresentados(){
 		nuevoNombre = usuario.nombre;
 		nuevaClave = usuario.clave;
@@ -165,8 +206,7 @@ public class ControladorPerfil : MonoBehaviour {
 		aspecto.sprite = ControladorPrincipal.instance.aspectos[usuario.icono];
 	}
 
-
-	// Actualiza los gameobjects de la tienda
+	/// <summary>Actualiza los gameobjects de la tienda.</summary>
 	public void ActualizarTienda() {
 		riskos.text = usuario.riskos.ToString(); //Actualizar cuantos riskos quedan (Riskos™)
 
@@ -198,7 +238,7 @@ public class ControladorPerfil : MonoBehaviour {
 		}
 	}
 	
-	//Abre y cierra la tienda
+	/// <summary>Abre y cierra la tienda.</summary>
 	public void ToggleTienda() {
 		if(animatorTienda != null)
 		{
@@ -207,19 +247,21 @@ public class ControladorPerfil : MonoBehaviour {
 		}
 	}
 
-	//Abre la ventana de confirmación de compra
+	/// <summary>Abre la ventana de confirmación de compra.</summary>
+	/// <param name="oc">El cosmetico que se esta confirmando su compra</param>
 	public void AbrirConfirmacionCompra(ObjetoCompra oc) {
 		objetoAComprar = oc;
 		confirmacionPanelTienda.SetActive(true);
 	}
 
-	//Confirma la compra desde el menu de confirmación
+	/// <summary>Confirma la compra desde el menu de confirmación.</summary>
 	public void ConfirmarCompra() {
 		objetoAComprar.Comprar();
 		confirmacionPanelTienda.SetActive(false);
 	}
 
-	//Cambia el nuevo icono del usuario en la pantalla de perfil
+	/// <summary>Cambia el nuevo icono del usuario en la pantalla de perfil.</summary>
+	/// <param name="direccion">Dirección de cambio de icono, '1' para el siguiente icono, '-1' para el icono anterior</param>
 	public void CambiarIcono(int direccion) {
 		int orig = nuevoIcono;
 		int c = orig;
@@ -243,7 +285,8 @@ public class ControladorPerfil : MonoBehaviour {
 		PersonalizarUsuario("Icono");
 	}
 
-	//Cambia el nuevo aspecto del usuario en la pantalla de perfil
+	/// <summary>Cambia el nuevo aspecto del usuario en la pantalla de perfil.</summary>
+	/// <param name="direccion">Dirección de cambio de aspecto, '1' para el siguiente aspecto, '-1' para el aspecto anterior</param>
 	public void CambiarAspecto(int direccion) {
 		int orig = nuevoAspecto;
 		int c = orig;

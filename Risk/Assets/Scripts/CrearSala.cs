@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
+/// <summary>
+/// Script usado en la creación y modificación de una sala de espera
+/// </summary>
 public class CrearSala : MonoBehaviour {
 	private string nombre;
 	private int tiempo;
 	
+	/// <summary>
+	/// Actualiza el nombre de la sala
+	/// </summary>
+	/// <param name="s">Nuevo nombre para la sala</param>
 	public void ActualizarNombre(string s){
 		nombre = s;
 	}
 	
+	/// <summary>
+	/// Opción de Partida, Nuevo tiempo de espera entre turnos
+	/// </summary>
+	/// <param name="s">Tiempo de espera entre turnos</param>
 	public void ActualizarTiempo(string s) {
 		tiempo = int.Parse(s);
 	}
 	
+	/// <summary>
+	/// Crea la Sala de Espera, realiza conexión y manda los datos de la sala al backend.
+	/// </summary>
 	public async void CreaSala(){
 		ControladorPrincipal.instance.PantallaCarga(true);
 		Usuario usuario = ControladorPrincipal.instance.usuarioRegistrado;

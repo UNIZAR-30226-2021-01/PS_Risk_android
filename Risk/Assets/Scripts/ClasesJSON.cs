@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
-// Colección de clases utilizadas para almacenar el contenido recibido del servidor en
-// formato JSON. Las clases y atributos corresponden con aquellos de la API del servidor.
+/// <summary>
+/// Colección de clases utilizadas para almacenar el contenido recibido del servidor en 
+/// formato JSON. Las clases y atributos corresponden con aquellos de la API del servidor.
+/// </summary>
 public static class ClasesJSON {
 
-	//Opciones de deserialización de los JSONs, lanzara excepciones si la deserializacion no funciona correctamente
+	/// <summary>
+	/// Opciones de deserialización de los JSONs, lanzara excepciones 
+	/// si la deserializacion no funciona correctamente.
+	/// </summary>
 	public static JsonSerializerSettings settings = new JsonSerializerSettings {
 		/*Error = (SpriteRenderer, args) =>
 		{
@@ -17,35 +22,41 @@ public static class ClasesJSON {
 		MissingMemberHandling = MissingMemberHandling.Error
 	};
 
+	/// <summary>Clase serializable para el JSON 'RiskError'.</summary>
 	[System.Serializable]
 	public class RiskError {
 		public int code;
 		public string err;
 	}
 	
+	/// <summary>Clase serializable para el JSON 'Cosmetico'.</summary>
 	[System.Serializable]
 	public class Cosmetico {
 		public int id;
 		public int precio;
 	}
 	
+	/// <summary>Clase serializable para el JSON 'Cosmetico'.</summary>
 	[System.Serializable]
 	public class UsuarioCompleto {
 		public Usuario usuario;
 		public List<Cosmetico> aspectos, iconos, tiendaAspectos, tiendaIconos;
 	}
 	
+	/// <summary>Clase serializable para el JSON 'Cosmetico'.</summary>
 	[System.Serializable]
 	public class Amigo {
 		public int id, icono, aspecto;
 		public string nombre;
 	}
 
+	/// <summary>Clase serializable para el JSON 'Cosmetico'.</summary>
 	[System.Serializable]
 	public class ListaAmigos {
 		public List<Amigo> amigos;
 	}
 
+	/// <summary>Clase serializable para el JSON 'Cosmetico'.</summary>
 	[System.Serializable]
 	public class Notificacion {
 		public string infoExtra;
@@ -55,50 +66,72 @@ public static class ClasesJSON {
 		public int idEnvio;
 	}
 	
+	/// <summary>Clase serializable para el JSON 'Cosmetico'.</summary>
 	[System.Serializable]
 	public class ListaNotificaciones {
 		public List<Notificacion> notificaciones;
 	}
 	
-	// Aspecto, usado para deserializar datos de usuario y tienda
+	/// <summary>
+	/// Clase serializable para el JSON 'Aspecto'.
+	/// Aspecto, usado para deserializar datos de usuario y tienda
+	/// </summary>
 	[System.Serializable]
 	public class Aspecto {
 		public int id;		//ID del Aspecto
 		public int precio;	//Precio del Aspecto en la tienda
 	}
-
-	// Lista de los aspectos que tiene el usuario
+	
+	/// <summary>
+	/// Clase serializable para el JSON 'ListaAspectosUsuario'.
+	/// Lista de los aspectos que tiene el usuario
+	/// </summary>
 	[System.Serializable]
 	public class ListaAspectosUsuario {
 		public List<Aspecto> aspectos;
 	}
-
-	// Lista de los aspectos que estan disponibles en la tienda
+	
+	/// <summary>
+	/// Clase serializable para el JSON 'ListaAspectosTienda'.
+	/// Lista de los aspectos que estan disponibles en la tienda
+	/// </summary>
 	[System.Serializable]
 	public class ListaAspectosTienda {
 		public List<Aspecto> tiendaAspectos;
 	}
 	
-	// Icono, usado para deserializar datos de usuario y tienda
+	/// <summary>
+	/// Clase serializable para el JSON 'Icono'.
+	/// Icono, usado para deserializar datos de usuario y tienda
+	/// </summary>
 	[System.Serializable]
 	public class Icono {
 		public int id;		//ID del Icono
 		public int precio;	//Precio del Icono en la tienda
 	}
-
-	// Lista de los iconos de perfil que tiene el usuario
+	
+	/// <summary>
+	/// Clase serializable para el JSON 'ListaIconosUsuario'.
+	/// Lista de los iconos de perfil que tiene el usuario
+	/// </summary>
 	[System.Serializable]
 	public class ListaIconosUsuario {
 		public List<Icono> iconos;
 	}
-
-	// Lista de los iconos de perfil que estan disponibles en la tienda
+	
+	/// <summary>
+	/// Clase serializable para el JSON 'ListaIconosTienda'.
+	/// Lista de los iconos de perfil que estan disponibles en la tienda
+	/// </summary>
 	[System.Serializable]
 	public class ListaIconosTienda {
 		public List<Icono> tiendaIconos;
 	}
 	
-	// Estructura a enviar para la creación de la sala
+	/// <summary>
+	/// Clase serializable para el JSON 'CreacionSala'.
+	/// Estructura a enviar para la creación de la sala
+	/// </summary>
 	[System.Serializable]
 	public class CreacionSala {
 		public int idUsuario;
@@ -113,8 +146,11 @@ public static class ClasesJSON {
 			nombreSala = nm;
 		}
 	}
-
-	// Estructura a enviar para aceptar una sala
+	
+	/// <summary>
+	/// Clase serializable para el JSON 'AceptarSala'.
+	/// Estructura a enviar para aceptar una sala
+	/// </summary>
 	[System.Serializable]
 	public class AceptarSala {
 		public int idUsuario, idSala;
@@ -126,8 +162,11 @@ public static class ClasesJSON {
 			idSala = sl;
 		}
 	}
-
-	// Invitacion de amigo a sala
+	
+	/// <summary>
+	/// Clase serializable para el JSON 'InvitacionSala'.
+	/// Invitacion de amigo a sala
+	/// </summary>
 	[System.Serializable]
 	public class InvitacionSala{
 		public int idInvitado;
@@ -137,21 +176,30 @@ public static class ClasesJSON {
 			idInvitado = id;
 		}
 	}
-
-	// Mensaje enviado por websocket. Contiene un string con un caracter que indica el tipo de mensaje
+	
+	/// <summary>
+	/// Clase serializable para el mensaje 'MensajeWebsocket'.
+	/// Mensaje enviado por websocket. Contiene un string con un caracter que indica el tipo de mensaje
+	/// </summary>
 	public class MensajeWebsocket {
 		public string _tipoMensaje;
 		
 	}
-
-	// Error producido por websocket
+	
+	/// <summary>
+	/// Clase serializable para el mensaje Websocket 'RiskErrorWS'.
+	/// Error producido por websocket
+	/// </summary>
 	[System.Serializable]
 	public class RiskErrorWS : MensajeWebsocket{
 		public int code;
 		public string err;	
 	}
-
-	// Datos de Sala de espera
+	
+	/// <summary>
+	/// Clase serializable para el mensaje Websocket 'DatosSala'.
+	/// Datos de Sala de espera
+	/// </summary>
 	[System.Serializable]
 	public class DatosSala : MensajeWebsocket{
 		public int tiempoTurno, idSala;
@@ -159,7 +207,10 @@ public static class ClasesJSON {
 		public List<Jugador> jugadores;
 	}
 	
-	// Jugador de una partida
+	/// <summary>
+	/// Clase serializable para el mensaje Websocket 'Jugador'.
+	/// Jugador de una partida
+	/// </summary>
 	[System.Serializable]
 	public class Jugador {
 		public int id, icono, aspecto;
