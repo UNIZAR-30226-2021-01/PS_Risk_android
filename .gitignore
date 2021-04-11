@@ -8,9 +8,9 @@ Risk/[Ll]ocal[Cc]ache/
 Risk/[Oo]bj/
 Risk/[Tt]emp/
 Risk/[Uu]nityGenerated/
-Risk/Documentation/[Oo]bj/
-Risk/Documentation/[Aa]pi/
-Risk/_site/
+Risk/[Dd]ocumentation/[Oo]bj/
+Risk/[Dd]ocumentation/[Aa]pi/
+Risk/[Dd]ocumentation/[Dd]ocs/
 Risk/[Aa]ssets/[Ss]cripts/[Oo]bj
 Risk/[Aa]ssets/[Ss]cripts/[Oo]bj.meta
 # file on crash reports

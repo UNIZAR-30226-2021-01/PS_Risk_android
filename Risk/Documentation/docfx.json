@@ -78,6 +78,6 @@
         "xrefService": [
             "https://xref.docs.microsoft.com/query?uid={uid}"
         ],
-        "dest": "../DocSite"
+        "dest": "docs"
     }
 }
