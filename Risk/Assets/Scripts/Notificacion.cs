@@ -5,9 +5,6 @@ using UnityEngine.UI;
 using Newtonsoft.Json;
 using TMPro;
 
-/*
-	Script para el prefab de notificacion
-*/
 /// <summary>
 /// Script usado en el prefab de notificaciones.
 /// Guarda la información de una notificación y la lógica para aceptarla o rechazarla.
@@ -48,7 +45,7 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			case TIPO_INVICATION:
-				Destroy(gameObject);
+				RechazarPartida();
 				break;
 
 			default:
@@ -74,7 +71,6 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			case TIPO_INVICATION:
-				//TODO
 				AceptarInvitacion();
 				break;
 
@@ -140,7 +136,7 @@ public class Notificacion : MonoBehaviour {
 				ControladorPrincipal.instance.PantallaError(error.err);
 			else { //Si no, se puede borrar la notificacion
 				Destroy(gameObject);
-				ControladorNotificaciones.notificaciones.Remove(datos);
+				controladorNotificaciones.notificaciones.Remove(datos);
 			}
 		} catch {}
 		
@@ -158,6 +154,25 @@ public class Notificacion : MonoBehaviour {
 				Destroy(gameObject);
 			} catch {}
 		}
+	}
+	
+	private async void RechazarPartida(){
+		Usuario usuario = ControladorPrincipal.instance.usuarioRegistrado;
+		ClasesJSON.AceptarSala datosSala = new ClasesJSON.AceptarSala(usuario.id, usuario.clave, datos.idEnvio);
+		// Crear formulario a enviar petición al servidor
+		WWWForm form = new WWWForm();
+		form.AddField("idUsuario", usuario.id);
+		form.AddField("clave", usuario.clave);
+		form.AddField("idSala", datos.idEnvio);
+		string result = await ConexionHTTP.instance.RequestHTTP("rechazarPartida", form);
+		try {
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(result);
+			if (error.code == 0){
+				ControladorPrincipal.instance.PantallaError(error.err);
+				Destroy(gameObject);
+			}
+			ControladorPrincipal.instance.PantallaError(error.err);
+		} catch {}
 	}
 
 }

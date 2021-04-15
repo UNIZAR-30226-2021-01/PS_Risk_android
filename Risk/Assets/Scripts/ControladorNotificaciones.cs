@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 public class ControladorNotificaciones : MonoBehaviour
 {
 	/// <summary>Lista/Cache de las notificaciones</summary>
-	public static List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
+	public List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
 
 	[SerializeField]
 	private GameObject prefabNotificacion; //Prefab de notificación

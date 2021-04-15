@@ -156,7 +156,7 @@ public static class ClasesJSON {
 		public int idUsuario, idSala;
 		public string clave;
 		
-		public AceptarSala(int us, string cl, int sl){
+		public AceptarSala(int us, string cl, int sl) {
 			idUsuario = us;
 			clave = cl;
 			idSala = sl;
@@ -168,7 +168,7 @@ public static class ClasesJSON {
 	/// Invitacion de amigo a sala
 	/// </summary>
 	[System.Serializable]
-	public class InvitacionSala{
+	public class InvitacionSala {
 		public int idInvitado;
 		public string tipo = "Invitar";
 		
@@ -177,6 +177,22 @@ public static class ClasesJSON {
 		}
 	}
 	
+	/// <summary>
+	/// Clase serializable para la solicitud de la lista de partidas
+	/// </summary>
+	public class ListaPartidas {
+		public List<Partida> partidas;
+	}
+
+
+	/// <summary>
+	/// Clase serializable que representa una partida en la lista de partidas
+	/// </summary>
+	public class Partida {
+		public int id, turnoActual, tiempoTurno;
+		public string nombre, nombreTurno, ultimoTurno;
+	}
+
 	/// <summary>
 	/// Clase serializable para el mensaje 'MensajeWebsocket'.
 	/// Mensaje enviado por websocket. Contiene un string con un caracter que indica el tipo de mensaje
@@ -216,5 +232,23 @@ public static class ClasesJSON {
 		public int id, icono, aspecto;
 		public string nombre;
 		public bool sigueVivo;
+	}
+	
+	/// <sumary>
+	/// Clase serializable para el mensaje Websocket 'Partida Completa'.
+	/// </sumary>
+	[System.Serializable]
+	public class PartidaCompleta {
+		public int idPartida, tiempoTurno, turnoActual, fase;
+		public string nombrePartida;
+		public List<Territorio> territorios;
+		public List<Jugador> jugadores;
+	}
+	
+	/// <sumary>
+	/// Clase serializable para la representacion de territorios
+	/// </sumary>
+	public class Territorio {
+		public int idJugador, numTropas;
 	}
 }

@@ -71,12 +71,12 @@ public class ControladorAmigos : MonoBehaviour {
 		try {
 			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
 			if(error.code != 0) {
-				// No hay error	
 				ControladorPrincipal.instance.PantallaError(error.err);
+			} else {
+				ControladorPrincipal.instance.PantallaInfo("Solicitud de amistad enviada exitosamente");
 			}
 		} catch {
 			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
 		}
-		ControladorPrincipal.instance.PantallaInfo("Solicitud de amistad enviada exitosamente");
 	}
 }

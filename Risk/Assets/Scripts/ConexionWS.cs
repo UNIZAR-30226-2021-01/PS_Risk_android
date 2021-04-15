@@ -116,7 +116,20 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("e"):
 						// Error
-						cp.PantallaErrorWS(mensaje);
+						ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(mensaje);
+						switch (error.code) {
+							case 2:
+								CerrarConexionWebSocket();	
+								cp.AbrirPantalla("Inicio");
+								break;
+							case 3:
+								CerrarConexionWebSocket();	
+								cp.AbrirPantalla("Principal");
+								break;
+							default:
+								cp.PantallaError(mensaje);
+								break;
+						}
 						break;
 					default:
 						// Ignorar resto de mensajes
@@ -132,11 +145,21 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("e"):
 						// Error
-						cp.PantallaErrorWS(mensaje);
+						ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(mensaje);
+						switch (error.code) {
+							case 3:
+								CerrarConexionWebSocket();	
+								cp.AbrirPantalla("Principal");
+								break;
+							default:
+								cp.PantallaError(mensaje);
+								break;
+						}
 						break;
 					case ("p"):
 						// Datos de partida completa: Empezar partida
 						// TODO: Guardar nuevos datos
+						ControladorPartida.instance.ActualizarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
 						estadoActual = Estado.partida;
 						cp.AbrirPantalla("Partida");
 						break;
@@ -158,7 +181,16 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("e"):
 						// Error
-						cp.PantallaErrorWS(mensaje);
+						ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(mensaje);
+						switch (error.code) {
+							case 3:
+								CerrarConexionWebSocket();	
+								cp.AbrirPantalla("Principal");
+								break;
+							default:
+								cp.PantallaError(mensaje);
+								break;
+						}
 						break;
 					case ("f"):
 						// Fin de partida, terminar partida

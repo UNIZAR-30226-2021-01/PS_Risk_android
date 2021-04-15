@@ -101,19 +101,6 @@ public class ControladorPrincipal : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Muestra la pantalla de error indicando el tipo de error.
-	/// </summary>
-	/// <param name="riskErr">Estructura JSON de el error</param>
-	public void PantallaErrorWS(string riskErr) {
-		ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(riskErr);
-		if (error.code == 0) { 
-			return;
-		}
-		pantallaError.SetActive(true);
-		textoError.text = error.err;
-	}
-
-	/// <summary>
 	/// Muestra la pantalla de error con un mensaje de error personalizado.
 	/// </summary>
 	/// <param name="riskErr">Mensaje a ser mostrado</param>
