@@ -223,32 +223,41 @@ public static class ClasesJSON {
 		public List<Jugador> jugadores;
 	}
 	
+	/// <sumary>
+	/// Clase serializable para el mensaje Websocket 'Partida Completa'.
+	/// </sumary>
+	[System.Serializable]
+	public class PartidaCompleta : MensajeWebsocket {
+		public int tiempoTurno, turnoActual, fase;
+		public string nombreSala, ultimoTurno;
+		public List<Territorio> territorios;
+		public List<Jugador> jugadores;
+	}
+	
 	/// <summary>
 	/// Clase serializable para el mensaje Websocket 'Jugador'.
 	/// Jugador de una partida
 	/// </summary>
 	[System.Serializable]
 	public class Jugador {
-		public int id, icono, aspecto;
+		public int id, icono, aspecto, refuerzos;
 		public string nombre;
 		public bool sigueVivo;
-	}
-	
-	/// <sumary>
-	/// Clase serializable para el mensaje Websocket 'Partida Completa'.
-	/// </sumary>
-	[System.Serializable]
-	public class PartidaCompleta {
-		public int idPartida, tiempoTurno, turnoActual, fase;
-		public string nombrePartida;
-		public List<Territorio> territorios;
-		public List<Jugador> jugadores;
 	}
 	
 	/// <sumary>
 	/// Clase serializable para la representacion de territorios
 	/// </sumary>
 	public class Territorio {
-		public int idJugador, numTropas;
+		public int id, jugador, tropas;
+
+		public override bool Equals(object obj) {
+			if (obj == null || (obj.GetType() != GetType())){
+				return false;
+			} else {
+				Territorio otro = (Territorio) obj;
+				return ((this.id == otro.id) && (this.jugador == otro.jugador) && (this.tropas == otro.tropas));
+			}
+		}
 	}
 }
