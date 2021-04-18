@@ -158,7 +158,6 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("p"):
 						// Datos de partida completa: Empezar partida
-						// TODO: Guardar nuevos datos
 						ControladorPartida.instance.ActualizarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
 						estadoActual = Estado.partida;
 						cp.AbrirPantalla("Partida");
@@ -171,13 +170,8 @@ public class ConexionWS : MonoBehaviour {
 			case (Estado.partida):
 				switch (tipoMensaje) {
 					case ("p"):
-						// Todos datos de partida: Actualizar datos de partida
-						// TODO: Guardar nuevos datos
-						cp.AbrirPantalla("Partida");
-						break;
-					case ("a"):
-						// Accion: Mostrar Cambios
-						// TODO
+						// Datos de partida completa: Actualizar datos
+						ControladorPartida.instance.ActualizarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
 						break;
 					case ("e"):
 						// Error
@@ -192,13 +186,12 @@ public class ConexionWS : MonoBehaviour {
 								break;
 						}
 						break;
-					case ("f"):
+					case ("x"):
 						// Fin de partida, terminar partida
-						// TODO
-						estadoActual = Estado.menuPrincipal;
+						ControladorPartida.instance.FinPartida();
 						break;
 					default:
-						// Ignorar resto de mensajes
+						ControladorPartida.instance.GestionarMensajePartida(tipoMensaje, mensaje);
 						break;
 				}
 				break;
