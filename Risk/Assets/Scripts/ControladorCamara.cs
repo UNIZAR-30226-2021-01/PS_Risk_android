@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ControladorCamara : MonoBehaviour {
+	private const float MIN_ZOOM = 1f, MAX_ZOOM = 5f;
 	private Camera mainCam;
 	[SerializeField]
 	private float velocidadZoom, maxTiempoToque, maxDistanciaToque;
 	public bool permitirJugar = true;
 	private bool permitirMovimiento;
-	/// <summary> Posición en worldspace de la esquina inferior izquierda de la cámara </summary>
+	// Posición en worldspace de la esquina inferior izquierda de la cámara
 	private Vector2 esquinaII;
-	/// <summary> Posición en worldspace de la esquina superior derecha de la cámara </summary>
+	// Posición en worldspace de la esquina superior derecha de la cámara
 	private Vector2 esquinaSD;
 	public EventSystem evSys;
 	private Vector2 posicionComienzoToque;
@@ -19,13 +20,17 @@ public class ControladorCamara : MonoBehaviour {
 	
 
 	private void OnEnable() {
-		mainCam.orthographicSize = 5;
-		permitirMovimiento = true;
+		try {
+			mainCam.orthographicSize = 5;
+			permitirMovimiento = true;
+		} catch {}
 	}
 
 	private void OnDisable() {
-		mainCam.orthographicSize = 5;
-		permitirMovimiento = false;
+		try {
+			mainCam.orthographicSize = 5;
+			permitirMovimiento = false;
+		} catch {}
 	}
 
 	private void Awake() {
@@ -56,6 +61,7 @@ public class ControladorCamara : MonoBehaviour {
 						ReajustarPantalla();
 						break;
 					case TouchPhase.Ended:
+						// Ocurre in toque
 						if(Time.realtimeSinceStartup-tiempoToque <= maxTiempoToque && Vector2.Distance(t.position, posicionComienzoToque) <= maxDistanciaToque){
 							Vector2 punto = mainCam.ScreenToWorldPoint(Input.GetTouch(0).position);
 							RaycastHit2D hit = Physics2D.Raycast(punto, Vector2.zero);
@@ -72,13 +78,13 @@ public class ControladorCamara : MonoBehaviour {
 				Touch t0 = Input.GetTouch(0);
 				Touch t1 = Input.GetTouch(1);
 				float dist = Vector2.Distance(t0.position, t1.position)-Vector2.Distance(t0.position+t0.deltaPosition, t1.position+t1.deltaPosition);
-				mainCam.orthographicSize = Mathf.Lerp(1,5,Mathf.InverseLerp(1,5,mainCam.orthographicSize+dist*velocidadZoom));
+				mainCam.orthographicSize = Mathf.Lerp(MIN_ZOOM, MAX_ZOOM, Mathf.InverseLerp(MIN_ZOOM, MAX_ZOOM, mainCam.orthographicSize+dist*velocidadZoom));
 				ReajustarPantalla();
 			}
 		}
 	}
 
-	/// <summary> Reajusta la pantalla para estar dentro de los bordes configurados al inicio </summary>
+	// Reajusta la pantalla para estar dentro de los bordes configurados al inicio
 	private void ReajustarPantalla(){
 		Vector2 nuevaEsquinaII = mainCam.ScreenToWorldPoint(new Vector3(0, 0, 0));
 		Vector2 nuevaEsquinaSD = mainCam.ScreenToWorldPoint(new Vector3(Screen.currentResolution.width, Screen.currentResolution.height, 0));

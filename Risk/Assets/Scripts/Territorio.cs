@@ -7,7 +7,7 @@ public class Territorio : MonoBehaviour {
 	[SerializeField]
 	private TextMeshPro numeroTropas;
 	[SerializeField]
-	private SpriteRenderer aspectoTropa, overlayTerritorio;
+	private SpriteRenderer aspectoTropa, overlayTropa, overlayTerritorio;
 	private ClasesJSON.Territorio datosAnteriores;
 	public Territorio[] conexiones;
 	
