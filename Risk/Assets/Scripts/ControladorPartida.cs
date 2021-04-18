@@ -33,4 +33,9 @@ public class ControladorPartida : MonoBehaviour {
 		mtx.ReleaseMutex();
 	}
 	
+	/// <summary>Función llamada por cada territorio cuando este es seleccionado</summary>
+	/// <param name="territorio">ID del territorio seleccionado</param>
+	public void SeleccionTerritorio(int territorio) {
+		// ¯\_(ツ)_/¯ TODO
+	}
 }
