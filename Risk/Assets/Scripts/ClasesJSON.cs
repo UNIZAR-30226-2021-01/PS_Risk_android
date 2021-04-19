@@ -234,6 +234,31 @@ public static class ClasesJSON {
 		public List<Jugador> jugadores;
 	}
 	
+	/// <sumary>
+	/// Clase serializable para el mensaje Websocket Confirmacion de Refuerzos
+	/// </sumary>
+	[System.Serializable]
+	public class ConfirmacionRefuerzos : MensajeWebsocket {
+		public Territorio territorio;
+	}
+	
+	/// <sumary>
+	/// Clase serializable para el mensaje Websocket Confirmacion de Ataque
+	/// </sumary>
+	[System.Serializable]
+	public class ConfirmacionAtaque : MensajeWebsocket {
+		public Territorio territorioOrigen, territorioDestino;
+		public int[] dadosOrigen, dadosDestino;
+	}
+	
+	/// <sumary>
+	/// Clase serializable para el mensaje Websocket Confirmacion de Movimiento
+	/// </sumary>
+	[System.Serializable]
+	public class ConfirmacionMovimiento : MensajeWebsocket {
+		public Territorio territorioOrigen, territorioDestino;
+	}
+
 	/// <summary>
 	/// Clase serializable para el mensaje Websocket 'Jugador'.
 	/// Jugador de una partida

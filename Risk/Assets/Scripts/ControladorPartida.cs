@@ -1,4 +1,4 @@
-﻿// TODO: Recibir confirmaciones de refuerzo, ataques y movimiento (tambien desde ConexionWS.cs)
+// TODO: Recibir confirmaciones de refuerzo, ataques y movimiento (tambien desde ConexionWS.cs)
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,14 +7,31 @@ using Newtonsoft.Json;
 
 public class ControladorPartida : MonoBehaviour {
 	private const string MSG_PASO_FASE = "{\"tipo\":\"Fase\"}";
-	private ClasesJSON.PartidaCompleta datosPartida;
+	/// <summary> Contiene los datos mas recientes de la partida </summary>
+	public ClasesJSON.PartidaCompleta datosPartida;
 	private enum Fase {refuerzos, ataque, movimiento};
 	private Fase faseActual;
-	private bool esperandoConfirmacion;
 	private Mutex mtx;
+	// Propiedad de fase. Permite leer y escribir la fase asegurando exclusion mutua
+	private Fase FaseActual {
+		get {
+			Fase toRet;
+			mtx.WaitOne();
+			toRet = faseActual;
+			mtx.ReleaseMutex();
+			return toRet;
+		}
+		set {
+			mtx.WaitOne();
+			faseActual = value;
+			mtx.ReleaseMutex();
+		}
+	}
+	private bool esperandoConfirmacion;
 	[SerializeField]
 	private Mapa mapa;
-	private GameObject ventanaFin, ventanaRefuerzos, ventanaAtaque, ventanaMovimiento;
+	[SerializeField]
+	private ControladorInterfazPartida interfazPartida;
 	private int territorioOrigen = -1, territorioDestino = -1;
 	public static ControladorPartida instance;
 	public ClasesJSON.Jugador jugador = null;
@@ -41,9 +58,7 @@ public class ControladorPartida : MonoBehaviour {
 			ControladorPrincipal.instance.AbrirPantalla("Principal");
 		}
 		datosPartida = nuevaPartida;
-		mtx.WaitOne();
-		faseActual = (Fase)(datosPartida.fase-1);
-		mtx.ReleaseMutex();
+		FaseActual = (Fase)(datosPartida.fase-1);
 		//mapa.ActualizarTerritorios(nuevaPartida.territorios);
 		mapa.generarAleatorio();
 	}
@@ -63,13 +78,13 @@ public class ControladorPartida : MonoBehaviour {
 				return;
 			}
 			territorioOrigen = territorio.id;
-			switch(faseActual){
+			switch(FaseActual){
 				case (Fase.refuerzos):
 					if(jugador.refuerzos <= 0){
 						Deseleccionar();
 						return;
 					}
-					ventanaRefuerzos.SetActive(true);
+					interfazPartida.VentanaRefuerzos();
 					break;
 				case (Fase.ataque):
 					mapa.MostrarAtaque(territorio.id);
@@ -81,17 +96,17 @@ public class ControladorPartida : MonoBehaviour {
 		} else {
 			// Segunda selección
 			// La segunda seleccion debe ser siempre de un territorio no oculto
-			if(territorio.Oculto || faseActual == Fase.refuerzos){
+			if(territorio.Oculto || FaseActual == Fase.refuerzos){
 				Deseleccionar();
 				return;
 			}
 			territorioDestino = territorio.id;
-			switch(faseActual){
+			switch(FaseActual){
 				case (Fase.ataque):
-					ventanaAtaque.SetActive(true);
+					interfazPartida.VentanaAtaque();
 					break;
 				case (Fase.movimiento):
-					ventanaMovimiento.SetActive(true);
+					interfazPartida.VentanaMovimiento();
 					break;
 			}
 		}
@@ -107,29 +122,11 @@ public class ControladorPartida : MonoBehaviour {
 		}
 	}
 	
-	/// <summary>
-	/// Invocado cuando se recibe un mensaje de cambio de fase.
-	/// Se aumenta la fase en uno.
-	/// </summary>
-	public void AvanzarFase(){
-		mtx.WaitOne();
-		faseActual = (Fase)(((int)faseActual+1)%4);
-		mtx.ReleaseMutex();
-		esperandoConfirmacion = false;
-		Deseleccionar();
-		// TODO: Actualizar la interfaz para mostrar el cambio de fase
-	}
-	
-	/// <summary>Invocado cuando se termina la partida. Muestra los resultados de la partida</summary>
-	public void FinPartida(){
-		ventanaFin.SetActive(true);
-	}
-	
-	/// <summary>Invocado cuando se pula confirmar desde la ventana de seleccion de tropas a reforzar.
+	/// <summary>Invocado cuando se pulsa confirmar desde la ventana de seleccion de tropas a reforzar.
 	/// Notifica al seridor de una acción de refuerzo</summary>
 	/// <param name ="tropas">Número de tropas a ser creadas en territorio origen seleccionado</param>
 	public async void Reforzar(int tropas){
-		if(faseActual != Fase.refuerzos || territorioOrigen == -1 || esperandoConfirmacion) {
+		if(FaseActual != Fase.refuerzos || territorioOrigen == -1 || esperandoConfirmacion) {
 			// Estados incorrectos, no deberían ocurrir pero so comprueban por si acaso
 			return;
 		}
@@ -145,7 +142,7 @@ public class ControladorPartida : MonoBehaviour {
 	/// Notifica al seridor de una acción de ataque</summary>
 	/// <param name ="tropas">Número de tropas a ser utilizadas en el ataque</param>
 	public async void Ataque(int tropas){
-		if(faseActual != Fase.ataque || territorioOrigen == -1 || territorioDestino == -1 || esperandoConfirmacion) {
+		if(FaseActual != Fase.ataque || territorioOrigen == -1 || territorioDestino == -1 || esperandoConfirmacion) {
 			// Estados incorrectos, no deberían ocurrir pero so comprueban por si acaso
 			return;
 		}
@@ -161,7 +158,7 @@ public class ControladorPartida : MonoBehaviour {
 	/// Notifica al seridor de una acción de ataque</summary>
 	/// <param name ="tropas">Número de tropas a ser utilizadas en el ataque</param>
 	public async void Movimiento(int tropas){
-		if(faseActual != Fase.movimiento || territorioOrigen == -1 || territorioDestino == -1 || esperandoConfirmacion) {
+		if(FaseActual != Fase.movimiento || territorioOrigen == -1 || territorioDestino == -1 || esperandoConfirmacion) {
 			// Estados incorrectos, no deberían ocurrir pero so comprueban por si acaso
 			return;
 		}
@@ -171,6 +168,54 @@ public class ControladorPartida : MonoBehaviour {
 		await ConexionWS.instance.EnviarWS(datos);
 		esperandoConfirmacion = true;
 		Deseleccionar();
+	}
+	
+	/// <summary>Invocado cuando se termina la partida. Muestra los resultados de la partida</summary>
+	public void FinPartida(){
+		interfazPartida.VentanaFin();
+	}
+	
+	/// <summary>
+	/// Invocado cuando se recibe un mensaje de cambio de fase.
+	/// Se aumenta la fase en uno.
+	/// </summary>
+	public void ConfirmacionFase(){
+		FaseActual = (Fase)(((int)FaseActual+1)%4);
+		esperandoConfirmacion = false;
+		Deseleccionar();
+		// TODO: Actualizar la interfaz para mostrar el cambio de fase
+	}
+	
+	/// <summary>
+	/// Invocado cuando se recibe un mensaje de confirmación de refuerzos
+	/// Se actualiza el territorio modificado
+	/// </summary>
+	public void ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos refuerzos){
+		mapa.ActualizarTerritorio(refuerzos.territorio);
+		esperandoConfirmacion = false;
+		ControladorPrincipal.instance.PantallaCarga(false);
+	}
+
+	/// <summary>
+	/// Invocado cuando se recibe un mensaje de confirmación de ataque
+	/// Se actualizan los territorios modificados y se muestran los dados resultantes
+	/// </summary>
+	public void ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque ataque){
+		mapa.ActualizarTerritorio(ataque.territorioOrigen);
+		mapa.ActualizarTerritorio(ataque.territorioDestino);
+		esperandoConfirmacion = false;
+		ControladorPrincipal.instance.PantallaCarga(false);
+	}
+
+	/// <summary>
+	/// Invocado cuando se recibe un mensaje de confirmación de movimiento
+	/// Se actualizan los territorios modificados
+	/// </summary>
+	public void ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento movimiento){
+		mapa.ActualizarTerritorio(movimiento.territorioOrigen);
+		mapa.ActualizarTerritorio(movimiento.territorioDestino);
+		esperandoConfirmacion = false;
+		ControladorPrincipal.instance.PantallaCarga(false);
 	}
 
 	// Deselecciona todos los territorios seleccionados

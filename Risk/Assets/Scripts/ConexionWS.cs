@@ -173,6 +173,26 @@ public class ConexionWS : MonoBehaviour {
 						// Datos de partida completa: Actualizar datos
 						ControladorPartida.instance.ActualizarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
 						break;
+					case ("f"):
+						// Pase de fase
+						ControladorPartida.instance.ConfirmacionFase();
+						break;
+					case ("r"):
+						// Confirmacion de refuerzo
+						ControladorPartida.instance.ConfirmacionRefuerzos(JsonConvert.DeserializeObject<ClasesJSON.ConfirmacionRefuerzos>(mensaje));
+						break;
+					case ("a"):
+						// Confirmacion de ataque
+						ControladorPartida.instance.ConfirmacionAtaque(JsonConvert.DeserializeObject<ClasesJSON.ConfirmacionAtaque>(mensaje));
+						break;
+					case ("m"):
+						// Confirmacion de ataque
+						ControladorPartida.instance.ConfirmacionMovimiento(JsonConvert.DeserializeObject<ClasesJSON.ConfirmacionMovimiento>(mensaje));
+						break;
+					case ("x"):
+						// Fin de partida, terminar partida
+						ControladorPartida.instance.FinPartida();
+						break;
 					case ("e"):
 						// Error
 						ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(mensaje);
@@ -185,14 +205,6 @@ public class ConexionWS : MonoBehaviour {
 								cp.PantallaError(mensaje);
 								break;
 						}
-						break;
-					case ("f"):
-						// Pase de fase
-						ControladorPartida.instance.AvanzarFase();
-						break;
-					case ("x"):
-						// Fin de partida, terminar partida
-						ControladorPartida.instance.FinPartida();
 						break;
 					default:
 						break;
