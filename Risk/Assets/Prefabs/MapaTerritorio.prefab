@@ -489,6 +489,7 @@ MonoBehaviour:
   numeroTropas: {fileID: 1696651292065031913}
   id: 0
   conexiones: []
+  pertenenciaJugador: 0
 --- !u!1 &5893143665749351491
 GameObject:
   m_ObjectHideFlags: 0

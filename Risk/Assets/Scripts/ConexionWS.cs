@@ -150,6 +150,7 @@ public class ConexionWS : MonoBehaviour {
 							case 3:
 								CerrarConexionWebSocket();	
 								cp.AbrirPantalla("Principal");
+								cp.PantallaInfo(error.err);
 								break;
 							default:
 								cp.PantallaError(mensaje);

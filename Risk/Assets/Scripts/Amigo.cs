@@ -55,8 +55,18 @@ public class Amigo : MonoBehaviour {
 		ClasesJSON.InvitacionSala invitacion = new ClasesJSON.InvitacionSala(id);
 		string datos = JsonConvert.SerializeObject(invitacion);
 		await ConexionWS.instance.EnviarWS(datos);
+		try {
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(datos);
+			if(error.code != 0) {
+				// Error
+				ControladorPrincipal.instance.PantallaError(error.err);
+			} else {
+				ControladorPrincipal.instance.PantallaInfo("Invitación enviada exitosamente");
+			}
+		} catch {
+			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+		}
 		ControladorPrincipal.instance.PantallaCarga(false);	
-		ControladorPrincipal.instance.PantallaInfo("Invitación enviada exitosamente");
 	}
 
 }
