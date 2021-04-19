@@ -482,12 +482,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef953307d757f1d4695fdbb8a7733106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  numeroTropas: {fileID: 1696651292065031913}
   aspectoTropa: {fileID: 8680714584170604614}
   overlayTropa: {fileID: 5015757628397469609}
   overlayTerritorio: {fileID: 8313625792170442783}
-  iconoTu: {fileID: 4930896343862215001}
+  indicadorTu: {fileID: 1291164819522999640}
+  numeroTropas: {fileID: 1696651292065031913}
+  id: 0
   conexiones: []
 --- !u!1 &5893143665749351491
 GameObject:

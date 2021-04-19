@@ -260,4 +260,46 @@ public static class ClasesJSON {
 			}
 		}
 	}
+	
+	/// <sumary>
+	/// Clase serializable para el envio de refuerzos
+	/// </sumary>
+	public class RefuerzoEnvio {
+		public string tipo;
+		public int id, tropas;
+		public RefuerzoEnvio(int idc, int trc){
+			tipo = "Refuerzos";
+			id = idc;
+			tropas = trc;
+		}
+	}
+
+	/// <sumary>
+	/// Clase serializable para el envio de ataques
+	/// </sumary>
+	public class AtaqueEnvio {
+		public string tipo;
+		public int origen, destino, tropas;
+		public AtaqueEnvio(int to, int td, int tr){
+			tipo = "Ataque";
+			origen = to;
+			destino = td;
+			tropas = tr;
+		}
+	}
+
+	/// <sumary>
+	/// Clase serializable para el envio de movimientos
+	/// </sumary>
+	public class MovimientoEnvio {
+		public string tipo;
+		public int origen, destino, tropas;
+		public MovimientoEnvio(int to, int td, int tr){
+			tipo = "Movimiento";
+			origen = to;
+			destino = td;
+			tropas = tr;
+		}
+	}
+
 }

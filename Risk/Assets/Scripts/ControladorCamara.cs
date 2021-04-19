@@ -8,15 +8,15 @@ public class ControladorCamara : MonoBehaviour {
 	private Camera mainCam;
 	[SerializeField]
 	private float velocidadZoom, maxTiempoToque, maxDistanciaToque;
-	public bool permitirJugar = true;
 	private bool permitirMovimiento;
 	// Posición en worldspace de la esquina inferior izquierda de la cámara
 	private Vector2 esquinaII;
 	// Posición en worldspace de la esquina superior derecha de la cámara
 	private Vector2 esquinaSD;
-	public EventSystem evSys;
 	private Vector2 posicionComienzoToque;
 	private float tiempoToque;
+	private Vector3 ultimaPosicionRaton;
+	public EventSystem evSys;
 	
 
 	private void OnEnable() {
@@ -30,6 +30,7 @@ public class ControladorCamara : MonoBehaviour {
 		try {
 			mainCam.orthographicSize = 5;
 			permitirMovimiento = false;
+			ReajustarPantalla();
 		} catch {}
 	}
 
@@ -41,13 +42,21 @@ public class ControladorCamara : MonoBehaviour {
 
 	private void Update() {
 		if(permitirMovimiento && !EventSystem.current.IsPointerOverGameObject(0)){
-			if(Input.GetMouseButtonDown(0)){
-				Vector2 point = mainCam.ScreenToWorldPoint(Input.mousePosition);
-				RaycastHit2D hit = Physics2D.Raycast(point, Vector2.zero);
-				if(hit.collider != null){
-					hit.collider.GetComponent<Territorio>().Seleccionado();
+			#if !UNITY_WEBGL || UNITY_EDITOR
+				if(Input.GetMouseButtonDown(0)){
+					Vector2 point = mainCam.ScreenToWorldPoint(Input.mousePosition);
+					RaycastHit2D hit = Physics2D.Raycast(point, Vector2.zero);
+					if(hit.collider != null){
+						hit.collider.GetComponent<Territorio>().Seleccionado();
+					}
 				}
-			}
+				if(Input.GetMouseButton(1) || Input.GetMouseButton(2)){
+					mainCam.transform.position -= mainCam.ScreenToWorldPoint(Input.mousePosition-ultimaPosicionRaton) - mainCam.ScreenToWorldPoint(Vector2.zero);
+				}
+				mainCam.orthographicSize = Mathf.Lerp(MIN_ZOOM, MAX_ZOOM, Mathf.InverseLerp(MIN_ZOOM, MAX_ZOOM, mainCam.orthographicSize-Input.GetAxis("Mouse ScrollWheel")));
+				ReajustarPantalla();
+				ultimaPosicionRaton = Input.mousePosition;
+			#endif
 			// Un dedo, el usuario esta tocando la pantalla: Interactuar con territorios
 			if(Input.touchCount == 1){
 				Touch t = Input.GetTouch(0);

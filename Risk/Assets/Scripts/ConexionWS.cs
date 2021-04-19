@@ -186,12 +186,15 @@ public class ConexionWS : MonoBehaviour {
 								break;
 						}
 						break;
+					case ("f"):
+						// Pase de fase
+						ControladorPartida.instance.AvanzarFase();
+						break;
 					case ("x"):
 						// Fin de partida, terminar partida
 						ControladorPartida.instance.FinPartida();
 						break;
 					default:
-						ControladorPartida.instance.GestionarMensajePartida(tipoMensaje, mensaje);
 						break;
 				}
 				break;
