@@ -41,8 +41,10 @@ public class ControladorCamara : MonoBehaviour {
 	}
 
 	private void Update() {
+		#if !UNITY_EDITOR
 		if(permitirMovimiento && !EventSystem.current.IsPointerOverGameObject(0)){
-			#if UNITY_EDITOR
+		#else
+		if(permitirMovimiento && !EventSystem.current.IsPointerOverGameObject(-1)){
 				if(Input.GetMouseButtonDown(0)){
 					Vector2 point = mainCam.ScreenToWorldPoint(Input.mousePosition);
 					RaycastHit2D hit = Physics2D.Raycast(point, Vector2.zero);

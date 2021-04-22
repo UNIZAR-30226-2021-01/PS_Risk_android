@@ -203,6 +203,7 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("e"):
 						// Error
+						cp.PantallaCarga(false);
 						ClasesJSON.RiskErrorWS error = JsonConvert.DeserializeObject<ClasesJSON.RiskErrorWS>(mensaje);
 						switch (error.code) {
 							case 3:

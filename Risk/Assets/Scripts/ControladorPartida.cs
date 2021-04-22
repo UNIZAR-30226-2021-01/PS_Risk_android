@@ -44,6 +44,12 @@ public class ControladorPartida : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 	
+	private void Update() {
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			print(FaseActual);
+		}
+	}
+	
 	/// <summary>
 	/// Invocado cuando se recibe un mensaje de partida completa.
 	/// Se actualiza el estado de la partida con el nuevo estado
@@ -65,7 +71,7 @@ public class ControladorPartida : MonoBehaviour {
 		}
 		datosPartida = nuevaPartida;
 		FaseActual = datosPartida.fase-1;
-		interfazPartida.ActualizarInterfaz();
+		interfazPartida.ActualizarInterfaz(nuevaPartida);
 		print("TurnoJugador: " + datosPartida.turnoJugador + ". Jugador.id: " + idJugador);
 		mapa.ActualizarTerritorios(nuevaPartida.territorios);
 	}
@@ -118,7 +124,7 @@ public class ControladorPartida : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	/// <summary>
 	/// Invocado al pulsar el boton de cambio de fase.
 	/// Envía al servidor un mensaje de cambio de fase.
