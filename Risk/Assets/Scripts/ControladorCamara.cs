@@ -42,12 +42,14 @@ public class ControladorCamara : MonoBehaviour {
 
 	private void Update() {
 		if(permitirMovimiento && !EventSystem.current.IsPointerOverGameObject(0)){
-			#if !UNITY_WEBGL || UNITY_EDITOR
+			#if UNITY_EDITOR
 				if(Input.GetMouseButtonDown(0)){
 					Vector2 point = mainCam.ScreenToWorldPoint(Input.mousePosition);
 					RaycastHit2D hit = Physics2D.Raycast(point, Vector2.zero);
 					if(hit.collider != null){
 						hit.collider.GetComponent<Territorio>().Seleccionado();
+					} else {
+						ControladorPartida.instance.Deseleccionar();
 					}
 				}
 				if(Input.GetMouseButton(1) || Input.GetMouseButton(2)){
@@ -76,10 +78,11 @@ public class ControladorCamara : MonoBehaviour {
 							RaycastHit2D hit = Physics2D.Raycast(punto, Vector2.zero);
 							if(hit.collider != null){
 								hit.collider.GetComponent<Territorio>().Seleccionado();
+							} else {
+								ControladorPartida.instance.Deseleccionar();
 							}
 						}
 						break;
-					default: break;
 				}
 			}
 			// Dos dedos, el usuario esta "pellizcando" la pantalla

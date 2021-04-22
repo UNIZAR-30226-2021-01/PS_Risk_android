@@ -228,7 +228,7 @@ public static class ClasesJSON {
 	/// </sumary>
 	[System.Serializable]
 	public class PartidaCompleta : MensajeWebsocket {
-		public int tiempoTurno, turnoActual, fase;
+		public int tiempoTurno, turnoActual, turnoJugador, fase;
 		public string nombreSala, ultimoTurno;
 		public List<Territorio> territorios;
 		public List<Jugador> jugadores;

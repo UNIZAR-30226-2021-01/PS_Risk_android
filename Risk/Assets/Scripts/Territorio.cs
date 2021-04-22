@@ -45,17 +45,13 @@ public class Territorio : MonoBehaviour {
 			// No hay nada que actualizar
 			return;
 		}
-		// VERSION INCORRECTA: TEMPORAL PARA VISUALIZAR
-		aspectoTropa.sprite = ControladorPrincipal.instance.aspectos[nuevosDatos.jugador];
-		overlayTropa.sprite = ControladorPrincipal.instance.colorAspectos[nuevosDatos.jugador];
-		// VERSION CORRECTA:
-		//aspectoTropa.sprite = ControladorPrincipal.instance.aspectos[ControladorPartida.instance.datosPartida.jugadores[nuevosDatos.jugador].aspecto];
-		//overlayTropa.sprite = ControladorPrincipal.instance.colorAspectos[ControladorPartida.instance.datosPartida.jugadores[nuevosDatos.jugador].aspecto];
+		aspectoTropa.sprite = ControladorPrincipal.instance.aspectos[ControladorPartida.instance.datosPartida.jugadores[nuevosDatos.jugador].aspecto];
+		overlayTropa.sprite = ControladorPrincipal.instance.colorAspectos[ControladorPartida.instance.datosPartida.jugadores[nuevosDatos.jugador].aspecto];
 		overlayTropa.color = ControladorPrincipal.instance.coloresJugadores[nuevosDatos.jugador];
 		overlayTerritorio.color = (oculto ? Color.black : ControladorPrincipal.instance.coloresJugadores[nuevosDatos.jugador])
 			* new Color(1,1,1,OPACIDAD_OVERLAY_TERRITORIO);
 		numeroTropas.text = nuevosDatos.tropas.ToString();
-		indicadorTu.SetActive(ControladorPartida.instance.jugador.id == nuevosDatos.jugador);
+		indicadorTu.SetActive(ControladorPartida.instance.idJugador == nuevosDatos.jugador);
 		pertenenciaJugador = nuevosDatos.jugador;
 		datosAnteriores = nuevosDatos;
 	}

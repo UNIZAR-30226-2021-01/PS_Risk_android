@@ -49,7 +49,8 @@ public class ConexionWS : MonoBehaviour {
 		
 		if (ws != null && ws.State == WebSocketState.Open) {
 			// Conexión websocket ya existe, no es necesario crear una nueva
-			return true;
+			CerrarConexionWebSocket();
+			//return true;
 		}
 
 		ws = new WebSocket(DIRECCION_PETICIONES + direccion);
@@ -130,6 +131,12 @@ public class ConexionWS : MonoBehaviour {
 								cp.PantallaError(mensaje);
 								break;
 						}
+						break;
+					case ("p"):
+						// Datos de partida completa: Empezar partida
+						ControladorPartida.instance.ActualizarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
+						estadoActual = Estado.partida;
+						cp.AbrirPantalla("Partida");
 						break;
 					default:
 						// Ignorar resto de mensajes

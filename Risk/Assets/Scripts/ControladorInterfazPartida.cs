@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControladorInterfazPartida : MonoBehaviour {
 	[SerializeField]
 	private GameObject fondoMenu, partida;
 	[SerializeField]
 	private GameObject ventanaFin, ventanaRefuerzos, ventanaAtaque, ventanaMovimiento;
+	[SerializeField]
+	private Image[] indicadorFase;
 
 	private void OnEnable() {
 		fondoMenu.SetActive(false); // Animacion de fundido en el futuro (?)
@@ -14,8 +17,20 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	}
 	
 	private void OnDisable() {
-		fondoMenu.SetActive(true); // Animacion de fundido en el futuro (?)
-		partida.SetActive(false);
+		try {
+			fondoMenu.SetActive(true); // Animacion de fundido en el futuro (?)
+			partida.SetActive(false);
+		} catch {}
+	}
+	
+	public void ActualizarInterfaz(){
+		ActualizarFase(ControladorPartida.instance.datosPartida.fase-1); // Hacer más elegante
+	}
+
+	public void ActualizarFase(int fase){
+		for (int i = 0; i < 3; i++) {
+			indicadorFase[i].color = (i == fase ? Color.white : Color.black);
+		}
 	}
 	
 	/// <summary>

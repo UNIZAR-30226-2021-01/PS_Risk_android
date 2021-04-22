@@ -7,15 +7,17 @@ using Newtonsoft.Json;
 
 public class ControladorPartida : MonoBehaviour {
 	private const string MSG_PASO_FASE = "{\"tipo\":\"Fase\"}";
+	private const int FASE_REFUERZOS = 0;
+	private const int FASE_ATAQUE = 1;
+	private const int FASE_MOVIMIENTO = 2;
 	/// <summary> Contiene los datos mas recientes de la partida </summary>
 	public ClasesJSON.PartidaCompleta datosPartida;
-	private enum Fase {refuerzos, ataque, movimiento};
-	private Fase faseActual;
-	private Mutex mtx;
+	private int faseActual;
+	private Mutex mtx = new Mutex();
 	// Propiedad de fase. Permite leer y escribir la fase asegurando exclusion mutua
-	private Fase FaseActual {
+	private int FaseActual {
 		get {
-			Fase toRet;
+			int toRet;
 			mtx.WaitOne();
 			toRet = faseActual;
 			mtx.ReleaseMutex();
@@ -34,10 +36,12 @@ public class ControladorPartida : MonoBehaviour {
 	private ControladorInterfazPartida interfazPartida;
 	private int territorioOrigen = -1, territorioDestino = -1;
 	public static ControladorPartida instance;
-	public ClasesJSON.Jugador jugador = null;
+	private ClasesJSON.Jugador jugador = null;
+	public int idJugador = -1;
 
 	private void Awake() {
 		instance = this;
+		gameObject.SetActive(false);
 	}
 	
 	/// <summary>
@@ -46,10 +50,12 @@ public class ControladorPartida : MonoBehaviour {
 	/// </summary>
 	/// <param name="nuevaPartida"> Datos recibidos en el mensaje de partida completa </param>
 	public void ActualizarDatosPartida(ClasesJSON.PartidaCompleta nuevaPartida) {
-		foreach(ClasesJSON.Jugador j in nuevaPartida.jugadores){
+		for(int i = 0; i < nuevaPartida.jugadores.Count; i++){
 			// TODO: Actualizar lista de jugadores	
-			if(j.nombre == ControladorPrincipal.instance.usuarioRegistrado.nombre){
+			ClasesJSON.Jugador j = nuevaPartida.jugadores[i];
+			if (j.id == ControladorPrincipal.instance.usuarioRegistrado.id) {
 				jugador = j;
+				idJugador = i;
 			}
 		}
 		if (jugador == null){
@@ -58,54 +64,55 @@ public class ControladorPartida : MonoBehaviour {
 			ControladorPrincipal.instance.AbrirPantalla("Principal");
 		}
 		datosPartida = nuevaPartida;
-		FaseActual = (Fase)(datosPartida.fase-1);
-		//mapa.ActualizarTerritorios(nuevaPartida.territorios);
-		mapa.generarAleatorio();
+		FaseActual = datosPartida.fase-1;
+		interfazPartida.ActualizarInterfaz();
+		print("TurnoJugador: " + datosPartida.turnoJugador + ". Jugador.id: " + idJugador);
+		mapa.ActualizarTerritorios(nuevaPartida.territorios);
 	}
 
 	/// <summary>Función llamada por cada territorio cuando este es seleccionado</summary>
 	/// <param name="territorio">Territorio seleccionado</param>
 	public void SeleccionTerritorio(Territorio territorio) {
-		if(datosPartida.turnoActual != jugador.id || esperandoConfirmacion){
+		if(datosPartida.turnoJugador != idJugador || esperandoConfirmacion){
 			// El jugador no debería poder interactuar
 			return;
 		}
 		if(territorioOrigen == -1) {
 			// Primera selección:
 			// La primera seleccion debe ser siempre un territorio controlador por el usuario
-			if(territorio.pertenenciaJugador != jugador.id) {
+			if(territorio.pertenenciaJugador != idJugador) {
 				Deseleccionar();
 				return;
 			}
 			territorioOrigen = territorio.id;
 			switch(FaseActual){
-				case (Fase.refuerzos):
+				case (FASE_REFUERZOS):
 					if(jugador.refuerzos <= 0){
 						Deseleccionar();
 						return;
 					}
 					interfazPartida.VentanaRefuerzos();
 					break;
-				case (Fase.ataque):
+				case (FASE_ATAQUE):
 					mapa.MostrarAtaque(territorio.id);
 					break;
-				case (Fase.movimiento):
+				case (FASE_MOVIMIENTO):
 					mapa.MostrarMovimiento(territorio.id);
 					break;
 			}
 		} else {
 			// Segunda selección
 			// La segunda seleccion debe ser siempre de un territorio no oculto
-			if(territorio.Oculto || FaseActual == Fase.refuerzos){
+			if(territorio.Oculto || FaseActual == FASE_REFUERZOS){
 				Deseleccionar();
 				return;
 			}
 			territorioDestino = territorio.id;
 			switch(FaseActual){
-				case (Fase.ataque):
+				case (FASE_ATAQUE):
 					interfazPartida.VentanaAtaque();
 					break;
-				case (Fase.movimiento):
+				case (FASE_MOVIMIENTO):
 					interfazPartida.VentanaMovimiento();
 					break;
 			}
@@ -117,7 +124,7 @@ public class ControladorPartida : MonoBehaviour {
 	/// Envía al servidor un mensaje de cambio de fase.
 	/// </summary>
 	public async void PasarFase() {
-		if (datosPartida.turnoActual == jugador.id) {
+		if (datosPartida.turnoJugador == idJugador) {
 			await ConexionWS.instance.EnviarWS(MSG_PASO_FASE);
 		}
 	}
@@ -126,7 +133,7 @@ public class ControladorPartida : MonoBehaviour {
 	/// Notifica al seridor de una acción de refuerzo</summary>
 	/// <param name ="tropas">Número de tropas a ser creadas en territorio origen seleccionado</param>
 	public async void Reforzar(int tropas){
-		if(FaseActual != Fase.refuerzos || territorioOrigen == -1 || esperandoConfirmacion) {
+		if(FaseActual != FASE_REFUERZOS || territorioOrigen == -1 || esperandoConfirmacion) {
 			// Estados incorrectos, no deberían ocurrir pero so comprueban por si acaso
 			return;
 		}
@@ -142,7 +149,7 @@ public class ControladorPartida : MonoBehaviour {
 	/// Notifica al seridor de una acción de ataque</summary>
 	/// <param name ="tropas">Número de tropas a ser utilizadas en el ataque</param>
 	public async void Ataque(int tropas){
-		if(FaseActual != Fase.ataque || territorioOrigen == -1 || territorioDestino == -1 || esperandoConfirmacion) {
+		if(FaseActual != FASE_ATAQUE || territorioOrigen == -1 || territorioDestino == -1 || esperandoConfirmacion) {
 			// Estados incorrectos, no deberían ocurrir pero so comprueban por si acaso
 			return;
 		}
@@ -158,7 +165,7 @@ public class ControladorPartida : MonoBehaviour {
 	/// Notifica al seridor de una acción de ataque</summary>
 	/// <param name ="tropas">Número de tropas a ser utilizadas en el ataque</param>
 	public async void Movimiento(int tropas){
-		if(FaseActual != Fase.movimiento || territorioOrigen == -1 || territorioDestino == -1 || esperandoConfirmacion) {
+		if(FaseActual != FASE_MOVIMIENTO || territorioOrigen == -1 || territorioDestino == -1 || esperandoConfirmacion) {
 			// Estados incorrectos, no deberían ocurrir pero so comprueban por si acaso
 			return;
 		}
@@ -180,10 +187,10 @@ public class ControladorPartida : MonoBehaviour {
 	/// Se aumenta la fase en uno.
 	/// </summary>
 	public void ConfirmacionFase(){
-		FaseActual = (Fase)(((int)FaseActual+1)%4);
+		FaseActual = (faseActual+1)%3;
 		esperandoConfirmacion = false;
 		Deseleccionar();
-		// TODO: Actualizar la interfaz para mostrar el cambio de fase
+		interfazPartida.ActualizarFase(FaseActual);
 	}
 	
 	/// <summary>
@@ -219,10 +226,14 @@ public class ControladorPartida : MonoBehaviour {
 	}
 
 	// Deselecciona todos los territorios seleccionados
-	private void Deseleccionar(){
+	public void Deseleccionar(){
 		territorioOrigen = -1;
 		territorioDestino = -1;
 		mapa.MostrarTodosTerritorios();
+	}
+	
+	public void SalirPartida(){
+		ConexionWS.instance.CerrarConexionWebSocket();
 	}
 
 }
