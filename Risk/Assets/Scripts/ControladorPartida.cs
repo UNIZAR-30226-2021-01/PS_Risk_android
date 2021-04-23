@@ -79,6 +79,13 @@ public class ControladorPartida : MonoBehaviour {
 	/// <summary>Función llamada por cada territorio cuando este es seleccionado</summary>
 	/// <param name="territorio">Territorio seleccionado</param>
 	public void SeleccionTerritorio(Territorio territorio) {
+		print("Seleccionado territorio: {turnoJugador: " + datosPartida.turnoJugador +
+			", esperandoConfirmacion: " + esperandoConfirmacion +
+			", territorioOrigen: " + territorioOrigen +
+			", territorio.PetenenciaJugador" + territorio.pertenenciaJugador +
+			", idJugador: " + idJugador +
+			", FaseActual: " + FaseActual +
+			", jugador.refuerzos: " + jugador.refuerzos + "}");
 		if(datosPartida.turnoJugador != idJugador || esperandoConfirmacion){
 			// El jugador no debería poder interactuar
 			return;

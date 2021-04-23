@@ -21,11 +21,11 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	
 	// GameObjects que muestran la lista de jugadores
 	[SerializeField]
-    private Image[] listaIconos;
+	private Image[] listaIconos;
 	[SerializeField]
-    private TextMeshProUGUI[] listaTextos;
+	private TextMeshProUGUI[] listaTextos;
 	[SerializeField]
-    private Image[] listaOverlaysColores;
+	private Image[] listaOverlaysColores;
 
 	// GameObjects que muestran el jugador actual
 	[SerializeField]
@@ -152,43 +152,43 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	public void VentanaFin() {
 		ventanaFin.SetActive(true);
 	}
-    
-    /// <summary>Actualiza la lista de jugadores a partir de un JSON de partida</summary>
-    /// <param name="datosSala">Datos de la partida, los cuales incluye los jugadores</param>
-    public void ActualizarLista(ClasesJSON.PartidaCompleta datosSala) {
+	
+	/// <summary>Actualiza la lista de jugadores a partir de un JSON de partida</summary>
+	/// <param name="datosSala">Datos de la partida, los cuales incluye los jugadores</param>
+	public void ActualizarLista(ClasesJSON.PartidaCompleta datosSala) {
 
-        int nJugadores = datosSala.jugadores.Count;
+		int nJugadores = datosSala.jugadores.Count;
 
 		//Iterar por los IDs de partida que se usan
-        for(int id = 0; id < nJugadores; id++) {
-            ActualizarJugador(id,datosSala.jugadores[id]);
+		for(int id = 0; id < nJugadores; id++) {
+			ActualizarJugador(id,datosSala.jugadores[id]);
 			if(datosSala.turnoJugador == id) //Actualizar el indicador del jugador actual
 				ActualizarJugadorActual(id, datosSala.jugadores[id]);
 		}
 
-        //Desactivar el resto de gameobjects, los cuales no estan mostrando ningun jugador
-        for(int i = nJugadores; i < 6; i++)
-            listaIconos[i].gameObject.SetActive(false);
-    }
-    
-    /// <summary>Actualiza los datos mostrados en la lista para un solo jugador</summary>
-    /// <param name="id">ID de partida del jguador a actualizar</param>
-    /// <param name="datosJugador">Nuevos datos</param>
-    private void ActualizarJugador(int id, ClasesJSON.Jugador datosJugador) {
-        listaOverlaysColores[id].color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
-        listaTextos[id].text = datosJugador.nombre; //Mostrar nombre
-        listaIconos[id].sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
-    }
+		//Desactivar el resto de gameobjects, los cuales no estan mostrando ningun jugador
+		for(int i = nJugadores; i < 6; i++)
+			listaIconos[i].gameObject.SetActive(false);
+	}
+	
+	/// <summary>Actualiza los datos mostrados en la lista para un solo jugador</summary>
+	/// <param name="id">ID de partida del jguador a actualizar</param>
+	/// <param name="datosJugador">Nuevos datos</param>
+	private void ActualizarJugador(int id, ClasesJSON.Jugador datosJugador) {
+		listaOverlaysColores[id].color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
+		listaTextos[id].text = datosJugador.nombre; //Mostrar nombre
+		listaIconos[id].sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
+	}
 
 	//Igual a ActualizarJugador(), pero para el jugador actual
 	private void ActualizarJugadorActual(int id, ClasesJSON.Jugador datosJugador) {
-        jugadorActualColor.color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
-        jugadorActualTexto.text = datosJugador.nombre; //Mostrar nombre
+		jugadorActualColor.color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
+		jugadorActualTexto.text = datosJugador.nombre; //Mostrar nombre
 		jugadorActualIcono.sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
 	}
 
-    /// <summary>Muestra y esconde la lista de jugadores. Si se esconde, se muestra el jugador actual</summary>
-    /// <param name="mostrar">Si 'true', se muestra la lista y se esconde el jugador actual. Viceversa para 'false'</param>
+	/// <summary>Muestra y esconde la lista de jugadores. Si se esconde, se muestra el jugador actual</summary>
+	/// <param name="mostrar">Si 'true', se muestra la lista y se esconde el jugador actual. Viceversa para 'false'</param>
 	public void MostrarListaJugadores(bool mostrar) {
 		listaIconos[0].transform.parent.gameObject.SetActive(mostrar);
 		jugadorActualIcono.gameObject.SetActive(!mostrar);
