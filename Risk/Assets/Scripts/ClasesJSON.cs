@@ -235,7 +235,7 @@ public static class ClasesJSON {
 	}
 	
 	/// <sumary>
-	/// Clase serializable para el mensaje Websocket Confirmacion de Refuerzos
+	/// Clase serializable para el mensaje Websocket 'Confirmacion de Refuerzos'
 	/// </sumary>
 	[System.Serializable]
 	public class ConfirmacionRefuerzos : MensajeWebsocket {
@@ -243,7 +243,7 @@ public static class ClasesJSON {
 	}
 	
 	/// <sumary>
-	/// Clase serializable para el mensaje Websocket Confirmacion de Ataque
+	/// Clase serializable para el mensaje Websocket 'Confirmacion de Ataque'
 	/// </sumary>
 	[System.Serializable]
 	public class ConfirmacionAtaque : MensajeWebsocket {
@@ -252,7 +252,7 @@ public static class ClasesJSON {
 	}
 	
 	/// <sumary>
-	/// Clase serializable para el mensaje Websocket Confirmacion de Movimiento
+	/// Clase serializable para el mensaje Websocket 'Confirmacion de Movimiento'
 	/// </sumary>
 	[System.Serializable]
 	public class ConfirmacionMovimiento : MensajeWebsocket {
