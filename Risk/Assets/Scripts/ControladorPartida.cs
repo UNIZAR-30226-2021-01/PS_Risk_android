@@ -72,7 +72,7 @@ public class ControladorPartida : MonoBehaviour {
 		datosPartida = nuevaPartida;
 		FaseActual = datosPartida.fase-1;
 		interfazPartida.ActualizarInterfaz(nuevaPartida);
-		print("TurnoJugador: " + datosPartida.turnoJugador + ". Jugador.id: " + idJugador);
+		print("TurnoJugador: " + datosPartida.turnoJugador + " (" + datosPartida.jugadores.ToArray()[datosPartida.turnoJugador].nombre + "). Jugador.id: " + idJugador + "(" + datosPartida.jugadores.ToArray()[idJugador].nombre + "). Esperando confirmación: " + esperandoConfirmacion);
 		mapa.ActualizarTerritorios(nuevaPartida.territorios);
 	}
 
@@ -231,13 +231,28 @@ public class ControladorPartida : MonoBehaviour {
 		ControladorPrincipal.instance.PantallaCarga(false);
 	}
 
-	// Deselecciona todos los territorios seleccionados
+	/// <summary>
+	/// Invocado cuando se selecciona en un lugar inválido al tener un territorio seleccionado
+	/// Muestra todos los territorios y borra los seleccionados guardados
+	/// </summary>
 	public void Deseleccionar(){
 		territorioOrigen = -1;
 		territorioDestino = -1;
 		mapa.MostrarTodosTerritorios();
 	}
 	
+	/// <summary>
+	/// Invocado cuando se recibe un error desde el servidor
+	/// Si se estaba esperando una confirmación significa que la operación ha fallado
+	/// </summary>
+	public void Error(){
+		esperandoConfirmacion = false;
+	}
+
+	/// <summary>
+	/// Invocado cuando se recibe un error desde el servidor
+	/// Si se estaba esperando una confirmación significa que la operación ha fallado
+	/// </summary>
 	public void SalirPartida(){
 		ConexionWS.instance.CerrarConexionWebSocket();
 	}

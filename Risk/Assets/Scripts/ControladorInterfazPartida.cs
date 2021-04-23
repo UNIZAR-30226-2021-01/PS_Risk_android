@@ -28,6 +28,7 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		try {
 			fondoMenu.SetActive(true); // Animacion de fundido en el futuro (?)
 			partida.SetActive(false);
+			ControladorPartida.instance.SalirPartida();
 		} catch {}
 	}
 	

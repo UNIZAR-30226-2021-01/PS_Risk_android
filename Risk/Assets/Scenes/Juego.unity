@@ -1039,7 +1039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &23838544
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fondoMenu: {fileID: 1988405648}
   partida: {fileID: 649884330}
-  ventanaFin: {fileID: 0}
+  ventanaFin: {fileID: 1712915054}
   ventanaRefuerzos: {fileID: 2088452803}
   ventanaAtaque: {fileID: 1171568252}
   ventanaMovimiento: {fileID: 1509424430}
@@ -20531,7 +20531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &576511317
 RectTransform:
   m_ObjectHideFlags: 0
