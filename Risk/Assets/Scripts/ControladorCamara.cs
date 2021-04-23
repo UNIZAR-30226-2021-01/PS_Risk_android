@@ -49,7 +49,7 @@ public class ControladorCamara : MonoBehaviour {
 					Vector2 point = mainCam.ScreenToWorldPoint(Input.mousePosition);
 					RaycastHit2D hit = Physics2D.Raycast(point, Vector2.zero);
 					if(hit.collider != null){
-						hit.collider.GetComponent<Territorio>().Seleccionado();
+						hit.collider.GetComponent<Territorio>().Seleccionar();
 					} else {
 						ControladorPartida.instance.Deseleccionar();
 					}
@@ -79,7 +79,7 @@ public class ControladorCamara : MonoBehaviour {
 							Vector2 punto = mainCam.ScreenToWorldPoint(Input.GetTouch(0).position);
 							RaycastHit2D hit = Physics2D.Raycast(punto, Vector2.zero);
 							if(hit.collider != null){
-								hit.collider.GetComponent<Territorio>().Seleccionado();
+								hit.collider.GetComponent<Territorio>().Seleccionar();
 							} else {
 								ControladorPartida.instance.Deseleccionar();
 							}

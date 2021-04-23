@@ -9,7 +9,7 @@ public class Territorio : MonoBehaviour {
 	[SerializeField]
 	private SpriteRenderer aspectoTropa, overlayTropa, overlayTerritorio;
 	[SerializeField]
-	private GameObject indicadorTu;
+	private GameObject indicadorTu, indicadorSeleccionado;
 	private ClasesJSON.Territorio datosAnteriores;
 	[SerializeField]
 	private TextMeshPro numeroTropas;
@@ -20,7 +20,7 @@ public class Territorio : MonoBehaviour {
 	public Territorio[] conexiones;
 	/// <summary>ID del jugador (en cuanto a orden de la partida) del que pertence este territorio</summary>
 	public int pertenenciaJugador;
-	private bool oculto = false;
+	private bool oculto = false, seleccionado = false;
 	/// <summary>
 	/// Property publico para asignar el estado de oculto al territorio.
 	///	Además de actualizar el valor interno de oculto actualiza su representación cuando es asignado.
@@ -33,6 +33,16 @@ public class Territorio : MonoBehaviour {
 			overlayTerritorio.color = (value ? Color.black : ControladorPrincipal.instance.coloresJugadores[datosAnteriores.jugador])
 				* new Color(1,1,1,OPACIDAD_OVERLAY_TERRITORIO);
 			oculto = value;
+		}
+	}
+
+	/// <summary>
+	///	</summary> 
+	public bool Seleccionado {
+		get { return seleccionado; }
+		set {
+			indicadorSeleccionado.SetActive(value);
+			seleccionado = value;
 		}
 	}
 	
@@ -57,12 +67,13 @@ public class Territorio : MonoBehaviour {
 	}
 
 	/// <summary> Método invocado cuando se selecciona el territorio </summary>
-	public void Seleccionado() {
+	public void Seleccionar() {
 		ControladorPartida.instance.SeleccionTerritorio(this);
 	}
 	
 	/// <summary> Muestra recursivamente todos los territorios del jugador conectados con este territorio </summary>
 	public void MostrarContiguosUsuario(){
+		Oculto = false;
 		foreach(Territorio t in conexiones){
 			if(pertenenciaJugador == t.pertenenciaJugador && t.Oculto){
 				t.Oculto = false;

@@ -123,10 +123,18 @@ public class ControladorPartida : MonoBehaviour {
 			territorioDestino = territorio.id;
 			switch(FaseActual){
 				case (FASE_ATAQUE):
-					interfazPartida.VentanaAtaque();
+					if(territorio.pertenenciaJugador != idJugador) {
+						interfazPartida.VentanaAtaque();
+					} else {
+						territorioDestino = -1;
+					}
 					break;
 				case (FASE_MOVIMIENTO):
+					if(territorio.pertenenciaJugador == idJugador) {
 					interfazPartida.VentanaMovimiento();
+					} else {
+						territorioDestino = -1;
+					}
 					break;
 			}
 		}

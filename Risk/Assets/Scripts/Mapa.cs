@@ -7,7 +7,7 @@ public class Mapa : MonoBehaviour {
 	public Territorio[] territorios;
 
 	// PRUEBAS SOLO: Asignar territorios de manera aleatoria
-	public void generarAleatorio(){
+	public void generarAleatorio() {
 		for(int i = 0; i < 42; i++) {
 			int cid = Random.Range(0,5);
 			ClasesJSON.Territorio t = new ClasesJSON.Territorio();
@@ -33,9 +33,10 @@ public class Mapa : MonoBehaviour {
 	}
 	
 	///<summary>Muestra todos los territorios del mapa</summary>
-	public void MostrarTodosTerritorios(){
+	public void MostrarTodosTerritorios() {
 		foreach (Territorio t in territorios) {
 			t.Oculto = false;
+			t.Seleccionado = false;
 		}
 	}
 
@@ -44,14 +45,15 @@ public class Mapa : MonoBehaviour {
 	/// el territorio seleccionado
 	/// </summary>
 	/// <param name="territorio">ID del territorio seleccionado</param>
-	public void MostrarAtaque(int territorio)
-	{
+	public void MostrarAtaque(int territorio) {
 		OcultarTerritorios();
 		foreach (Territorio t in territorios[territorio].conexiones) {
 			if(territorios[territorio].pertenenciaJugador != t.pertenenciaJugador){
 				t.Oculto = false;
 			}
 		}
+		territorios[territorio].Oculto = false;
+		territorios[territorio].Seleccionado = true;
 	}
 	
 	/// <summary>
@@ -59,15 +61,17 @@ public class Mapa : MonoBehaviour {
 	/// encuentran conectados al territorio especificado
 	/// </summary>
 	/// <param name="territorio">ID del territorio</param>
-	public void MostrarMovimiento(int territorio){
+	public void MostrarMovimiento(int territorio) {
 		OcultarTerritorios();
 		territorios[territorio].MostrarContiguosUsuario();
+		territorios[territorio].Seleccionado = true;
 	}
 
 	// Oculta todos los territorios
-	private void OcultarTerritorios(){
+	private void OcultarTerritorios() {
 		foreach (Territorio t in territorios) {
 			t.Oculto = true;
+			t.Seleccionado = false;
 		}
 	}
 }
