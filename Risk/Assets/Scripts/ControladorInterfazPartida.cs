@@ -18,6 +18,16 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	private TMP_InputField numeroAtaque;
 	[SerializeField]
 	private TMP_InputField numeroMovimiento;
+	
+	// <summary>Lista de las imagenes con los iconos de perfil de cada jugador, iniciar en el editor</summary>
+	[SerializeField]
+    private Image[] listaIconos;
+    // <summary>Lista con el nombre visual de todos los jugadores de la partida, iniciar en el editor</summary>
+	[SerializeField]
+    private TextMeshProUGUI[] listaTextos;
+    // <summary>Lista con el color de overlay para cada jugador en la lista, iniciar en el editor</summary>
+	[SerializeField]
+    private Image[] listaOverlaysColores;
 
 	private void OnEnable() {
 		fondoMenu.SetActive(false); // Animacion de fundido en el futuro (?)
@@ -57,6 +67,7 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// </summary>
 	public void ActualizarInterfaz(ClasesJSON.PartidaCompleta datosPartida) {
 		ActualizarFase(datosPartida.fase-1); // Hacer más elegante
+		InicializarLista(datosPartida);
 	}
 
 	/// <summary>
@@ -136,5 +147,29 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	public void VentanaFin() {
 		ventanaFin.SetActive(true);
 	}
-	
+    
+    /// <summary>Inicializa la lista de jugadores a partir de un JSON de partida</summary>
+    /// <param name="datosSala">Datos de la partida, los cuales incluye los jugadores</param>
+    public void InicializarLista(ClasesJSON.PartidaCompleta datosSala) {
+
+        int nJugadores = datosSala.jugadores.Count;
+
+        foreach(ClasesJSON.Jugador j in datosSala.jugadores)
+            ActualizarJugador(j);
+
+        //Desactivar el resto de gameobjects, los cuales no estan mostrando ningun jugador
+        for(int i = nJugadores; i < 6; i++)
+            listaIconos[i].gameObject.SetActive(false);
+    }
+    
+    /// <summary>Actualiza los datos mostrados en la lista para un solo jugador</summary>
+    /// <param name="datosJugador">Nuevos datos, incluido el id del jguador en partida</param>
+    public void ActualizarJugador(ClasesJSON.Jugador datosJugador) {
+        int id = datosJugador.id - 1;
+
+        listaIconos[id].gameObject.SetActive(true); //Activar gameobject
+        listaOverlaysColores[id].color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
+        listaTextos[id].text = datosJugador.nombre; //Mostrar nombre
+        listaIconos[id].sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
+    }
 }

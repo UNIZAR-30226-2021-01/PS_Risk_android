@@ -62,6 +62,7 @@ public class ControladorPartida : MonoBehaviour {
 			if (j.id == ControladorPrincipal.instance.usuarioRegistrado.id) {
 				jugador = j;
 				idJugador = i;
+				Debug.Log("j.id: " + j.id + " / ControladorPrincipal.instance.usuarioRegistrado.id: " + ControladorPrincipal.instance.usuarioRegistrado.id);
 			}
 		}
 		if (jugador == null){
