@@ -19,15 +19,19 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	[SerializeField]
 	private TMP_InputField numeroMovimiento;
 	
-	// <summary>Lista de las imagenes con los iconos de perfil de cada jugador, iniciar en el editor</summary>
+	// GameObjects que muestran la lista de jugadores
 	[SerializeField]
     private Image[] listaIconos;
-    // <summary>Lista con el nombre visual de todos los jugadores de la partida, iniciar en el editor</summary>
 	[SerializeField]
     private TextMeshProUGUI[] listaTextos;
-    // <summary>Lista con el color de overlay para cada jugador en la lista, iniciar en el editor</summary>
 	[SerializeField]
     private Image[] listaOverlaysColores;
+
+	// GameObjects que muestran el jugador actual
+	[SerializeField]
+	private Image jugadorActualIcono, jugadorActualColor;
+	[SerializeField]
+	private TextMeshProUGUI jugadorActualTexto;
 
 	private void OnEnable() {
 		fondoMenu.SetActive(false); // Animacion de fundido en el futuro (?)
@@ -67,7 +71,7 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// </summary>
 	public void ActualizarInterfaz(ClasesJSON.PartidaCompleta datosPartida) {
 		ActualizarFase(datosPartida.fase-1); // Hacer más elegante
-		InicializarLista(datosPartida);
+		ActualizarLista(datosPartida);
 	}
 
 	/// <summary>
@@ -148,14 +152,18 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		ventanaFin.SetActive(true);
 	}
     
-    /// <summary>Inicializa la lista de jugadores a partir de un JSON de partida</summary>
+    /// <summary>Actualiza la lista de jugadores a partir de un JSON de partida</summary>
     /// <param name="datosSala">Datos de la partida, los cuales incluye los jugadores</param>
-    public void InicializarLista(ClasesJSON.PartidaCompleta datosSala) {
+    public void ActualizarLista(ClasesJSON.PartidaCompleta datosSala) {
 
         int nJugadores = datosSala.jugadores.Count;
 
-        for(int id = 0; id < nJugadores; id++) //Iterar por los IDs de partida que se usan
+		//Iterar por los IDs de partida que se usan
+        for(int id = 0; id < nJugadores; id++) {
             ActualizarJugador(id,datosSala.jugadores[id]);
+			if(datosSala.turnoJugador == id) //Actualizar el indicador del jugador actual
+				ActualizarJugadorActual(id, datosSala.jugadores[id]);
+		}
 
         //Desactivar el resto de gameobjects, los cuales no estan mostrando ningun jugador
         for(int i = nJugadores; i < 6; i++)
@@ -165,10 +173,23 @@ public class ControladorInterfazPartida : MonoBehaviour {
     /// <summary>Actualiza los datos mostrados en la lista para un solo jugador</summary>
     /// <param name="id">ID de partida del jguador a actualizar</param>
     /// <param name="datosJugador">Nuevos datos</param>
-    public void ActualizarJugador(int id, ClasesJSON.Jugador datosJugador) {
-        listaIconos[id].gameObject.SetActive(true); //Activar gameobject
+    private void ActualizarJugador(int id, ClasesJSON.Jugador datosJugador) {
         listaOverlaysColores[id].color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
         listaTextos[id].text = datosJugador.nombre; //Mostrar nombre
         listaIconos[id].sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
     }
+
+	//Igual a ActualizarJugador(), pero para el jugador actual
+	private void ActualizarJugadorActual(int id, ClasesJSON.Jugador datosJugador) {
+        jugadorActualColor.color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
+        jugadorActualTexto.text = datosJugador.nombre; //Mostrar nombre
+		jugadorActualIcono.sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
+	}
+
+    /// <summary>Muestra y esconde la lista de jugadores. Si se esconde, se muestra el jugador actual</summary>
+    /// <param name="mostrar">Si 'true', se muestra la lista y se esconde el jugador actual. Viceversa para 'false'</param>
+	public void MostrarListaJugadores(bool mostrar) {
+		listaIconos[0].transform.parent.gameObject.SetActive(mostrar);
+		jugadorActualIcono.gameObject.SetActive(!mostrar);
+	}
 }

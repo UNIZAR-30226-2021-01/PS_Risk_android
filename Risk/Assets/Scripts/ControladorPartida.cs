@@ -73,7 +73,6 @@ public class ControladorPartida : MonoBehaviour {
 		FaseActual = datosPartida.fase-1;
 		interfazPartida.ActualizarInterfaz(nuevaPartida);
 		print("TurnoJugador: " + datosPartida.turnoJugador + ". Jugador.id: " + idJugador);
-		Debug.Log("idJugador: " + idJugador);
 		mapa.ActualizarTerritorios(nuevaPartida.territorios);
 	}
 
