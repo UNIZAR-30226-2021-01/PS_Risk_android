@@ -154,8 +154,8 @@ public class ControladorInterfazPartida : MonoBehaviour {
 
         int nJugadores = datosSala.jugadores.Count;
 
-        foreach(ClasesJSON.Jugador j in datosSala.jugadores)
-            ActualizarJugador(j);
+        for(int id = 0; id < nJugadores; id++) //Iterar por los IDs de partida que se usan
+            ActualizarJugador(id,datosSala.jugadores[id]);
 
         //Desactivar el resto de gameobjects, los cuales no estan mostrando ningun jugador
         for(int i = nJugadores; i < 6; i++)
@@ -163,10 +163,9 @@ public class ControladorInterfazPartida : MonoBehaviour {
     }
     
     /// <summary>Actualiza los datos mostrados en la lista para un solo jugador</summary>
-    /// <param name="datosJugador">Nuevos datos, incluido el id del jguador en partida</param>
-    public void ActualizarJugador(ClasesJSON.Jugador datosJugador) {
-        int id = datosJugador.id - 1;
-
+    /// <param name="id">ID de partida del jguador a actualizar</param>
+    /// <param name="datosJugador">Nuevos datos</param>
+    public void ActualizarJugador(int id, ClasesJSON.Jugador datosJugador) {
         listaIconos[id].gameObject.SetActive(true); //Activar gameobject
         listaOverlaysColores[id].color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
         listaTextos[id].text = datosJugador.nombre; //Mostrar nombre

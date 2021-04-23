@@ -62,7 +62,6 @@ public class ControladorPartida : MonoBehaviour {
 			if (j.id == ControladorPrincipal.instance.usuarioRegistrado.id) {
 				jugador = j;
 				idJugador = i;
-				Debug.Log("j.id: " + j.id + " / ControladorPrincipal.instance.usuarioRegistrado.id: " + ControladorPrincipal.instance.usuarioRegistrado.id);
 			}
 		}
 		if (jugador == null){
@@ -74,6 +73,7 @@ public class ControladorPartida : MonoBehaviour {
 		FaseActual = datosPartida.fase-1;
 		interfazPartida.ActualizarInterfaz(nuevaPartida);
 		print("TurnoJugador: " + datosPartida.turnoJugador + ". Jugador.id: " + idJugador);
+		Debug.Log("idJugador: " + idJugador);
 		mapa.ActualizarTerritorios(nuevaPartida.territorios);
 	}
 
