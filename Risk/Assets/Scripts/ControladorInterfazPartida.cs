@@ -174,8 +174,9 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		}
 
 		//Desactivar el resto de gameobjects, los cuales no estan mostrando ningun jugador
-		for(int i = nJugadores; i < 6; i++)
+		for(int i = nJugadores; i < 6; i++) {
 			listaIconos[i].gameObject.SetActive(false);
+		}
 	}
 	
 	/// <summary>Actualiza los datos mostrados en la lista para un solo jugador</summary>
@@ -183,7 +184,8 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// <param name="datosJugador">Nuevos datos</param>
 	private void ActualizarJugador(int id, ClasesJSON.Jugador datosJugador) {
 		listaOverlaysColores[id].color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
-		listaTextos[id].text = datosJugador.nombre; //Mostrar nombre
+		listaTextos[id].text = "<color=#" + ColorUtility.ToHtmlStringRGB(ControladorPrincipal.instance.coloresJugadores[id]) + 
+				">'" + datosJugador.nombre + "'</color>"; //Mostrar nombre
 		listaIconos[id].sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
 	}
 
