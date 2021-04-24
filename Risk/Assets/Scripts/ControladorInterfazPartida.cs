@@ -18,6 +18,11 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	private TMP_InputField numeroAtaque;
 	[SerializeField]
 	private TMP_InputField numeroMovimiento;
+
+	[SerializeField]
+	private TextMeshProUGUI textoRefuerzosRestantes; //Campo de texto con el numero de refuerzos restantes por poner
+	[SerializeField]
+	private Animator animatorRefuerzosRestantes; //Animación para el indicador de refuerzos restantes
 	
 	// GameObjects que muestran la lista de jugadores
 	[SerializeField]
@@ -188,5 +193,19 @@ public class ControladorInterfazPartida : MonoBehaviour {
 			listaJugadoresAbierto = !listaJugadoresAbierto;
 			animatorJugadores.SetBool("Abierto", listaJugadoresAbierto);
 		}
+	}
+
+	/// <summary>Cambia el numero de refuerzos restantes a poner</summary>
+	/// <param name="numero">Nueva cantidad a mostrar</param>
+	public void ActualizarRefuerzosRestantes(int numero) {
+		textoRefuerzosRestantes.text = numero.ToString();
+	}
+
+	/// <summary>Mostrar o esconder el panel con los refuerzos restantes</summary>
+	/// <param name="mostrar">Si 'true', mostrar</param>
+	public void ToggleRefuerzosRestantes(bool mostrar) {
+		animatorRefuerzosRestantes.SetBool("Abierto", mostrar);
+		//Por alguna razon, la animación se reproduce dos veces, aunque solo se llama una vez
+		//¿Problema con el animator? Buscar
 	}
 }

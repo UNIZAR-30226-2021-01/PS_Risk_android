@@ -37,11 +37,18 @@ public class ControladorPartida : MonoBehaviour {
 	private int territorioOrigen = -1, territorioDestino = -1;
 	public static ControladorPartida instance;
 	private ClasesJSON.Jugador jugador = null;
-	public int idJugador = -1;
+	public int idJugador = -1; //ID del jugador del cliente
+	private int idJugadorActual = -1; //ID del jugador que le toca jugar
+	private int refuerzosRestantes; //Numero de refuerzos restantes por poner
 
 	private void Awake() {
 		instance = this;
 		gameObject.SetActive(false);
+	}
+
+	private void OnEnable() {
+		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
+		//Activar acordemente el menu de refuerzos que quedan por poner
 	}
 	
 	private void Update() {
@@ -71,7 +78,10 @@ public class ControladorPartida : MonoBehaviour {
 		}
 		datosPartida = nuevaPartida;
 		FaseActual = datosPartida.fase-1;
+		idJugadorActual = nuevaPartida.turnoJugador;
+		refuerzosRestantes = nuevaPartida.jugadores[idJugador].refuerzos;
 		interfazPartida.ActualizarInterfaz(nuevaPartida);
+		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
 		print("TurnoJugador: " + datosPartida.turnoJugador + " (" + datosPartida.jugadores.ToArray()[datosPartida.turnoJugador].nombre + "). Jugador.id: " + idJugador + "(" + datosPartida.jugadores.ToArray()[idJugador].nombre + "). Esperando confirmación: " + esperandoConfirmacion);
 		mapa.ActualizarTerritorios(nuevaPartida.territorios);
 	}
@@ -164,6 +174,8 @@ public class ControladorPartida : MonoBehaviour {
 		await ConexionWS.instance.EnviarWS(datos);
 		esperandoConfirmacion = true;
 		Deseleccionar();
+		refuerzosRestantes -= tropas;
+		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
 	}
 	
 	/// <summary>Invocado cuando se pulsa confirmar desde la ventana de ataque.
@@ -212,6 +224,7 @@ public class ControladorPartida : MonoBehaviour {
 		esperandoConfirmacion = false;
 		Deseleccionar();
 		interfazPartida.ActualizarFase(FaseActual);
+		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS);
 	}
 	
 	/// <summary>
