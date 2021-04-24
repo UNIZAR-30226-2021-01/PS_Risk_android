@@ -26,12 +26,12 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	private TextMeshProUGUI[] listaTextos;
 	[SerializeField]
 	private Image[] listaOverlaysColores;
-
-	// GameObjects que muestran el jugador actual
 	[SerializeField]
-	private Image jugadorActualIcono, jugadorActualColor;
+	private Animator animatorJugadores; //Animator de lista de jugadores
 	[SerializeField]
-	private TextMeshProUGUI jugadorActualTexto;
+	private TextMeshProUGUI textoJugadorActual; //Texto que indica quien es el jugador actual
+	
+	private bool listaJugadoresAbierto = false; //Indica si la lista de jugadores esta abierto o cerrado
 
 	private void OnEnable() {
 		fondoMenu.SetActive(false); // Animacion de fundido en el futuro (?)
@@ -162,8 +162,10 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		//Iterar por los IDs de partida que se usan
 		for(int id = 0; id < nJugadores; id++) {
 			ActualizarJugador(id,datosSala.jugadores[id]);
-			if(datosSala.turnoJugador == id) //Actualizar el indicador del jugador actual
-				ActualizarJugadorActual(id, datosSala.jugadores[id]);
+			if(datosSala.turnoJugador == id) { //Actualizar el texto que indica el jugador actual
+				textoJugadorActual.text = "Turno de: <color=#" + ColorUtility.ToHtmlStringRGB(ControladorPrincipal.instance.coloresJugadores[id]) + 
+				">'" + datosSala.jugadores[id].nombre + "'</color>";
+			}
 		}
 
 		//Desactivar el resto de gameobjects, los cuales no estan mostrando ningun jugador
@@ -180,17 +182,11 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		listaIconos[id].sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
 	}
 
-	//Igual a ActualizarJugador(), pero para el jugador actual
-	private void ActualizarJugadorActual(int id, ClasesJSON.Jugador datosJugador) {
-		jugadorActualColor.color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
-		jugadorActualTexto.text = datosJugador.nombre; //Mostrar nombre
-		jugadorActualIcono.sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
-	}
-
-	/// <summary>Muestra y esconde la lista de jugadores. Si se esconde, se muestra el jugador actual</summary>
-	/// <param name="mostrar">Si 'true', se muestra la lista y se esconde el jugador actual. Viceversa para 'false'</param>
-	public void MostrarListaJugadores(bool mostrar) {
-		listaIconos[0].transform.parent.gameObject.SetActive(mostrar);
-		jugadorActualIcono.gameObject.SetActive(!mostrar);
+	/// <summary>Muestra y esconde la lista de jugadores</summary>
+	public void ToggleListaJugadores() {
+		if(animatorJugadores != null) {
+			listaJugadoresAbierto = !listaJugadoresAbierto;
+			animatorJugadores.SetBool("Abierto", listaJugadoresAbierto);
+		}
 	}
 }
