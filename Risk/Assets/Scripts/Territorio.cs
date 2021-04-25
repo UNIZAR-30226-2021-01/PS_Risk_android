@@ -12,14 +12,14 @@ public class Territorio : MonoBehaviour {
 	private GameObject indicadorTu, indicadorSeleccionado;
 	private ClasesJSON.Territorio datosAnteriores;
 	[SerializeField]
-	private TextMeshPro numeroTropas;
+	private TextMeshPro textoNumeroTropas;
 	[SerializeField]
 	/// <summary>ID del territorio, iniciar en el editor</summary>
 	public int id;
 	/// <summary>Conexiones con otros territorios, inicializar en el editor</summary>
 	public Territorio[] conexiones;
 	/// <summary>ID del jugador (en cuanto a orden de la partida) del que pertence este territorio</summary>
-	public int pertenenciaJugador;
+	public int pertenenciaJugador, numeroTropas;
 	private bool oculto = false, seleccionado = false;
 	/// <summary>
 	/// Property publico para asignar el estado de oculto al territorio.
@@ -46,24 +46,37 @@ public class Territorio : MonoBehaviour {
 		}
 	}
 	
-	/// <summary> Si los datos recibidos son diferentes a los actuales muestra los cambios </summary>
+	/// <summary> Actualiza los datos del territorio con los datos proporciondos </summary>
 	/// <param name="nuevosDatos"> Nuevos datos a ser almacenados en este territorio </param>
-	public void ActualizarTerritorio(ClasesJSON.Territorio nuevosDatos){
+	public void AsignarTerritorio(ClasesJSON.Territorio nuevosDatos) {
 		if (datosAnteriores == null) {
 			id = nuevosDatos.id;
-		} else if (datosAnteriores.Equals(nuevosDatos)) {
-			// No hay nada que actualizar
-			return;
+			datosAnteriores = nuevosDatos;
 		}
 		aspectoTropa.sprite = ControladorPrincipal.instance.aspectos[ControladorPartida.instance.datosPartida.jugadores[nuevosDatos.jugador].aspecto];
 		overlayTropa.sprite = ControladorPrincipal.instance.colorAspectos[ControladorPartida.instance.datosPartida.jugadores[nuevosDatos.jugador].aspecto];
 		overlayTropa.color = ControladorPrincipal.instance.coloresJugadores[nuevosDatos.jugador];
 		overlayTerritorio.color = (oculto ? Color.black : ControladorPrincipal.instance.coloresJugadores[nuevosDatos.jugador])
 			* new Color(1,1,1,OPACIDAD_OVERLAY_TERRITORIO);
-		numeroTropas.text = nuevosDatos.tropas.ToString();
+		numeroTropas = nuevosDatos.tropas;
+		textoNumeroTropas.text = numeroTropas.ToString();
 		indicadorTu.SetActive(ControladorPartida.instance.idJugador == nuevosDatos.jugador);
 		pertenenciaJugador = nuevosDatos.jugador;
 		datosAnteriores = nuevosDatos;
+	}
+	
+	/// <summary> Si los datos recibidos son diferentes a los actuales muestra los cambios mediante una animación </summary>
+	/// <param name="nuevosDatos"> Nuevos datos a ser almacenados en este territorio </param>
+	public void ActualizarTerritorio(ClasesJSON.Territorio nuevosDatos) {
+		if (datosAnteriores == null) {
+			id = nuevosDatos.id;
+			datosAnteriores = nuevosDatos;
+		} else if (datosAnteriores.Equals(nuevosDatos)) {
+			// No hay nada que actualizar
+			return;
+		}
+		// Mostrar animación de los cambios
+		AsignarTerritorio(nuevosDatos);
 	}
 
 	/// <summary> Método invocado cuando se selecciona el territorio </summary>
@@ -72,7 +85,7 @@ public class Territorio : MonoBehaviour {
 	}
 	
 	/// <summary> Muestra recursivamente todos los territorios del jugador conectados con este territorio </summary>
-	public void MostrarContiguosUsuario(){
+	public void MostrarContiguosUsuario() {
 		Oculto = false;
 		foreach(Territorio t in conexiones){
 			if(pertenenciaJugador == t.pertenenciaJugador && t.Oculto){

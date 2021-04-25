@@ -36,10 +36,10 @@ public class ControladorPartida : MonoBehaviour {
 	private ControladorInterfazPartida interfazPartida;
 	private int territorioOrigen = -1, territorioDestino = -1;
 	public static ControladorPartida instance;
-	private ClasesJSON.Jugador jugador = null;
 	public int idJugador = -1; //ID del jugador del cliente
 	private int idJugadorActual = -1; //ID del jugador que le toca jugar
 	private int refuerzosRestantes; //Numero de refuerzos restantes por poner
+	private bool haMovido = false;
 
 	private void Awake() {
 		instance = this;
@@ -58,20 +58,17 @@ public class ControladorPartida : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// Invocado cuando se recibe un mensaje de partida completa.
-	/// Se actualiza el estado de la partida con el nuevo estado
+	/// Invocado cuando se entra a la partida.
 	/// </summary>
-	/// <param name="nuevaPartida"> Datos recibidos en el mensaje de partida completa </param>
-	public void ActualizarDatosPartida(ClasesJSON.PartidaCompleta nuevaPartida) {
+	/// <param name="nuevaPartida"> Datos de partida completa </param>
+	public void AsignarDatosPartida(ClasesJSON.PartidaCompleta nuevaPartida) {
 		for(int i = 0; i < nuevaPartida.jugadores.Count; i++){
-			// TODO: Actualizar lista de jugadores	
 			ClasesJSON.Jugador j = nuevaPartida.jugadores[i];
 			if (j.id == ControladorPrincipal.instance.usuarioRegistrado.id) {
-				jugador = j;
 				idJugador = i;
 			}
 		}
-		if (jugador == null){
+		if (idJugador == -1){
 			ControladorPrincipal.instance.PantallaError("Jugador no encontrado en partida");
 			ConexionWS.instance.CerrarConexionWebSocket();
 			ControladorPrincipal.instance.AbrirPantalla("Principal");
@@ -82,20 +79,29 @@ public class ControladorPartida : MonoBehaviour {
 		refuerzosRestantes = nuevaPartida.jugadores[idJugador].refuerzos;
 		interfazPartida.ActualizarInterfaz(nuevaPartida);
 		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
-		print("TurnoJugador: " + datosPartida.turnoJugador + " (" + datosPartida.jugadores.ToArray()[datosPartida.turnoJugador].nombre + "). Jugador.id: " + idJugador + "(" + datosPartida.jugadores.ToArray()[idJugador].nombre + "). Esperando confirmación: " + esperandoConfirmacion);
+		mapa.AsignarTerritorios(nuevaPartida.territorios);
+		haMovido = false;
+	}
+	
+	/// <summary>
+	/// Invocado cuando se recibe un mensaje de partida completa.
+	/// Se actualiza el estado de la partida con el nuevo estado
+	/// </summary>
+	/// <param name="nuevaPartida"> Datos recibidos en el mensaje de partida completa </param>
+	public void ActualizarDatosPartida(ClasesJSON.PartidaCompleta nuevaPartida) {
+		datosPartida = nuevaPartida;
+		FaseActual = datosPartida.fase-1;
+		idJugadorActual = nuevaPartida.turnoJugador;
+		refuerzosRestantes = nuevaPartida.jugadores[idJugador].refuerzos;
+		interfazPartida.ActualizarInterfaz(nuevaPartida);
+		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
 		mapa.ActualizarTerritorios(nuevaPartida.territorios);
+		ControladorPrincipal.instance.PantallaCarga(false);
 	}
 
 	/// <summary>Función llamada por cada territorio cuando este es seleccionado</summary>
 	/// <param name="territorio">Territorio seleccionado</param>
 	public void SeleccionTerritorio(Territorio territorio) {
-		print("Seleccionado territorio: {turnoJugador: " + datosPartida.turnoJugador +
-			", esperandoConfirmacion: " + esperandoConfirmacion +
-			", territorioOrigen: " + territorioOrigen +
-			", territorio.PetenenciaJugador" + territorio.pertenenciaJugador +
-			", idJugador: " + idJugador +
-			", FaseActual: " + FaseActual +
-			", jugador.refuerzos: " + jugador.refuerzos + "}");
 		if(datosPartida.turnoJugador != idJugador || esperandoConfirmacion){
 			// El jugador no debería poder interactuar
 			return;
@@ -110,16 +116,32 @@ public class ControladorPartida : MonoBehaviour {
 			territorioOrigen = territorio.id;
 			switch(FaseActual){
 				case (FASE_REFUERZOS):
-					if(jugador.refuerzos <= 0){
+					if(refuerzosRestantes <= 0){
 						Deseleccionar();
+						ControladorPrincipal.instance.PantallaInfo("No quedan tropas que colocar");
 						return;
 					}
-					interfazPartida.VentanaRefuerzos();
+					interfazPartida.VentanaRefuerzos(refuerzosRestantes);
 					break;
 				case (FASE_ATAQUE):
+					if (territorio.numeroTropas <= 1) {
+						Deseleccionar();
+						ControladorPrincipal.instance.PantallaInfo("No se puede atacar desde territorio con una sola tropa");
+						return;
+					}
 					mapa.MostrarAtaque(territorio.id);
 					break;
 				case (FASE_MOVIMIENTO):
+					if (haMovido) {
+						Deseleccionar();
+						ControladorPrincipal.instance.PantallaInfo("Solo se puede realizar un movimiento por turno");
+						return;
+					}
+					if (territorio.numeroTropas <= 1) {
+						Deseleccionar();
+						ControladorPrincipal.instance.PantallaInfo("No se puede mover desde territorio con una sola tropa");
+						return;
+					}
 					mapa.MostrarMovimiento(territorio.id);
 					break;
 			}
@@ -134,14 +156,14 @@ public class ControladorPartida : MonoBehaviour {
 			switch(FaseActual){
 				case (FASE_ATAQUE):
 					if(territorio.pertenenciaJugador != idJugador) {
-						interfazPartida.VentanaAtaque();
+						interfazPartida.VentanaAtaque(mapa.territorios[territorioOrigen].numeroTropas-1);
 					} else {
 						territorioDestino = -1;
 					}
 					break;
 				case (FASE_MOVIMIENTO):
 					if(territorio.pertenenciaJugador == idJugador) {
-					interfazPartida.VentanaMovimiento();
+						interfazPartida.VentanaMovimiento(mapa.territorios[territorioOrigen].numeroTropas-1);
 					} else {
 						territorioDestino = -1;
 					}
@@ -156,6 +178,7 @@ public class ControladorPartida : MonoBehaviour {
 	/// </summary>
 	public async void PasarFase() {
 		if (datosPartida.turnoJugador == idJugador) {
+			ControladorPrincipal.instance.PantallaCarga(true);
 			await ConexionWS.instance.EnviarWS(MSG_PASO_FASE);
 		}
 	}
@@ -174,8 +197,6 @@ public class ControladorPartida : MonoBehaviour {
 		await ConexionWS.instance.EnviarWS(datos);
 		esperandoConfirmacion = true;
 		Deseleccionar();
-		refuerzosRestantes -= tropas;
-		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
 	}
 	
 	/// <summary>Invocado cuando se pulsa confirmar desde la ventana de ataque.
@@ -224,7 +245,9 @@ public class ControladorPartida : MonoBehaviour {
 		esperandoConfirmacion = false;
 		Deseleccionar();
 		interfazPartida.ActualizarFase(FaseActual);
-		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS);
+		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
+		ControladorPrincipal.instance.PantallaCarga(false);
+		haMovido = false;
 	}
 	
 	/// <summary>
@@ -232,6 +255,8 @@ public class ControladorPartida : MonoBehaviour {
 	/// Se actualiza el territorio modificado
 	/// </summary>
 	public void ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos refuerzos){
+		refuerzosRestantes -= refuerzos.territorio.tropas-mapa.territorios[refuerzos.territorio.id].numeroTropas;
+		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes);
 		mapa.ActualizarTerritorio(refuerzos.territorio);
 		esperandoConfirmacion = false;
 		ControladorPrincipal.instance.PantallaCarga(false);
@@ -257,6 +282,7 @@ public class ControladorPartida : MonoBehaviour {
 		mapa.ActualizarTerritorio(movimiento.territorioDestino);
 		esperandoConfirmacion = false;
 		ControladorPrincipal.instance.PantallaCarga(false);
+		haMovido = true;
 	}
 
 	/// <summary>

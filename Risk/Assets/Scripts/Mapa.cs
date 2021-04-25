@@ -6,18 +6,6 @@ public class Mapa : MonoBehaviour {
 	/// <summary>Lista con los controladores de las tropas, asignados desde el editor</summary>
 	public Territorio[] territorios;
 
-	// PRUEBAS SOLO: Asignar territorios de manera aleatoria
-	public void generarAleatorio() {
-		for(int i = 0; i < 42; i++) {
-			int cid = Random.Range(0,5);
-			ClasesJSON.Territorio t = new ClasesJSON.Territorio();
-			t.id = i;
-			t.jugador = cid;
-			t.tropas = Random.Range(1,99);
-			territorios[i].ActualizarTerritorio(t);
-		}
-	}
-
 	///<summary>Actualiza los datos del territorio especificado</summary>
 	///<param name="nuevoTerritorio">Territorio a actualizar</param>
 	public void ActualizarTerritorio(ClasesJSON.Territorio nuevoTerritorio) {
@@ -29,6 +17,14 @@ public class Mapa : MonoBehaviour {
 	public void ActualizarTerritorios(List<ClasesJSON.Territorio> listaTerritorios) {
 		foreach (ClasesJSON.Territorio nt in listaTerritorios) {
 			territorios[nt.id].ActualizarTerritorio(nt);
+		}
+	}
+	
+	///<summary>Asigna los datos de los territorios especificados</summary>
+	///<param name="listaTerritorios">Lista de territorios a actualizar</param>
+	public void AsignarTerritorios(List<ClasesJSON.Territorio> listaTerritorios) {
+		foreach (ClasesJSON.Territorio nt in listaTerritorios) {
+			territorios[nt.id].AsignarTerritorio(nt);
 		}
 	}
 	

@@ -8,10 +8,11 @@
 	}
 	SubShader
 	{
-		Tags {"Queue"="AlphaTest" "IgnoreProjector"="True" "RenderType"="TransparentCutout"}
+		Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
 		LOD 100
-
+		ZWrite Off
 		Lighting Off
+		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{
@@ -50,10 +51,8 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float2 uv = floor(i.uv*500)/500;
-				fixed4 col = tex2D(_MainTex, i.uv);
-				col *= step(frac(100*(uv.x-uv.y-_Time.x/3)), 0.4);
-				clip(col.a - _Cutoff);
-				return _Color;
+				float a = tex2D(_MainTex, i.uv).a * step(frac(100*(uv.x-uv.y-_Time.x/3)), 0.4);
+				return fixed4(_Color.x, _Color.y, _Color.z, _Color.a*a);
 			}
 			ENDCG
 		}

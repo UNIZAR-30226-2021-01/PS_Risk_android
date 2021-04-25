@@ -488,10 +488,11 @@ MonoBehaviour:
   overlayTerritorio: {fileID: 8313625792170442783}
   indicadorTu: {fileID: 1291164819522999640}
   indicadorSeleccionado: {fileID: 6911103540042128229}
-  numeroTropas: {fileID: 1696651292065031913}
+  textoNumeroTropas: {fileID: 1696651292065031913}
   id: 0
   conexiones: []
   pertenenciaJugador: 0
+  numeroTropas: 0
 --- !u!1 &5893143665749351491
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ControladorCamara : MonoBehaviour {
-	private const float MIN_ZOOM = 1f, MAX_ZOOM = 5f;
+	private const float MIN_ZOOM = 1.5f, MAX_ZOOM = 5f, VELOCIDAD_ZOOM = 0.0075f, MAX_TIEMPO_TOQUE = 0.5f, MAX_DISTANCIA_TOQUE = 50f;
 	private Camera mainCam;
 	[SerializeField]
-	private float velocidadZoom, maxTiempoToque, maxDistanciaToque;
 	private bool permitirMovimiento;
 	// Posición en worldspace de la esquina inferior izquierda de la cámara
 	private Vector2 esquinaII;
@@ -75,7 +74,7 @@ public class ControladorCamara : MonoBehaviour {
 						break;
 					case TouchPhase.Ended:
 						// Ocurre in toque
-						if(Time.realtimeSinceStartup-tiempoToque <= maxTiempoToque && Vector2.Distance(t.position, posicionComienzoToque) <= maxDistanciaToque){
+						if(Time.realtimeSinceStartup-tiempoToque <= MAX_TIEMPO_TOQUE && Vector2.Distance(t.position, posicionComienzoToque) <= MAX_DISTANCIA_TOQUE){
 							Vector2 punto = mainCam.ScreenToWorldPoint(Input.GetTouch(0).position);
 							RaycastHit2D hit = Physics2D.Raycast(punto, Vector2.zero);
 							if(hit.collider != null){
@@ -92,7 +91,7 @@ public class ControladorCamara : MonoBehaviour {
 				Touch t0 = Input.GetTouch(0);
 				Touch t1 = Input.GetTouch(1);
 				float dist = Vector2.Distance(t0.position, t1.position)-Vector2.Distance(t0.position+t0.deltaPosition, t1.position+t1.deltaPosition);
-				mainCam.orthographicSize = Mathf.Lerp(MIN_ZOOM, MAX_ZOOM, Mathf.InverseLerp(MIN_ZOOM, MAX_ZOOM, mainCam.orthographicSize+dist*velocidadZoom));
+				mainCam.orthographicSize = Mathf.Lerp(MIN_ZOOM, MAX_ZOOM, Mathf.InverseLerp(MIN_ZOOM, MAX_ZOOM, mainCam.orthographicSize+dist*VELOCIDAD_ZOOM));
 				ReajustarPantalla();
 			}
 		}

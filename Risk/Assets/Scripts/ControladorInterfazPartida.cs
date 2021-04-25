@@ -23,20 +23,15 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	private TextMeshProUGUI textoRefuerzosRestantes; //Campo de texto con el numero de refuerzos restantes por poner
 	[SerializeField]
 	private Animator animatorRefuerzosRestantes; //Animación para el indicador de refuerzos restantes
-	
-	// GameObjects que muestran la lista de jugadores
 	[SerializeField]
-	private Image[] listaIconos;
-	[SerializeField]
-	private TextMeshProUGUI[] listaTextos;
-	[SerializeField]
-	private Image[] listaOverlaysColores;
+	private JugadorPartida[] listaJugadores;
 	[SerializeField]
 	private Animator animatorJugadores; //Animator de lista de jugadores
 	[SerializeField]
 	private TextMeshProUGUI textoJugadorActual; //Texto que indica quien es el jugador actual
 	
 	private bool listaJugadoresAbierto = false; //Indica si la lista de jugadores esta abierto o cerrado
+	private int limiteTropas;
 
 	private void OnEnable() {
 		fondoMenu.SetActive(false); // Animacion de fundido en el futuro (?)
@@ -102,15 +97,17 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// Aumenta en uno el numero de tropas
 	/// </summary>
 	public void AumentarTropas() {
-		numeroTropas++;
-		ActualizarNumeroTropas();
+		if (numeroTropas < limiteTropas) {
+			numeroTropas++;
+			ActualizarNumeroTropas();
+		}
 	}
 	
 	/// <summary>
 	/// Disminuye en uno el numero de tropas
 	/// </summary>
 	public void DisminuirTropas() {
-		if (numeroTropas > 0) {
+		if (numeroTropas > 1) {
 			numeroTropas--;
 			ActualizarNumeroTropas();
 		}
@@ -120,34 +117,41 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// Disminuye en uno el numero de tropas
 	/// </summary>
 	public void AsignarTropas(string s) {
-		numeroTropas = int.Parse(s);
-		ActualizarNumeroTropas();
+		int prevNum = numeroTropas;
+		int newNum = Mathf.Clamp(int.Parse(s), 1, limiteTropas);
+		if (prevNum != newNum) {
+			numeroTropas = newNum;
+			ActualizarNumeroTropas();
+		}
 	}
 	
 	/// <summary>
 	/// Activa la ventana de refuerzos
 	/// </summary>
-	public void VentanaRefuerzos() {
-		numeroTropas = 0;
-		numeroRefuerzos.text = "0";
+	public void VentanaRefuerzos(int refuerzos) {
+		numeroTropas = 1;
+		numeroRefuerzos.text = "1";
+		limiteTropas = refuerzos;
 		ventanaRefuerzos.SetActive(true);
 	}
 	
 	/// <summary>
 	/// Activa la ventana de ataque
 	/// </summary>
-	public void VentanaAtaque() {
-		numeroTropas = 0;
-		numeroAtaque.text = "0";
+	public void VentanaAtaque(int atacantes) {
+		numeroTropas = 1;
+		numeroAtaque.text = "1";
+		limiteTropas = atacantes;
 		ventanaAtaque.SetActive(true);
 	}
 	
 	/// <summary>
 	/// Activa la ventana de movimiento
 	/// </summary>
-	public void VentanaMovimiento() {
-		numeroTropas = 0;
-		numeroMovimiento.text = "0";
+	public void VentanaMovimiento(int tropas) {
+		numeroTropas = 1;
+		numeroMovimiento.text = "1";
+		limiteTropas = tropas;
 		ventanaMovimiento.SetActive(true);
 	}
 	
@@ -169,32 +173,30 @@ public class ControladorInterfazPartida : MonoBehaviour {
 			ActualizarJugador(id,datosSala.jugadores[id]);
 			if(datosSala.turnoJugador == id) { //Actualizar el texto que indica el jugador actual
 				textoJugadorActual.text = "Turno de: <color=#" + ColorUtility.ToHtmlStringRGB(ControladorPrincipal.instance.coloresJugadores[id]) + 
-				">'" + datosSala.jugadores[id].nombre + "'</color>";
+				">" + datosSala.jugadores[id].nombre + "</color>";
 			}
 		}
 
 		//Desactivar el resto de gameobjects, los cuales no estan mostrando ningun jugador
 		for(int i = nJugadores; i < 6; i++) {
-			listaIconos[i].gameObject.SetActive(false);
+			listaJugadores[i].gameObject.SetActive(false);
 		}
 	}
 	
 	/// <summary>Actualiza los datos mostrados en la lista para un solo jugador</summary>
-	/// <param name="id">ID de partida del jguador a actualizar</param>
+	/// <param name="id">ID de partida del jugador a actualizar</param>
 	/// <param name="datosJugador">Nuevos datos</param>
 	private void ActualizarJugador(int id, ClasesJSON.Jugador datosJugador) {
-		listaOverlaysColores[id].color = ControladorPrincipal.instance.coloresJugadores[id]; //Colorear bandera
-		listaTextos[id].text = "<color=#" + ColorUtility.ToHtmlStringRGB(ControladorPrincipal.instance.coloresJugadores[id]) + 
-				">'" + datosJugador.nombre + "'</color>"; //Mostrar nombre
-		listaIconos[id].sprite = ControladorPrincipal.instance.iconos[datosJugador.icono]; //Mostrar icono
+		JugadorPartida jugador = listaJugadores[id];
+		jugador.icono.sprite = ControladorPrincipal.instance.iconos[datosJugador.icono];
+		jugador.banderaColor.color = ControladorPrincipal.instance.coloresJugadores[id];
+		jugador.nombre.text = datosJugador.nombre;
 	}
 
 	/// <summary>Muestra y esconde la lista de jugadores</summary>
 	public void ToggleListaJugadores() {
-		if(animatorJugadores != null) {
-			listaJugadoresAbierto = !listaJugadoresAbierto;
-			animatorJugadores.SetBool("Abierto", listaJugadoresAbierto);
-		}
+		listaJugadoresAbierto = !listaJugadoresAbierto;
+		animatorJugadores.SetBool("Abierto", listaJugadoresAbierto);
 	}
 
 	/// <summary>Cambia el numero de refuerzos restantes a poner</summary>
@@ -207,7 +209,5 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// <param name="mostrar">Si 'true', mostrar</param>
 	public void ToggleRefuerzosRestantes(bool mostrar) {
 		animatorRefuerzosRestantes.SetBool("Abierto", mostrar);
-		//Por alguna razon, la animación se reproduce dos veces, aunque solo se llama una vez
-		//¿Problema con el animator? Buscar
 	}
 }

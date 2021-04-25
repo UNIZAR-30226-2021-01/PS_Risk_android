@@ -48,9 +48,8 @@ public class ConexionWS : MonoBehaviour {
 	public async Task<bool> ConexionWebSocket(string direccion) {
 		
 		if (ws != null && ws.State == WebSocketState.Open) {
-			// Conexión websocket ya existe, no es necesario crear una nueva
+			// Conexión websocket ya existe, cerrarlo y crear una nueva
 			CerrarConexionWebSocket();
-			//return true;
 		}
 
 		ws = new WebSocket(DIRECCION_PETICIONES + direccion);
@@ -134,7 +133,7 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("p"):
 						// Datos de partida completa: Empezar partida
-						ControladorPartida.instance.ActualizarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
+						ControladorPartida.instance.AsignarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
 						estadoActual = Estado.partida;
 						cp.AbrirPantalla("Partida");
 						break;
@@ -166,7 +165,7 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("p"):
 						// Datos de partida completa: Empezar partida
-						ControladorPartida.instance.ActualizarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
+						ControladorPartida.instance.AsignarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
 						estadoActual = Estado.partida;
 						cp.AbrirPantalla("Partida");
 						break;
@@ -196,6 +195,18 @@ public class ConexionWS : MonoBehaviour {
 					case ("m"):
 						// Confirmacion de ataque
 						ControladorPartida.instance.ConfirmacionMovimiento(JsonConvert.DeserializeObject<ClasesJSON.ConfirmacionMovimiento>(mensaje));
+						break;
+					case ("d"):
+						// Datos de sala: Unirse a sala de espera
+						estadoActual = Estado.salaEspera;
+						ClasesJSON.DatosSala datosSala = JsonConvert.DeserializeObject<ClasesJSON.DatosSala>(mensaje);
+						if(datosSala.jugadores.ToArray()[0].id == ControladorPrincipal.instance.usuarioRegistrado.id){
+							controladorEsperaHost.ActualizarDatosSalaEspera(mensaje);
+							cp.AbrirPantalla("SalaEsperaHost");
+						} else {
+							controladorEsperaInvitado.ActualizarDatosSalaEspera(mensaje);
+							cp.AbrirPantalla("SalaEsperaInvitado");
+						}
 						break;
 					case ("x"):
 						// Fin de partida, terminar partida
