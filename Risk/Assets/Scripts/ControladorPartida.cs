@@ -232,8 +232,8 @@ public class ControladorPartida : MonoBehaviour {
 	}
 	
 	/// <summary>Invocado cuando se termina la partida. Muestra los resultados de la partida</summary>
-	public void FinPartida(){
-		interfazPartida.VentanaFin();
+	public void FinPartida(ClasesJSON.FinPartida datos){
+		interfazPartida.VentanaFin(datos);
 	}
 	
 	/// <summary>

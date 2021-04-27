@@ -25,7 +25,7 @@ public class Notificacion : MonoBehaviour {
 	private ClasesJSON.Notificacion datos; //Datos de la notificación, como idEnvio, extraInfo y tipo
 
 	private const string TIPO_AMISTAD = "Peticion de amistad";
-	private const string TIPO_TURNO = "turno";
+	private const string TIPO_TURNO = "Notificacion de turno";
 	private const string TIPO_INVICATION = "Invitacion";
 	
 	/// <summary>
@@ -41,7 +41,7 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			case TIPO_TURNO:
-				//TODO
+				Destroy(gameObject);
 				break;
 
 			case TIPO_INVICATION:
@@ -67,7 +67,7 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			case TIPO_TURNO:
-				//TODO
+				AceptarTurno();
 				break;
 
 			case TIPO_INVICATION:
@@ -101,7 +101,7 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			case TIPO_TURNO:
-				nombre.text = "Notificación Turno";
+				nombre.text = "Es tu turno en la partida <b><color=#FF0000>" + datos.infoExtra + "</color></b>";
 				break;
 
 			case TIPO_INVICATION:
@@ -147,6 +147,20 @@ public class Notificacion : MonoBehaviour {
 		ClasesJSON.AceptarSala datosSala = new ClasesJSON.AceptarSala(usuario.id, usuario.clave, datos.idEnvio);
 		string datosEnviar = JsonConvert.SerializeObject(datosSala);
 		if(!(await ConexionWS.instance.ConexionWebSocket("aceptarSala"))){
+			ControladorPrincipal.instance.PantallaError("No se ha podido realizar la conexión con el servidor");
+		} else {
+			await ConexionWS.instance.EnviarWS(datosEnviar);
+			try{
+				Destroy(gameObject);
+			} catch {}
+		}
+	}
+	
+	private async void AceptarTurno() {
+		Usuario usuario = ControladorPrincipal.instance.usuarioRegistrado;
+		ClasesJSON.AceptarSala datosSala = new ClasesJSON.AceptarSala(usuario.id, usuario.clave, datos.idEnvio);
+		string datosEnviar = JsonConvert.SerializeObject(datosSala);
+		if(!(await ConexionWS.instance.ConexionWebSocket("entrarPartida"))){
 			ControladorPrincipal.instance.PantallaError("No se ha podido realizar la conexión con el servidor");
 		} else {
 			await ConexionWS.instance.EnviarWS(datosEnviar);

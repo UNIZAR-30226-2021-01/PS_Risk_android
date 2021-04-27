@@ -6,6 +6,9 @@ using TMPro;
 public class Territorio : MonoBehaviour {
 
 	private const float OPACIDAD_OVERLAY_TERRITORIO = 0.75f;
+	private const int FASE_REFUERZOS = 0;
+	private const int FASE_ATAQUE = 1;
+	private const int FASE_MOVIMIENTO = 2;
 	[SerializeField]
 	private SpriteRenderer aspectoTropa, overlayTropa, overlayTerritorio;
 	[SerializeField]
@@ -13,6 +16,8 @@ public class Territorio : MonoBehaviour {
 	private ClasesJSON.Territorio datosAnteriores;
 	[SerializeField]
 	private TextMeshPro textoNumeroTropas;
+	[SerializeField]
+	private IndicadorCambioTropas textoCambio;
 	[SerializeField]
 	/// <summary>ID del territorio, iniciar en el editor</summary>
 	public int id;
@@ -35,7 +40,6 @@ public class Territorio : MonoBehaviour {
 			oculto = value;
 		}
 	}
-
 	/// <summary>
 	///	</summary> 
 	public bool Seleccionado {
@@ -76,6 +80,10 @@ public class Territorio : MonoBehaviour {
 			return;
 		}
 		// Mostrar animación de los cambios
+		if(datosAnteriores.jugador != nuevosDatos.jugador) {
+			textoCambio.Animar(nuevosDatos.tropas);
+		}
+		textoCambio.Animar(nuevosDatos.tropas-datosAnteriores.tropas);
 		AsignarTerritorio(nuevosDatos);
 	}
 

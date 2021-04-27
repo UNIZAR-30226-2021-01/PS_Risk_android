@@ -29,6 +29,8 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	private Animator animatorJugadores; //Animator de lista de jugadores
 	[SerializeField]
 	private TextMeshProUGUI textoJugadorActual; //Texto que indica quien es el jugador actual
+	[SerializeField]
+	private TextMeshProUGUI textoFin;
 	
 	private bool listaJugadoresAbierto = false; //Indica si la lista de jugadores esta abierto o cerrado
 	private int limiteTropas;
@@ -158,7 +160,12 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// <summary>
 	/// Activa la ventana de resultados de la partida
 	/// </summary>
-	public void VentanaFin() {
+	public void VentanaFin(ClasesJSON.FinPartida datos) {
+		textoFin.text = "El ganador de la partida es <color=#" + ColorUtility.ToHtmlStringRGB(ControladorPrincipal.instance.coloresJugadores[datos.idGanador]) + 
+				">" + ControladorPartida.instance.datosPartida.jugadores[datos.idGanador].nombre + "</color>";
+		if (datos.idGanador == ControladorPartida.instance.idJugador) {
+			textoFin.text += "\n Has ganado " + datos.riskos.ToString() + " riskos";
+		}
 		ventanaFin.SetActive(true);
 	}
 	

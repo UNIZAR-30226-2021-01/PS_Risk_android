@@ -258,6 +258,14 @@ public static class ClasesJSON {
 	public class ConfirmacionMovimiento : MensajeWebsocket {
 		public Territorio territorioOrigen, territorioDestino;
 	}
+	
+	/// <sumary>
+	/// Clase serializable para el mensaje Websocket 'Fin de partida'
+	/// </sumary>
+	[System.Serializable]
+	public class FinPartida : MensajeWebsocket {
+		public int idGanador, riskos;
+	}
 
 	/// <summary>
 	/// Clase serializable para el mensaje Websocket 'Jugador'.

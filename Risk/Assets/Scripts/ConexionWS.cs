@@ -32,6 +32,12 @@ public class ConexionWS : MonoBehaviour {
 		#endif
 	}
 	
+	private void OnApplicationQuit() {
+		if (ws != null) {
+			ws.Close();
+		}
+	}
+	
 	/// <summary>Realiza una petición WebSocket con el formulario en formato de string json.</summary>
 	/// <param name="form">Mensaje a enviar</param>
 	public async Task EnviarWS(string form) {
@@ -208,9 +214,9 @@ public class ConexionWS : MonoBehaviour {
 							cp.AbrirPantalla("SalaEsperaInvitado");
 						}
 						break;
-					case ("x"):
+					case ("t"):
 						// Fin de partida, terminar partida
-						ControladorPartida.instance.FinPartida();
+						ControladorPartida.instance.FinPartida(JsonConvert.DeserializeObject<ClasesJSON.FinPartida>(mensaje));
 						break;
 					case ("e"):
 						// Error
