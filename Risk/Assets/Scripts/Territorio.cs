@@ -82,8 +82,9 @@ public class Territorio : MonoBehaviour {
 		// Mostrar animación de los cambios
 		if(datosAnteriores.jugador != nuevosDatos.jugador) {
 			textoCambio.Animar(nuevosDatos.tropas);
+		} else {
+			textoCambio.Animar(nuevosDatos.tropas-datosAnteriores.tropas);
 		}
-		textoCambio.Animar(nuevosDatos.tropas-datosAnteriores.tropas);
 		AsignarTerritorio(nuevosDatos);
 	}
 

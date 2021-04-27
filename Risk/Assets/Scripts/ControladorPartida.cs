@@ -46,11 +46,6 @@ public class ControladorPartida : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
-	private void OnEnable() {
-		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
-		//Activar acordemente el menu de refuerzos que quedan por poner
-	}
-	
 	private void Update() {
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			print(FaseActual);
@@ -81,6 +76,7 @@ public class ControladorPartida : MonoBehaviour {
 		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
 		mapa.AsignarTerritorios(nuevaPartida.territorios);
 		haMovido = false;
+		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
 	}
 	
 	/// <summary>
@@ -97,6 +93,7 @@ public class ControladorPartida : MonoBehaviour {
 		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
 		mapa.ActualizarTerritorios(nuevaPartida.territorios);
 		ControladorPrincipal.instance.PantallaCarga(false);
+		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
 	}
 
 	/// <summary>Función llamada por cada territorio cuando este es seleccionado</summary>
