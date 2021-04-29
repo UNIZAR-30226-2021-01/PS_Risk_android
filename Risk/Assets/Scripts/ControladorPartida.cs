@@ -244,6 +244,7 @@ public class ControladorPartida : MonoBehaviour {
 		interfazPartida.ActualizarFase(FaseActual);
 		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
 		ControladorPrincipal.instance.PantallaCarga(false);
+		interfazPartida.MostrarHistorialUltimaBatalla(false);
 		haMovido = false;
 	}
 	
@@ -267,7 +268,9 @@ public class ControladorPartida : MonoBehaviour {
 		mapa.ActualizarTerritorio(ataque.territorioOrigen);
 		mapa.ActualizarTerritorio(ataque.territorioDestino);
 		esperandoConfirmacion = false;
+		interfazPartida.ActualizarHistorialUltimaBatalla(ataque); //Mostrar Dados
 		ControladorPrincipal.instance.PantallaCarga(false);
+		interfazPartida.MostrarHistorialUltimaBatalla(true);
 	}
 
 	/// <summary>

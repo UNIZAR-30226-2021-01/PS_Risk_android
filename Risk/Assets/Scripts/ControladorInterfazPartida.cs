@@ -31,6 +31,30 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	private TextMeshProUGUI textoJugadorActual; //Texto que indica quien es el jugador actual
 	[SerializeField]
 	private TextMeshProUGUI textoFin;
+
+	//Historial, gameobjecst que muestran los resultados de la ultima batalla
+	[SerializeField]
+	private GameObject historialPanel; //Panel del historial de la ultima batalla
+	[SerializeField]
+	private Image[] historialDados; //Array de tamaño 5 con todos los dados que se pueden mostrar en el historial. Dos primeros son los de defensa
+	[SerializeField]
+	private GameObject[] historialDadosOutline; //Outline para cada dado en caso de que este resulte ganador, array de 4 ya que el último nunca puede iluminarse
+	[SerializeField]
+	private Image[] historialTropas; //Tropas en el historial, primero defensor
+	[SerializeField]
+	private Image[] historialTropasColor; //Overlay de color para las tropas en el historial, primero defensor
+	[SerializeField]
+	private TextMeshProUGUI[] historialTextos; //Textos del historial, 0 para cantidad defensor, 1 para cambio defensor, 2 para cantidad atacante, 3 para cambio atacante
+
+	[SerializeField]
+	private Sprite[] dadosRojos; //Array de sprites de los dados rojos (Ataque)
+	[SerializeField]
+	private Sprite[] dadosBlancos; //Array de sprites de los dados blancos (Defensa)
+	[SerializeField]
+	private Sprite dadosOutline; //Outline para indicar que dado ha permitido derrotar a otro dado
+
+	[SerializeField]
+	private Animator animatorUltimaBatalla; //Aminator del menu de la última batalla
 	
 	private bool listaJugadoresAbierto = false; //Indica si la lista de jugadores esta abierto o cerrado
 	private int limiteTropas;
@@ -216,5 +240,86 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// <param name="mostrar">Si 'true', mostrar</param>
 	public void ToggleRefuerzosRestantes(bool mostrar) {
 		animatorRefuerzosRestantes.SetBool("Abierto", mostrar);
+	}
+
+	/// <summary>Actualiza y permite ver la pantalla de la última batalla</summary>
+	/// <param name="ataque">Información con el último ataque</param>
+	public void ActualizarHistorialUltimaBatalla(ClasesJSON.ConfirmacionAtaque ataque) {
+		ClasesJSON.Territorio origen = ataque.territorioOrigen;
+		ClasesJSON.Territorio destino = ataque.territorioDestino;
+
+		//Indicar cuantas tropas quedan
+		historialTextos[0].text = destino.tropas.ToString();
+		historialTextos[2].text = origen.tropas.ToString();
+
+		int perdidasAtacante = 0;
+		int perdidasDefensor = 0;
+
+		//Desactivar todos los outlines de los dados
+		foreach(var o in historialDadosOutline)
+			o.SetActive(false);
+
+		//Desactivar todos los dados
+		foreach(var o in historialDados)
+			o.gameObject.SetActive(false);
+
+		//Obtener cuantos dados se comparan, puede ser 1 o 2
+		int minDados = Mathf.Min(ataque.dadosOrigen.Length, ataque.dadosDestino.Length);
+
+		//Activar los outlines y obtener perdidas de soldados
+		for(int i = 0; i < minDados; i++) {
+			bool comparacion = ataque.dadosDestino[i] >= ataque.dadosOrigen[i];
+			historialDadosOutline[i].SetActive(comparacion); //Defensa
+			historialDadosOutline[i + 2].SetActive(!comparacion); //Ataque
+
+			if(comparacion)
+				perdidasAtacante++;
+			else
+				perdidasDefensor++;
+		}
+
+		//Actualizar dados defensa
+		for(int i = 0; i < ataque.dadosDestino.Length; i++) {
+			historialDados[i].gameObject.SetActive(true);
+			historialDados[i].overrideSprite = dadosBlancos[ataque.dadosDestino[i] - 1];
+		}
+		//Actualizar dados ataque
+		for(int i = 0; i < ataque.dadosOrigen.Length; i++) {
+			historialDados[i + 2].gameObject.SetActive(true);
+			historialDados[i + 2].overrideSprite = dadosRojos[ataque.dadosOrigen[i] - 1];
+		}
+
+		//Tropas
+		int jugadorAtacante = ataque.territorioOrigen.jugador;
+		int jugadorDefensor = ataque.territorioDestino.jugador;
+
+		int skinAtacante = ControladorPartida.instance.datosPartida.jugadores[jugadorAtacante].aspecto;
+		int skinDefensor = ControladorPartida.instance.datosPartida.jugadores[jugadorDefensor].aspecto;
+
+		historialTropas[1].overrideSprite = ControladorPrincipal.instance.aspectos[skinAtacante]; //Aspecto
+		historialTropas[0].overrideSprite = ControladorPrincipal.instance.aspectos[skinDefensor];
+
+		historialTropasColor[1].color = ControladorPrincipal.instance.coloresJugadores[jugadorAtacante];
+		historialTropasColor[0].color = ControladorPrincipal.instance.coloresJugadores[jugadorDefensor];
+
+		historialTextos[3].text = "(-" + perdidasAtacante + ")";
+
+		//Comprobar si el territorio defendiendo ha perdido todas las tropas (Movimiento)
+		if(jugadorAtacante == jugadorDefensor) { //En caso de movimiento de tropas
+			historialTextos[1].text = "(" + destino.tropas + ")"; 
+		} else { //En caso contrario
+			historialTextos[1].text = "(-" + perdidasDefensor + ")";
+		}
+	}
+
+	/// <summary>Abre y cierra la ventana con los datos de la ultima batalla</summary>
+	public void ToggleHistorialUltimaBatalla() {
+		animatorUltimaBatalla.SetBool("Abierto", !animatorUltimaBatalla.GetBool("Abierto"));
+	}
+
+	/// <summary>Muestra y esconde la ventana con la información de la última batalla</summary>
+	/// <param name="mostrar">Si 'true', la ventana se mostrara, y viceversa</param>
+	public void MostrarHistorialUltimaBatalla(bool mostrar) {
+		historialPanel.SetActive(mostrar);
 	}
 }
