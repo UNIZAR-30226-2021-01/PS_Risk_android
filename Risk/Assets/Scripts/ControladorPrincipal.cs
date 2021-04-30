@@ -79,6 +79,7 @@ public class ControladorPrincipal : MonoBehaviour
 			GameObject hijo = transform.GetChild(i).gameObject;
 			pantallas.Add(hijo.name, hijo);
 		}
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
 
 	/// <summary>Cambia la pantalla actual por la pantalla especificada, si existe</summary>

@@ -76,7 +76,9 @@ public class Territorio : MonoBehaviour {
 			id = nuevosDatos.id;
 			datosAnteriores = nuevosDatos;
 		} else if (datosAnteriores.Equals(nuevosDatos)) {
-			// No hay nada que actualizar
+			// No hay nada que actualizar, mostrar los cambios de aspectos si han ocurrido
+			aspectoTropa.sprite = ControladorPrincipal.instance.aspectos[ControladorPartida.instance.datosPartida.jugadores[nuevosDatos.jugador].aspecto];
+			overlayTropa.sprite = ControladorPrincipal.instance.colorAspectos[ControladorPartida.instance.datosPartida.jugadores[nuevosDatos.jugador].aspecto];
 			return;
 		}
 		// Mostrar animación de los cambios

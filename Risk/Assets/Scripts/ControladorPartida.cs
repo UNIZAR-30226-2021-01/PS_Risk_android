@@ -77,6 +77,7 @@ public class ControladorPartida : MonoBehaviour {
 		mapa.AsignarTerritorios(nuevaPartida.territorios);
 		haMovido = false;
 		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
+		interfazPartida.MostrarHistorialUltimaBatalla(false);
 	}
 	
 	/// <summary>
@@ -94,6 +95,7 @@ public class ControladorPartida : MonoBehaviour {
 		mapa.ActualizarTerritorios(nuevaPartida.territorios);
 		ControladorPrincipal.instance.PantallaCarga(false);
 		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
+		interfazPartida.MostrarHistorialUltimaBatalla(false);
 	}
 
 	/// <summary>Función llamada por cada territorio cuando este es seleccionado</summary>

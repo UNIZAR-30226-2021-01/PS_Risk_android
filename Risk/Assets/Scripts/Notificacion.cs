@@ -41,7 +41,7 @@ public class Notificacion : MonoBehaviour {
 				break;
 
 			case TIPO_TURNO:
-				Destroy(gameObject);
+				RechazarTurno();
 				break;
 
 			case TIPO_INVICATION:
@@ -168,6 +168,30 @@ public class Notificacion : MonoBehaviour {
 				Destroy(gameObject);
 			} catch {}
 		}
+	}
+	
+	private async void RechazarTurno() {
+
+		//Crear formulario
+		WWWForm form = new WWWForm();
+		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
+		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
+		form.AddField("idSala", datos.idEnvio);
+
+		//Obtener respuesta del servidor
+		string respuesta = await ConexionHTTP.instance.RequestHTTP("borrarNotificacionTurno", form);
+
+		//Procesar respuesta
+		try {
+			//Error, ir a la pantalla de error
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(respuesta);
+			if(error.code != 0) //Mostrar pantalla de error solo si la respuesta no es error 0
+				ControladorPrincipal.instance.PantallaError(error.err);
+			else { //Si no, se puede borrar la notificacion
+				Destroy(gameObject);
+				controladorNotificaciones.notificaciones.Remove(datos);
+			}
+		} catch {}
 	}
 	
 	private async void RechazarPartida(){

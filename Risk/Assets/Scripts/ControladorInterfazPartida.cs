@@ -10,6 +10,8 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	[SerializeField]
 	private GameObject ventanaFin, ventanaRefuerzos, ventanaAtaque, ventanaMovimiento;
 	[SerializeField]
+	private Sprite[] spriteIndicadorFase;
+	[SerializeField]
 	private Image[] indicadorFase;
 	private int numeroTropas;
 	[SerializeField]
@@ -106,7 +108,8 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// </summary>
 	public void ActualizarFase(int fase){
 		for (int i = 0; i < 3; i++) {
-			indicadorFase[i].color = (i == fase ? Color.white : Color.black);
+			indicadorFase[i].sprite = spriteIndicadorFase[(i == fase ? 0 : 1)];
+			indicadorFase[i].color = (i == fase ? new Color(0.3f, 1, 0.3f, 1) : new Color(0.75f, 0.75f, 0.75f, 1));
 		}
 	}
 	
@@ -241,6 +244,11 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	public void ToggleRefuerzosRestantes(bool mostrar) {
 		animatorRefuerzosRestantes.SetBool("Abierto", mostrar);
 	}
+	
+	private IEnumerator esperarAnimadorRefuerzos(bool mostrar){
+		yield return new WaitForEndOfFrame();
+		animatorRefuerzosRestantes.SetBool("Abierto", mostrar);
+	}
 
 	/// <summary>Actualiza y permite ver la pantalla de la última batalla</summary>
 	/// <param name="ataque">Información con el último ataque</param>
@@ -250,41 +258,35 @@ public class ControladorInterfazPartida : MonoBehaviour {
 
 		//Indicar cuantas tropas quedan
 		historialTextos[0].text = destino.tropas.ToString();
-		historialTextos[2].text = origen.tropas.ToString();
-
-		int perdidasAtacante = 0;
-		int perdidasDefensor = 0;
+		historialTextos[1].text = origen.tropas.ToString();
 
 		//Desactivar todos los outlines de los dados
-		foreach(var o in historialDadosOutline)
+		foreach (var o in historialDadosOutline) {
 			o.SetActive(false);
+		}
 
 		//Desactivar todos los dados
-		foreach(var o in historialDados)
+		foreach (var o in historialDados) {
 			o.gameObject.SetActive(false);
+		}
 
 		//Obtener cuantos dados se comparan, puede ser 1 o 2
 		int minDados = Mathf.Min(ataque.dadosOrigen.Length, ataque.dadosDestino.Length);
 
 		//Activar los outlines y obtener perdidas de soldados
-		for(int i = 0; i < minDados; i++) {
-			bool comparacion = ataque.dadosDestino[i] >= ataque.dadosOrigen[i];
-			historialDadosOutline[i].SetActive(comparacion); //Defensa
-			historialDadosOutline[i + 2].SetActive(!comparacion); //Ataque
-
-			if(comparacion)
-				perdidasAtacante++;
-			else
-				perdidasDefensor++;
+		for (int i = 0; i < minDados; i++) {
+			bool destinoMayor = ataque.dadosDestino[i] >= ataque.dadosOrigen[i];
+			historialDadosOutline[i].SetActive(destinoMayor); //Defensa
+			historialDadosOutline[i + 2].SetActive(!destinoMayor); //Ataque
 		}
 
 		//Actualizar dados defensa
-		for(int i = 0; i < ataque.dadosDestino.Length; i++) {
+		for (int i = 0; i < ataque.dadosDestino.Length; i++) {
 			historialDados[i].gameObject.SetActive(true);
 			historialDados[i].overrideSprite = dadosBlancos[ataque.dadosDestino[i] - 1];
 		}
 		//Actualizar dados ataque
-		for(int i = 0; i < ataque.dadosOrigen.Length; i++) {
+		for (int i = 0; i < ataque.dadosOrigen.Length; i++) {
 			historialDados[i + 2].gameObject.SetActive(true);
 			historialDados[i + 2].overrideSprite = dadosRojos[ataque.dadosOrigen[i] - 1];
 		}
@@ -293,23 +295,17 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		int jugadorAtacante = ataque.territorioOrigen.jugador;
 		int jugadorDefensor = ataque.territorioDestino.jugador;
 
-		int skinAtacante = ControladorPartida.instance.datosPartida.jugadores[jugadorAtacante].aspecto;
-		int skinDefensor = ControladorPartida.instance.datosPartida.jugadores[jugadorDefensor].aspecto;
+		int aspectoAtacante = ControladorPartida.instance.datosPartida.jugadores[jugadorAtacante].aspecto;
+		int aspectoDefensor = ControladorPartida.instance.datosPartida.jugadores[jugadorDefensor].aspecto;
 
-		historialTropas[1].overrideSprite = ControladorPrincipal.instance.aspectos[skinAtacante]; //Aspecto
-		historialTropas[0].overrideSprite = ControladorPrincipal.instance.aspectos[skinDefensor];
+		historialTropas[1].overrideSprite = ControladorPrincipal.instance.aspectos[aspectoAtacante]; //Aspecto
+		historialTropas[0].overrideSprite = ControladorPrincipal.instance.aspectos[aspectoDefensor];
 
+		historialTropasColor[1].overrideSprite = ControladorPrincipal.instance.colorAspectos[aspectoAtacante]; //Aspecto
+		historialTropasColor[0].overrideSprite = ControladorPrincipal.instance.colorAspectos[aspectoDefensor];
 		historialTropasColor[1].color = ControladorPrincipal.instance.coloresJugadores[jugadorAtacante];
 		historialTropasColor[0].color = ControladorPrincipal.instance.coloresJugadores[jugadorDefensor];
 
-		historialTextos[3].text = "(-" + perdidasAtacante + ")";
-
-		//Comprobar si el territorio defendiendo ha perdido todas las tropas (Movimiento)
-		if(jugadorAtacante == jugadorDefensor) { //En caso de movimiento de tropas
-			historialTextos[1].text = "(" + destino.tropas + ")"; 
-		} else { //En caso contrario
-			historialTextos[1].text = "(-" + perdidasDefensor + ")";
-		}
 	}
 
 	/// <summary>Abre y cierra la ventana con los datos de la ultima batalla</summary>

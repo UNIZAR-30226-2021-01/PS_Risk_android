@@ -139,9 +139,9 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("p"):
 						// Datos de partida completa: Empezar partida
+						cp.AbrirPantalla("Partida");
 						ControladorPartida.instance.AsignarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
 						estadoActual = Estado.partida;
-						cp.AbrirPantalla("Partida");
 						break;
 					default:
 						// Ignorar resto de mensajes
@@ -171,9 +171,9 @@ public class ConexionWS : MonoBehaviour {
 						break;
 					case ("p"):
 						// Datos de partida completa: Empezar partida
+						cp.AbrirPantalla("Partida");
 						ControladorPartida.instance.AsignarDatosPartida(JsonConvert.DeserializeObject<ClasesJSON.PartidaCompleta>(mensaje));
 						estadoActual = Estado.partida;
-						cp.AbrirPantalla("Partida");
 						break;
 					default:
 						// Ignorar resto de mensajes
