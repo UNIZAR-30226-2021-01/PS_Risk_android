@@ -59,6 +59,8 @@ public class ControladorInterfazPartida : MonoBehaviour {
 
 	[SerializeField]
 	private Animator animatorUltimaBatalla; //Aminator del menu de la última batalla
+	[SerializeField]
+	private GameObject panelNotificaciones;
 	
 	private bool listaJugadoresAbierto = false; //Indica si la lista de jugadores esta abierto o cerrado
 	private int limiteTropas;
@@ -76,6 +78,7 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	private void OnEnable() {
 		fondoMenu.SetActive(false); // Animacion de fundido en el futuro (?)
 		partida.SetActive(true);
+		panelNotificaciones.SetActive(false);
 	}
 	
 	private void OnDisable() {

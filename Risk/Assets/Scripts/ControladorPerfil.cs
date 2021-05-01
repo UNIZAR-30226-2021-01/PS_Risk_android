@@ -309,4 +309,23 @@ public class ControladorPerfil : MonoBehaviour {
 
 		PersonalizarUsuario("Aspecto");
 	}
+	
+	public async void BorrarCuenta() {
+		WWWForm form = new WWWForm();
+		form.AddField("idUsuario", usuario.id);
+		form.AddField("clave", usuario.clave);
+		string recibido = await ConexionHTTP.instance.RequestHTTP("borrarCuenta", form);
+		try {
+			// Vemos si hay error
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido, ClasesJSON.settings);
+			if(error.code != 0){
+				ControladorPrincipal.instance.PantallaError(error.err);
+			} else {
+				// No hay error, cerrar sesión
+				ControladorPrincipal.instance.AbrirPantalla("Inicio");
+			}
+		} catch {
+			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+		}
+	}
 }

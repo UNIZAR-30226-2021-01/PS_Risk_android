@@ -68,16 +68,8 @@ public class ControladorPartida : MonoBehaviour {
 			ConexionWS.instance.CerrarConexionWebSocket();
 			ControladorPrincipal.instance.AbrirPantalla("Principal");
 		}
-		datosPartida = nuevaPartida;
-		FaseActual = datosPartida.fase-1;
-		idJugadorActual = nuevaPartida.turnoJugador;
-		refuerzosRestantes = nuevaPartida.jugadores[idJugador].refuerzos;
-		interfazPartida.ActualizarInterfaz(nuevaPartida);
-		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
-		mapa.AsignarTerritorios(nuevaPartida.territorios);
+		ActualizarDatos(nuevaPartida);
 		haMovido = false;
-		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
-		interfazPartida.MostrarHistorialUltimaBatalla(false);
 	}
 	
 	/// <summary>
@@ -86,14 +78,18 @@ public class ControladorPartida : MonoBehaviour {
 	/// </summary>
 	/// <param name="nuevaPartida"> Datos recibidos en el mensaje de partida completa </param>
 	public void ActualizarDatosPartida(ClasesJSON.PartidaCompleta nuevaPartida) {
+		ControladorPrincipal.instance.PantallaCarga(false);
+		ActualizarDatos(nuevaPartida);
+	}
+	
+	private void ActualizarDatos(ClasesJSON.PartidaCompleta nuevaPartida) {
 		datosPartida = nuevaPartida;
 		FaseActual = datosPartida.fase-1;
 		idJugadorActual = nuevaPartida.turnoJugador;
 		refuerzosRestantes = nuevaPartida.jugadores[idJugador].refuerzos;
 		interfazPartida.ActualizarInterfaz(nuevaPartida);
 		interfazPartida.ActualizarRefuerzosRestantes(refuerzosRestantes); //Actualizar el indicador de refuerzos
-		mapa.ActualizarTerritorios(nuevaPartida.territorios);
-		ControladorPrincipal.instance.PantallaCarga(false);
+		mapa.AsignarTerritorios(nuevaPartida.territorios);
 		interfazPartida.ToggleRefuerzosRestantes(FaseActual == FASE_REFUERZOS && idJugador == idJugadorActual);
 		interfazPartida.MostrarHistorialUltimaBatalla(false);
 	}
