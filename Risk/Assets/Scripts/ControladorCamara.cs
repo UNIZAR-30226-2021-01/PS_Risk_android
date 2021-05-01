@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ControladorCamara : MonoBehaviour {
-	private const float MIN_ZOOM = 1.5f, MAX_ZOOM = 5f, VELOCIDAD_ZOOM = 0.0075f, MAX_TIEMPO_TOQUE = 0.5f, MAX_DISTANCIA_TOQUE = 50f;
+	private const float MIN_ZOOM = 1.5f, MAX_ZOOM = 5.5f, VELOCIDAD_ZOOM = 0.0075f, MAX_TIEMPO_TOQUE = 0.5f, MAX_DISTANCIA_TOQUE = 50f;
 	private Camera mainCam;
 	[SerializeField]
 	private bool permitirMovimiento;
@@ -20,7 +20,7 @@ public class ControladorCamara : MonoBehaviour {
 
 	private void OnEnable() {
 		try {
-			mainCam.orthographicSize = 5;
+			mainCam.orthographicSize = 5.5f;
 			permitirMovimiento = true;
 		} catch {}
 	}

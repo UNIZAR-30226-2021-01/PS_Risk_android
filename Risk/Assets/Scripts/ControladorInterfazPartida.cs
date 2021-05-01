@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +31,8 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	[SerializeField]
 	private Animator animatorJugadores; //Animator de lista de jugadores
 	[SerializeField]
-	private TextMeshProUGUI textoJugadorActual; //Texto que indica quien es el jugador actual
+	private TextMeshProUGUI textoJugadorActual, tiempoActual;
+	private DateTime inicioTurno;
 	[SerializeField]
 	private TextMeshProUGUI textoFin;
 
@@ -60,6 +62,16 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	
 	private bool listaJugadoresAbierto = false; //Indica si la lista de jugadores esta abierto o cerrado
 	private int limiteTropas;
+
+	private void ActualizarTiempo() {
+		if (gameObject.activeInHierarchy) {
+			tiempoActual.text = (DateTime.UtcNow - inicioTurno).ToString(@"hh\:mm\:ss");
+		}
+	}
+
+	private void Start() {
+		InvokeRepeating("ActualizarTiempo", 0, 1);
+	}
 
 	private void OnEnable() {
 		fondoMenu.SetActive(false); // Animacion de fundido en el futuro (?)
@@ -101,6 +113,7 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	public void ActualizarInterfaz(ClasesJSON.PartidaCompleta datosPartida) {
 		ActualizarFase(datosPartida.fase-1); // Hacer más elegante
 		ActualizarLista(datosPartida);
+		inicioTurno = DateTime.Parse(datosPartida.ultimoTurno, null, System.Globalization.DateTimeStyles.RoundtripKind).AddMinutes(datosPartida.tiempoTurno);
 	}
 
 	/// <summary>
