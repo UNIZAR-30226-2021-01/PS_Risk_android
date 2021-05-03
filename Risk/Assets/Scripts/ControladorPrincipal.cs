@@ -71,6 +71,8 @@ public class ControladorPrincipal : MonoBehaviour
 	private GameObject pantallaCarga, pantallaError, pantallaInfo;
 	private Dictionary<string, GameObject> pantallas;
 	
+	private Coroutine rutinaTimeout = null;
+	
 	private void Awake() {
 		// Asignación de valor inicial de las variables de la clase
 		instance = this;
@@ -109,7 +111,7 @@ public class ControladorPrincipal : MonoBehaviour
 		pantallaError.SetActive(true);
 		textoError.text = error;
 	}
-
+	
 	/// <summary>Muestra la pantalla de información</summary>
 	/// <param name="info">Información a mostrar</param>
 	public void PantallaInfo(string info) {
@@ -120,9 +122,24 @@ public class ControladorPrincipal : MonoBehaviour
 	/// <summary>Muestra/Esconde la pantalla de Carga</summary>
 	/// <param name="activado">Si 'true', se activa la pantalla de carga, y viceversa</param>
 	public void PantallaCarga(bool activado) {
+		if (rutinaTimeout != null) {
+			StopCoroutine(rutinaTimeout);
+			rutinaTimeout = null;
+		}
+		if (activado) {
+			rutinaTimeout = StartCoroutine("TimeoutError");
+		}
 		pantallaCarga.SetActive(activado);
 	}
 	
+	// Espera 10 segundos a realizar el timeout
+	IEnumerator TimeoutError() {
+		yield return new WaitForSecondsRealtime(10f);
+		AbrirPantalla("Inicio");
+		PantallaError("Se ha sobrepasado el tiempo máximo de espera, volver a intentar más tarde");
+		PantallaCarga(false);
+	}
+
 	private void DesactivarPantallas() {
 		foreach (GameObject p in pantallas.Values) {
 			// Desactivar todas las pantallas que no tengan el tag de mostrarSiempre
