@@ -9,18 +9,11 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	[SerializeField]
 	private GameObject fondoMenu, partida;
 	[SerializeField]
-	private GameObject ventanaFin, ventanaRefuerzos, ventanaAtaque, ventanaMovimiento;
+	private GameObject ventanaFin;
 	[SerializeField]
 	private Sprite[] spriteIndicadorFase;
 	[SerializeField]
 	private Image[] indicadorFase;
-	private int numeroTropas;
-	[SerializeField]
-	private TMP_InputField numeroRefuerzos;
-	[SerializeField]
-	private TMP_InputField numeroAtaque;
-	[SerializeField]
-	private TMP_InputField numeroMovimiento;
 
 	[SerializeField]
 	private TextMeshProUGUI textoRefuerzosRestantes; //Campo de texto con el numero de refuerzos restantes por poner
@@ -61,9 +54,10 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	private Animator animatorUltimaBatalla; //Aminator del menu de la última batalla
 	[SerializeField]
 	private GameObject panelNotificaciones;
+	[SerializeField]
+	private VentanaAccion ventanaRefuerzos, ventanaAtaque, ventanaMovimiento;
 	
 	private bool listaJugadoresAbierto = false; //Indica si la lista de jugadores esta abierto o cerrado
-	private int limiteTropas;
 
 	private void ActualizarTiempo() {
 		if (gameObject.activeInHierarchy) {
@@ -88,27 +82,6 @@ public class ControladorInterfazPartida : MonoBehaviour {
 			ControladorPartida.instance.SalirPartida();
 		} catch {}
 	}
-	
-	/// <summary>
-	/// Método invocado al pulsar la confirmación del refuerzo
-	/// </summary>
-	public void AceptarRefuerzo() {
-		ControladorPartida.instance.Reforzar(numeroTropas);
-	}
-	
-	/// <summary>
-	/// Método invocado al pulsar la confirmación del ataque
-	/// </summary>
-	public void AceptarAtaque() {
-		ControladorPartida.instance.Ataque(numeroTropas);
-	}
-	
-	/// <summary>
-	/// Método invocado al pulsar la confirmación del movimiento
-	/// </summary>
-	public void AceptarMovimiento() {
-		ControladorPartida.instance.Movimiento(numeroTropas);
-	}
 
 	/// <summary>
 	/// Actualiza todos los elementos de la interfaz
@@ -130,74 +103,30 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// Actualiza los textos de numeros de tropas en las ventanas de acciones
-	/// </summary>
-	public void ActualizarNumeroTropas() {
-		numeroRefuerzos.text = numeroTropas.ToString();
-		numeroAtaque.text = numeroTropas.ToString();
-		numeroMovimiento.text = numeroTropas.ToString();
-	}
-
-	/// <summary>
-	/// Aumenta en uno el numero de tropas
-	/// </summary>
-	public void AumentarTropas() {
-		if (numeroTropas < limiteTropas) {
-			numeroTropas++;
-			ActualizarNumeroTropas();
-		}
-	}
-	
-	/// <summary>
-	/// Disminuye en uno el numero de tropas
-	/// </summary>
-	public void DisminuirTropas() {
-		if (numeroTropas > 1) {
-			numeroTropas--;
-			ActualizarNumeroTropas();
-		}
-	}
-	
-	/// <summary>
-	/// Disminuye en uno el numero de tropas
-	/// </summary>
-	public void AsignarTropas(string s) {
-		int prevNum = numeroTropas;
-		int newNum = Mathf.Clamp(int.Parse(s), 1, limiteTropas);
-		if (prevNum != newNum) {
-			numeroTropas = newNum;
-			ActualizarNumeroTropas();
-		}
-	}
-	
-	/// <summary>
 	/// Activa la ventana de refuerzos
 	/// </summary>
-	public void VentanaRefuerzos(int refuerzos) {
-		numeroTropas = 1;
-		numeroRefuerzos.text = "1";
-		limiteTropas = refuerzos;
-		ventanaRefuerzos.SetActive(true);
+	public void VentanaRefuerzos(int refuerzos, Territorio destino) {
+		ventanaRefuerzos.ActualizarDatos(destino.pertenenciaJugador, destino.pertenenciaJugador,
+			refuerzos, destino.numeroTropas, refuerzos);
+		ventanaRefuerzos.gameObject.SetActive(true);
 	}
 	
 	/// <summary>
 	/// Activa la ventana de ataque
 	/// </summary>
-	public void VentanaAtaque(int atacantes) {
-		numeroTropas = 1;
-		numeroAtaque.text = "1";
-		limiteTropas = atacantes;
-		ventanaAtaque.SetActive(true);
+	public void VentanaAtaque(Territorio origen, Territorio destino) {
+		ventanaAtaque.ActualizarDatos(origen.pertenenciaJugador, destino.pertenenciaJugador,
+			origen.numeroTropas, destino.numeroTropas, origen.numeroTropas-1);
+		ventanaAtaque.gameObject.SetActive(true);
 	}
 	
 	/// <summary>
 	/// Activa la ventana de movimiento
 	/// </summary>
-	public void VentanaMovimiento(int tropas) {
-		numeroTropas = 1;
-		numeroMovimiento.text = "1";
-		limiteTropas = tropas;
-		ventanaMovimiento.SetActive(true);
+	public void VentanaMovimiento(Territorio origen, Territorio destino) {
+		ventanaMovimiento.ActualizarDatos(origen.pertenenciaJugador, destino.pertenenciaJugador,
+			origen.numeroTropas, destino.numeroTropas, origen.numeroTropas-1);
+		ventanaMovimiento.gameObject.SetActive(true);
 	}
 	
 	/// <summary>
@@ -268,12 +197,12 @@ public class ControladorInterfazPartida : MonoBehaviour {
 
 	/// <summary>Actualiza y permite ver la pantalla de la última batalla</summary>
 	/// <param name="ataque">Información con el último ataque</param>
-	public void ActualizarHistorialUltimaBatalla(ClasesJSON.ConfirmacionAtaque ataque) {
+	public void ActualizarHistorialUltimaBatalla(ClasesJSON.ConfirmacionAtaque ataque, Territorio anteriorDestino) {
 		ClasesJSON.Territorio origen = ataque.territorioOrigen;
 		ClasesJSON.Territorio destino = ataque.territorioDestino;
 
 		//Indicar cuantas tropas quedan
-		historialTextos[0].text = destino.tropas.ToString();
+		historialTextos[0].text = (origen.jugador == destino.jugador ? "0" : destino.tropas.ToString());
 		historialTextos[1].text = origen.tropas.ToString();
 
 		//Desactivar todos los outlines de los dados
@@ -299,26 +228,26 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		//Actualizar dados defensa
 		for (int i = 0; i < ataque.dadosDestino.Length; i++) {
 			historialDados[i].gameObject.SetActive(true);
-			historialDados[i].overrideSprite = dadosBlancos[ataque.dadosDestino[i] - 1];
+			historialDados[i].sprite = dadosBlancos[ataque.dadosDestino[i] - 1];
 		}
 		//Actualizar dados ataque
 		for (int i = 0; i < ataque.dadosOrigen.Length; i++) {
 			historialDados[i + 2].gameObject.SetActive(true);
-			historialDados[i + 2].overrideSprite = dadosRojos[ataque.dadosOrigen[i] - 1];
+			historialDados[i + 2].sprite = dadosRojos[ataque.dadosOrigen[i] - 1];
 		}
 
 		//Tropas
 		int jugadorAtacante = ataque.territorioOrigen.jugador;
-		int jugadorDefensor = ataque.territorioDestino.jugador;
+		int jugadorDefensor = anteriorDestino.pertenenciaJugador;
 
 		int aspectoAtacante = ControladorPartida.instance.datosPartida.jugadores[jugadorAtacante].aspecto;
 		int aspectoDefensor = ControladorPartida.instance.datosPartida.jugadores[jugadorDefensor].aspecto;
 
-		historialTropas[1].overrideSprite = ControladorPrincipal.instance.aspectos[aspectoAtacante]; //Aspecto
-		historialTropas[0].overrideSprite = ControladorPrincipal.instance.aspectos[aspectoDefensor];
+		historialTropas[1].sprite = ControladorPrincipal.instance.aspectos[aspectoAtacante]; //Aspecto
+		historialTropas[0].sprite = ControladorPrincipal.instance.aspectos[aspectoDefensor];
 
-		historialTropasColor[1].overrideSprite = ControladorPrincipal.instance.colorAspectos[aspectoAtacante]; //Aspecto
-		historialTropasColor[0].overrideSprite = ControladorPrincipal.instance.colorAspectos[aspectoDefensor];
+		historialTropasColor[1].sprite = ControladorPrincipal.instance.colorAspectos[aspectoAtacante]; //Aspecto
+		historialTropasColor[0].sprite = ControladorPrincipal.instance.colorAspectos[aspectoDefensor];
 		historialTropasColor[1].color = ControladorPrincipal.instance.coloresJugadores[jugadorAtacante];
 		historialTropasColor[0].color = ControladorPrincipal.instance.coloresJugadores[jugadorDefensor];
 

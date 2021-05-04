@@ -116,7 +116,7 @@ public class ControladorPartida : MonoBehaviour {
 						ControladorPrincipal.instance.PantallaInfo("No quedan tropas que colocar");
 						return;
 					}
-					interfazPartida.VentanaRefuerzos(refuerzosRestantes);
+					interfazPartida.VentanaRefuerzos(refuerzosRestantes, territorio);
 					break;
 				case (FASE_ATAQUE):
 					if (territorio.numeroTropas <= 1) {
@@ -151,14 +151,14 @@ public class ControladorPartida : MonoBehaviour {
 			switch(FaseActual){
 				case (FASE_ATAQUE):
 					if(territorio.pertenenciaJugador != idJugador) {
-						interfazPartida.VentanaAtaque(mapa.territorios[territorioOrigen].numeroTropas-1);
+						interfazPartida.VentanaAtaque(mapa.territorios[territorioOrigen], territorio);
 					} else {
 						territorioDestino = -1;
 					}
 					break;
 				case (FASE_MOVIMIENTO):
 					if(territorio.pertenenciaJugador == idJugador) {
-						interfazPartida.VentanaMovimiento(mapa.territorios[territorioOrigen].numeroTropas-1);
+						interfazPartida.VentanaMovimiento(mapa.territorios[territorioOrigen], territorio);
 					} else {
 						territorioDestino = -1;
 					}
@@ -263,10 +263,10 @@ public class ControladorPartida : MonoBehaviour {
 	/// Se actualizan los territorios modificados y se muestran los dados resultantes
 	/// </summary>
 	public void ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque ataque){
+		interfazPartida.ActualizarHistorialUltimaBatalla(ataque, mapa.territorios[ataque.territorioDestino.id]); //Mostrar Dados
 		mapa.ActualizarTerritorio(ataque.territorioOrigen);
 		mapa.ActualizarTerritorio(ataque.territorioDestino);
 		esperandoConfirmacion = false;
-		interfazPartida.ActualizarHistorialUltimaBatalla(ataque); //Mostrar Dados
 		ControladorPrincipal.instance.PantallaCarga(false);
 		interfazPartida.MostrarHistorialUltimaBatalla(true);
 	}
