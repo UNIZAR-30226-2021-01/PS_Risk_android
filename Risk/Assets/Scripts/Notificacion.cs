@@ -51,7 +51,7 @@ public class Notificacion : MonoBehaviour {
 			default:
 				break;
 		}
-		controladorNotificaciones.ActualizarNotificaciones();
+		controladorNotificaciones.ActualizarNotificaciones(true);
 	}
 
 	/// <summary>
@@ -77,7 +77,7 @@ public class Notificacion : MonoBehaviour {
 			default:
 				break;
 		}
-		controladorNotificaciones.ActualizarNotificaciones();
+		controladorNotificaciones.ActualizarNotificaciones(true);
 	}
 
 	//Actualiza los datos de la clase
@@ -136,7 +136,7 @@ public class Notificacion : MonoBehaviour {
 				ControladorPrincipal.instance.PantallaError(error.err);
 			else { //Si no, se puede borrar la notificacion
 				Destroy(gameObject);
-				controladorNotificaciones.notificaciones.Remove(datos);
+				ControladorNotificaciones.notificaciones.Remove(datos);
 			}
 		} catch {}
 		
@@ -189,7 +189,7 @@ public class Notificacion : MonoBehaviour {
 				ControladorPrincipal.instance.PantallaError(error.err);
 			else { //Si no, se puede borrar la notificacion
 				Destroy(gameObject);
-				controladorNotificaciones.notificaciones.Remove(datos);
+				ControladorNotificaciones.notificaciones.Remove(datos);
 			}
 		} catch {}
 	}

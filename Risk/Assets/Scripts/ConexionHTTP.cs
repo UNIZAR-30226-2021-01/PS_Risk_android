@@ -50,6 +50,32 @@ public class ConexionHTTP : MonoBehaviour
 		ControladorPrincipal.instance.PantallaCarga(false);
 		return temp;
 	}
+
+	/// <summary>Realiza una petición HTTP con un formulario, sin mostrar la pantalla de carga</summary>
+	/// <param name="direccion">Dirección del servidor</param>
+	/// <param name="form">Formulario a enviar</param>
+	/// <returns>Respuesta JSON del servidor</returns>
+	// Se repite codigo, hay que juntarlo con la funcion de arriba
+	public async Task<string> RequestHTTPFantasma(string direccion, WWWForm form) {
+		string temp = null;
+		// Realizamos la petición HTTP a traves de la corrutina
+		StartCoroutine(SendRequest<string>(direccion, form, (returned) => {
+			temp = returned;
+		}));
+		// Esperamos a recibir la respuesta de la corrutina
+		float totalTime = 0;
+		while(temp == null){
+			await Task.Delay(500);
+			totalTime += 0.5f;
+			if(totalTime >= MAX_TIME){
+				// Se ha esperado el tiempo máximo, devolver error
+				temp = "ERROR";
+				break;
+			}
+			// Si ha tardado mas de medio segundo activar la pantalla de carga (no importa si lo hace más de 1 vez)
+		}
+		return temp;
+	}
 	
 	/// <summary>Cifra el el string de entrada con el algoritmo SHA256.</summary>
 	/// <param name="entrada">Texto a cifrar</param>

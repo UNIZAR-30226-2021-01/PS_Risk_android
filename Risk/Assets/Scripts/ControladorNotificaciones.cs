@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 public class ControladorNotificaciones : MonoBehaviour
 {
 	/// <summary>Lista/Cache de las notificaciones</summary>
-	public List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
+	public static List<ClasesJSON.Notificacion> notificaciones; //Cache de notificaciones
 
 	[SerializeField]
 	private GameObject prefabNotificacion; //Prefab de notificación
@@ -24,19 +24,23 @@ public class ControladorNotificaciones : MonoBehaviour
 	
 	//Queremos actualizar las notificaciones en pantalla cada vez que se accede a la pantalla
 	private void OnEnable() {
-		ActualizarNotificaciones();
+		ActualizarNotificaciones(false);
+		//'false' ya que las notificaciones habrán sido descargadas de backend desde BotonNotificaciones.cs
+		//Si se quieren recargar las notificaciones explicicamente al entrar a la pantalla, poner ActualizarNotificaciones(true)
 	}
 
 	/// <summary>Actualiza las notificaciones a mostrar al usuario.</summary>
-	public async void ActualizarNotificaciones() {
+	/// <param name="obtenerNotificaciones">Si 'true', también se descargan las notificaciones de backend</param>
+	public async void ActualizarNotificaciones(bool obtenerNotificaciones) {
 
 		//Borrar los gameobjects de las notificaciones anteriores
 		for(int i = 0; i < listaPadre.childCount; i++) {
 			Destroy(listaPadre.GetChild(i).gameObject);
 		}
 
-		//Retrivir las notificaciones del servidor
-		await ObtenerNotificaciones();
+		//Retrivir las notificaciones del servidor si se ha indicado
+		if(obtenerNotificaciones)
+			await ObtenerNotificaciones(true);
 		
 		if(notificaciones != null) {
 			foreach(ClasesJSON.Notificacion n in notificaciones) {
@@ -55,9 +59,10 @@ public class ControladorNotificaciones : MonoBehaviour
 		}
 	}
 
-	//Obtiene las notificaciones del servidor y las guarda en la variable 'notificaciones'
-	//Las notificaciones son guardadas en un campo estatico para uso posterior desde donde sea
-	private async Task ObtenerNotificaciones() {
+	/// <summary> Obtiene las notificaciones del servidor y las guarda en la variable 'notificaciones' </summary>
+	/// <param name="mostrarPantallaCarga">Si 'true', se muestra la pantalla de carga mientras la funcion se ejecute</param>
+	// Las notificaciones pueden ser accedidas desde cualquier sitio (Como el menu principal) al estar guardadas en un campo estatico
+	public static async Task ObtenerNotificaciones(bool mostrarPantallaCarga) {
 
 		//Si el controlador ui no esta iniciado, borrar la lista de notificaciones
 		if(ControladorPrincipal.instance == null) {
@@ -76,7 +81,11 @@ public class ControladorNotificaciones : MonoBehaviour
 		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
 
 		//Obtener respuesta del servidor
-		string respuesta = await ConexionHTTP.instance.RequestHTTP("notificaciones", form);
+		string respuesta;
+		if(mostrarPantallaCarga)
+			respuesta = await ConexionHTTP.instance.RequestHTTP("notificaciones", form);
+		else
+			respuesta = await ConexionHTTP.instance.RequestHTTPFantasma("notificaciones", form);
 
 		try { 
 			try {
