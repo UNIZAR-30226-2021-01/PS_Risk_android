@@ -20,11 +20,14 @@ public class ControladorNotificaciones : MonoBehaviour
 	[SerializeField]
 	private Transform listaPadre; //Transform del objeto padre que tendra como hijos los elementos de la lista
 
+	[SerializeField]
+	private bool descargarNotificacionesAutomaticamente = true; //Si 'true', al entrar a la ventana, se descargaran las notificaciones de backend
+
 	private const string ERROR_ACTUALIZARNOTIFICACIONES = "No se puede actualizar la lista de notificaciones";
 	
 	//Queremos actualizar las notificaciones en pantalla cada vez que se accede a la pantalla
 	private void OnEnable() {
-		ActualizarNotificaciones(false);
+		ActualizarNotificaciones(descargarNotificacionesAutomaticamente);
 		//'false' ya que las notificaciones habrán sido descargadas de backend desde BotonNotificaciones.cs
 		//Si se quieren recargar las notificaciones explicicamente al entrar a la pantalla, poner ActualizarNotificaciones(true)
 	}
