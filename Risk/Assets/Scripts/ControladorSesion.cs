@@ -63,11 +63,11 @@ public class ControladorSesion : MonoBehaviour
 	/// Envia al backend una petición de registrar usuario si los datos dados son correctos. Recibe los datos básicos del usuario.
 	/// </summary>
 	public async void Registrarse() {
-		if(usuario == "" || clave == "" || correo == "") {
+		if (usuario == "" || clave == "") {
 			ControladorPrincipal.instance.PantallaError("Se deben rellenar todos los campos para hacer el registro");
 			return;
 		}
-		if(usuario.Contains("@")) {
+		if (usuario.Contains("@")) {
 			ControladorPrincipal.instance.PantallaError("Caracter @ no permitido en nombre de usuario");
 			return;
 		}
