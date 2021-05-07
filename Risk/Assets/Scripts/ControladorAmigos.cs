@@ -9,13 +9,51 @@ public class ControladorAmigos : MonoBehaviour {
 	private GameObject amigoPrefab, noAmigoPrefab;
 	[SerializeField]
 	private Transform padreAmigos;
+	[SerializeField]
+	private GameObject panelConfirmacionBorrado;
 	private List<ClasesJSON.Amigo> listaAmigos;
 	private string amigoAgregar;
+	private Amigo amigoBorrar = null;
 
 	/// <summary>Actualiza que usuario se quiere añadir como amigo.</summary>
 	/// <param name="nombre">Nombre del usuario que se quiere añadir como amigo</param>
-	public void ActualizarAmigoAgregar(string nombre){
+	public void ActualizarAmigoAgregar(string nombre) {
 		amigoAgregar = nombre;
+	}
+	
+	public void AsignarAmigoBorrar(Amigo aBorrar) {
+		amigoBorrar = aBorrar;
+		panelConfirmacionBorrado.SetActive(true);
+	}
+	
+	public async void ConfirmarBorrarAmigo() {
+		if (amigoBorrar == null) {
+			return;
+		}
+		ControladorPrincipal.instance.PantallaCarga(true);
+		// Crear formulario a enviar
+		WWWForm form = new WWWForm();
+		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
+		form.AddField("idAmigo", amigoBorrar.id);
+		form.AddField("decision", "Borrar");
+		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
+		// Enviar petición al servidor
+		string recibido = await ConexionHTTP.instance.RequestHTTP("gestionAmistad", form);
+		try {
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
+			if(error.code != 0) {
+				// Error
+				ControladorPrincipal.instance.PantallaError(error.err);
+			} else {
+				// Borrado del servidor efectuado correctamente borrar este usuario de la lista
+				Destroy(amigoBorrar.gameObject);
+			}
+		} catch {
+			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
+		}
+		RecargarAmigos();
+		ControladorPrincipal.instance.PantallaCarga(false);
+		amigoBorrar = null;
 	}
 
 	/// <summary>Recarga la lista de amigos con datos obtenidos de backend.</summary>

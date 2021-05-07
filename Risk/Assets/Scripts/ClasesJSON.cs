@@ -264,7 +264,7 @@ public static class ClasesJSON {
 	/// </sumary>
 	[System.Serializable]
 	public class FinPartida : MensajeWebsocket {
-		public int idGanador, riskos;
+		public int ganador, riskos;
 	}
 
 	/// <summary>

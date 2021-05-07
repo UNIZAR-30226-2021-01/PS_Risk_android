@@ -133,9 +133,10 @@ public class ControladorInterfazPartida : MonoBehaviour {
 	/// Activa la ventana de resultados de la partida
 	/// </summary>
 	public void VentanaFin(ClasesJSON.FinPartida datos) {
-		textoFin.text = "El ganador de la partida es <color=#" + ColorUtility.ToHtmlStringRGB(ControladorPrincipal.instance.coloresJugadores[datos.idGanador]) + 
-				">" + ControladorPartida.instance.datosPartida.jugadores[datos.idGanador].nombre + "</color>";
-		if (datos.idGanador == ControladorPartida.instance.idJugador) {
+		print(ControladorPartida.instance.datosPartida.jugadores[2].nombre);
+		textoFin.text = "El ganador de la partida es <color=#" + ColorUtility.ToHtmlStringRGB(ControladorPrincipal.instance.coloresJugadores[datos.ganador]) + 
+				">" + ControladorPartida.instance.datosPartida.jugadores[datos.ganador].nombre + "</color>";
+		if (datos.ganador == ControladorPartida.instance.idJugador) {
 			textoFin.text += "\n Has ganado " + datos.riskos.ToString() + " riskos";
 		}
 		ventanaFin.SetActive(true);

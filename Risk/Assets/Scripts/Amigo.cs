@@ -24,29 +24,7 @@ public class Amigo : MonoBehaviour {
 	
 	/// <summary>Envia petición al servidor con el id de este amigo para ser borrado de la lista de amigos del usuario</summary>
 	public async void BorrarAmigo(){
-		ControladorPrincipal.instance.PantallaCarga(true);
-		// Crear formulario a enviar
-		WWWForm form = new WWWForm();
-		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
-		form.AddField("idAmigo", id);
-		form.AddField("decision", "Borrar");
-		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
-		// Enviar petición al servidor
-		string recibido = await ConexionHTTP.instance.RequestHTTP("gestionAmistad", form);
-		try {
-			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(recibido);
-			if(error.code != 0) {
-				// Error
-				ControladorPrincipal.instance.PantallaError(error.err);
-			} else {
-				// Borrado del servidor efectuado correctamente borrar este usuario de la lista
-				Destroy(gameObject);
-			}
-		} catch {
-			ControladorPrincipal.instance.PantallaError("Respuesta desconocida recibida desde el servidor");
-		}
-		controladorAmigos.RecargarAmigos();
-		ControladorPrincipal.instance.PantallaCarga(false);
+		controladorAmigos.AsignarAmigoBorrar(this);
 	}
 	
 	/// <summary>Invitar al amigo a una sala</summary>

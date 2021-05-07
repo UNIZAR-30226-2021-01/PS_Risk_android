@@ -42,8 +42,9 @@ public class ControladorNotificaciones : MonoBehaviour
 		}
 
 		//Retrivir las notificaciones del servidor si se ha indicado
-		if(obtenerNotificaciones)
+		if(obtenerNotificaciones) {
 			await ObtenerNotificaciones(true);
+		}
 		
 		if(notificaciones != null) {
 			foreach(ClasesJSON.Notificacion n in notificaciones) {
