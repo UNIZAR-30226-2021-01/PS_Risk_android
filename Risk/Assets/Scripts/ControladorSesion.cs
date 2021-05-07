@@ -81,6 +81,24 @@ public class ControladorSesion : MonoBehaviour
 		LoggearUsuario(result);
 	}
 	
+	public async void OlvidoClave(){
+		if (correo == "") {
+			ControladorPrincipal.instance.PantallaError("Se debe introducir el correo de la cuenta");
+			return;
+		}
+		WWWForm form = new WWWForm();
+		form.AddField("correo", correo);
+		string result = await ConexionHTTP.instance.RequestHTTP("olvidoClave", form);
+		try {
+			ClasesJSON.RiskError error = JsonConvert.DeserializeObject<ClasesJSON.RiskError>(result);
+			if (error.code != 0) {
+				ControladorPrincipal.instance.PantallaError(error.err);
+			} else {
+				ControladorPrincipal.instance.PantallaInfo("Restablecimiento solicitado con éxito, se ha enviado un correo con las instrucciones para restablecer la cuenta");
+			}
+		} catch {}
+	}
+	
 	// Intenta acceder a la cuenta del usuario y en caso exitoso entra al menú principal
 	private void LoggearUsuario(string recibido) {
 		try {
