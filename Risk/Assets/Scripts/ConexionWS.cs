@@ -133,7 +133,7 @@ public class ConexionWS : MonoBehaviour {
 								cp.AbrirPantalla("Principal");
 								break;
 							default:
-								cp.PantallaError(mensaje);
+								cp.PantallaError(error.err);
 								break;
 						}
 						break;
@@ -165,7 +165,7 @@ public class ConexionWS : MonoBehaviour {
 								cp.PantallaInfo(error.err);
 								break;
 							default:
-								cp.PantallaError(mensaje);
+								cp.PantallaError(error.err);
 								break;
 						}
 						break;
