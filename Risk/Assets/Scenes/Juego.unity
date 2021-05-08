@@ -69392,6 +69392,7 @@ MonoBehaviour:
   noAmigoPrefab: {fileID: 2605023710543727153, guid: e19d6c3cfe775844ba1479475cdd9b8e,
     type: 3}
   padreAmigos: {fileID: 1282658354}
+  panelConfirmacionBorrado: {fileID: 0}
 --- !u!114 &1754366328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76033,6 +76034,7 @@ MonoBehaviour:
   noAmigoPrefab: {fileID: 5013984249004360792, guid: b85041099b83fd2468d4593a4026dbe6,
     type: 3}
   padreAmigos: {fileID: 1783704803}
+  panelConfirmacionBorrado: {fileID: 0}
 --- !u!1 &1948649614
 GameObject:
   m_ObjectHideFlags: 0
