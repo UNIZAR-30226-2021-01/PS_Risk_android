@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class JugadorPartida : MonoBehaviour {
-	public Image icono, banderaColor;
+	public Image icono, banderaColor, muerto;
 	public TextMeshProUGUI nombre;
 
 }

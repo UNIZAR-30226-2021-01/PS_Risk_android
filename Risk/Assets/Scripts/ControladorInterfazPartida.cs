@@ -171,6 +171,7 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		jugador.icono.sprite = ControladorPrincipal.instance.iconos[datosJugador.icono];
 		jugador.banderaColor.color = ControladorPrincipal.instance.coloresJugadores[id];
 		jugador.nombre.text = datosJugador.nombre;
+		jugador.muerto.gameObject.SetActive(!datosJugador.sigueVivo);
 	}
 
 	/// <summary>Muestra y esconde la lista de jugadores</summary>
