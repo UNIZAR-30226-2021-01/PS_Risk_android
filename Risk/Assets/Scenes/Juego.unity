@@ -76979,7 +76979,11 @@ MonoBehaviour:
   noAmigoPrefab: {fileID: 5013984249004360792, guid: b85041099b83fd2468d4593a4026dbe6,
     type: 3}
   padreAmigos: {fileID: 1783704803}
+<<<<<<< HEAD
   panelConfirmacionBorrado: {fileID: 1361673548}
+=======
+  panelConfirmacionBorrado: {fileID: 0}
+>>>>>>> 21807fa84823341977502f6e4fd1808bb2d0bce7
 --- !u!1 &1948649614
 GameObject:
   m_ObjectHideFlags: 0
