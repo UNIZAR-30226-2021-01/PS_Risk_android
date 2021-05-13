@@ -16,21 +16,21 @@ public class BotonNotificaciones : MonoBehaviour
 	private TextMeshProUGUI numeroNotificaciones; //Texto que indica el numero de notificaciones
 
 	[SerializeField]
-    private GameObject iconoCargando; // Gameobjects del icono de carga
+	private GameObject iconoCargando; // Gameobjects del icono de carga
 
-    [SerializeField]
-    private GameObject indicadorNotificaciones; //Imagen que indica si hay notificaciones y sirve de fondo para el numero de estas
+	[SerializeField]
+	private GameObject indicadorNotificaciones; //Imagen que indica si hay notificaciones y sirve de fondo para el numero de estas
 
-    private const int tiempoRefresh = 5000; //Tiempo en milisegundos entre re-peticiones de obtencion de notificaciones
+	private const int tiempoRefresh = 5000; //Tiempo en milisegundos entre re-peticiones de obtencion de notificaciones
 	
 	private bool descargandoNotificaciones = false; //Indica si se estan descargando notificaciones o no
 
-    private void OnEnable() {
+	private void OnEnable() {
 		//Re-iniciar los boton
 		botonNotificacion.interactable = false;
 		numeroNotificaciones.text = "LD";
 		indicadorNotificaciones.SetActive(false);
-        iconoCargando.SetActive(true);
+		iconoCargando.SetActive(true);
 	
 
 		//Iniciar el proceso de actualizar notificaciones si no se esta realizando ya
@@ -38,24 +38,24 @@ public class BotonNotificaciones : MonoBehaviour
 			ActualizarNotificaciones();
 		else
 			ActualizarInterfaz();
-    }
+	}
 
 	//Actualiza las notificaciones en el controlador 
 	private async void ActualizarNotificaciones() {
-        //Repetir obtencion de notificaciones mientras el boton de notificaciones este en pantalla
-        //Repetir cada tiempoRefresh segundos
+		//Repetir obtencion de notificaciones mientras el boton de notificaciones este en pantalla
+		//Repetir cada tiempoRefresh segundos
 		descargandoNotificaciones = true;
 
 		while(this != null && this.gameObject.activeInHierarchy) {
 
-            //Obtener notificaciones
+			//Obtener notificaciones
 			await ControladorNotificaciones.ObtenerNotificaciones(false);
 
 			//Actualizar Interfaz
 			ActualizarInterfaz();
 
 			//Scheudle esta funcion para dentro de 10 segundos
-            await Task.Delay(tiempoRefresh);
+			await Task.Delay(tiempoRefresh);
 		}
 		descargandoNotificaciones = false;
 	}
@@ -69,7 +69,7 @@ public class BotonNotificaciones : MonoBehaviour
 		//Actualizar los datos en pantalla, permitirle dar al boton
 		indicadorNotificaciones.SetActive(true);
 		botonNotificacion.interactable = true;
-        iconoCargando.SetActive(false);
+		iconoCargando.SetActive(false);
 
 		if(n < 0)
 			numeroNotificaciones.text = "ER";

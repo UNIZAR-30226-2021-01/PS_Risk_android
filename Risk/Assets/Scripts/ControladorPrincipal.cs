@@ -83,7 +83,7 @@ public class ControladorPrincipal : MonoBehaviour
 		}
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
-
+	
 	/// <summary>Cambia la pantalla actual por la pantalla especificada, si existe</summary>
 	public void AbrirPantalla(string pantalla) {
 		GameObject objetoPantalla;

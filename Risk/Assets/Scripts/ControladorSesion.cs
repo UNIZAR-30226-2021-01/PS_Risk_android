@@ -99,10 +99,19 @@ public class ControladorSesion : MonoBehaviour
 		} catch {}
 	}
 	
+	public async void RecargarUsuario() {
+		WWWForm form = new WWWForm();
+		form.AddField("idUsuario", ControladorPrincipal.instance.usuarioRegistrado.id);
+		form.AddField("clave", ControladorPrincipal.instance.usuarioRegistrado.clave);
+		string result = await ConexionHTTP.instance.RequestHTTP("recargarUsuario", form);
+		LoggearUsuario(result);
+	}
+	
 	// Intenta acceder a la cuenta del usuario y en caso exitoso entra al menú principal
 	private void LoggearUsuario(string recibido) {
 		try {
 			ClasesJSON.UsuarioCompleto usuarioCompleto = JsonConvert.DeserializeObject<ClasesJSON.UsuarioCompleto>(recibido, ClasesJSON.settings);
+			usuarioCompleto.usuario.clave = ConexionHTTP.Cifrar(clave);
 			ControladorPrincipal.instance.usuarioRegistrado = usuarioCompleto.usuario;
 
 			ObtenerIconosAspectos(recibido);

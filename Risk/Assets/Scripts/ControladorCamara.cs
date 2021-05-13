@@ -40,7 +40,7 @@ public class ControladorCamara : MonoBehaviour {
 	}
 
 	private void Update() {
-		#if !UNITY_EDITOR
+		#if !UNITY_EDITOR && !UNITY_STANDALONE_WIN && !UNITY_STANDALONE_LINUX && !UNITY_STANDALONE_OSX
 		if(permitirMovimiento && !EventSystem.current.IsPointerOverGameObject(0)){
 		#else
 		if(permitirMovimiento && !EventSystem.current.IsPointerOverGameObject(-1)){

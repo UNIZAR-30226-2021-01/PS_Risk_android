@@ -75,6 +75,9 @@ public class ControladorAmigos : MonoBehaviour {
 		}
 		try {
 			listaAmigos = JsonConvert.DeserializeObject<ClasesJSON.ListaAmigos>(recibido, ClasesJSON.settings).amigos;
+			for(int i = 0; i < padreAmigos.childCount; i++) {
+				Destroy(padreAmigos.GetChild(i).gameObject);
+			}
 			if (listaAmigos.Count == 0) {
 				Instantiate(noAmigoPrefab, padreAmigos);
 				return;
