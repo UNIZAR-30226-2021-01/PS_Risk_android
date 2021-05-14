@@ -6,10 +6,24 @@ public class Mapa : MonoBehaviour {
 	/// <summary>Lista con los controladores de las tropas, asignados desde el editor</summary>
 	public Territorio[] territorios;
 
+	/// <summary> Sprites que indican si un continente esta controlado por completo por un jugador, asignadoes desde el editor</summary>
+	public SpriteRenderer[] indicadoresContinentes;
+
+	//Terriorios pertenecientes a cada continente
+	private List<int>[] territoriosContinentes = {
+		new List<int>(new int[]{7,8,9,10,11,12}),
+		new List<int>(new int[]{13,14,15,16,17,18,19,20,21,22,23,24}),
+		new List<int>(new int[]{0,1,2,3,4,5,6}),
+		new List<int>(new int[]{33,34,35,36,37,38,39,40,41}),
+		new List<int>(new int[]{29,30,31,32}),
+		new List<int>(new int[]{25,26,27,28})
+	};
+
 	///<summary>Actualiza los datos del territorio especificado</summary>
 	///<param name="nuevoTerritorio">Territorio a actualizar</param>
 	public void ActualizarTerritorio(ClasesJSON.Territorio nuevoTerritorio) {
 		territorios[nuevoTerritorio.id].ActualizarTerritorio(nuevoTerritorio);
+		ActualizarContinentes();
 	}
 	
 	///<summary>Actualiza los datos de los territorios especificados</summary>
@@ -18,6 +32,7 @@ public class Mapa : MonoBehaviour {
 		foreach (ClasesJSON.Territorio nt in listaTerritorios) {
 			territorios[nt.id].ActualizarTerritorio(nt);
 		}
+		ActualizarContinentes();
 	}
 	
 	///<summary>Asigna los datos de los territorios especificados</summary>
@@ -68,6 +83,30 @@ public class Mapa : MonoBehaviour {
 		foreach (Territorio t in territorios) {
 			t.Oculto = true;
 			t.Seleccionado = false;
+		}
+	}
+
+	// Actualiza los indicadorse (sprites) de los continentes
+	private void ActualizarContinentes() {
+		//Para cada continente
+		for(int c = 0; c < 6; c++) {
+			bool completo = true;
+			int d = territorios[territoriosContinentes[c][0]].pertenenciaJugador;
+
+			//Comprobar si un jugador tiene el continente completo
+			foreach(int t in territoriosContinentes[c]) {
+				if(d != territorios[t].pertenenciaJugador) {
+					completo = false;
+					break;
+				}
+			}
+
+			if(completo) { //Si lo tiene, mostrar borde y colorear
+				indicadoresContinentes[c].gameObject.SetActive(true);
+				indicadoresContinentes[c].color = ControladorPrincipal.instance.coloresJugadores[d];
+			} else { //Si no lo tiene, desactivar borde
+				indicadoresContinentes[c].gameObject.SetActive(false);
+			}
 		}
 	}
 }
