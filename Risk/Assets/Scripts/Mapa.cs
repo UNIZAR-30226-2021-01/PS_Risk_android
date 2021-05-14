@@ -41,6 +41,7 @@ public class Mapa : MonoBehaviour {
 		foreach (ClasesJSON.Territorio nt in listaTerritorios) {
 			territorios[nt.id].AsignarTerritorio(nt);
 		}
+		ActualizarContinentes();
 	}
 	
 	///<summary>Muestra todos los territorios del mapa</summary>
@@ -86,8 +87,8 @@ public class Mapa : MonoBehaviour {
 		}
 	}
 
-	// Actualiza los indicadorse (sprites) de los continentes
-	private void ActualizarContinentes() {
+	///<summary>Actualiza los indicadores (sprites) de los continentes</summary>
+	public void ActualizarContinentes() {
 		//Para cada continente
 		for(int c = 0; c < 6; c++) {
 			bool completo = true;
