@@ -9,6 +9,9 @@ public class Mapa : MonoBehaviour {
 	/// <summary> Sprites que indican si un continente esta controlado por completo por un jugador, asignadoes desde el editor</summary>
 	public SpriteRenderer[] indicadoresContinentes;
 
+	/// <summary>Color con el que brillan los continentes cuando estos son controlados por un único jugador</summary>
+	public Color colorBrilloContinentes;
+
 	//Terriorios pertenecientes a cada continente
 	private List<int>[] territoriosContinentes = {
 		new List<int>(new int[]{7,8,9,10,11,12}),
@@ -104,7 +107,8 @@ public class Mapa : MonoBehaviour {
 
 			if(completo) { //Si lo tiene, mostrar borde y colorear
 				indicadoresContinentes[c].gameObject.SetActive(true);
-				indicadoresContinentes[c].color = ControladorPrincipal.instance.coloresJugadores[d];
+				//indicadoresContinentes[c].color = ControladorPrincipal.instance.coloresJugadores[d];
+				indicadoresContinentes[c].color = colorBrilloContinentes;
 			} else { //Si no lo tiene, desactivar borde
 				indicadoresContinentes[c].gameObject.SetActive(false);
 			}
