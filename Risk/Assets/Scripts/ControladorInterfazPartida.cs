@@ -260,9 +260,14 @@ public class ControladorInterfazPartida : MonoBehaviour {
 		animatorUltimaBatalla.SetBool("Abierto", !animatorUltimaBatalla.GetBool("Abierto"));
 	}
 
+	private void AbrirHistorialUltimaBatalla(bool abrir) {
+		animatorUltimaBatalla.SetBool("Abierto", abrir);
+	}
+
 	/// <summary>Muestra y esconde la ventana con la información de la última batalla</summary>
 	/// <param name="mostrar">Si 'true', la ventana se mostrara, y viceversa</param>
 	public void MostrarHistorialUltimaBatalla(bool mostrar) {
 		historialPanel.SetActive(mostrar);
+		AbrirHistorialUltimaBatalla(mostrar);
 	}
 }

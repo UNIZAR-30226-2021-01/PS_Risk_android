@@ -14,6 +14,14 @@ public class VentanaAccion : MonoBehaviour {
 	private int numeroTropasOrigen, numeroTropasDestino, tropasSeleccionadas, maxTropas;
 	public bool ataque;
 	
+	/// <summary>
+	/// Actualiza los datos mostrados en la ventana de acción
+	/// <param name ="idJugadorOrigen"> ID de partida del jugador del territorio de origen</param>
+	/// <param name ="idJugadorDestino"> ID de partida del jugador del territorio destino</param>
+	/// <param name ="cantidadOrigen"> Numero de tropas en territorio origen</param>
+	/// <param name ="cantidadDestino"> Numero de tropas en territorio destino</param>
+	/// <param name ="limiteTropas"> Tropas máximas a seleccionar</param>
+	/// </summary>
 	public void ActualizarDatos(int idJugadorOrigen, int idJugadorDestino, int cantidadOrigen, int cantidadDestino, int limiteTropas) {
 		tropasSeleccionadas = 1;
 		numeroTropasOrigen = cantidadOrigen;
