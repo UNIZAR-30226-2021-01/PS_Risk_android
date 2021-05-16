@@ -997,7 +997,7 @@ MonoBehaviour:
   - {fileID: 1374079517}
   - {fileID: 1258782827}
   - {fileID: 1213183403}
-  colorBrilloContinentes: {r: 0.33654273, g: 0.6792453, b: 0.28515485, a: 0}
+  colorBrilloContinentes: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &16959938
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11845,7 +11845,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239924548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dea21ef61a5a77f44b62cdb092148dd7, type: 2}
   m_CullingMode: 0
@@ -13989,7 +13989,7 @@ PrefabInstance:
     - target: {fileID: 7828020775754581013, guid: 02e8e85329339944495f5526bd8a1e16,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 590.5
+      value: 590
       objectReference: {fileID: 0}
     - target: {fileID: 7828020775754581013, guid: 02e8e85329339944495f5526bd8a1e16,
         type: 3}
@@ -50993,7 +50993,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213183400}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dea21ef61a5a77f44b62cdb092148dd7, type: 2}
   m_CullingMode: 0
@@ -52392,7 +52392,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258782824}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dea21ef61a5a77f44b62cdb092148dd7, type: 2}
   m_CullingMode: 0
@@ -56458,7 +56458,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374079514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dea21ef61a5a77f44b62cdb092148dd7, type: 2}
   m_CullingMode: 0
@@ -70207,7 +70207,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735310162}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dea21ef61a5a77f44b62cdb092148dd7, type: 2}
   m_CullingMode: 0
@@ -71369,7 +71369,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785392144}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dea21ef61a5a77f44b62cdb092148dd7, type: 2}
   m_CullingMode: 0
