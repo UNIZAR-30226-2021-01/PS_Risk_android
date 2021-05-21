@@ -7948,8 +7948,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1335248100}
   m_HandleRect: {fileID: 1335248099}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.4526002
+  m_Value: 0.9999999
+  m_Size: 0.27765274
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -53354,8 +53354,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0, y: -654.68756}
+  m_SizeDelta: {x: 0, y: 1309.3752}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1285805702
 MonoBehaviour:
@@ -53376,18 +53376,30 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b><size=120>C\xF3mo Jugar:</size></b>\n\n<b><size=100>Introducci\xF3n:</size></b>\nEn
-    este juego, participan entre 3 y 6 jugadores en un mapa global, con el objetivo
-    de conquistar el mundo entero usando tropas para atacar y defender territorios.\n\nCada
-    jugador tiene su turno, el cual esta separado en fases:\n\n<b><size=100>Fase
-    1:</size></b>\nObtienes un numero de tropas nuevas dependiendo de los territorios
-    que tienes conquistados. Estas tropas se ponen como <i>refuerzos</i> en territorios
-    como quieras en los que ya tienes tropas\n\n<b><size=100>Fase 2:</size></b>\nCuantas
-    veces quieras, ataca desde un territorio tuyo, con un numero espec\xEDfico de
-    tropas, a un territorio enemigo. No puedes atacar desde un territorio que solo
-    tenga una tropa.\n\n<b><size=100>Fase 3:</size></b>\nUna \xFAnica vez, mueve
-    un n\xFAmero cualquiera de tropas desde un territorio controlado por t\xED a
-    otro territorio tuyo."
+  m_text: "<b><size=120>C\xF3mo Jugar:</size></b>\n\nEl objetivo del juego es conquistar
+    el tablero entero, el cual esta dividido en 42 territorios.\r\nCada territorio
+    le pertenece a un jugador y posee un n\xFAmero de tropas.\r\n\r\nCada jugador
+    puede controlar las tropas y territorios de su color, y juegan por turnos.\r\n\r\nCada
+    turno se divide en tres fases:\r\n\n\r<b><size=100>Fase de Refuerzos</size></b>\nSeg\xFAn
+    el n\xFAmero de territorios, continentes totalmente controlados y territorios
+    conquistados en el turno anterior,\r el jugador recive un n\xFAmero de refuerzos
+    (tropas), los cuales se pueden colocar en cualquier territorio que este controle.\r\n\t\t\r\nPara
+    realizar esto, seleccione un territorio, y despues, el n\xFAmero de tropas a
+    poner en ella.\r\n\t\t\r\n\r<b><size=100>Fase de Ataque</size></b>\nCuantas veces
+    se quiera en esta fase, se puede ataquar a un territorio que no te pertenezca
+    desde otro que si.\r\nPuedes ataquar con un m\xE1ximo de tropas igual al de tu
+    territorio menos uno.\r\nEl atacante tira tantos dados como tropas ataquen (M\xE1ximo
+    de 3 dados), y el defensor tira tantos dados como tropas tiene en su territorio
+    (M\xE1ximo 2 dados)\r\nCuantos m\xE1s dados tengas, m\xE1s probabilidades tienes
+    de quitarle tropas al enemigo, y igual con el enemigo.\r\nSi el numero de tropas
+    en el territorio enemigo llega a 0, se mueven todas las tropas que estaban atacando
+    a ese territorio.\r\n\t\t\r\nPara realizar esto, selecciona un territorio tuyo
+    desde donde atacar, despu\xE9s un territorio enemigo al que atacar, y finalmente
+    el n\xFAmero de tropas que quieres que ataquen.\r\n\t\t\r\n\r<b><size=100>Fase
+    de Movimiento</size></b>\nUna sola vez en esta fase, puedes mover tropas de un
+    territorio a otro.\r\n\t\t\r\nPara realizar esto, selecciona un territorio tuyo
+    de origen, despu\xE9s un territorio tuyo de destino, y finalmente el n\xFAmero
+    de tropas que quieres mover del origen al destino."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 89a4a7e1443421b44be63afadfc3e741, type: 2}
   m_sharedMaterial: {fileID: -5816978087895083171, guid: 89a4a7e1443421b44be63afadfc3e741,
@@ -55195,8 +55207,8 @@ RectTransform:
   m_Father: {fileID: 301396580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.54739976}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.7223472}
+  m_AnchorMax: {x: 1, y: 0.9999999}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
