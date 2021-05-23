@@ -96,6 +96,436 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class ControladorPartida : MonoBehaviour</code></pre>
   </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Global_ControladorPartida_datosPartida" data-uid="Global.ControladorPartida.datosPartida">datosPartida</h4>
+  <div class="markdown level1 summary"><p>Contiene los datos mas recientes de la partida </p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ClasesJSON.PartidaCompleta datosPartida</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.ClasesJSON.PartidaCompleta.html">ClasesJSON.PartidaCompleta</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Global_ControladorPartida_idJugador" data-uid="Global.ControladorPartida.idJugador">idJugador</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int idJugador</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Global_ControladorPartida_instance" data-uid="Global.ControladorPartida.instance">instance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ControladorPartida instance</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.ControladorPartida.html">ControladorPartida</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Global_ControladorPartida_ActualizarDatosPartida_" data-uid="Global.ControladorPartida.ActualizarDatosPartida*"></a>
+  <h4 id="Global_ControladorPartida_ActualizarDatosPartida_ClasesJSON_PartidaCompleta_" data-uid="Global.ControladorPartida.ActualizarDatosPartida(ClasesJSON.PartidaCompleta)">ActualizarDatosPartida(ClasesJSON.PartidaCompleta)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se recibe un mensaje de partida completa.
+Se actualiza el estado de la partida con el nuevo estado</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ActualizarDatosPartida(ClasesJSON.PartidaCompleta nuevaPartida)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.ClasesJSON.PartidaCompleta.html">ClasesJSON.PartidaCompleta</a></td>
+        <td><span class="parametername">nuevaPartida</span></td>
+        <td><p>Datos recibidos en el mensaje de partida completa </p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_AsignarDatosPartida_" data-uid="Global.ControladorPartida.AsignarDatosPartida*"></a>
+  <h4 id="Global_ControladorPartida_AsignarDatosPartida_ClasesJSON_PartidaCompleta_" data-uid="Global.ControladorPartida.AsignarDatosPartida(ClasesJSON.PartidaCompleta)">AsignarDatosPartida(ClasesJSON.PartidaCompleta)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se entra a la partida.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AsignarDatosPartida(ClasesJSON.PartidaCompleta nuevaPartida)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.ClasesJSON.PartidaCompleta.html">ClasesJSON.PartidaCompleta</a></td>
+        <td><span class="parametername">nuevaPartida</span></td>
+        <td><p>Datos de partida completa </p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_Ataque_" data-uid="Global.ControladorPartida.Ataque*"></a>
+  <h4 id="Global_ControladorPartida_Ataque_System_Int32_" data-uid="Global.ControladorPartida.Ataque(System.Int32)">Ataque(Int32)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se pulsa confirmar desde la ventana de ataque.
+Notifica al seridor de una acción de ataque</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Ataque(int tropas)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">tropas</span></td>
+        <td><p>Número de tropas a ser utilizadas en el ataque</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_ConfirmacionAtaque_" data-uid="Global.ControladorPartida.ConfirmacionAtaque*"></a>
+  <h4 id="Global_ControladorPartida_ConfirmacionAtaque_ClasesJSON_ConfirmacionAtaque_" data-uid="Global.ControladorPartida.ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque)">ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se recibe un mensaje de confirmación de ataque
+Se actualizan los territorios modificados y se muestran los dados resultantes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque ataque)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.ClasesJSON.ConfirmacionAtaque.html">ClasesJSON.ConfirmacionAtaque</a></td>
+        <td><span class="parametername">ataque</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_ConfirmacionFase_" data-uid="Global.ControladorPartida.ConfirmacionFase*"></a>
+  <h4 id="Global_ControladorPartida_ConfirmacionFase" data-uid="Global.ControladorPartida.ConfirmacionFase">ConfirmacionFase()</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se recibe un mensaje de cambio de fase.
+Se aumenta la fase en uno.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ConfirmacionFase()</code></pre>
+  </div>
+  
+  
+  <a id="Global_ControladorPartida_ConfirmacionMovimiento_" data-uid="Global.ControladorPartida.ConfirmacionMovimiento*"></a>
+  <h4 id="Global_ControladorPartida_ConfirmacionMovimiento_ClasesJSON_ConfirmacionMovimiento_" data-uid="Global.ControladorPartida.ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento)">ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se recibe un mensaje de confirmación de movimiento
+Se actualizan los territorios modificados</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento movimiento)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.ClasesJSON.ConfirmacionMovimiento.html">ClasesJSON.ConfirmacionMovimiento</a></td>
+        <td><span class="parametername">movimiento</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_ConfirmacionRefuerzos_" data-uid="Global.ControladorPartida.ConfirmacionRefuerzos*"></a>
+  <h4 id="Global_ControladorPartida_ConfirmacionRefuerzos_ClasesJSON_ConfirmacionRefuerzos_" data-uid="Global.ControladorPartida.ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos)">ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se recibe un mensaje de confirmación de refuerzos
+Se actualiza el territorio modificado</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos refuerzos)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.ClasesJSON.ConfirmacionRefuerzos.html">ClasesJSON.ConfirmacionRefuerzos</a></td>
+        <td><span class="parametername">refuerzos</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_Deseleccionar_" data-uid="Global.ControladorPartida.Deseleccionar*"></a>
+  <h4 id="Global_ControladorPartida_Deseleccionar" data-uid="Global.ControladorPartida.Deseleccionar">Deseleccionar()</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se selecciona en un lugar inválido al tener un territorio seleccionado
+Muestra todos los territorios y borra los seleccionados guardados</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Deseleccionar()</code></pre>
+  </div>
+  
+  
+  <a id="Global_ControladorPartida_Error_" data-uid="Global.ControladorPartida.Error*"></a>
+  <h4 id="Global_ControladorPartida_Error" data-uid="Global.ControladorPartida.Error">Error()</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se recibe un error desde el servidor
+Si se estaba esperando una confirmación significa que la operación ha fallado</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Error()</code></pre>
+  </div>
+  
+  
+  <a id="Global_ControladorPartida_FinPartida_" data-uid="Global.ControladorPartida.FinPartida*"></a>
+  <h4 id="Global_ControladorPartida_FinPartida_ClasesJSON_FinPartida_" data-uid="Global.ControladorPartida.FinPartida(ClasesJSON.FinPartida)">FinPartida(ClasesJSON.FinPartida)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se termina la partida. Muestra los resultados de la partida</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FinPartida(ClasesJSON.FinPartida datos)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.ClasesJSON.FinPartida.html">ClasesJSON.FinPartida</a></td>
+        <td><span class="parametername">datos</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_Movimiento_" data-uid="Global.ControladorPartida.Movimiento*"></a>
+  <h4 id="Global_ControladorPartida_Movimiento_System_Int32_" data-uid="Global.ControladorPartida.Movimiento(System.Int32)">Movimiento(Int32)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se pulsa confirmar desde la ventana de movimiento.
+Notifica al seridor de una acción de ataque</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Movimiento(int tropas)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">tropas</span></td>
+        <td><p>Número de tropas a ser utilizadas en el ataque</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_PasarFase_" data-uid="Global.ControladorPartida.PasarFase*"></a>
+  <h4 id="Global_ControladorPartida_PasarFase" data-uid="Global.ControladorPartida.PasarFase">PasarFase()</h4>
+  <div class="markdown level1 summary"><p>Invocado al pulsar el boton de cambio de fase.
+Envía al servidor un mensaje de cambio de fase.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PasarFase()</code></pre>
+  </div>
+  
+  
+  <a id="Global_ControladorPartida_Reforzar_" data-uid="Global.ControladorPartida.Reforzar*"></a>
+  <h4 id="Global_ControladorPartida_Reforzar_System_Int32_" data-uid="Global.ControladorPartida.Reforzar(System.Int32)">Reforzar(Int32)</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se pulsa confirmar desde la ventana de seleccion de tropas a reforzar.
+Notifica al seridor de una acción de refuerzo</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reforzar(int tropas)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">tropas</span></td>
+        <td><p>Número de tropas a ser creadas en territorio origen seleccionado</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ControladorPartida_SalirPartida_" data-uid="Global.ControladorPartida.SalirPartida*"></a>
+  <h4 id="Global_ControladorPartida_SalirPartida" data-uid="Global.ControladorPartida.SalirPartida">SalirPartida()</h4>
+  <div class="markdown level1 summary"><p>Invocado cuando se recibe un error desde el servidor
+Si se estaba esperando una confirmación significa que la operación ha fallado</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SalirPartida()</code></pre>
+  </div>
+  
+  
+  <a id="Global_ControladorPartida_SeleccionTerritorio_" data-uid="Global.ControladorPartida.SeleccionTerritorio*"></a>
+  <h4 id="Global_ControladorPartida_SeleccionTerritorio_Territorio_" data-uid="Global.ControladorPartida.SeleccionTerritorio(Territorio)">SeleccionTerritorio(Territorio)</h4>
+  <div class="markdown level1 summary"><p>Función llamada por cada territorio cuando este es seleccionado</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SeleccionTerritorio(Territorio territorio)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.Territorio.html">Territorio</a></td>
+        <td><span class="parametername">territorio</span></td>
+        <td><p>Territorio seleccionado</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
