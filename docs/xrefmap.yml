@@ -83,6 +83,12 @@ references:
   commentId: F:Global.AmigoInvitar.id
   fullName: AmigoInvitar.id
   nameWithType: AmigoInvitar.id
+- uid: Global.BotonNotificaciones
+  name: BotonNotificaciones
+  href: api/Global.BotonNotificaciones.html
+  commentId: T:Global.BotonNotificaciones
+  fullName: BotonNotificaciones
+  nameWithType: BotonNotificaciones
 - uid: Global.ClasesJSON
   name: ClasesJSON
   href: api/Global.ClasesJSON.html
@@ -174,6 +180,109 @@ references:
   commentId: F:Global.ClasesJSON.Aspecto.precio
   fullName: ClasesJSON.Aspecto.precio
   nameWithType: ClasesJSON.Aspecto.precio
+- uid: Global.ClasesJSON.AtaqueEnvio
+  name: ClasesJSON.AtaqueEnvio
+  href: api/Global.ClasesJSON.AtaqueEnvio.html
+  commentId: T:Global.ClasesJSON.AtaqueEnvio
+  fullName: ClasesJSON.AtaqueEnvio
+  nameWithType: ClasesJSON.AtaqueEnvio
+- uid: Global.ClasesJSON.AtaqueEnvio.#ctor(System.Int32,System.Int32,System.Int32)
+  name: AtaqueEnvio(Int32, Int32, Int32)
+  href: api/Global.ClasesJSON.AtaqueEnvio.html#Global_ClasesJSON_AtaqueEnvio__ctor_System_Int32_System_Int32_System_Int32_
+  commentId: M:Global.ClasesJSON.AtaqueEnvio.#ctor(System.Int32,System.Int32,System.Int32)
+  fullName: ClasesJSON.AtaqueEnvio.AtaqueEnvio(System.Int32, System.Int32, System.Int32)
+  nameWithType: ClasesJSON.AtaqueEnvio.AtaqueEnvio(Int32, Int32, Int32)
+- uid: Global.ClasesJSON.AtaqueEnvio.#ctor*
+  name: AtaqueEnvio
+  href: api/Global.ClasesJSON.AtaqueEnvio.html#Global_ClasesJSON_AtaqueEnvio__ctor_
+  commentId: Overload:Global.ClasesJSON.AtaqueEnvio.#ctor
+  isSpec: "True"
+  fullName: ClasesJSON.AtaqueEnvio.AtaqueEnvio
+  nameWithType: ClasesJSON.AtaqueEnvio.AtaqueEnvio
+- uid: Global.ClasesJSON.AtaqueEnvio.destino
+  name: destino
+  href: api/Global.ClasesJSON.AtaqueEnvio.html#Global_ClasesJSON_AtaqueEnvio_destino
+  commentId: F:Global.ClasesJSON.AtaqueEnvio.destino
+  fullName: ClasesJSON.AtaqueEnvio.destino
+  nameWithType: ClasesJSON.AtaqueEnvio.destino
+- uid: Global.ClasesJSON.AtaqueEnvio.origen
+  name: origen
+  href: api/Global.ClasesJSON.AtaqueEnvio.html#Global_ClasesJSON_AtaqueEnvio_origen
+  commentId: F:Global.ClasesJSON.AtaqueEnvio.origen
+  fullName: ClasesJSON.AtaqueEnvio.origen
+  nameWithType: ClasesJSON.AtaqueEnvio.origen
+- uid: Global.ClasesJSON.AtaqueEnvio.tipo
+  name: tipo
+  href: api/Global.ClasesJSON.AtaqueEnvio.html#Global_ClasesJSON_AtaqueEnvio_tipo
+  commentId: F:Global.ClasesJSON.AtaqueEnvio.tipo
+  fullName: ClasesJSON.AtaqueEnvio.tipo
+  nameWithType: ClasesJSON.AtaqueEnvio.tipo
+- uid: Global.ClasesJSON.AtaqueEnvio.tropas
+  name: tropas
+  href: api/Global.ClasesJSON.AtaqueEnvio.html#Global_ClasesJSON_AtaqueEnvio_tropas
+  commentId: F:Global.ClasesJSON.AtaqueEnvio.tropas
+  fullName: ClasesJSON.AtaqueEnvio.tropas
+  nameWithType: ClasesJSON.AtaqueEnvio.tropas
+- uid: Global.ClasesJSON.ConfirmacionAtaque
+  name: ClasesJSON.ConfirmacionAtaque
+  href: api/Global.ClasesJSON.ConfirmacionAtaque.html
+  commentId: T:Global.ClasesJSON.ConfirmacionAtaque
+  fullName: ClasesJSON.ConfirmacionAtaque
+  nameWithType: ClasesJSON.ConfirmacionAtaque
+- uid: Global.ClasesJSON.ConfirmacionAtaque.dadosDestino
+  name: dadosDestino
+  href: api/Global.ClasesJSON.ConfirmacionAtaque.html#Global_ClasesJSON_ConfirmacionAtaque_dadosDestino
+  commentId: F:Global.ClasesJSON.ConfirmacionAtaque.dadosDestino
+  fullName: ClasesJSON.ConfirmacionAtaque.dadosDestino
+  nameWithType: ClasesJSON.ConfirmacionAtaque.dadosDestino
+- uid: Global.ClasesJSON.ConfirmacionAtaque.dadosOrigen
+  name: dadosOrigen
+  href: api/Global.ClasesJSON.ConfirmacionAtaque.html#Global_ClasesJSON_ConfirmacionAtaque_dadosOrigen
+  commentId: F:Global.ClasesJSON.ConfirmacionAtaque.dadosOrigen
+  fullName: ClasesJSON.ConfirmacionAtaque.dadosOrigen
+  nameWithType: ClasesJSON.ConfirmacionAtaque.dadosOrigen
+- uid: Global.ClasesJSON.ConfirmacionAtaque.territorioDestino
+  name: territorioDestino
+  href: api/Global.ClasesJSON.ConfirmacionAtaque.html#Global_ClasesJSON_ConfirmacionAtaque_territorioDestino
+  commentId: F:Global.ClasesJSON.ConfirmacionAtaque.territorioDestino
+  fullName: ClasesJSON.ConfirmacionAtaque.territorioDestino
+  nameWithType: ClasesJSON.ConfirmacionAtaque.territorioDestino
+- uid: Global.ClasesJSON.ConfirmacionAtaque.territorioOrigen
+  name: territorioOrigen
+  href: api/Global.ClasesJSON.ConfirmacionAtaque.html#Global_ClasesJSON_ConfirmacionAtaque_territorioOrigen
+  commentId: F:Global.ClasesJSON.ConfirmacionAtaque.territorioOrigen
+  fullName: ClasesJSON.ConfirmacionAtaque.territorioOrigen
+  nameWithType: ClasesJSON.ConfirmacionAtaque.territorioOrigen
+- uid: Global.ClasesJSON.ConfirmacionMovimiento
+  name: ClasesJSON.ConfirmacionMovimiento
+  href: api/Global.ClasesJSON.ConfirmacionMovimiento.html
+  commentId: T:Global.ClasesJSON.ConfirmacionMovimiento
+  fullName: ClasesJSON.ConfirmacionMovimiento
+  nameWithType: ClasesJSON.ConfirmacionMovimiento
+- uid: Global.ClasesJSON.ConfirmacionMovimiento.territorioDestino
+  name: territorioDestino
+  href: api/Global.ClasesJSON.ConfirmacionMovimiento.html#Global_ClasesJSON_ConfirmacionMovimiento_territorioDestino
+  commentId: F:Global.ClasesJSON.ConfirmacionMovimiento.territorioDestino
+  fullName: ClasesJSON.ConfirmacionMovimiento.territorioDestino
+  nameWithType: ClasesJSON.ConfirmacionMovimiento.territorioDestino
+- uid: Global.ClasesJSON.ConfirmacionMovimiento.territorioOrigen
+  name: territorioOrigen
+  href: api/Global.ClasesJSON.ConfirmacionMovimiento.html#Global_ClasesJSON_ConfirmacionMovimiento_territorioOrigen
+  commentId: F:Global.ClasesJSON.ConfirmacionMovimiento.territorioOrigen
+  fullName: ClasesJSON.ConfirmacionMovimiento.territorioOrigen
+  nameWithType: ClasesJSON.ConfirmacionMovimiento.territorioOrigen
+- uid: Global.ClasesJSON.ConfirmacionRefuerzos
+  name: ClasesJSON.ConfirmacionRefuerzos
+  href: api/Global.ClasesJSON.ConfirmacionRefuerzos.html
+  commentId: T:Global.ClasesJSON.ConfirmacionRefuerzos
+  fullName: ClasesJSON.ConfirmacionRefuerzos
+  nameWithType: ClasesJSON.ConfirmacionRefuerzos
+- uid: Global.ClasesJSON.ConfirmacionRefuerzos.territorio
+  name: territorio
+  href: api/Global.ClasesJSON.ConfirmacionRefuerzos.html#Global_ClasesJSON_ConfirmacionRefuerzos_territorio
+  commentId: F:Global.ClasesJSON.ConfirmacionRefuerzos.territorio
+  fullName: ClasesJSON.ConfirmacionRefuerzos.territorio
+  nameWithType: ClasesJSON.ConfirmacionRefuerzos.territorio
 - uid: Global.ClasesJSON.Cosmetico
   name: ClasesJSON.Cosmetico
   href: api/Global.ClasesJSON.Cosmetico.html
@@ -265,6 +374,24 @@ references:
   commentId: F:Global.ClasesJSON.DatosSala.tiempoTurno
   fullName: ClasesJSON.DatosSala.tiempoTurno
   nameWithType: ClasesJSON.DatosSala.tiempoTurno
+- uid: Global.ClasesJSON.FinPartida
+  name: ClasesJSON.FinPartida
+  href: api/Global.ClasesJSON.FinPartida.html
+  commentId: T:Global.ClasesJSON.FinPartida
+  fullName: ClasesJSON.FinPartida
+  nameWithType: ClasesJSON.FinPartida
+- uid: Global.ClasesJSON.FinPartida.ganador
+  name: ganador
+  href: api/Global.ClasesJSON.FinPartida.html#Global_ClasesJSON_FinPartida_ganador
+  commentId: F:Global.ClasesJSON.FinPartida.ganador
+  fullName: ClasesJSON.FinPartida.ganador
+  nameWithType: ClasesJSON.FinPartida.ganador
+- uid: Global.ClasesJSON.FinPartida.riskos
+  name: riskos
+  href: api/Global.ClasesJSON.FinPartida.html#Global_ClasesJSON_FinPartida_riskos
+  commentId: F:Global.ClasesJSON.FinPartida.riskos
+  fullName: ClasesJSON.FinPartida.riskos
+  nameWithType: ClasesJSON.FinPartida.riskos
 - uid: Global.ClasesJSON.Icono
   name: ClasesJSON.Icono
   href: api/Global.ClasesJSON.Icono.html
@@ -344,6 +471,12 @@ references:
   commentId: F:Global.ClasesJSON.Jugador.nombre
   fullName: ClasesJSON.Jugador.nombre
   nameWithType: ClasesJSON.Jugador.nombre
+- uid: Global.ClasesJSON.Jugador.refuerzos
+  name: refuerzos
+  href: api/Global.ClasesJSON.Jugador.html#Global_ClasesJSON_Jugador_refuerzos
+  commentId: F:Global.ClasesJSON.Jugador.refuerzos
+  fullName: ClasesJSON.Jugador.refuerzos
+  nameWithType: ClasesJSON.Jugador.refuerzos
 - uid: Global.ClasesJSON.Jugador.sigueVivo
   name: sigueVivo
   href: api/Global.ClasesJSON.Jugador.html#Global_ClasesJSON_Jugador_sigueVivo
@@ -422,6 +555,18 @@ references:
   commentId: F:Global.ClasesJSON.ListaNotificaciones.notificaciones
   fullName: ClasesJSON.ListaNotificaciones.notificaciones
   nameWithType: ClasesJSON.ListaNotificaciones.notificaciones
+- uid: Global.ClasesJSON.ListaPartidas
+  name: ClasesJSON.ListaPartidas
+  href: api/Global.ClasesJSON.ListaPartidas.html
+  commentId: T:Global.ClasesJSON.ListaPartidas
+  fullName: ClasesJSON.ListaPartidas
+  nameWithType: ClasesJSON.ListaPartidas
+- uid: Global.ClasesJSON.ListaPartidas.partidas
+  name: partidas
+  href: api/Global.ClasesJSON.ListaPartidas.html#Global_ClasesJSON_ListaPartidas_partidas
+  commentId: F:Global.ClasesJSON.ListaPartidas.partidas
+  fullName: ClasesJSON.ListaPartidas.partidas
+  nameWithType: ClasesJSON.ListaPartidas.partidas
 - uid: Global.ClasesJSON.MensajeWebsocket
   name: ClasesJSON.MensajeWebsocket
   href: api/Global.ClasesJSON.MensajeWebsocket.html
@@ -434,6 +579,49 @@ references:
   commentId: F:Global.ClasesJSON.MensajeWebsocket._tipoMensaje
   fullName: ClasesJSON.MensajeWebsocket._tipoMensaje
   nameWithType: ClasesJSON.MensajeWebsocket._tipoMensaje
+- uid: Global.ClasesJSON.MovimientoEnvio
+  name: ClasesJSON.MovimientoEnvio
+  href: api/Global.ClasesJSON.MovimientoEnvio.html
+  commentId: T:Global.ClasesJSON.MovimientoEnvio
+  fullName: ClasesJSON.MovimientoEnvio
+  nameWithType: ClasesJSON.MovimientoEnvio
+- uid: Global.ClasesJSON.MovimientoEnvio.#ctor(System.Int32,System.Int32,System.Int32)
+  name: MovimientoEnvio(Int32, Int32, Int32)
+  href: api/Global.ClasesJSON.MovimientoEnvio.html#Global_ClasesJSON_MovimientoEnvio__ctor_System_Int32_System_Int32_System_Int32_
+  commentId: M:Global.ClasesJSON.MovimientoEnvio.#ctor(System.Int32,System.Int32,System.Int32)
+  fullName: ClasesJSON.MovimientoEnvio.MovimientoEnvio(System.Int32, System.Int32, System.Int32)
+  nameWithType: ClasesJSON.MovimientoEnvio.MovimientoEnvio(Int32, Int32, Int32)
+- uid: Global.ClasesJSON.MovimientoEnvio.#ctor*
+  name: MovimientoEnvio
+  href: api/Global.ClasesJSON.MovimientoEnvio.html#Global_ClasesJSON_MovimientoEnvio__ctor_
+  commentId: Overload:Global.ClasesJSON.MovimientoEnvio.#ctor
+  isSpec: "True"
+  fullName: ClasesJSON.MovimientoEnvio.MovimientoEnvio
+  nameWithType: ClasesJSON.MovimientoEnvio.MovimientoEnvio
+- uid: Global.ClasesJSON.MovimientoEnvio.destino
+  name: destino
+  href: api/Global.ClasesJSON.MovimientoEnvio.html#Global_ClasesJSON_MovimientoEnvio_destino
+  commentId: F:Global.ClasesJSON.MovimientoEnvio.destino
+  fullName: ClasesJSON.MovimientoEnvio.destino
+  nameWithType: ClasesJSON.MovimientoEnvio.destino
+- uid: Global.ClasesJSON.MovimientoEnvio.origen
+  name: origen
+  href: api/Global.ClasesJSON.MovimientoEnvio.html#Global_ClasesJSON_MovimientoEnvio_origen
+  commentId: F:Global.ClasesJSON.MovimientoEnvio.origen
+  fullName: ClasesJSON.MovimientoEnvio.origen
+  nameWithType: ClasesJSON.MovimientoEnvio.origen
+- uid: Global.ClasesJSON.MovimientoEnvio.tipo
+  name: tipo
+  href: api/Global.ClasesJSON.MovimientoEnvio.html#Global_ClasesJSON_MovimientoEnvio_tipo
+  commentId: F:Global.ClasesJSON.MovimientoEnvio.tipo
+  fullName: ClasesJSON.MovimientoEnvio.tipo
+  nameWithType: ClasesJSON.MovimientoEnvio.tipo
+- uid: Global.ClasesJSON.MovimientoEnvio.tropas
+  name: tropas
+  href: api/Global.ClasesJSON.MovimientoEnvio.html#Global_ClasesJSON_MovimientoEnvio_tropas
+  commentId: F:Global.ClasesJSON.MovimientoEnvio.tropas
+  fullName: ClasesJSON.MovimientoEnvio.tropas
+  nameWithType: ClasesJSON.MovimientoEnvio.tropas
 - uid: Global.ClasesJSON.Notificacion
   name: ClasesJSON.Notificacion
   href: api/Global.ClasesJSON.Notificacion.html
@@ -458,6 +646,139 @@ references:
   commentId: F:Global.ClasesJSON.Notificacion.tipo
   fullName: ClasesJSON.Notificacion.tipo
   nameWithType: ClasesJSON.Notificacion.tipo
+- uid: Global.ClasesJSON.Partida
+  name: ClasesJSON.Partida
+  href: api/Global.ClasesJSON.Partida.html
+  commentId: T:Global.ClasesJSON.Partida
+  fullName: ClasesJSON.Partida
+  nameWithType: ClasesJSON.Partida
+- uid: Global.ClasesJSON.Partida.id
+  name: id
+  href: api/Global.ClasesJSON.Partida.html#Global_ClasesJSON_Partida_id
+  commentId: F:Global.ClasesJSON.Partida.id
+  fullName: ClasesJSON.Partida.id
+  nameWithType: ClasesJSON.Partida.id
+- uid: Global.ClasesJSON.Partida.nombre
+  name: nombre
+  href: api/Global.ClasesJSON.Partida.html#Global_ClasesJSON_Partida_nombre
+  commentId: F:Global.ClasesJSON.Partida.nombre
+  fullName: ClasesJSON.Partida.nombre
+  nameWithType: ClasesJSON.Partida.nombre
+- uid: Global.ClasesJSON.Partida.nombreTurno
+  name: nombreTurno
+  href: api/Global.ClasesJSON.Partida.html#Global_ClasesJSON_Partida_nombreTurno
+  commentId: F:Global.ClasesJSON.Partida.nombreTurno
+  fullName: ClasesJSON.Partida.nombreTurno
+  nameWithType: ClasesJSON.Partida.nombreTurno
+- uid: Global.ClasesJSON.Partida.tiempoTurno
+  name: tiempoTurno
+  href: api/Global.ClasesJSON.Partida.html#Global_ClasesJSON_Partida_tiempoTurno
+  commentId: F:Global.ClasesJSON.Partida.tiempoTurno
+  fullName: ClasesJSON.Partida.tiempoTurno
+  nameWithType: ClasesJSON.Partida.tiempoTurno
+- uid: Global.ClasesJSON.Partida.turnoActual
+  name: turnoActual
+  href: api/Global.ClasesJSON.Partida.html#Global_ClasesJSON_Partida_turnoActual
+  commentId: F:Global.ClasesJSON.Partida.turnoActual
+  fullName: ClasesJSON.Partida.turnoActual
+  nameWithType: ClasesJSON.Partida.turnoActual
+- uid: Global.ClasesJSON.Partida.ultimoTurno
+  name: ultimoTurno
+  href: api/Global.ClasesJSON.Partida.html#Global_ClasesJSON_Partida_ultimoTurno
+  commentId: F:Global.ClasesJSON.Partida.ultimoTurno
+  fullName: ClasesJSON.Partida.ultimoTurno
+  nameWithType: ClasesJSON.Partida.ultimoTurno
+- uid: Global.ClasesJSON.PartidaCompleta
+  name: ClasesJSON.PartidaCompleta
+  href: api/Global.ClasesJSON.PartidaCompleta.html
+  commentId: T:Global.ClasesJSON.PartidaCompleta
+  fullName: ClasesJSON.PartidaCompleta
+  nameWithType: ClasesJSON.PartidaCompleta
+- uid: Global.ClasesJSON.PartidaCompleta.fase
+  name: fase
+  href: api/Global.ClasesJSON.PartidaCompleta.html#Global_ClasesJSON_PartidaCompleta_fase
+  commentId: F:Global.ClasesJSON.PartidaCompleta.fase
+  fullName: ClasesJSON.PartidaCompleta.fase
+  nameWithType: ClasesJSON.PartidaCompleta.fase
+- uid: Global.ClasesJSON.PartidaCompleta.jugadores
+  name: jugadores
+  href: api/Global.ClasesJSON.PartidaCompleta.html#Global_ClasesJSON_PartidaCompleta_jugadores
+  commentId: F:Global.ClasesJSON.PartidaCompleta.jugadores
+  fullName: ClasesJSON.PartidaCompleta.jugadores
+  nameWithType: ClasesJSON.PartidaCompleta.jugadores
+- uid: Global.ClasesJSON.PartidaCompleta.nombreSala
+  name: nombreSala
+  href: api/Global.ClasesJSON.PartidaCompleta.html#Global_ClasesJSON_PartidaCompleta_nombreSala
+  commentId: F:Global.ClasesJSON.PartidaCompleta.nombreSala
+  fullName: ClasesJSON.PartidaCompleta.nombreSala
+  nameWithType: ClasesJSON.PartidaCompleta.nombreSala
+- uid: Global.ClasesJSON.PartidaCompleta.territorios
+  name: territorios
+  href: api/Global.ClasesJSON.PartidaCompleta.html#Global_ClasesJSON_PartidaCompleta_territorios
+  commentId: F:Global.ClasesJSON.PartidaCompleta.territorios
+  fullName: ClasesJSON.PartidaCompleta.territorios
+  nameWithType: ClasesJSON.PartidaCompleta.territorios
+- uid: Global.ClasesJSON.PartidaCompleta.tiempoTurno
+  name: tiempoTurno
+  href: api/Global.ClasesJSON.PartidaCompleta.html#Global_ClasesJSON_PartidaCompleta_tiempoTurno
+  commentId: F:Global.ClasesJSON.PartidaCompleta.tiempoTurno
+  fullName: ClasesJSON.PartidaCompleta.tiempoTurno
+  nameWithType: ClasesJSON.PartidaCompleta.tiempoTurno
+- uid: Global.ClasesJSON.PartidaCompleta.turnoActual
+  name: turnoActual
+  href: api/Global.ClasesJSON.PartidaCompleta.html#Global_ClasesJSON_PartidaCompleta_turnoActual
+  commentId: F:Global.ClasesJSON.PartidaCompleta.turnoActual
+  fullName: ClasesJSON.PartidaCompleta.turnoActual
+  nameWithType: ClasesJSON.PartidaCompleta.turnoActual
+- uid: Global.ClasesJSON.PartidaCompleta.turnoJugador
+  name: turnoJugador
+  href: api/Global.ClasesJSON.PartidaCompleta.html#Global_ClasesJSON_PartidaCompleta_turnoJugador
+  commentId: F:Global.ClasesJSON.PartidaCompleta.turnoJugador
+  fullName: ClasesJSON.PartidaCompleta.turnoJugador
+  nameWithType: ClasesJSON.PartidaCompleta.turnoJugador
+- uid: Global.ClasesJSON.PartidaCompleta.ultimoTurno
+  name: ultimoTurno
+  href: api/Global.ClasesJSON.PartidaCompleta.html#Global_ClasesJSON_PartidaCompleta_ultimoTurno
+  commentId: F:Global.ClasesJSON.PartidaCompleta.ultimoTurno
+  fullName: ClasesJSON.PartidaCompleta.ultimoTurno
+  nameWithType: ClasesJSON.PartidaCompleta.ultimoTurno
+- uid: Global.ClasesJSON.RefuerzoEnvio
+  name: ClasesJSON.RefuerzoEnvio
+  href: api/Global.ClasesJSON.RefuerzoEnvio.html
+  commentId: T:Global.ClasesJSON.RefuerzoEnvio
+  fullName: ClasesJSON.RefuerzoEnvio
+  nameWithType: ClasesJSON.RefuerzoEnvio
+- uid: Global.ClasesJSON.RefuerzoEnvio.#ctor(System.Int32,System.Int32)
+  name: RefuerzoEnvio(Int32, Int32)
+  href: api/Global.ClasesJSON.RefuerzoEnvio.html#Global_ClasesJSON_RefuerzoEnvio__ctor_System_Int32_System_Int32_
+  commentId: M:Global.ClasesJSON.RefuerzoEnvio.#ctor(System.Int32,System.Int32)
+  fullName: ClasesJSON.RefuerzoEnvio.RefuerzoEnvio(System.Int32, System.Int32)
+  nameWithType: ClasesJSON.RefuerzoEnvio.RefuerzoEnvio(Int32, Int32)
+- uid: Global.ClasesJSON.RefuerzoEnvio.#ctor*
+  name: RefuerzoEnvio
+  href: api/Global.ClasesJSON.RefuerzoEnvio.html#Global_ClasesJSON_RefuerzoEnvio__ctor_
+  commentId: Overload:Global.ClasesJSON.RefuerzoEnvio.#ctor
+  isSpec: "True"
+  fullName: ClasesJSON.RefuerzoEnvio.RefuerzoEnvio
+  nameWithType: ClasesJSON.RefuerzoEnvio.RefuerzoEnvio
+- uid: Global.ClasesJSON.RefuerzoEnvio.id
+  name: id
+  href: api/Global.ClasesJSON.RefuerzoEnvio.html#Global_ClasesJSON_RefuerzoEnvio_id
+  commentId: F:Global.ClasesJSON.RefuerzoEnvio.id
+  fullName: ClasesJSON.RefuerzoEnvio.id
+  nameWithType: ClasesJSON.RefuerzoEnvio.id
+- uid: Global.ClasesJSON.RefuerzoEnvio.tipo
+  name: tipo
+  href: api/Global.ClasesJSON.RefuerzoEnvio.html#Global_ClasesJSON_RefuerzoEnvio_tipo
+  commentId: F:Global.ClasesJSON.RefuerzoEnvio.tipo
+  fullName: ClasesJSON.RefuerzoEnvio.tipo
+  nameWithType: ClasesJSON.RefuerzoEnvio.tipo
+- uid: Global.ClasesJSON.RefuerzoEnvio.tropas
+  name: tropas
+  href: api/Global.ClasesJSON.RefuerzoEnvio.html#Global_ClasesJSON_RefuerzoEnvio_tropas
+  commentId: F:Global.ClasesJSON.RefuerzoEnvio.tropas
+  fullName: ClasesJSON.RefuerzoEnvio.tropas
+  nameWithType: ClasesJSON.RefuerzoEnvio.tropas
 - uid: Global.ClasesJSON.RiskError
   name: ClasesJSON.RiskError
   href: api/Global.ClasesJSON.RiskError.html
@@ -500,6 +821,43 @@ references:
   commentId: F:Global.ClasesJSON.settings
   fullName: ClasesJSON.settings
   nameWithType: ClasesJSON.settings
+- uid: Global.ClasesJSON.Territorio
+  name: ClasesJSON.Territorio
+  href: api/Global.ClasesJSON.Territorio.html
+  commentId: T:Global.ClasesJSON.Territorio
+  fullName: ClasesJSON.Territorio
+  nameWithType: ClasesJSON.Territorio
+- uid: Global.ClasesJSON.Territorio.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Global.ClasesJSON.Territorio.html#Global_ClasesJSON_Territorio_Equals_System_Object_
+  commentId: M:Global.ClasesJSON.Territorio.Equals(System.Object)
+  fullName: ClasesJSON.Territorio.Equals(System.Object)
+  nameWithType: ClasesJSON.Territorio.Equals(Object)
+- uid: Global.ClasesJSON.Territorio.Equals*
+  name: Equals
+  href: api/Global.ClasesJSON.Territorio.html#Global_ClasesJSON_Territorio_Equals_
+  commentId: Overload:Global.ClasesJSON.Territorio.Equals
+  isSpec: "True"
+  fullName: ClasesJSON.Territorio.Equals
+  nameWithType: ClasesJSON.Territorio.Equals
+- uid: Global.ClasesJSON.Territorio.id
+  name: id
+  href: api/Global.ClasesJSON.Territorio.html#Global_ClasesJSON_Territorio_id
+  commentId: F:Global.ClasesJSON.Territorio.id
+  fullName: ClasesJSON.Territorio.id
+  nameWithType: ClasesJSON.Territorio.id
+- uid: Global.ClasesJSON.Territorio.jugador
+  name: jugador
+  href: api/Global.ClasesJSON.Territorio.html#Global_ClasesJSON_Territorio_jugador
+  commentId: F:Global.ClasesJSON.Territorio.jugador
+  fullName: ClasesJSON.Territorio.jugador
+  nameWithType: ClasesJSON.Territorio.jugador
+- uid: Global.ClasesJSON.Territorio.tropas
+  name: tropas
+  href: api/Global.ClasesJSON.Territorio.html#Global_ClasesJSON_Territorio_tropas
+  commentId: F:Global.ClasesJSON.Territorio.tropas
+  fullName: ClasesJSON.Territorio.tropas
+  nameWithType: ClasesJSON.Territorio.tropas
 - uid: Global.ClasesJSON.UsuarioCompleto
   name: ClasesJSON.UsuarioCompleto
   href: api/Global.ClasesJSON.UsuarioCompleto.html
@@ -574,6 +932,19 @@ references:
   isSpec: "True"
   fullName: ConexionHTTP.RequestHTTP
   nameWithType: ConexionHTTP.RequestHTTP
+- uid: Global.ConexionHTTP.RequestHTTPFantasma(System.String,WWWForm)
+  name: RequestHTTPFantasma(String, WWWForm)
+  href: api/Global.ConexionHTTP.html#Global_ConexionHTTP_RequestHTTPFantasma_System_String_WWWForm_
+  commentId: M:Global.ConexionHTTP.RequestHTTPFantasma(System.String,WWWForm)
+  fullName: ConexionHTTP.RequestHTTPFantasma(System.String, WWWForm)
+  nameWithType: ConexionHTTP.RequestHTTPFantasma(String, WWWForm)
+- uid: Global.ConexionHTTP.RequestHTTPFantasma*
+  name: RequestHTTPFantasma
+  href: api/Global.ConexionHTTP.html#Global_ConexionHTTP_RequestHTTPFantasma_
+  commentId: Overload:Global.ConexionHTTP.RequestHTTPFantasma
+  isSpec: "True"
+  fullName: ConexionHTTP.RequestHTTPFantasma
+  nameWithType: ConexionHTTP.RequestHTTPFantasma
 - uid: Global.ConexionHTTP.SendRequest*
   name: SendRequest
   href: api/Global.ConexionHTTP.html#Global_ConexionHTTP_SendRequest_
@@ -660,6 +1031,32 @@ references:
   isSpec: "True"
   fullName: ControladorAmigos.ActualizarAmigoAgregar
   nameWithType: ControladorAmigos.ActualizarAmigoAgregar
+- uid: Global.ControladorAmigos.AsignarAmigoBorrar(Amigo)
+  name: AsignarAmigoBorrar(Amigo)
+  href: api/Global.ControladorAmigos.html#Global_ControladorAmigos_AsignarAmigoBorrar_Amigo_
+  commentId: M:Global.ControladorAmigos.AsignarAmigoBorrar(Amigo)
+  fullName: ControladorAmigos.AsignarAmigoBorrar(Amigo)
+  nameWithType: ControladorAmigos.AsignarAmigoBorrar(Amigo)
+- uid: Global.ControladorAmigos.AsignarAmigoBorrar*
+  name: AsignarAmigoBorrar
+  href: api/Global.ControladorAmigos.html#Global_ControladorAmigos_AsignarAmigoBorrar_
+  commentId: Overload:Global.ControladorAmigos.AsignarAmigoBorrar
+  isSpec: "True"
+  fullName: ControladorAmigos.AsignarAmigoBorrar
+  nameWithType: ControladorAmigos.AsignarAmigoBorrar
+- uid: Global.ControladorAmigos.ConfirmarBorrarAmigo
+  name: ConfirmarBorrarAmigo()
+  href: api/Global.ControladorAmigos.html#Global_ControladorAmigos_ConfirmarBorrarAmigo
+  commentId: M:Global.ControladorAmigos.ConfirmarBorrarAmigo
+  fullName: ControladorAmigos.ConfirmarBorrarAmigo()
+  nameWithType: ControladorAmigos.ConfirmarBorrarAmigo()
+- uid: Global.ControladorAmigos.ConfirmarBorrarAmigo*
+  name: ConfirmarBorrarAmigo
+  href: api/Global.ControladorAmigos.html#Global_ControladorAmigos_ConfirmarBorrarAmigo_
+  commentId: Overload:Global.ControladorAmigos.ConfirmarBorrarAmigo
+  isSpec: "True"
+  fullName: ControladorAmigos.ConfirmarBorrarAmigo
+  nameWithType: ControladorAmigos.ConfirmarBorrarAmigo
 - uid: Global.ControladorAmigos.EnviarSolicitudAmistad
   name: EnviarSolicitudAmistad()
   href: api/Global.ControladorAmigos.html#Global_ControladorAmigos_EnviarSolicitudAmistad
@@ -686,6 +1083,212 @@ references:
   isSpec: "True"
   fullName: ControladorAmigos.RecargarAmigos
   nameWithType: ControladorAmigos.RecargarAmigos
+- uid: Global.ControladorCamara
+  name: ControladorCamara
+  href: api/Global.ControladorCamara.html
+  commentId: T:Global.ControladorCamara
+  fullName: ControladorCamara
+  nameWithType: ControladorCamara
+- uid: Global.ControladorCamara.evSys
+  name: evSys
+  href: api/Global.ControladorCamara.html#Global_ControladorCamara_evSys
+  commentId: F:Global.ControladorCamara.evSys
+  fullName: ControladorCamara.evSys
+  nameWithType: ControladorCamara.evSys
+- uid: Global.ControladorInterfazPartida
+  name: ControladorInterfazPartida
+  href: api/Global.ControladorInterfazPartida.html
+  commentId: T:Global.ControladorInterfazPartida
+  fullName: ControladorInterfazPartida
+  nameWithType: ControladorInterfazPartida
+- uid: Global.ControladorInterfazPartida.ActualizarFase(System.Int32)
+  name: ActualizarFase(Int32)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarFase_System_Int32_
+  commentId: M:Global.ControladorInterfazPartida.ActualizarFase(System.Int32)
+  fullName: ControladorInterfazPartida.ActualizarFase(System.Int32)
+  nameWithType: ControladorInterfazPartida.ActualizarFase(Int32)
+- uid: Global.ControladorInterfazPartida.ActualizarFase*
+  name: ActualizarFase
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarFase_
+  commentId: Overload:Global.ControladorInterfazPartida.ActualizarFase
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.ActualizarFase
+  nameWithType: ControladorInterfazPartida.ActualizarFase
+- uid: Global.ControladorInterfazPartida.ActualizarHistorialUltimaBatalla(ClasesJSON.ConfirmacionAtaque,Territorio)
+  name: ActualizarHistorialUltimaBatalla(ClasesJSON.ConfirmacionAtaque, Territorio)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarHistorialUltimaBatalla_ClasesJSON_ConfirmacionAtaque_Territorio_
+  commentId: M:Global.ControladorInterfazPartida.ActualizarHistorialUltimaBatalla(ClasesJSON.ConfirmacionAtaque,Territorio)
+  fullName: ControladorInterfazPartida.ActualizarHistorialUltimaBatalla(ClasesJSON.ConfirmacionAtaque, Territorio)
+  nameWithType: ControladorInterfazPartida.ActualizarHistorialUltimaBatalla(ClasesJSON.ConfirmacionAtaque, Territorio)
+- uid: Global.ControladorInterfazPartida.ActualizarHistorialUltimaBatalla*
+  name: ActualizarHistorialUltimaBatalla
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarHistorialUltimaBatalla_
+  commentId: Overload:Global.ControladorInterfazPartida.ActualizarHistorialUltimaBatalla
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.ActualizarHistorialUltimaBatalla
+  nameWithType: ControladorInterfazPartida.ActualizarHistorialUltimaBatalla
+- uid: Global.ControladorInterfazPartida.ActualizarInterfaz(ClasesJSON.PartidaCompleta)
+  name: ActualizarInterfaz(ClasesJSON.PartidaCompleta)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarInterfaz_ClasesJSON_PartidaCompleta_
+  commentId: M:Global.ControladorInterfazPartida.ActualizarInterfaz(ClasesJSON.PartidaCompleta)
+  fullName: ControladorInterfazPartida.ActualizarInterfaz(ClasesJSON.PartidaCompleta)
+  nameWithType: ControladorInterfazPartida.ActualizarInterfaz(ClasesJSON.PartidaCompleta)
+- uid: Global.ControladorInterfazPartida.ActualizarInterfaz*
+  name: ActualizarInterfaz
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarInterfaz_
+  commentId: Overload:Global.ControladorInterfazPartida.ActualizarInterfaz
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.ActualizarInterfaz
+  nameWithType: ControladorInterfazPartida.ActualizarInterfaz
+- uid: Global.ControladorInterfazPartida.ActualizarLista(ClasesJSON.PartidaCompleta)
+  name: ActualizarLista(ClasesJSON.PartidaCompleta)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarLista_ClasesJSON_PartidaCompleta_
+  commentId: M:Global.ControladorInterfazPartida.ActualizarLista(ClasesJSON.PartidaCompleta)
+  fullName: ControladorInterfazPartida.ActualizarLista(ClasesJSON.PartidaCompleta)
+  nameWithType: ControladorInterfazPartida.ActualizarLista(ClasesJSON.PartidaCompleta)
+- uid: Global.ControladorInterfazPartida.ActualizarLista*
+  name: ActualizarLista
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarLista_
+  commentId: Overload:Global.ControladorInterfazPartida.ActualizarLista
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.ActualizarLista
+  nameWithType: ControladorInterfazPartida.ActualizarLista
+- uid: Global.ControladorInterfazPartida.ActualizarRefuerzosRestantes(System.Int32)
+  name: ActualizarRefuerzosRestantes(Int32)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarRefuerzosRestantes_System_Int32_
+  commentId: M:Global.ControladorInterfazPartida.ActualizarRefuerzosRestantes(System.Int32)
+  fullName: ControladorInterfazPartida.ActualizarRefuerzosRestantes(System.Int32)
+  nameWithType: ControladorInterfazPartida.ActualizarRefuerzosRestantes(Int32)
+- uid: Global.ControladorInterfazPartida.ActualizarRefuerzosRestantes*
+  name: ActualizarRefuerzosRestantes
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ActualizarRefuerzosRestantes_
+  commentId: Overload:Global.ControladorInterfazPartida.ActualizarRefuerzosRestantes
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.ActualizarRefuerzosRestantes
+  nameWithType: ControladorInterfazPartida.ActualizarRefuerzosRestantes
+- uid: Global.ControladorInterfazPartida.MostrarHistorialUltimaBatalla(System.Boolean)
+  name: MostrarHistorialUltimaBatalla(Boolean)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_MostrarHistorialUltimaBatalla_System_Boolean_
+  commentId: M:Global.ControladorInterfazPartida.MostrarHistorialUltimaBatalla(System.Boolean)
+  fullName: ControladorInterfazPartida.MostrarHistorialUltimaBatalla(System.Boolean)
+  nameWithType: ControladorInterfazPartida.MostrarHistorialUltimaBatalla(Boolean)
+- uid: Global.ControladorInterfazPartida.MostrarHistorialUltimaBatalla*
+  name: MostrarHistorialUltimaBatalla
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_MostrarHistorialUltimaBatalla_
+  commentId: Overload:Global.ControladorInterfazPartida.MostrarHistorialUltimaBatalla
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.MostrarHistorialUltimaBatalla
+  nameWithType: ControladorInterfazPartida.MostrarHistorialUltimaBatalla
+- uid: Global.ControladorInterfazPartida.ToggleHistorialUltimaBatalla
+  name: ToggleHistorialUltimaBatalla()
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ToggleHistorialUltimaBatalla
+  commentId: M:Global.ControladorInterfazPartida.ToggleHistorialUltimaBatalla
+  fullName: ControladorInterfazPartida.ToggleHistorialUltimaBatalla()
+  nameWithType: ControladorInterfazPartida.ToggleHistorialUltimaBatalla()
+- uid: Global.ControladorInterfazPartida.ToggleHistorialUltimaBatalla*
+  name: ToggleHistorialUltimaBatalla
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ToggleHistorialUltimaBatalla_
+  commentId: Overload:Global.ControladorInterfazPartida.ToggleHistorialUltimaBatalla
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.ToggleHistorialUltimaBatalla
+  nameWithType: ControladorInterfazPartida.ToggleHistorialUltimaBatalla
+- uid: Global.ControladorInterfazPartida.ToggleListaJugadores
+  name: ToggleListaJugadores()
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ToggleListaJugadores
+  commentId: M:Global.ControladorInterfazPartida.ToggleListaJugadores
+  fullName: ControladorInterfazPartida.ToggleListaJugadores()
+  nameWithType: ControladorInterfazPartida.ToggleListaJugadores()
+- uid: Global.ControladorInterfazPartida.ToggleListaJugadores*
+  name: ToggleListaJugadores
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ToggleListaJugadores_
+  commentId: Overload:Global.ControladorInterfazPartida.ToggleListaJugadores
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.ToggleListaJugadores
+  nameWithType: ControladorInterfazPartida.ToggleListaJugadores
+- uid: Global.ControladorInterfazPartida.ToggleRefuerzosRestantes(System.Boolean)
+  name: ToggleRefuerzosRestantes(Boolean)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ToggleRefuerzosRestantes_System_Boolean_
+  commentId: M:Global.ControladorInterfazPartida.ToggleRefuerzosRestantes(System.Boolean)
+  fullName: ControladorInterfazPartida.ToggleRefuerzosRestantes(System.Boolean)
+  nameWithType: ControladorInterfazPartida.ToggleRefuerzosRestantes(Boolean)
+- uid: Global.ControladorInterfazPartida.ToggleRefuerzosRestantes*
+  name: ToggleRefuerzosRestantes
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_ToggleRefuerzosRestantes_
+  commentId: Overload:Global.ControladorInterfazPartida.ToggleRefuerzosRestantes
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.ToggleRefuerzosRestantes
+  nameWithType: ControladorInterfazPartida.ToggleRefuerzosRestantes
+- uid: Global.ControladorInterfazPartida.VentanaAtaque(Territorio,Territorio)
+  name: VentanaAtaque(Territorio, Territorio)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_VentanaAtaque_Territorio_Territorio_
+  commentId: M:Global.ControladorInterfazPartida.VentanaAtaque(Territorio,Territorio)
+  fullName: ControladorInterfazPartida.VentanaAtaque(Territorio, Territorio)
+  nameWithType: ControladorInterfazPartida.VentanaAtaque(Territorio, Territorio)
+- uid: Global.ControladorInterfazPartida.VentanaAtaque*
+  name: VentanaAtaque
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_VentanaAtaque_
+  commentId: Overload:Global.ControladorInterfazPartida.VentanaAtaque
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.VentanaAtaque
+  nameWithType: ControladorInterfazPartida.VentanaAtaque
+- uid: Global.ControladorInterfazPartida.VentanaFin(ClasesJSON.FinPartida)
+  name: VentanaFin(ClasesJSON.FinPartida)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_VentanaFin_ClasesJSON_FinPartida_
+  commentId: M:Global.ControladorInterfazPartida.VentanaFin(ClasesJSON.FinPartida)
+  fullName: ControladorInterfazPartida.VentanaFin(ClasesJSON.FinPartida)
+  nameWithType: ControladorInterfazPartida.VentanaFin(ClasesJSON.FinPartida)
+- uid: Global.ControladorInterfazPartida.VentanaFin*
+  name: VentanaFin
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_VentanaFin_
+  commentId: Overload:Global.ControladorInterfazPartida.VentanaFin
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.VentanaFin
+  nameWithType: ControladorInterfazPartida.VentanaFin
+- uid: Global.ControladorInterfazPartida.VentanaMovimiento(Territorio,Territorio)
+  name: VentanaMovimiento(Territorio, Territorio)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_VentanaMovimiento_Territorio_Territorio_
+  commentId: M:Global.ControladorInterfazPartida.VentanaMovimiento(Territorio,Territorio)
+  fullName: ControladorInterfazPartida.VentanaMovimiento(Territorio, Territorio)
+  nameWithType: ControladorInterfazPartida.VentanaMovimiento(Territorio, Territorio)
+- uid: Global.ControladorInterfazPartida.VentanaMovimiento*
+  name: VentanaMovimiento
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_VentanaMovimiento_
+  commentId: Overload:Global.ControladorInterfazPartida.VentanaMovimiento
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.VentanaMovimiento
+  nameWithType: ControladorInterfazPartida.VentanaMovimiento
+- uid: Global.ControladorInterfazPartida.VentanaRefuerzos(System.Int32,Territorio)
+  name: VentanaRefuerzos(Int32, Territorio)
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_VentanaRefuerzos_System_Int32_Territorio_
+  commentId: M:Global.ControladorInterfazPartida.VentanaRefuerzos(System.Int32,Territorio)
+  fullName: ControladorInterfazPartida.VentanaRefuerzos(System.Int32, Territorio)
+  nameWithType: ControladorInterfazPartida.VentanaRefuerzos(Int32, Territorio)
+- uid: Global.ControladorInterfazPartida.VentanaRefuerzos*
+  name: VentanaRefuerzos
+  href: api/Global.ControladorInterfazPartida.html#Global_ControladorInterfazPartida_VentanaRefuerzos_
+  commentId: Overload:Global.ControladorInterfazPartida.VentanaRefuerzos
+  isSpec: "True"
+  fullName: ControladorInterfazPartida.VentanaRefuerzos
+  nameWithType: ControladorInterfazPartida.VentanaRefuerzos
+- uid: Global.ControladorListaPartidas
+  name: ControladorListaPartidas
+  href: api/Global.ControladorListaPartidas.html
+  commentId: T:Global.ControladorListaPartidas
+  fullName: ControladorListaPartidas
+  nameWithType: ControladorListaPartidas
+- uid: Global.ControladorListaPartidas.RecargarPartidas
+  name: RecargarPartidas()
+  href: api/Global.ControladorListaPartidas.html#Global_ControladorListaPartidas_RecargarPartidas
+  commentId: M:Global.ControladorListaPartidas.RecargarPartidas
+  fullName: ControladorListaPartidas.RecargarPartidas()
+  nameWithType: ControladorListaPartidas.RecargarPartidas()
+- uid: Global.ControladorListaPartidas.RecargarPartidas*
+  name: RecargarPartidas
+  href: api/Global.ControladorListaPartidas.html#Global_ControladorListaPartidas_RecargarPartidas_
+  commentId: Overload:Global.ControladorListaPartidas.RecargarPartidas
+  isSpec: "True"
+  fullName: ControladorListaPartidas.RecargarPartidas
+  nameWithType: ControladorListaPartidas.RecargarPartidas
 - uid: Global.ControladorMenuPrincipal
   name: ControladorMenuPrincipal
   href: api/Global.ControladorMenuPrincipal.html
@@ -698,12 +1301,12 @@ references:
   commentId: T:Global.ControladorNotificaciones
   fullName: ControladorNotificaciones
   nameWithType: ControladorNotificaciones
-- uid: Global.ControladorNotificaciones.ActualizarNotificaciones
-  name: ActualizarNotificaciones()
-  href: api/Global.ControladorNotificaciones.html#Global_ControladorNotificaciones_ActualizarNotificaciones
-  commentId: M:Global.ControladorNotificaciones.ActualizarNotificaciones
-  fullName: ControladorNotificaciones.ActualizarNotificaciones()
-  nameWithType: ControladorNotificaciones.ActualizarNotificaciones()
+- uid: Global.ControladorNotificaciones.ActualizarNotificaciones(System.Boolean)
+  name: ActualizarNotificaciones(Boolean)
+  href: api/Global.ControladorNotificaciones.html#Global_ControladorNotificaciones_ActualizarNotificaciones_System_Boolean_
+  commentId: M:Global.ControladorNotificaciones.ActualizarNotificaciones(System.Boolean)
+  fullName: ControladorNotificaciones.ActualizarNotificaciones(System.Boolean)
+  nameWithType: ControladorNotificaciones.ActualizarNotificaciones(Boolean)
 - uid: Global.ControladorNotificaciones.ActualizarNotificaciones*
   name: ActualizarNotificaciones
   href: api/Global.ControladorNotificaciones.html#Global_ControladorNotificaciones_ActualizarNotificaciones_
@@ -717,12 +1320,238 @@ references:
   commentId: F:Global.ControladorNotificaciones.notificaciones
   fullName: ControladorNotificaciones.notificaciones
   nameWithType: ControladorNotificaciones.notificaciones
+- uid: Global.ControladorNotificaciones.ObtenerNotificaciones(System.Boolean)
+  name: ObtenerNotificaciones(Boolean)
+  href: api/Global.ControladorNotificaciones.html#Global_ControladorNotificaciones_ObtenerNotificaciones_System_Boolean_
+  commentId: M:Global.ControladorNotificaciones.ObtenerNotificaciones(System.Boolean)
+  fullName: ControladorNotificaciones.ObtenerNotificaciones(System.Boolean)
+  nameWithType: ControladorNotificaciones.ObtenerNotificaciones(Boolean)
+- uid: Global.ControladorNotificaciones.ObtenerNotificaciones*
+  name: ObtenerNotificaciones
+  href: api/Global.ControladorNotificaciones.html#Global_ControladorNotificaciones_ObtenerNotificaciones_
+  commentId: Overload:Global.ControladorNotificaciones.ObtenerNotificaciones
+  isSpec: "True"
+  fullName: ControladorNotificaciones.ObtenerNotificaciones
+  nameWithType: ControladorNotificaciones.ObtenerNotificaciones
 - uid: Global.ControladorPartida
   name: ControladorPartida
   href: api/Global.ControladorPartida.html
   commentId: T:Global.ControladorPartida
   fullName: ControladorPartida
   nameWithType: ControladorPartida
+- uid: Global.ControladorPartida.ActualizarDatosPartida(ClasesJSON.PartidaCompleta)
+  name: ActualizarDatosPartida(ClasesJSON.PartidaCompleta)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ActualizarDatosPartida_ClasesJSON_PartidaCompleta_
+  commentId: M:Global.ControladorPartida.ActualizarDatosPartida(ClasesJSON.PartidaCompleta)
+  fullName: ControladorPartida.ActualizarDatosPartida(ClasesJSON.PartidaCompleta)
+  nameWithType: ControladorPartida.ActualizarDatosPartida(ClasesJSON.PartidaCompleta)
+- uid: Global.ControladorPartida.ActualizarDatosPartida*
+  name: ActualizarDatosPartida
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ActualizarDatosPartida_
+  commentId: Overload:Global.ControladorPartida.ActualizarDatosPartida
+  isSpec: "True"
+  fullName: ControladorPartida.ActualizarDatosPartida
+  nameWithType: ControladorPartida.ActualizarDatosPartida
+- uid: Global.ControladorPartida.AsignarDatosPartida(ClasesJSON.PartidaCompleta)
+  name: AsignarDatosPartida(ClasesJSON.PartidaCompleta)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_AsignarDatosPartida_ClasesJSON_PartidaCompleta_
+  commentId: M:Global.ControladorPartida.AsignarDatosPartida(ClasesJSON.PartidaCompleta)
+  fullName: ControladorPartida.AsignarDatosPartida(ClasesJSON.PartidaCompleta)
+  nameWithType: ControladorPartida.AsignarDatosPartida(ClasesJSON.PartidaCompleta)
+- uid: Global.ControladorPartida.AsignarDatosPartida*
+  name: AsignarDatosPartida
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_AsignarDatosPartida_
+  commentId: Overload:Global.ControladorPartida.AsignarDatosPartida
+  isSpec: "True"
+  fullName: ControladorPartida.AsignarDatosPartida
+  nameWithType: ControladorPartida.AsignarDatosPartida
+- uid: Global.ControladorPartida.Ataque(System.Int32)
+  name: Ataque(Int32)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Ataque_System_Int32_
+  commentId: M:Global.ControladorPartida.Ataque(System.Int32)
+  fullName: ControladorPartida.Ataque(System.Int32)
+  nameWithType: ControladorPartida.Ataque(Int32)
+- uid: Global.ControladorPartida.Ataque*
+  name: Ataque
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Ataque_
+  commentId: Overload:Global.ControladorPartida.Ataque
+  isSpec: "True"
+  fullName: ControladorPartida.Ataque
+  nameWithType: ControladorPartida.Ataque
+- uid: Global.ControladorPartida.ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque)
+  name: ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ConfirmacionAtaque_ClasesJSON_ConfirmacionAtaque_
+  commentId: M:Global.ControladorPartida.ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque)
+  fullName: ControladorPartida.ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque)
+  nameWithType: ControladorPartida.ConfirmacionAtaque(ClasesJSON.ConfirmacionAtaque)
+- uid: Global.ControladorPartida.ConfirmacionAtaque*
+  name: ConfirmacionAtaque
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ConfirmacionAtaque_
+  commentId: Overload:Global.ControladorPartida.ConfirmacionAtaque
+  isSpec: "True"
+  fullName: ControladorPartida.ConfirmacionAtaque
+  nameWithType: ControladorPartida.ConfirmacionAtaque
+- uid: Global.ControladorPartida.ConfirmacionFase
+  name: ConfirmacionFase()
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ConfirmacionFase
+  commentId: M:Global.ControladorPartida.ConfirmacionFase
+  fullName: ControladorPartida.ConfirmacionFase()
+  nameWithType: ControladorPartida.ConfirmacionFase()
+- uid: Global.ControladorPartida.ConfirmacionFase*
+  name: ConfirmacionFase
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ConfirmacionFase_
+  commentId: Overload:Global.ControladorPartida.ConfirmacionFase
+  isSpec: "True"
+  fullName: ControladorPartida.ConfirmacionFase
+  nameWithType: ControladorPartida.ConfirmacionFase
+- uid: Global.ControladorPartida.ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento)
+  name: ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ConfirmacionMovimiento_ClasesJSON_ConfirmacionMovimiento_
+  commentId: M:Global.ControladorPartida.ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento)
+  fullName: ControladorPartida.ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento)
+  nameWithType: ControladorPartida.ConfirmacionMovimiento(ClasesJSON.ConfirmacionMovimiento)
+- uid: Global.ControladorPartida.ConfirmacionMovimiento*
+  name: ConfirmacionMovimiento
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ConfirmacionMovimiento_
+  commentId: Overload:Global.ControladorPartida.ConfirmacionMovimiento
+  isSpec: "True"
+  fullName: ControladorPartida.ConfirmacionMovimiento
+  nameWithType: ControladorPartida.ConfirmacionMovimiento
+- uid: Global.ControladorPartida.ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos)
+  name: ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ConfirmacionRefuerzos_ClasesJSON_ConfirmacionRefuerzos_
+  commentId: M:Global.ControladorPartida.ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos)
+  fullName: ControladorPartida.ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos)
+  nameWithType: ControladorPartida.ConfirmacionRefuerzos(ClasesJSON.ConfirmacionRefuerzos)
+- uid: Global.ControladorPartida.ConfirmacionRefuerzos*
+  name: ConfirmacionRefuerzos
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_ConfirmacionRefuerzos_
+  commentId: Overload:Global.ControladorPartida.ConfirmacionRefuerzos
+  isSpec: "True"
+  fullName: ControladorPartida.ConfirmacionRefuerzos
+  nameWithType: ControladorPartida.ConfirmacionRefuerzos
+- uid: Global.ControladorPartida.datosPartida
+  name: datosPartida
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_datosPartida
+  commentId: F:Global.ControladorPartida.datosPartida
+  fullName: ControladorPartida.datosPartida
+  nameWithType: ControladorPartida.datosPartida
+- uid: Global.ControladorPartida.Deseleccionar
+  name: Deseleccionar()
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Deseleccionar
+  commentId: M:Global.ControladorPartida.Deseleccionar
+  fullName: ControladorPartida.Deseleccionar()
+  nameWithType: ControladorPartida.Deseleccionar()
+- uid: Global.ControladorPartida.Deseleccionar*
+  name: Deseleccionar
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Deseleccionar_
+  commentId: Overload:Global.ControladorPartida.Deseleccionar
+  isSpec: "True"
+  fullName: ControladorPartida.Deseleccionar
+  nameWithType: ControladorPartida.Deseleccionar
+- uid: Global.ControladorPartida.Error
+  name: Error()
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Error
+  commentId: M:Global.ControladorPartida.Error
+  fullName: ControladorPartida.Error()
+  nameWithType: ControladorPartida.Error()
+- uid: Global.ControladorPartida.Error*
+  name: Error
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Error_
+  commentId: Overload:Global.ControladorPartida.Error
+  isSpec: "True"
+  fullName: ControladorPartida.Error
+  nameWithType: ControladorPartida.Error
+- uid: Global.ControladorPartida.FinPartida(ClasesJSON.FinPartida)
+  name: FinPartida(ClasesJSON.FinPartida)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_FinPartida_ClasesJSON_FinPartida_
+  commentId: M:Global.ControladorPartida.FinPartida(ClasesJSON.FinPartida)
+  fullName: ControladorPartida.FinPartida(ClasesJSON.FinPartida)
+  nameWithType: ControladorPartida.FinPartida(ClasesJSON.FinPartida)
+- uid: Global.ControladorPartida.FinPartida*
+  name: FinPartida
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_FinPartida_
+  commentId: Overload:Global.ControladorPartida.FinPartida
+  isSpec: "True"
+  fullName: ControladorPartida.FinPartida
+  nameWithType: ControladorPartida.FinPartida
+- uid: Global.ControladorPartida.idJugador
+  name: idJugador
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_idJugador
+  commentId: F:Global.ControladorPartida.idJugador
+  fullName: ControladorPartida.idJugador
+  nameWithType: ControladorPartida.idJugador
+- uid: Global.ControladorPartida.instance
+  name: instance
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_instance
+  commentId: F:Global.ControladorPartida.instance
+  fullName: ControladorPartida.instance
+  nameWithType: ControladorPartida.instance
+- uid: Global.ControladorPartida.Movimiento(System.Int32)
+  name: Movimiento(Int32)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Movimiento_System_Int32_
+  commentId: M:Global.ControladorPartida.Movimiento(System.Int32)
+  fullName: ControladorPartida.Movimiento(System.Int32)
+  nameWithType: ControladorPartida.Movimiento(Int32)
+- uid: Global.ControladorPartida.Movimiento*
+  name: Movimiento
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Movimiento_
+  commentId: Overload:Global.ControladorPartida.Movimiento
+  isSpec: "True"
+  fullName: ControladorPartida.Movimiento
+  nameWithType: ControladorPartida.Movimiento
+- uid: Global.ControladorPartida.PasarFase
+  name: PasarFase()
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_PasarFase
+  commentId: M:Global.ControladorPartida.PasarFase
+  fullName: ControladorPartida.PasarFase()
+  nameWithType: ControladorPartida.PasarFase()
+- uid: Global.ControladorPartida.PasarFase*
+  name: PasarFase
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_PasarFase_
+  commentId: Overload:Global.ControladorPartida.PasarFase
+  isSpec: "True"
+  fullName: ControladorPartida.PasarFase
+  nameWithType: ControladorPartida.PasarFase
+- uid: Global.ControladorPartida.Reforzar(System.Int32)
+  name: Reforzar(Int32)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Reforzar_System_Int32_
+  commentId: M:Global.ControladorPartida.Reforzar(System.Int32)
+  fullName: ControladorPartida.Reforzar(System.Int32)
+  nameWithType: ControladorPartida.Reforzar(Int32)
+- uid: Global.ControladorPartida.Reforzar*
+  name: Reforzar
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_Reforzar_
+  commentId: Overload:Global.ControladorPartida.Reforzar
+  isSpec: "True"
+  fullName: ControladorPartida.Reforzar
+  nameWithType: ControladorPartida.Reforzar
+- uid: Global.ControladorPartida.SalirPartida
+  name: SalirPartida()
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_SalirPartida
+  commentId: M:Global.ControladorPartida.SalirPartida
+  fullName: ControladorPartida.SalirPartida()
+  nameWithType: ControladorPartida.SalirPartida()
+- uid: Global.ControladorPartida.SalirPartida*
+  name: SalirPartida
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_SalirPartida_
+  commentId: Overload:Global.ControladorPartida.SalirPartida
+  isSpec: "True"
+  fullName: ControladorPartida.SalirPartida
+  nameWithType: ControladorPartida.SalirPartida
+- uid: Global.ControladorPartida.SeleccionTerritorio(Territorio)
+  name: SeleccionTerritorio(Territorio)
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_SeleccionTerritorio_Territorio_
+  commentId: M:Global.ControladorPartida.SeleccionTerritorio(Territorio)
+  fullName: ControladorPartida.SeleccionTerritorio(Territorio)
+  nameWithType: ControladorPartida.SeleccionTerritorio(Territorio)
+- uid: Global.ControladorPartida.SeleccionTerritorio*
+  name: SeleccionTerritorio
+  href: api/Global.ControladorPartida.html#Global_ControladorPartida_SeleccionTerritorio_
+  commentId: Overload:Global.ControladorPartida.SeleccionTerritorio
+  isSpec: "True"
+  fullName: ControladorPartida.SeleccionTerritorio
+  nameWithType: ControladorPartida.SeleccionTerritorio
 - uid: Global.ControladorPerfil
   name: ControladorPerfil
   href: api/Global.ControladorPerfil.html
@@ -839,6 +1668,19 @@ references:
   commentId: F:Global.ControladorPerfil.aspecto
   fullName: ControladorPerfil.aspecto
   nameWithType: ControladorPerfil.aspecto
+- uid: Global.ControladorPerfil.BorrarCuenta
+  name: BorrarCuenta()
+  href: api/Global.ControladorPerfil.html#Global_ControladorPerfil_BorrarCuenta
+  commentId: M:Global.ControladorPerfil.BorrarCuenta
+  fullName: ControladorPerfil.BorrarCuenta()
+  nameWithType: ControladorPerfil.BorrarCuenta()
+- uid: Global.ControladorPerfil.BorrarCuenta*
+  name: BorrarCuenta
+  href: api/Global.ControladorPerfil.html#Global_ControladorPerfil_BorrarCuenta_
+  commentId: Overload:Global.ControladorPerfil.BorrarCuenta
+  isSpec: "True"
+  fullName: ControladorPerfil.BorrarCuenta
+  nameWithType: ControladorPerfil.BorrarCuenta
 - uid: Global.ControladorPerfil.CambiarAspecto(System.Int32)
   name: CambiarAspecto(Int32)
   href: api/Global.ControladorPerfil.html#Global_ControladorPerfil_CambiarAspecto_System_Int32_
@@ -1039,19 +1881,6 @@ references:
   isSpec: "True"
   fullName: ControladorPrincipal.PantallaError
   nameWithType: ControladorPrincipal.PantallaError
-- uid: Global.ControladorPrincipal.PantallaErrorWS(System.String)
-  name: PantallaErrorWS(String)
-  href: api/Global.ControladorPrincipal.html#Global_ControladorPrincipal_PantallaErrorWS_System_String_
-  commentId: M:Global.ControladorPrincipal.PantallaErrorWS(System.String)
-  fullName: ControladorPrincipal.PantallaErrorWS(System.String)
-  nameWithType: ControladorPrincipal.PantallaErrorWS(String)
-- uid: Global.ControladorPrincipal.PantallaErrorWS*
-  name: PantallaErrorWS
-  href: api/Global.ControladorPrincipal.html#Global_ControladorPrincipal_PantallaErrorWS_
-  commentId: Overload:Global.ControladorPrincipal.PantallaErrorWS
-  isSpec: "True"
-  fullName: ControladorPrincipal.PantallaErrorWS
-  nameWithType: ControladorPrincipal.PantallaErrorWS
 - uid: Global.ControladorPrincipal.PantallaInfo(System.String)
   name: PantallaInfo(String)
   href: api/Global.ControladorPrincipal.html#Global_ControladorPrincipal_PantallaInfo_System_String_
@@ -1199,6 +2028,32 @@ references:
   isSpec: "True"
   fullName: ControladorSesion.IniciarSesion
   nameWithType: ControladorSesion.IniciarSesion
+- uid: Global.ControladorSesion.OlvidoClave
+  name: OlvidoClave()
+  href: api/Global.ControladorSesion.html#Global_ControladorSesion_OlvidoClave
+  commentId: M:Global.ControladorSesion.OlvidoClave
+  fullName: ControladorSesion.OlvidoClave()
+  nameWithType: ControladorSesion.OlvidoClave()
+- uid: Global.ControladorSesion.OlvidoClave*
+  name: OlvidoClave
+  href: api/Global.ControladorSesion.html#Global_ControladorSesion_OlvidoClave_
+  commentId: Overload:Global.ControladorSesion.OlvidoClave
+  isSpec: "True"
+  fullName: ControladorSesion.OlvidoClave
+  nameWithType: ControladorSesion.OlvidoClave
+- uid: Global.ControladorSesion.RecargarUsuario
+  name: RecargarUsuario()
+  href: api/Global.ControladorSesion.html#Global_ControladorSesion_RecargarUsuario
+  commentId: M:Global.ControladorSesion.RecargarUsuario
+  fullName: ControladorSesion.RecargarUsuario()
+  nameWithType: ControladorSesion.RecargarUsuario()
+- uid: Global.ControladorSesion.RecargarUsuario*
+  name: RecargarUsuario
+  href: api/Global.ControladorSesion.html#Global_ControladorSesion_RecargarUsuario_
+  commentId: Overload:Global.ControladorSesion.RecargarUsuario
+  isSpec: "True"
+  fullName: ControladorSesion.RecargarUsuario
+  nameWithType: ControladorSesion.RecargarUsuario
 - uid: Global.ControladorSesion.Registrarse
   name: Registrarse()
   href: api/Global.ControladorSesion.html#Global_ControladorSesion_Registrarse
@@ -1257,6 +2112,37 @@ references:
   isSpec: "True"
   fullName: CrearSala.CreaSala
   nameWithType: CrearSala.CreaSala
+- uid: Global.IndicadorCambioTropas
+  name: IndicadorCambioTropas
+  href: api/Global.IndicadorCambioTropas.html
+  commentId: T:Global.IndicadorCambioTropas
+  fullName: IndicadorCambioTropas
+  nameWithType: IndicadorCambioTropas
+- uid: Global.IndicadorCambioTropas.animador
+  name: animador
+  href: api/Global.IndicadorCambioTropas.html#Global_IndicadorCambioTropas_animador
+  commentId: F:Global.IndicadorCambioTropas.animador
+  fullName: IndicadorCambioTropas.animador
+  nameWithType: IndicadorCambioTropas.animador
+- uid: Global.IndicadorCambioTropas.Animar(System.Int32)
+  name: Animar(Int32)
+  href: api/Global.IndicadorCambioTropas.html#Global_IndicadorCambioTropas_Animar_System_Int32_
+  commentId: M:Global.IndicadorCambioTropas.Animar(System.Int32)
+  fullName: IndicadorCambioTropas.Animar(System.Int32)
+  nameWithType: IndicadorCambioTropas.Animar(Int32)
+- uid: Global.IndicadorCambioTropas.Animar*
+  name: Animar
+  href: api/Global.IndicadorCambioTropas.html#Global_IndicadorCambioTropas_Animar_
+  commentId: Overload:Global.IndicadorCambioTropas.Animar
+  isSpec: "True"
+  fullName: IndicadorCambioTropas.Animar
+  nameWithType: IndicadorCambioTropas.Animar
+- uid: Global.IndicadorCambioTropas.indicador
+  name: indicador
+  href: api/Global.IndicadorCambioTropas.html#Global_IndicadorCambioTropas_indicador
+  commentId: F:Global.IndicadorCambioTropas.indicador
+  fullName: IndicadorCambioTropas.indicador
+  nameWithType: IndicadorCambioTropas.indicador
 - uid: Global.JugadorLista
   name: JugadorLista
   href: api/Global.JugadorLista.html
@@ -1293,6 +2179,157 @@ references:
   commentId: F:Global.JugadorLista.tropaOveraly
   fullName: JugadorLista.tropaOveraly
   nameWithType: JugadorLista.tropaOveraly
+- uid: Global.JugadorPartida
+  name: JugadorPartida
+  href: api/Global.JugadorPartida.html
+  commentId: T:Global.JugadorPartida
+  fullName: JugadorPartida
+  nameWithType: JugadorPartida
+- uid: Global.JugadorPartida.banderaColor
+  name: banderaColor
+  href: api/Global.JugadorPartida.html#Global_JugadorPartida_banderaColor
+  commentId: F:Global.JugadorPartida.banderaColor
+  fullName: JugadorPartida.banderaColor
+  nameWithType: JugadorPartida.banderaColor
+- uid: Global.JugadorPartida.icono
+  name: icono
+  href: api/Global.JugadorPartida.html#Global_JugadorPartida_icono
+  commentId: F:Global.JugadorPartida.icono
+  fullName: JugadorPartida.icono
+  nameWithType: JugadorPartida.icono
+- uid: Global.JugadorPartida.muerto
+  name: muerto
+  href: api/Global.JugadorPartida.html#Global_JugadorPartida_muerto
+  commentId: F:Global.JugadorPartida.muerto
+  fullName: JugadorPartida.muerto
+  nameWithType: JugadorPartida.muerto
+- uid: Global.JugadorPartida.nombre
+  name: nombre
+  href: api/Global.JugadorPartida.html#Global_JugadorPartida_nombre
+  commentId: F:Global.JugadorPartida.nombre
+  fullName: JugadorPartida.nombre
+  nameWithType: JugadorPartida.nombre
+- uid: Global.Mapa
+  name: Mapa
+  href: api/Global.Mapa.html
+  commentId: T:Global.Mapa
+  fullName: Mapa
+  nameWithType: Mapa
+- uid: Global.Mapa.ActualizarContinentes
+  name: ActualizarContinentes()
+  href: api/Global.Mapa.html#Global_Mapa_ActualizarContinentes
+  commentId: M:Global.Mapa.ActualizarContinentes
+  fullName: Mapa.ActualizarContinentes()
+  nameWithType: Mapa.ActualizarContinentes()
+- uid: Global.Mapa.ActualizarContinentes*
+  name: ActualizarContinentes
+  href: api/Global.Mapa.html#Global_Mapa_ActualizarContinentes_
+  commentId: Overload:Global.Mapa.ActualizarContinentes
+  isSpec: "True"
+  fullName: Mapa.ActualizarContinentes
+  nameWithType: Mapa.ActualizarContinentes
+- uid: Global.Mapa.ActualizarTerritorio(ClasesJSON.Territorio)
+  name: ActualizarTerritorio(ClasesJSON.Territorio)
+  href: api/Global.Mapa.html#Global_Mapa_ActualizarTerritorio_ClasesJSON_Territorio_
+  commentId: M:Global.Mapa.ActualizarTerritorio(ClasesJSON.Territorio)
+  fullName: Mapa.ActualizarTerritorio(ClasesJSON.Territorio)
+  nameWithType: Mapa.ActualizarTerritorio(ClasesJSON.Territorio)
+- uid: Global.Mapa.ActualizarTerritorio*
+  name: ActualizarTerritorio
+  href: api/Global.Mapa.html#Global_Mapa_ActualizarTerritorio_
+  commentId: Overload:Global.Mapa.ActualizarTerritorio
+  isSpec: "True"
+  fullName: Mapa.ActualizarTerritorio
+  nameWithType: Mapa.ActualizarTerritorio
+- uid: Global.Mapa.ActualizarTerritorios(System.Collections.Generic.List{ClasesJSON.Territorio})
+  name: ActualizarTerritorios(List<ClasesJSON.Territorio>)
+  href: api/Global.Mapa.html#Global_Mapa_ActualizarTerritorios_System_Collections_Generic_List_ClasesJSON_Territorio__
+  commentId: M:Global.Mapa.ActualizarTerritorios(System.Collections.Generic.List{ClasesJSON.Territorio})
+  name.vb: ActualizarTerritorios(List(Of ClasesJSON.Territorio))
+  fullName: Mapa.ActualizarTerritorios(System.Collections.Generic.List<ClasesJSON.Territorio>)
+  fullName.vb: Mapa.ActualizarTerritorios(System.Collections.Generic.List(Of ClasesJSON.Territorio))
+  nameWithType: Mapa.ActualizarTerritorios(List<ClasesJSON.Territorio>)
+  nameWithType.vb: Mapa.ActualizarTerritorios(List(Of ClasesJSON.Territorio))
+- uid: Global.Mapa.ActualizarTerritorios*
+  name: ActualizarTerritorios
+  href: api/Global.Mapa.html#Global_Mapa_ActualizarTerritorios_
+  commentId: Overload:Global.Mapa.ActualizarTerritorios
+  isSpec: "True"
+  fullName: Mapa.ActualizarTerritorios
+  nameWithType: Mapa.ActualizarTerritorios
+- uid: Global.Mapa.AsignarTerritorios(System.Collections.Generic.List{ClasesJSON.Territorio})
+  name: AsignarTerritorios(List<ClasesJSON.Territorio>)
+  href: api/Global.Mapa.html#Global_Mapa_AsignarTerritorios_System_Collections_Generic_List_ClasesJSON_Territorio__
+  commentId: M:Global.Mapa.AsignarTerritorios(System.Collections.Generic.List{ClasesJSON.Territorio})
+  name.vb: AsignarTerritorios(List(Of ClasesJSON.Territorio))
+  fullName: Mapa.AsignarTerritorios(System.Collections.Generic.List<ClasesJSON.Territorio>)
+  fullName.vb: Mapa.AsignarTerritorios(System.Collections.Generic.List(Of ClasesJSON.Territorio))
+  nameWithType: Mapa.AsignarTerritorios(List<ClasesJSON.Territorio>)
+  nameWithType.vb: Mapa.AsignarTerritorios(List(Of ClasesJSON.Territorio))
+- uid: Global.Mapa.AsignarTerritorios*
+  name: AsignarTerritorios
+  href: api/Global.Mapa.html#Global_Mapa_AsignarTerritorios_
+  commentId: Overload:Global.Mapa.AsignarTerritorios
+  isSpec: "True"
+  fullName: Mapa.AsignarTerritorios
+  nameWithType: Mapa.AsignarTerritorios
+- uid: Global.Mapa.colorBrilloContinentes
+  name: colorBrilloContinentes
+  href: api/Global.Mapa.html#Global_Mapa_colorBrilloContinentes
+  commentId: F:Global.Mapa.colorBrilloContinentes
+  fullName: Mapa.colorBrilloContinentes
+  nameWithType: Mapa.colorBrilloContinentes
+- uid: Global.Mapa.indicadoresContinentes
+  name: indicadoresContinentes
+  href: api/Global.Mapa.html#Global_Mapa_indicadoresContinentes
+  commentId: F:Global.Mapa.indicadoresContinentes
+  fullName: Mapa.indicadoresContinentes
+  nameWithType: Mapa.indicadoresContinentes
+- uid: Global.Mapa.MostrarAtaque(System.Int32)
+  name: MostrarAtaque(Int32)
+  href: api/Global.Mapa.html#Global_Mapa_MostrarAtaque_System_Int32_
+  commentId: M:Global.Mapa.MostrarAtaque(System.Int32)
+  fullName: Mapa.MostrarAtaque(System.Int32)
+  nameWithType: Mapa.MostrarAtaque(Int32)
+- uid: Global.Mapa.MostrarAtaque*
+  name: MostrarAtaque
+  href: api/Global.Mapa.html#Global_Mapa_MostrarAtaque_
+  commentId: Overload:Global.Mapa.MostrarAtaque
+  isSpec: "True"
+  fullName: Mapa.MostrarAtaque
+  nameWithType: Mapa.MostrarAtaque
+- uid: Global.Mapa.MostrarMovimiento(System.Int32)
+  name: MostrarMovimiento(Int32)
+  href: api/Global.Mapa.html#Global_Mapa_MostrarMovimiento_System_Int32_
+  commentId: M:Global.Mapa.MostrarMovimiento(System.Int32)
+  fullName: Mapa.MostrarMovimiento(System.Int32)
+  nameWithType: Mapa.MostrarMovimiento(Int32)
+- uid: Global.Mapa.MostrarMovimiento*
+  name: MostrarMovimiento
+  href: api/Global.Mapa.html#Global_Mapa_MostrarMovimiento_
+  commentId: Overload:Global.Mapa.MostrarMovimiento
+  isSpec: "True"
+  fullName: Mapa.MostrarMovimiento
+  nameWithType: Mapa.MostrarMovimiento
+- uid: Global.Mapa.MostrarTodosTerritorios
+  name: MostrarTodosTerritorios()
+  href: api/Global.Mapa.html#Global_Mapa_MostrarTodosTerritorios
+  commentId: M:Global.Mapa.MostrarTodosTerritorios
+  fullName: Mapa.MostrarTodosTerritorios()
+  nameWithType: Mapa.MostrarTodosTerritorios()
+- uid: Global.Mapa.MostrarTodosTerritorios*
+  name: MostrarTodosTerritorios
+  href: api/Global.Mapa.html#Global_Mapa_MostrarTodosTerritorios_
+  commentId: Overload:Global.Mapa.MostrarTodosTerritorios
+  isSpec: "True"
+  fullName: Mapa.MostrarTodosTerritorios
+  nameWithType: Mapa.MostrarTodosTerritorios
+- uid: Global.Mapa.territorios
+  name: territorios
+  href: api/Global.Mapa.html#Global_Mapa_territorios
+  commentId: F:Global.Mapa.territorios
+  fullName: Mapa.territorios
+  nameWithType: Mapa.territorios
 - uid: Global.Notificacion
   name: Notificacion
   href: api/Global.Notificacion.html
@@ -1420,6 +2457,152 @@ references:
   isSpec: "True"
   fullName: ObjetoCompra.SetComprar
   nameWithType: ObjetoCompra.SetComprar
+- uid: Global.PartidaLista
+  name: PartidaLista
+  href: api/Global.PartidaLista.html
+  commentId: T:Global.PartidaLista
+  fullName: PartidaLista
+  nameWithType: PartidaLista
+- uid: Global.PartidaLista.ActualizarTexto(System.String)
+  name: ActualizarTexto(String)
+  href: api/Global.PartidaLista.html#Global_PartidaLista_ActualizarTexto_System_String_
+  commentId: M:Global.PartidaLista.ActualizarTexto(System.String)
+  fullName: PartidaLista.ActualizarTexto(System.String)
+  nameWithType: PartidaLista.ActualizarTexto(String)
+- uid: Global.PartidaLista.ActualizarTexto*
+  name: ActualizarTexto
+  href: api/Global.PartidaLista.html#Global_PartidaLista_ActualizarTexto_
+  commentId: Overload:Global.PartidaLista.ActualizarTexto
+  isSpec: "True"
+  fullName: PartidaLista.ActualizarTexto
+  nameWithType: PartidaLista.ActualizarTexto
+- uid: Global.PartidaLista.id
+  name: id
+  href: api/Global.PartidaLista.html#Global_PartidaLista_id
+  commentId: F:Global.PartidaLista.id
+  fullName: PartidaLista.id
+  nameWithType: PartidaLista.id
+- uid: Global.PartidaLista.Unirse
+  name: Unirse()
+  href: api/Global.PartidaLista.html#Global_PartidaLista_Unirse
+  commentId: M:Global.PartidaLista.Unirse
+  fullName: PartidaLista.Unirse()
+  nameWithType: PartidaLista.Unirse()
+- uid: Global.PartidaLista.Unirse*
+  name: Unirse
+  href: api/Global.PartidaLista.html#Global_PartidaLista_Unirse_
+  commentId: Overload:Global.PartidaLista.Unirse
+  isSpec: "True"
+  fullName: PartidaLista.Unirse
+  nameWithType: PartidaLista.Unirse
+- uid: Global.Territorio
+  name: Territorio
+  href: api/Global.Territorio.html
+  commentId: T:Global.Territorio
+  fullName: Territorio
+  nameWithType: Territorio
+- uid: Global.Territorio.ActualizarTerritorio(ClasesJSON.Territorio)
+  name: ActualizarTerritorio(ClasesJSON.Territorio)
+  href: api/Global.Territorio.html#Global_Territorio_ActualizarTerritorio_ClasesJSON_Territorio_
+  commentId: M:Global.Territorio.ActualizarTerritorio(ClasesJSON.Territorio)
+  fullName: Territorio.ActualizarTerritorio(ClasesJSON.Territorio)
+  nameWithType: Territorio.ActualizarTerritorio(ClasesJSON.Territorio)
+- uid: Global.Territorio.ActualizarTerritorio*
+  name: ActualizarTerritorio
+  href: api/Global.Territorio.html#Global_Territorio_ActualizarTerritorio_
+  commentId: Overload:Global.Territorio.ActualizarTerritorio
+  isSpec: "True"
+  fullName: Territorio.ActualizarTerritorio
+  nameWithType: Territorio.ActualizarTerritorio
+- uid: Global.Territorio.AsignarTerritorio(ClasesJSON.Territorio)
+  name: AsignarTerritorio(ClasesJSON.Territorio)
+  href: api/Global.Territorio.html#Global_Territorio_AsignarTerritorio_ClasesJSON_Territorio_
+  commentId: M:Global.Territorio.AsignarTerritorio(ClasesJSON.Territorio)
+  fullName: Territorio.AsignarTerritorio(ClasesJSON.Territorio)
+  nameWithType: Territorio.AsignarTerritorio(ClasesJSON.Territorio)
+- uid: Global.Territorio.AsignarTerritorio*
+  name: AsignarTerritorio
+  href: api/Global.Territorio.html#Global_Territorio_AsignarTerritorio_
+  commentId: Overload:Global.Territorio.AsignarTerritorio
+  isSpec: "True"
+  fullName: Territorio.AsignarTerritorio
+  nameWithType: Territorio.AsignarTerritorio
+- uid: Global.Territorio.conexiones
+  name: conexiones
+  href: api/Global.Territorio.html#Global_Territorio_conexiones
+  commentId: F:Global.Territorio.conexiones
+  fullName: Territorio.conexiones
+  nameWithType: Territorio.conexiones
+- uid: Global.Territorio.id
+  name: id
+  href: api/Global.Territorio.html#Global_Territorio_id
+  commentId: F:Global.Territorio.id
+  fullName: Territorio.id
+  nameWithType: Territorio.id
+- uid: Global.Territorio.MostrarContiguosUsuario
+  name: MostrarContiguosUsuario()
+  href: api/Global.Territorio.html#Global_Territorio_MostrarContiguosUsuario
+  commentId: M:Global.Territorio.MostrarContiguosUsuario
+  fullName: Territorio.MostrarContiguosUsuario()
+  nameWithType: Territorio.MostrarContiguosUsuario()
+- uid: Global.Territorio.MostrarContiguosUsuario*
+  name: MostrarContiguosUsuario
+  href: api/Global.Territorio.html#Global_Territorio_MostrarContiguosUsuario_
+  commentId: Overload:Global.Territorio.MostrarContiguosUsuario
+  isSpec: "True"
+  fullName: Territorio.MostrarContiguosUsuario
+  nameWithType: Territorio.MostrarContiguosUsuario
+- uid: Global.Territorio.numeroTropas
+  name: numeroTropas
+  href: api/Global.Territorio.html#Global_Territorio_numeroTropas
+  commentId: F:Global.Territorio.numeroTropas
+  fullName: Territorio.numeroTropas
+  nameWithType: Territorio.numeroTropas
+- uid: Global.Territorio.Oculto
+  name: Oculto
+  href: api/Global.Territorio.html#Global_Territorio_Oculto
+  commentId: P:Global.Territorio.Oculto
+  fullName: Territorio.Oculto
+  nameWithType: Territorio.Oculto
+- uid: Global.Territorio.Oculto*
+  name: Oculto
+  href: api/Global.Territorio.html#Global_Territorio_Oculto_
+  commentId: Overload:Global.Territorio.Oculto
+  isSpec: "True"
+  fullName: Territorio.Oculto
+  nameWithType: Territorio.Oculto
+- uid: Global.Territorio.pertenenciaJugador
+  name: pertenenciaJugador
+  href: api/Global.Territorio.html#Global_Territorio_pertenenciaJugador
+  commentId: F:Global.Territorio.pertenenciaJugador
+  fullName: Territorio.pertenenciaJugador
+  nameWithType: Territorio.pertenenciaJugador
+- uid: Global.Territorio.Seleccionado
+  name: Seleccionado
+  href: api/Global.Territorio.html#Global_Territorio_Seleccionado
+  commentId: P:Global.Territorio.Seleccionado
+  fullName: Territorio.Seleccionado
+  nameWithType: Territorio.Seleccionado
+- uid: Global.Territorio.Seleccionado*
+  name: Seleccionado
+  href: api/Global.Territorio.html#Global_Territorio_Seleccionado_
+  commentId: Overload:Global.Territorio.Seleccionado
+  isSpec: "True"
+  fullName: Territorio.Seleccionado
+  nameWithType: Territorio.Seleccionado
+- uid: Global.Territorio.Seleccionar
+  name: Seleccionar()
+  href: api/Global.Territorio.html#Global_Territorio_Seleccionar
+  commentId: M:Global.Territorio.Seleccionar
+  fullName: Territorio.Seleccionar()
+  nameWithType: Territorio.Seleccionar()
+- uid: Global.Territorio.Seleccionar*
+  name: Seleccionar
+  href: api/Global.Territorio.html#Global_Territorio_Seleccionar_
+  commentId: Overload:Global.Territorio.Seleccionar
+  isSpec: "True"
+  fullName: Territorio.Seleccionar
+  nameWithType: Territorio.Seleccionar
 - uid: Global.Usuario
   name: Usuario
   href: api/Global.Usuario.html
@@ -1474,3 +2657,106 @@ references:
   commentId: F:Global.Usuario.riskos
   fullName: Usuario.riskos
   nameWithType: Usuario.riskos
+- uid: Global.VentanaAccion
+  name: VentanaAccion
+  href: api/Global.VentanaAccion.html
+  commentId: T:Global.VentanaAccion
+  fullName: VentanaAccion
+  nameWithType: VentanaAccion
+- uid: Global.VentanaAccion.AceptarAtaque
+  name: AceptarAtaque()
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_AceptarAtaque
+  commentId: M:Global.VentanaAccion.AceptarAtaque
+  fullName: VentanaAccion.AceptarAtaque()
+  nameWithType: VentanaAccion.AceptarAtaque()
+- uid: Global.VentanaAccion.AceptarAtaque*
+  name: AceptarAtaque
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_AceptarAtaque_
+  commentId: Overload:Global.VentanaAccion.AceptarAtaque
+  isSpec: "True"
+  fullName: VentanaAccion.AceptarAtaque
+  nameWithType: VentanaAccion.AceptarAtaque
+- uid: Global.VentanaAccion.AceptarMovimiento
+  name: AceptarMovimiento()
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_AceptarMovimiento
+  commentId: M:Global.VentanaAccion.AceptarMovimiento
+  fullName: VentanaAccion.AceptarMovimiento()
+  nameWithType: VentanaAccion.AceptarMovimiento()
+- uid: Global.VentanaAccion.AceptarMovimiento*
+  name: AceptarMovimiento
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_AceptarMovimiento_
+  commentId: Overload:Global.VentanaAccion.AceptarMovimiento
+  isSpec: "True"
+  fullName: VentanaAccion.AceptarMovimiento
+  nameWithType: VentanaAccion.AceptarMovimiento
+- uid: Global.VentanaAccion.AceptarRefuerzo
+  name: AceptarRefuerzo()
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_AceptarRefuerzo
+  commentId: M:Global.VentanaAccion.AceptarRefuerzo
+  fullName: VentanaAccion.AceptarRefuerzo()
+  nameWithType: VentanaAccion.AceptarRefuerzo()
+- uid: Global.VentanaAccion.AceptarRefuerzo*
+  name: AceptarRefuerzo
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_AceptarRefuerzo_
+  commentId: Overload:Global.VentanaAccion.AceptarRefuerzo
+  isSpec: "True"
+  fullName: VentanaAccion.AceptarRefuerzo
+  nameWithType: VentanaAccion.AceptarRefuerzo
+- uid: Global.VentanaAccion.ActualizarDatos(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+  name: ActualizarDatos(Int32, Int32, Int32, Int32, Int32)
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_ActualizarDatos_System_Int32_System_Int32_System_Int32_System_Int32_System_Int32_
+  commentId: M:Global.VentanaAccion.ActualizarDatos(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+  fullName: VentanaAccion.ActualizarDatos(System.Int32, System.Int32, System.Int32, System.Int32, System.Int32)
+  nameWithType: VentanaAccion.ActualizarDatos(Int32, Int32, Int32, Int32, Int32)
+- uid: Global.VentanaAccion.ActualizarDatos*
+  name: ActualizarDatos
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_ActualizarDatos_
+  commentId: Overload:Global.VentanaAccion.ActualizarDatos
+  isSpec: "True"
+  fullName: VentanaAccion.ActualizarDatos
+  nameWithType: VentanaAccion.ActualizarDatos
+- uid: Global.VentanaAccion.AsignarTropas(System.Single)
+  name: AsignarTropas(Single)
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_AsignarTropas_System_Single_
+  commentId: M:Global.VentanaAccion.AsignarTropas(System.Single)
+  fullName: VentanaAccion.AsignarTropas(System.Single)
+  nameWithType: VentanaAccion.AsignarTropas(Single)
+- uid: Global.VentanaAccion.AsignarTropas*
+  name: AsignarTropas
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_AsignarTropas_
+  commentId: Overload:Global.VentanaAccion.AsignarTropas
+  isSpec: "True"
+  fullName: VentanaAccion.AsignarTropas
+  nameWithType: VentanaAccion.AsignarTropas
+- uid: Global.VentanaAccion.ataque
+  name: ataque
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_ataque
+  commentId: F:Global.VentanaAccion.ataque
+  fullName: VentanaAccion.ataque
+  nameWithType: VentanaAccion.ataque
+- uid: Global.VentanaAccion.DisminuirTropas
+  name: DisminuirTropas()
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_DisminuirTropas
+  commentId: M:Global.VentanaAccion.DisminuirTropas
+  fullName: VentanaAccion.DisminuirTropas()
+  nameWithType: VentanaAccion.DisminuirTropas()
+- uid: Global.VentanaAccion.DisminuirTropas*
+  name: DisminuirTropas
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_DisminuirTropas_
+  commentId: Overload:Global.VentanaAccion.DisminuirTropas
+  isSpec: "True"
+  fullName: VentanaAccion.DisminuirTropas
+  nameWithType: VentanaAccion.DisminuirTropas
+- uid: Global.VentanaAccion.IncrementarTropas
+  name: IncrementarTropas()
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_IncrementarTropas
+  commentId: M:Global.VentanaAccion.IncrementarTropas
+  fullName: VentanaAccion.IncrementarTropas()
+  nameWithType: VentanaAccion.IncrementarTropas()
+- uid: Global.VentanaAccion.IncrementarTropas*
+  name: IncrementarTropas
+  href: api/Global.VentanaAccion.html#Global_VentanaAccion_IncrementarTropas_
+  commentId: Overload:Global.VentanaAccion.IncrementarTropas
+  isSpec: "True"
+  fullName: VentanaAccion.IncrementarTropas
+  nameWithType: VentanaAccion.IncrementarTropas

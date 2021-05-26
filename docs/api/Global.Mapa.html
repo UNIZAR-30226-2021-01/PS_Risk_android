@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class ConexionHTTP
+    <title>Class Mapa
    | Documentaci&#243;n de RISK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class ConexionHTTP
+    <meta name="title" content="Class Mapa
    | Documentaci&#243;n de RISK ">
     <meta name="generator" content="docfx 2.57.0.0">
     
@@ -78,36 +78,35 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Global.ConexionHTTP">
+            <article class="content wrap" id="_content" data-uid="Global.Mapa">
   
   
-  <h1 id="Global_ConexionHTTP" data-uid="Global.ConexionHTTP" class="text-break">Class ConexionHTTP
+  <h1 id="Global_Mapa" data-uid="Global.Mapa" class="text-break">Class Mapa
   </h1>
-  <div class="markdown level0 summary"><p>Script que gestiona la conexión por HTTP con backend.</p>
-</div>
+  <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">ConexionHTTP</span></div>
+    <div class="level1"><span class="xref">Mapa</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Global.html">Global</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
-  <h5 id="Global_ConexionHTTP_syntax">Syntax</h5>
+  <h5 id="Global_Mapa_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ConexionHTTP : MonoBehaviour</code></pre>
+    <pre><code class="lang-csharp hljs">public class Mapa : MonoBehaviour</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
   
   
-  <h4 id="Global_ConexionHTTP_instance" data-uid="Global.ConexionHTTP.instance">instance</h4>
-  <div class="markdown level1 summary"><p>Referencia estática a si mismo para usar como singleton.</p>
+  <h4 id="Global_Mapa_colorBrilloContinentes" data-uid="Global.Mapa.colorBrilloContinentes">colorBrilloContinentes</h4>
+  <div class="markdown level1 summary"><p>Color con el que brillan los continentes cuando estos son controlados por un único jugador</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ConexionHTTP instance</code></pre>
+    <pre><code class="lang-csharp hljs">public Color colorBrilloContinentes</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -119,7 +118,57 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Global.ConexionHTTP.html">ConexionHTTP</a></td>
+        <td><span class="xref">Color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Global_Mapa_indicadoresContinentes" data-uid="Global.Mapa.indicadoresContinentes">indicadoresContinentes</h4>
+  <div class="markdown level1 summary"><p>Sprites que indican si un continente esta controlado por completo por un jugador, asignadoes desde el editor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpriteRenderer[] indicadoresContinentes</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SpriteRenderer</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Global_Mapa_territorios" data-uid="Global.Mapa.territorios">territorios</h4>
+  <div class="markdown level1 summary"><p>Lista con los controladores de las tropas, asignados desde el editor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Territorio[] territorios</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.Territorio.html">Territorio</a>[]</td>
         <td></td>
       </tr>
     </tbody>
@@ -128,14 +177,25 @@
   </h3>
   
   
-  <a id="Global_ConexionHTTP_Cifrar_" data-uid="Global.ConexionHTTP.Cifrar*"></a>
-  <h4 id="Global_ConexionHTTP_Cifrar_System_String_" data-uid="Global.ConexionHTTP.Cifrar(System.String)">Cifrar(String)</h4>
-  <div class="markdown level1 summary"><p>Cifra el el string de entrada con el algoritmo SHA256.</p>
+  <a id="Global_Mapa_ActualizarContinentes_" data-uid="Global.Mapa.ActualizarContinentes*"></a>
+  <h4 id="Global_Mapa_ActualizarContinentes" data-uid="Global.Mapa.ActualizarContinentes">ActualizarContinentes()</h4>
+  <div class="markdown level1 summary"><p>Actualiza los indicadores (sprites) de los continentes</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static string Cifrar(string entrada)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ActualizarContinentes()</code></pre>
+  </div>
+  
+  
+  <a id="Global_Mapa_ActualizarTerritorio_" data-uid="Global.Mapa.ActualizarTerritorio*"></a>
+  <h4 id="Global_Mapa_ActualizarTerritorio_ClasesJSON_Territorio_" data-uid="Global.Mapa.ActualizarTerritorio(ClasesJSON.Territorio)">ActualizarTerritorio(ClasesJSON.Territorio)</h4>
+  <div class="markdown level1 summary"><p>Actualiza los datos del territorio especificado</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ActualizarTerritorio(ClasesJSON.Territorio nuevoTerritorio)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -148,38 +208,23 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">entrada</span></td>
-        <td><p>Texto a cifrar</p>
+        <td><a class="xref" href="Global.ClasesJSON.Territorio.html">ClasesJSON.Territorio</a></td>
+        <td><span class="parametername">nuevoTerritorio</span></td>
+        <td><p>Territorio a actualizar</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   
   
-  <a id="Global_ConexionHTTP_RequestHTTP_" data-uid="Global.ConexionHTTP.RequestHTTP*"></a>
-  <h4 id="Global_ConexionHTTP_RequestHTTP_System_String_WWWForm_" data-uid="Global.ConexionHTTP.RequestHTTP(System.String,WWWForm)">RequestHTTP(String, WWWForm)</h4>
-  <div class="markdown level1 summary"><p>Realiza una petición HTTP con un formulario.</p>
+  <a id="Global_Mapa_ActualizarTerritorios_" data-uid="Global.Mapa.ActualizarTerritorios*"></a>
+  <h4 id="Global_Mapa_ActualizarTerritorios_System_Collections_Generic_List_ClasesJSON_Territorio__" data-uid="Global.Mapa.ActualizarTerritorios(System.Collections.Generic.List{ClasesJSON.Territorio})">ActualizarTerritorios(List&lt;ClasesJSON.Territorio&gt;)</h4>
+  <div class="markdown level1 summary"><p>Actualiza los datos de los territorios especificados</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; RequestHTTP(string direccion, WWWForm form)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ActualizarTerritorios(List&lt;ClasesJSON.Territorio&gt; listaTerritorios)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -192,45 +237,23 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">direccion</span></td>
-        <td><p>Dirección del servidor</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">WWWForm</span></td>
-        <td><span class="parametername">form</span></td>
-        <td><p>Formulario a enviar</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td><p>Respuesta JSON del servidor</p>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Global.ClasesJSON.Territorio.html">ClasesJSON.Territorio</a>&gt;</td>
+        <td><span class="parametername">listaTerritorios</span></td>
+        <td><p>Lista de territorios a actualizar</p>
 </td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="Global_ConexionHTTP_RequestHTTPFantasma_" data-uid="Global.ConexionHTTP.RequestHTTPFantasma*"></a>
-  <h4 id="Global_ConexionHTTP_RequestHTTPFantasma_System_String_WWWForm_" data-uid="Global.ConexionHTTP.RequestHTTPFantasma(System.String,WWWForm)">RequestHTTPFantasma(String, WWWForm)</h4>
-  <div class="markdown level1 summary"><p>Realiza una petición HTTP con un formulario, sin mostrar la pantalla de carga</p>
+  <a id="Global_Mapa_AsignarTerritorios_" data-uid="Global.Mapa.AsignarTerritorios*"></a>
+  <h4 id="Global_Mapa_AsignarTerritorios_System_Collections_Generic_List_ClasesJSON_Territorio__" data-uid="Global.Mapa.AsignarTerritorios(System.Collections.Generic.List{ClasesJSON.Territorio})">AsignarTerritorios(List&lt;ClasesJSON.Territorio&gt;)</h4>
+  <div class="markdown level1 summary"><p>Asigna los datos de los territorios especificados</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; RequestHTTPFantasma(string direccion, WWWForm form)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AsignarTerritorios(List&lt;ClasesJSON.Territorio&gt; listaTerritorios)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -243,45 +266,24 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">direccion</span></td>
-        <td><p>Dirección del servidor</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">WWWForm</span></td>
-        <td><span class="parametername">form</span></td>
-        <td><p>Formulario a enviar</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td><p>Respuesta JSON del servidor</p>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Global.ClasesJSON.Territorio.html">ClasesJSON.Territorio</a>&gt;</td>
+        <td><span class="parametername">listaTerritorios</span></td>
+        <td><p>Lista de territorios a actualizar</p>
 </td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="Global_ConexionHTTP_SendRequest_" data-uid="Global.ConexionHTTP.SendRequest*"></a>
-  <h4 id="Global_ConexionHTTP_SendRequest__1_System_String_WWWForm_Action___0__" data-uid="Global.ConexionHTTP.SendRequest``1(System.String,WWWForm,Action{``0})">SendRequest&lt;T&gt;(String, WWWForm, Action&lt;T&gt;)</h4>
-  <div class="markdown level1 summary"><p>Envia una petición HTTP con el formulario y devuelve el resultado en texto a la función de callback.</p>
+  <a id="Global_Mapa_MostrarAtaque_" data-uid="Global.Mapa.MostrarAtaque*"></a>
+  <h4 id="Global_Mapa_MostrarAtaque_System_Int32_" data-uid="Global.Mapa.MostrarAtaque(System.Int32)">MostrarAtaque(Int32)</h4>
+  <div class="markdown level1 summary"><p>Muestra los territorios a los que se puede atacar desde
+el territorio seleccionado</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerator SendRequest&lt;T&gt;(string direccion, WWWForm form, Action&lt;T&gt; callback)</code></pre>
+    <pre><code class="lang-csharp hljs">public void MostrarAtaque(int territorio)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -294,56 +296,54 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">direccion</span></td>
-        <td><p>Dirección del servidor</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">WWWForm</span></td>
-        <td><span class="parametername">form</span></td>
-        <td><p>Formulario a enviar</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Action</span>&lt;T&gt;</td>
-        <td><span class="parametername">callback</span></td>
-        <td><p>Callback</p>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">territorio</span></td>
+        <td><p>ID del territorio seleccionado</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
+  
+  
+  <a id="Global_Mapa_MostrarMovimiento_" data-uid="Global.Mapa.MostrarMovimiento*"></a>
+  <h4 id="Global_Mapa_MostrarMovimiento_System_Int32_" data-uid="Global.Mapa.MostrarMovimiento(System.Int32)">MostrarMovimiento(Int32)</h4>
+  <div class="markdown level1 summary"><p>Muestra todos los territorios pertenecientes al usuario que se
+encuentran conectados al territorio especificado</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MostrarMovimiento(int territorio)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerator">IEnumerator</a></td>
-        <td><p>IEnumerator</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
         <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">T</span></td>
-        <td></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">territorio</span></td>
+        <td><p>ID del territorio</p>
+</td>
       </tr>
     </tbody>
   </table>
+  
+  
+  <a id="Global_Mapa_MostrarTodosTerritorios_" data-uid="Global.Mapa.MostrarTodosTerritorios*"></a>
+  <h4 id="Global_Mapa_MostrarTodosTerritorios" data-uid="Global.Mapa.MostrarTodosTerritorios">MostrarTodosTerritorios()</h4>
+  <div class="markdown level1 summary"><p>Muestra todos los territorios del mapa</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MostrarTodosTerritorios()</code></pre>
+  </div>
 </article>
           </div>
           

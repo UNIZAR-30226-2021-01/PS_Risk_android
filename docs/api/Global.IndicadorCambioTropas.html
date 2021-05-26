@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class ControladorNotificaciones
+    <title>Class IndicadorCambioTropas
    | Documentaci&#243;n de RISK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class ControladorNotificaciones
+    <meta name="title" content="Class IndicadorCambioTropas
    | Documentaci&#243;n de RISK ">
     <meta name="generator" content="docfx 2.57.0.0">
     
@@ -78,36 +78,34 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Global.ControladorNotificaciones">
+            <article class="content wrap" id="_content" data-uid="Global.IndicadorCambioTropas">
   
   
-  <h1 id="Global_ControladorNotificaciones" data-uid="Global.ControladorNotificaciones" class="text-break">Class ControladorNotificaciones
+  <h1 id="Global_IndicadorCambioTropas" data-uid="Global.IndicadorCambioTropas" class="text-break">Class IndicadorCambioTropas
   </h1>
-  <div class="markdown level0 summary"><p>Script usado para controlar el menu de notificaciones</p>
-</div>
+  <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">ControladorNotificaciones</span></div>
+    <div class="level1"><span class="xref">IndicadorCambioTropas</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Global.html">Global</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
-  <h5 id="Global_ControladorNotificaciones_syntax">Syntax</h5>
+  <h5 id="Global_IndicadorCambioTropas_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ControladorNotificaciones : MonoBehaviour</code></pre>
+    <pre><code class="lang-csharp hljs">public class IndicadorCambioTropas : MonoBehaviour</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
   
   
-  <h4 id="Global_ControladorNotificaciones_notificaciones" data-uid="Global.ControladorNotificaciones.notificaciones">notificaciones</h4>
-  <div class="markdown level1 summary"><p>Lista/Cache de las notificaciones</p>
-</div>
+  <h4 id="Global_IndicadorCambioTropas_animador" data-uid="Global.IndicadorCambioTropas.animador">animador</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static List&lt;ClasesJSON.Notificacion&gt; notificaciones</code></pre>
+    <pre><code class="lang-csharp hljs">public Animator animador</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -119,7 +117,31 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Global.ClasesJSON.Notificacion.html">ClasesJSON.Notificacion</a>&gt;</td>
+        <td><span class="xref">Animator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Global_IndicadorCambioTropas_indicador" data-uid="Global.IndicadorCambioTropas.indicador">indicador</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TextMeshPro indicador</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TextMeshPro</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -128,14 +150,13 @@
   </h3>
   
   
-  <a id="Global_ControladorNotificaciones_ActualizarNotificaciones_" data-uid="Global.ControladorNotificaciones.ActualizarNotificaciones*"></a>
-  <h4 id="Global_ControladorNotificaciones_ActualizarNotificaciones_System_Boolean_" data-uid="Global.ControladorNotificaciones.ActualizarNotificaciones(System.Boolean)">ActualizarNotificaciones(Boolean)</h4>
-  <div class="markdown level1 summary"><p>Actualiza las notificaciones a mostrar al usuario.</p>
-</div>
+  <a id="Global_IndicadorCambioTropas_Animar_" data-uid="Global.IndicadorCambioTropas.Animar*"></a>
+  <h4 id="Global_IndicadorCambioTropas_Animar_System_Int32_" data-uid="Global.IndicadorCambioTropas.Animar(System.Int32)">Animar(Int32)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ActualizarNotificaciones(bool obtenerNotificaciones)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Animar(int numero)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -148,53 +169,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">obtenerNotificaciones</span></td>
-        <td><p>Si &apos;true&apos;, también se descargan las notificaciones de backend</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Global_ControladorNotificaciones_ObtenerNotificaciones_" data-uid="Global.ControladorNotificaciones.ObtenerNotificaciones*"></a>
-  <h4 id="Global_ControladorNotificaciones_ObtenerNotificaciones_System_Boolean_" data-uid="Global.ControladorNotificaciones.ObtenerNotificaciones(System.Boolean)">ObtenerNotificaciones(Boolean)</h4>
-  <div class="markdown level1 summary"><p>Obtiene las notificaciones del servidor y las guarda en la variable &apos;notificaciones&apos; </p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task ObtenerNotificaciones(bool mostrarPantallaCarga)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">mostrarPantallaCarga</span></td>
-        <td><p>Si &apos;true&apos;, se muestra la pantalla de carga mientras la funcion se ejecute</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Task</span></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">numero</span></td>
         <td></td>
       </tr>
     </tbody>
